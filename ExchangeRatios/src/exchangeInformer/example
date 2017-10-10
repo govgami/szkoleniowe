@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ExchangeRatesSeries xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Table>A</Table>
+<Currency>dolar amerykański</Currency>
+<Code>USD</Code>
+<Rates>
+<Rate>
+<No>195/A/NBP/2017</No>
+<EffectiveDate>2017-10-09</EffectiveDate>
+<Mid>3.6743</Mid>
+</Rate>
+</Rates>
+</ExchangeRatesSeries>
