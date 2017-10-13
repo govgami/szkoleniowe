@@ -1,20 +1,22 @@
-package exchangeInformer.connection.request;
+package parser.url;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Request {
+import parser.InnerDataParser;
+
+public class UrlParser implements InnerDataParser{
 	String url;
 
-	public Request(String url) {
-		this.url = url;
+	public UrlParser(String urlString) {
+		this.url = urlString;
 	}
 
 	public String getRequestUrl() {
 		return url;
 	}
 
-	public URL makeUrl() {
+	public URL parse() {
 		try {
 			return new URL(url);
 		} catch (MalformedURLException e) {

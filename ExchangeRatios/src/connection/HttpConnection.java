@@ -1,20 +1,20 @@
-package exchangeInformer.connection;
+package connection;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import exchangeInformer.connection.request.Request;
+import java.net.URL;
 
-public class Connection {
-	Request request;
+public class HttpConnection {
+	URL request;
 
-	public Connection(Request request) {
+	public HttpConnection(URL request) {
 		this.request = request;
 	}
 
-	public String getHTML() {
+	public String download() {
 		HttpURLConnection conn = null;
 		try {
 			StringBuilder result = new StringBuilder();
@@ -33,7 +33,7 @@ public class Connection {
 	HttpURLConnection getConnection() {
 		HttpURLConnection conn = null;
 		try {
-			conn = (HttpURLConnection) request.makeUrl().openConnection();
+			conn = (HttpURLConnection) request.openConnection();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -41,13 +41,17 @@ public class Connection {
 	}
 
 	String readResponse(HttpURLConnection conn, StringBuilder result) throws IOException {
-		conn.setRequestMethod("GET");
-		BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		String line;
-		while ((line = rd.readLine()) != null) {
-			result.append(line);
+		try {
+			conn.setRequestMethod("GET");
+			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line;
+			while ((line = rd.readLine()) != null) {
+				result.append(line);
+			}
+			rd.close();
+			return result.toString();
+		} catch (IOException e) {
+			throw new RuntimeException("Failed to connect: " + conn.getURL().toString());
 		}
-		rd.close();
-		return result.toString();
 	}
 }
