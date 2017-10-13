@@ -15,13 +15,13 @@ public class UrlParser implements InnerDataParser{
 	public String getRequestUrl() {
 		return url;
 	}
-
-	public URL parse() {
+@Override
+	public URL parse(){
 		try {
 			return new URL(url);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-			return null;
+			throw new RuntimeException("Attempted to parse malformed URL: "+url);
 		}
 	}
 }

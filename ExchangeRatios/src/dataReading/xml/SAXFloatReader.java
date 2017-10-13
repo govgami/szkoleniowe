@@ -1,14 +1,16 @@
-package exchangeInformer.xml;
+package dataReading.xml;
 
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 
+import dataReading.ValueReader;
+
 import java.io.*;
 
-public class SAXFloatReader extends DefaultHandler implements SAXValueReader {
-	float value = -1;
+public class SAXFloatReader extends DefaultHandler implements ValueReader {
+	float value = Float.NaN;
 	boolean valueFound = false;
-	String searchedQName = "Mid";
+	String searchedQName = null;
 
 	public SAXFloatReader(String searchedQName) {
 		this.searchedQName = searchedQName;

@@ -11,13 +11,13 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import exchangeInformer.xml.SAXFloatReader;
-import exchangeInformer.xml.SAXValueReader;
+import dataReading.ValueReader;
+import dataReading.xml.SAXFloatReader;
 import parser.xml.XMLInputSourceParser;
 
 public class SAXDataReader implements DataReading {
 	public String read(String informerResponse) {
-		SAXValueReader sax = readAsSAX(informerResponse);
+		ValueReader sax = readAsSAX(informerResponse);
 		return sax.getFoundValueString();
 	}
 
