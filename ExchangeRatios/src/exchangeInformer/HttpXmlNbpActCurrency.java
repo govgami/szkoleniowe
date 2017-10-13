@@ -1,15 +1,15 @@
 package exchangeInformer;
 
 import downloader.xml.nbp.ActualExchangeDownloader;
-import exchangeInformer.responseInterpreter.InformerResponse;
+import exchangeInformer.responseInterpreter.SAXDataReader;
 
-public class NbpActCurrencyConnector {
+public class HttpXmlNbpActCurrency {
 ActualExchangeDownloader info;
-InformerResponse resp;
+SAXDataReader resp;
 
-NbpActCurrencyConnector(String currencyShortcut){
+HttpXmlNbpActCurrency(String currencyShortcut){
 	info=new ActualExchangeDownloader(currencyShortcut);
-	resp=new InformerResponse();
+	resp=new SAXDataReader();
 }
 
 public String getCurrencyValueString() {
@@ -22,14 +22,14 @@ public float getCurrencyValue() {
 
 
 public static float getValue(String currencyShortcut) {
-	NbpActCurrencyConnector nacc=new NbpActCurrencyConnector(currencyShortcut);
+	HttpXmlNbpActCurrency nacc=new HttpXmlNbpActCurrency(currencyShortcut);
 return nacc.getCurrencyValue();
 }
 public static String getValueString(String currencyShortcut) {
-	NbpActCurrencyConnector nacc=new NbpActCurrencyConnector(currencyShortcut);
+	HttpXmlNbpActCurrency nacc=new HttpXmlNbpActCurrency(currencyShortcut);
 return nacc.getCurrencyValueString();
 }
-public static NbpActCurrencyConnector linkActCurrConn(String currencyShortcut) {
-	return new NbpActCurrencyConnector(currencyShortcut);
+public static HttpXmlNbpActCurrency linkActCurrConn(String currencyShortcut) {
+	return new HttpXmlNbpActCurrency(currencyShortcut);
 }
 }

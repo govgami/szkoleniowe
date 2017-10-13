@@ -9,11 +9,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import downloader.xml.nbp.ActualExchangeDownloader;
-import exchangeInformer.responseInterpreter.InformerResponse;
+import exchangeInformer.responseInterpreter.SAXDataReader;
 
 public class _SmokeTest {
 	ActualExchangeDownloader info;
-	InformerResponse resp;
+	SAXDataReader resp;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -26,7 +26,7 @@ public class _SmokeTest {
 	@Before
 	public void setUp() throws Exception {
 		info = new ActualExchangeDownloader("usd");
-		resp = new InformerResponse();
+		resp = new SAXDataReader();
 	}
 
 	@After

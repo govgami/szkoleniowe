@@ -1,5 +1,5 @@
 package exchangeInformer.responseInterpreter;
 
-public interface ResponseInterpretation {
+public interface DataReading {
 public String read(String response);
 }
