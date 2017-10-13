@@ -8,10 +8,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import downloader.xml.nbp.ActualExchangeDownloader;
 import exchangeInformer.responseInterpreter.InformerResponse;
 
 public class _SmokeTest {
-	ExchangeInformer info;
+	ActualExchangeDownloader info;
 	InformerResponse resp;
 
 	@BeforeClass
@@ -24,7 +25,7 @@ public class _SmokeTest {
 
 	@Before
 	public void setUp() throws Exception {
-		info = new ExchangeInformer("usd");
+		info = new ActualExchangeDownloader("usd");
 		resp = new InformerResponse();
 	}
 
@@ -34,7 +35,7 @@ public class _SmokeTest {
 
 	@Test
 	public void test() {
-		String r = info.callRequest();
+		String r = info.download();
 		System.out.print(r + "\n");
 		String readed = resp.read(r);
 		System.out.println(readed);

@@ -1,18 +1,19 @@
 package exchangeInformer;
 
+import downloader.xml.nbp.ActualExchangeDownloader;
 import exchangeInformer.responseInterpreter.InformerResponse;
 
 public class NbpActCurrencyConnector {
-ExchangeInformer info;
+ActualExchangeDownloader info;
 InformerResponse resp;
 
 NbpActCurrencyConnector(String currencyShortcut){
-	info=new ExchangeInformer(currencyShortcut);
+	info=new ActualExchangeDownloader(currencyShortcut);
 	resp=new InformerResponse();
 }
 
 public String getCurrencyValueString() {
-	return resp.read(info.callRequest());
+	return resp.read(info.download());
 }
 
 public float getCurrencyValue() {
