@@ -7,12 +7,12 @@ import dataReading.ValueReader;
 
 import java.io.*;
 
-public class SAXFloatReader extends DefaultHandler implements ValueReader {
+public class SAXNumericReader extends DefaultHandler implements ValueReader {
 	float value = Float.NaN;
 	boolean valueFound = false;
 	String searchedQName = null;
 
-	public SAXFloatReader(String searchedQName) {
+	public SAXNumericReader(String searchedQName) {
 		this.searchedQName = searchedQName;
 	}
 

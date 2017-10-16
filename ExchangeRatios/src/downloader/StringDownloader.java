@@ -1,5 +1,5 @@
 package downloader;
 
-public interface Downloader {
+public interface StringDownloader {
 public String download();
 }

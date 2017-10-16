@@ -6,8 +6,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import org.apache.log4j.*;
 
-public class HttpConnection {
+import logging.Log;
+
+public class HttpConnection implements Connectivity{
 	URL request;
 
 	public HttpConnection(URL request) {
@@ -21,13 +24,14 @@ public class HttpConnection {
 			conn = getConnection();
 			return readResponse(conn, result);
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			Log.warn("failure:\n"+e.getStackTrace());
+			throw new RuntimeException("Malformed URL");
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.warn("failure:\n"+e.getStackTrace());
+			throw new RuntimeException("IOException");
 		} finally {
 			conn.disconnect();
 		}
-		return null;
 	}
 
 	HttpURLConnection getConnection() {
@@ -35,7 +39,8 @@ public class HttpConnection {
 		try {
 			conn = (HttpURLConnection) request.openConnection();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.warn("failure:\n"+e.getStackTrace());
+			throw new RuntimeException("IOException");
 		}
 		return conn;
 	}
@@ -51,7 +56,8 @@ public class HttpConnection {
 			rd.close();
 			return result.toString();
 		} catch (IOException e) {
-			throw new RuntimeException("Failed to connect: " + conn.getURL().toString());
+			Log.warn("failure:\n"+e.getStackTrace());
+			throw new RuntimeException("IOException: " + conn.getURL().toString());
 		}
 	}
 }

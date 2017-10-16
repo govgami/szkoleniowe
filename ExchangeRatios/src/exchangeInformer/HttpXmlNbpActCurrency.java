@@ -1,27 +1,31 @@
 package exchangeInformer;
 
-import downloader.xml.nbp.ActualExchangeDownloader;
-import exchangeInformer.responseInterpreter.SAXDataReader;
+import java.math.BigDecimal;
+
+import dataReading.xml.SAXNumericReader;
+import downloader.xml.nbp.SpecifiedActualExchangeDownloader;
+import extraction.xml.specialized.SAXDataReader;
+import parser.Str2BigDecimal;
 
 public class HttpXmlNbpActCurrency {
-ActualExchangeDownloader info;
+SpecifiedActualExchangeDownloader info;
 SAXDataReader resp;
 
-HttpXmlNbpActCurrency(String currencyShortcut){
-	info=new ActualExchangeDownloader(currencyShortcut);
-	resp=new SAXDataReader();
+public HttpXmlNbpActCurrency(String currencyShortcut){
+	info=new SpecifiedActualExchangeDownloader(currencyShortcut.toLowerCase());
+	resp=new SAXDataReader(new SAXNumericReader("Mid"));
 }
 
 public String getCurrencyValueString() {
 	return resp.read(info.download());
 }
 
-public float getCurrencyValue() {
-	return Float.parseFloat(getCurrencyValueString());
+public BigDecimal getCurrencyValue() {
+	return new Str2BigDecimal(getCurrencyValueString()).parse();
 }
 
 
-public static float getValue(String currencyShortcut) {
+public static BigDecimal getValue(String currencyShortcut) {
 	HttpXmlNbpActCurrency nacc=new HttpXmlNbpActCurrency(currencyShortcut);
 return nacc.getCurrencyValue();
 }

@@ -8,11 +8,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import downloader.xml.nbp.ActualExchangeDownloader;
-import exchangeInformer.responseInterpreter.SAXDataReader;
+import dataReading.xml.SAXNumericReader;
+import downloader.xml.nbp.GeneralActualExchangeDownloader;
+import downloader.xml.nbp.SpecifiedActualExchangeDownloader;
+import extraction.xml.specialized.SAXDataReader;
+import parser.xml.XMLInputSourceParser;
 
 public class _SmokeTest {
-	ActualExchangeDownloader info;
+	SpecifiedActualExchangeDownloader specInfo;
+	GeneralActualExchangeDownloader genInfo;
 	SAXDataReader resp;
 
 	@BeforeClass
@@ -25,8 +29,9 @@ public class _SmokeTest {
 
 	@Before
 	public void setUp() throws Exception {
-		info = new ActualExchangeDownloader("usd");
-		resp = new SAXDataReader();
+		specInfo = new SpecifiedActualExchangeDownloader("usd");
+		genInfo=new GeneralActualExchangeDownloader();
+		resp = new SAXDataReader(new SAXNumericReader("Mid"));
 	}
 
 	@After
@@ -34,12 +39,18 @@ public class _SmokeTest {
 	}
 
 	@Test
-	public void test() {
-		String r = info.download();
+	public void testActualExchangeForUSD() {
+		String r = specInfo.download();
 		System.out.print(r + "\n");
 		String readed = resp.read(r);
 		System.out.println(readed);
 		assertNotEquals(-1, Float.parseFloat(readed), 1);
+	}
+	
+	@Test
+	public void testGeneralExchangeForUSD() {
+		String r = genInfo.download();
+		System.out.print(r + "\n");
 	}
 
 }

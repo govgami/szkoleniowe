@@ -3,6 +3,7 @@ package parser.url;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import logging.Log;
 import parser.InnerDataParser;
 
 public class UrlParser implements InnerDataParser{
@@ -20,7 +21,7 @@ public class UrlParser implements InnerDataParser{
 		try {
 			return new URL(url);
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			Log.warn("failure:\n"+e.getStackTrace());
 			throw new RuntimeException("Attempted to parse malformed URL: "+url);
 		}
 	}

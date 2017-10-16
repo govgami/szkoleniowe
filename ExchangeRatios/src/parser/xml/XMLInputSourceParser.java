@@ -17,4 +17,8 @@ public class XMLInputSourceParser implements InnerDataParser {
 	public InputSource parse() throws RuntimeException{
 		return new InputSource(new StringReader(source));
 	}
+	
+	public static InputSource parse(String parsed) {
+		return new InputSource(new StringReader(parsed));
+	}
 }

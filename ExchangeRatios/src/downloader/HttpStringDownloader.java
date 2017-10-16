@@ -3,11 +3,11 @@ package downloader;
 import connection.HttpConnection;
 import parser.url.UrlParser;
 
-public class HttpDownloader implements Downloader{
+public class HttpStringDownloader implements StringDownloader{
 	protected String httpRequest;
 	protected HttpConnection conn;
 	
-	public HttpDownloader(String request){
+	public HttpStringDownloader(String request){
 		this.httpRequest=request;
 		this.conn=new HttpConnection(new UrlParser(httpRequest).parse());
 	}
