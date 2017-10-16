@@ -2,22 +2,26 @@ package exchangeInformer;
 
 import static org.junit.Assert.*;
 
+import java.util.Calendar;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import dataReading.xml.SAXNumericReader;
-import downloader.xml.nbp.GeneralActualExchangeDownloader;
-import downloader.xml.nbp.SpecifiedActualExchangeDownloader;
-import extraction.xml.specialized.SAXDataReader;
-import parser.xml.XMLInputSourceParser;
+import downloader.xml.XMLStringNBPDownloader;
+import downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
+import extraction.xml.specialized.SelectiveSaxDataReader;
+import valueReading.xml.CurrMarkSpecSAXNumericReader;
+import valueReading.xml.SAXNumericReader;
 
 public class _SmokeTest {
-	SpecifiedActualExchangeDownloader specInfo;
-	GeneralActualExchangeDownloader genInfo;
-	SAXDataReader resp;
+	XMLStringNBPDownloader specInfo;
+	XMLStringNBPDownloader genInfo;
+	XMLStringNBPDownloader timedGenInfo;
+	SelectiveSaxDataReader resp;
+SelectiveSaxDataReader respExt;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -29,9 +33,13 @@ public class _SmokeTest {
 
 	@Before
 	public void setUp() throws Exception {
-		specInfo = new SpecifiedActualExchangeDownloader("usd");
-		genInfo=new GeneralActualExchangeDownloader();
-		resp = new SAXDataReader(new SAXNumericReader("Mid"));
+		specInfo = HttpXmlExchangeDownloaderFactory.exchangeRateA("usd");
+		genInfo=HttpXmlExchangeDownloaderFactory.exchangeTable("a");
+		Calendar date=Calendar.getInstance();
+		date.setTimeInMillis(date.getTimeInMillis()-1000*3600*24*7);
+		timedGenInfo=HttpXmlExchangeDownloaderFactory.exchangeTableOnDay("a", date.getTime());
+		resp = new SelectiveSaxDataReader(new SAXNumericReader("Mid"));
+		respExt= new SelectiveSaxDataReader(new CurrMarkSpecSAXNumericReader("usd", "Mid"));
 	}
 
 	@After
@@ -51,6 +59,16 @@ public class _SmokeTest {
 	public void testGeneralExchangeForUSD() {
 		String r = genInfo.download();
 		System.out.print(r + "\n");
+		String readed = respExt.read(r);
+		System.out.println(readed);
+		assertNotEquals(-1, Float.parseFloat(readed), 1);
 	}
-
+	@Test
+	public void testGeneralTimedExchangeForUSDWeekAgo() {
+		String r = timedGenInfo.download();
+		System.out.print(r + "\n");
+		String readed = respExt.read(r);
+		System.out.println(readed);
+		assertNotEquals(-1, Float.parseFloat(readed), 1);
+	}
 }

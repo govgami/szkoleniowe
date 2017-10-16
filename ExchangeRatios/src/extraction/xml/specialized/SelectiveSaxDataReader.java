@@ -10,16 +10,15 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import dataReading.ValueReader;
-import dataReading.xml.SAXNumericReader;
 import extraction.XMLDataReading;
 import logging.Log;
 import parser.xml.XMLInputSourceParser;
+import valueReading.ValueReader;
 
-public class SAXDataReader implements XMLDataReading {
+public class SelectiveSaxDataReader implements XMLDataReading {
 	ValueReader reader;
 	
-	public SAXDataReader(ValueReader valueReader){
+	public SelectiveSaxDataReader(ValueReader valueReader){
 		reader=valueReader;
 	}
 	
@@ -37,7 +36,7 @@ public class SAXDataReader implements XMLDataReading {
 			xmlReader.setContentHandler((ContentHandler)reader);
 			xmlReader.parse(information);
 		} catch (IOException | SAXException | ParserConfigurationException e) {
-			Log.warn("failure:\n"+e.getStackTrace());
+			Log.exception("failure:\n",e);
 			throw new RuntimeException("Improper information for reading as SAXDataReader:"+e.getStackTrace());
 			
 		}

@@ -1,14 +1,16 @@
-package dataReading.xml;
+package valueReading.xml;
 
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 
-import dataReading.ValueReader;
+import parser.Str2BigDecimal;
+import valueReading.ValueReader;
 
 import java.io.*;
+import java.math.BigDecimal;
 
 public class SAXNumericReader extends DefaultHandler implements ValueReader {
-	float value = Float.NaN;
+	BigDecimal value = null;
 	boolean valueFound = false;
 	String searchedQName = null;
 
@@ -39,7 +41,8 @@ public class SAXNumericReader extends DefaultHandler implements ValueReader {
 
 	public void characters(char[] ch, int start, int length) throws SAXException {
 		if (valueFound) {
-			value = Float.parseFloat(new String(ch, start, length));
+			value=new Str2BigDecimal(new String(ch, start, length)).parse();
+//			value = Float.parseFloat(new String(ch, start, length));
 		}
 	}
 
@@ -55,11 +58,11 @@ public class SAXNumericReader extends DefaultHandler implements ValueReader {
 		return "file:" + path;
 	}
 
-	public float getFoundValue() {
+	public BigDecimal getFoundValue() {
 		return value;
 	}
 
 	public String getFoundValueString() {
-		return Float.toString(value);
+		return value.toString();
 	}
 }

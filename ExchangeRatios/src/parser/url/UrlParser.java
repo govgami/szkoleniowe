@@ -21,7 +21,7 @@ public class UrlParser implements InnerDataParser{
 		try {
 			return new URL(url);
 		} catch (MalformedURLException e) {
-			Log.warn("failure:\n"+e.getStackTrace());
+			Log.exception("failure:\n",e);
 			throw new RuntimeException("Attempted to parse malformed URL: "+url);
 		}
 	}

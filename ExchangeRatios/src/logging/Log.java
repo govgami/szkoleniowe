@@ -17,4 +17,7 @@ public static void info(String logInformation) {
 public static void warn(String logInformation) {
 	log.warning(logInformation);
 }
+public static void exception(String logInformation, Throwable thrown) {
+	log.log(java.util.logging.Level.SEVERE, logInformation, thrown);
+}
 }
