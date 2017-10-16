@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import logging.Log;
 
-public class HttpConnection implements Connectivity{
+public class HttpConnection implements Connectivity {
 	URL request;
 
 	public HttpConnection(URL request) {
@@ -22,10 +22,10 @@ public class HttpConnection implements Connectivity{
 			conn = getConnection();
 			return readResponse(conn, result);
 		} catch (MalformedURLException e) {
-			Log.exception("failure:\n",e);
+			Log.exception("failure:\n", e);
 			throw new RuntimeException("Malformed URL");
 		} catch (IOException e) {
-			Log.exception("failure:\n",e);
+			Log.exception("failure:\n", e);
 			throw new RuntimeException("IOException");
 		} finally {
 			conn.disconnect();
@@ -37,7 +37,7 @@ public class HttpConnection implements Connectivity{
 		try {
 			conn = (HttpURLConnection) request.openConnection();
 		} catch (IOException e) {
-			Log.exception("failure:\n",e);
+			Log.exception("failure:\n", e);
 			throw new RuntimeException("IOException");
 		}
 		return conn;
@@ -54,7 +54,7 @@ public class HttpConnection implements Connectivity{
 			rd.close();
 			return result.toString();
 		} catch (IOException e) {
-			Log.exception("failure:\n",e);
+			Log.exception("failure:\n", e);
 			throw new RuntimeException("IOException: " + conn.getURL().toString());
 		}
 	}

@@ -12,12 +12,12 @@ import valueReading.ValueReader;
 public class SequentialSAXNumericReader extends DefaultHandler implements ValueReader {
 	BigDecimal value = null;
 	boolean sequenceStarted;
-	String sequenceMarkName=null;
+	String sequenceMarkName = null;
 	boolean valueFound = false;
 	String searchedQName = null;
 
 	public SequentialSAXNumericReader(String sequenceMarkName, String searchedQName) {
-this.sequenceMarkName=sequenceMarkName;
+		this.sequenceMarkName = sequenceMarkName;
 		this.searchedQName = searchedQName;
 	}
 
@@ -25,9 +25,9 @@ this.sequenceMarkName=sequenceMarkName;
 	}
 
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
-if(qName.equals(sequenceMarkName)) {
-	sequenceStarted=true;
-}
+		if (qName.equals(sequenceMarkName)) {
+			sequenceStarted = true;
+		}
 		if (qName.equals(searchedQName)) {
 			valueFound = true;
 		}
@@ -36,7 +36,7 @@ if(qName.equals(sequenceMarkName)) {
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		if (qName.equals(searchedQName)) {
-			sequenceStarted=false;
+			sequenceStarted = false;
 			valueFound = false;
 		}
 		super.endElement(uri, localName, qName);
@@ -46,8 +46,8 @@ if(qName.equals(sequenceMarkName)) {
 	}
 
 	public void characters(char[] ch, int start, int length) throws SAXException {
-		if (valueFound&sequenceStarted) {
-			value=new Str2BigDecimal(new String(ch, start, length)).parse();
+		if (valueFound & sequenceStarted) {
+			value = new Str2BigDecimal(new String(ch, start, length)).parse();
 		}
 	}
 

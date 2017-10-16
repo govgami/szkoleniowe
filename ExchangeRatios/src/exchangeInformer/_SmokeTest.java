@@ -21,7 +21,7 @@ public class _SmokeTest {
 	XMLStringNBPDownloader genInfo;
 	XMLStringNBPDownloader timedGenInfo;
 	SelectiveSaxDataReader resp;
-SelectiveSaxDataReader respExt;
+	SelectiveSaxDataReader respExt;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -34,12 +34,12 @@ SelectiveSaxDataReader respExt;
 	@Before
 	public void setUp() throws Exception {
 		specInfo = HttpXmlExchangeDownloaderFactory.exchangeRateA("usd");
-		genInfo=HttpXmlExchangeDownloaderFactory.exchangeTable("a");
-		Calendar date=Calendar.getInstance();
-		date.setTimeInMillis(date.getTimeInMillis()-1000*3600*24*7);
-		timedGenInfo=HttpXmlExchangeDownloaderFactory.exchangeTableOnDay("a", date.getTime());
+		genInfo = HttpXmlExchangeDownloaderFactory.exchangeTable("a");
+		Calendar date = Calendar.getInstance();
+		date.setTimeInMillis(date.getTimeInMillis() - 1000 * 3600 * 24 * 7);
+		timedGenInfo = HttpXmlExchangeDownloaderFactory.exchangeTableOnDay("a", date.getTime());
 		resp = new SelectiveSaxDataReader(new SAXNumericReader("Mid"));
-		respExt= new SelectiveSaxDataReader(new CurrMarkSpecSAXNumericReader("usd", "Mid"));
+		respExt = new SelectiveSaxDataReader(new CurrMarkSpecSAXNumericReader("usd", "Mid"));
 	}
 
 	@After
@@ -54,7 +54,7 @@ SelectiveSaxDataReader respExt;
 		System.out.println(readed);
 		assertNotEquals(-1, Float.parseFloat(readed), 1);
 	}
-	
+
 	@Test
 	public void testGeneralExchangeForUSD() {
 		String r = genInfo.download();
@@ -63,6 +63,7 @@ SelectiveSaxDataReader respExt;
 		System.out.println(readed);
 		assertNotEquals(-1, Float.parseFloat(readed), 1);
 	}
+
 	@Test
 	public void testGeneralTimedExchangeForUSDWeekAgo() {
 		String r = timedGenInfo.download();

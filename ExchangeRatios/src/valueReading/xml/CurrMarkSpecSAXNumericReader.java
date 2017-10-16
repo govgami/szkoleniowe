@@ -13,15 +13,15 @@ public class CurrMarkSpecSAXNumericReader extends DefaultHandler implements Valu
 
 	BigDecimal value = null;
 	boolean sequenceStarted;
-	boolean sequenceAccepted=false;
-	String sequenceMarkName=null;
-	String searchedSequenceContent=null;
+	boolean sequenceAccepted = false;
+	String sequenceMarkName = null;
+	String searchedSequenceContent = null;
 	boolean valueFound = false;
 	String searchedQName = null;
 
 	public CurrMarkSpecSAXNumericReader(String currencyShortcut, String searchedQName) {
-this.sequenceMarkName="Code";
-this.searchedSequenceContent=currencyShortcut.toUpperCase();
+		this.sequenceMarkName = "Code";
+		this.searchedSequenceContent = currencyShortcut.toUpperCase();
 		this.searchedQName = searchedQName;
 	}
 
@@ -29,9 +29,9 @@ this.searchedSequenceContent=currencyShortcut.toUpperCase();
 	}
 
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
-if(qName.equals(sequenceMarkName)) {
-	sequenceStarted=true;
-}
+		if (qName.equals(sequenceMarkName)) {
+			sequenceStarted = true;
+		}
 		if (qName.equals(searchedQName)) {
 			valueFound = true;
 		}
@@ -40,9 +40,9 @@ if(qName.equals(sequenceMarkName)) {
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		if (qName.equals(searchedQName)) {
-			sequenceStarted=false;
+			sequenceStarted = false;
 			valueFound = false;
-			sequenceAccepted=false;
+			sequenceAccepted = false;
 		}
 		super.endElement(uri, localName, qName);
 	}
@@ -51,11 +51,11 @@ if(qName.equals(sequenceMarkName)) {
 	}
 
 	public void characters(char[] ch, int start, int length) throws SAXException {
-if(sequenceStarted&searchedSequenceContent.equals(new String(ch, start, length))) {
-sequenceAccepted=true;
-}
-		if (valueFound&sequenceAccepted) {
-			value=new Str2BigDecimal(new String(ch, start, length)).parse();
+		if (sequenceStarted & searchedSequenceContent.equals(new String(ch, start, length))) {
+			sequenceAccepted = true;
+		}
+		if (valueFound & sequenceAccepted) {
+			value = new Str2BigDecimal(new String(ch, start, length)).parse();
 		}
 	}
 

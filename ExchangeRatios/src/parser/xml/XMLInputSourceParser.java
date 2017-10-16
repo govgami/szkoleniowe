@@ -14,10 +14,10 @@ public class XMLInputSourceParser implements InnerDataParser {
 	}
 
 	@Override
-	public InputSource parse() throws RuntimeException{
+	public InputSource parse() throws RuntimeException {
 		return new InputSource(new StringReader(source));
 	}
-	
+
 	public static InputSource parse(String parsed) {
 		return new InputSource(new StringReader(parsed));
 	}

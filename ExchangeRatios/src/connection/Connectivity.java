@@ -1,5 +1,5 @@
 package connection;
 
 public interface Connectivity {
-public String download();
+	public String download();
 }

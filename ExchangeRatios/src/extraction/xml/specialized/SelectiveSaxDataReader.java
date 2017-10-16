@@ -10,18 +10,18 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import extraction.XMLDataReading;
+import extraction.StringDataReading;
 import logging.Log;
 import parser.xml.XMLInputSourceParser;
 import valueReading.ValueReader;
 
-public class SelectiveSaxDataReader implements XMLDataReading {
+public class SelectiveSaxDataReader implements StringDataReading {
 	ValueReader reader;
-	
-	public SelectiveSaxDataReader(ValueReader valueReader){
-		reader=valueReader;
+
+	public SelectiveSaxDataReader(ValueReader valueReader) {
+		reader = valueReader;
 	}
-	
+
 	public String read(String xmlText) {
 		readAsSAX(new XMLInputSourceParser(xmlText).parse());
 		return reader.getFoundValueString();
@@ -33,12 +33,12 @@ public class SelectiveSaxDataReader implements XMLDataReading {
 			spf.setNamespaceAware(true);
 			SAXParser saxParser = spf.newSAXParser();
 			XMLReader xmlReader = saxParser.getXMLReader();
-			xmlReader.setContentHandler((ContentHandler)reader);
+			xmlReader.setContentHandler((ContentHandler) reader);
 			xmlReader.parse(information);
 		} catch (IOException | SAXException | ParserConfigurationException e) {
-			Log.exception("failure:\n",e);
-			throw new RuntimeException("Improper information for reading as SAXDataReader:"+e.getStackTrace());
-			
+			Log.exception("failure:\n", e);
+			throw new RuntimeException("Improper information for reading as SAXDataReader:" + e.getStackTrace());
+
 		}
 	}
 

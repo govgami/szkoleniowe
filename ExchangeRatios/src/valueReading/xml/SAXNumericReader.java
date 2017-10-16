@@ -41,8 +41,8 @@ public class SAXNumericReader extends DefaultHandler implements ValueReader {
 
 	public void characters(char[] ch, int start, int length) throws SAXException {
 		if (valueFound) {
-			value=new Str2BigDecimal(new String(ch, start, length)).parse();
-//			value = Float.parseFloat(new String(ch, start, length));
+			value = new Str2BigDecimal(new String(ch, start, length)).parse();
+			// value = Float.parseFloat(new String(ch, start, length));
 		}
 	}
 
