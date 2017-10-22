@@ -1,4 +1,4 @@
-package exchangeInformer;
+package main;
 
 import java.math.BigDecimal;
 

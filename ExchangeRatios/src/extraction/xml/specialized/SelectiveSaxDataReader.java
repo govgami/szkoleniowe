@@ -26,6 +26,11 @@ public class SelectiveSaxDataReader implements StringDataReading {
 		readAsSAX(new XMLInputSourceParser(xmlText).parse());
 		return reader.getFoundValueString();
 	}
+	
+	public Object readExt(String xmlText) {
+		readAsSAX(new XMLInputSourceParser(xmlText).parse());
+		return reader.getFoundValue();
+	}
 
 	protected void readAsSAX(InputSource information) {
 		try {

@@ -9,7 +9,7 @@ import logging.Log;
 public class Date2Str implements InnerDataParser {
 
 	Date date;
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	public Date2Str(long time) {
 		date = new Date(time);

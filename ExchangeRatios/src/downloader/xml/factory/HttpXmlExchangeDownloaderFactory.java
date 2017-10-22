@@ -19,5 +19,9 @@ public class HttpXmlExchangeDownloaderFactory {
 		return new XMLStringNBPDownloader(
 				"exchangerates/tables/" + tableName.toLowerCase() + "/" + new Date2Str(time).parse());
 	}
+	public static XMLStringNBPDownloader exchangeTableOnDayTo(String tableName, Date time, Date last) {
+		return new XMLStringNBPDownloader(
+				"exchangerates/tables/" + tableName.toLowerCase() + "/" + new Date2Str(time).parse()+"/"+new Date2Str(last).parse()+"/");
+	}
 
 }

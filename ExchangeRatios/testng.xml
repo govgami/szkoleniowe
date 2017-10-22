@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <suite name="APISuite">
+ <test name="General test" >
+ 
+<classes>
+<class name="testing._SmokeTest" />
+ 
+ </classes>
+ 
+</test>
+ 
+</suite>

@@ -1,4 +1,4 @@
-package exchangeInformer;
+package main;
 
 import downloader.StringDownloader;
 import extraction.xml.specialized.SelectiveSaxDataReader;
