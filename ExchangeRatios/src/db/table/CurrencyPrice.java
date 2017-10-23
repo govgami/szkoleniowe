@@ -1,11 +1,10 @@
-package valueReading.utility;
+package db.table;
 
 import java.math.BigDecimal;
 
 import parser.Str2BigDecimal;
 
 public class CurrencyPrice {
-	private int id;
 	private String currencySign;
 	private BigDecimal avgCurrencyPrice;
 	private String effectiveDate;
@@ -33,10 +32,6 @@ public class CurrencyPrice {
 	
 	public static CurrencyPrice minMax(String currencySign, String sellPrice, String buyPrice, String effectiveDate) {
 		return new CurrencyPrice(currencySign, new Str2BigDecimal(sellPrice).parse(), new Str2BigDecimal(buyPrice).parse(), effectiveDate);	
-	}
-	
-	public int getId() {
-		return id;
 	}
 	
 	public String getCurrencySign() {

@@ -3,15 +3,11 @@
 <suite name="Failed suite [APISuite]">
   <test name="General test(failed)">
     <classes>
-      <class name="testing._SmokeTest">
+      <class name="testing._DbTest">
         <methods>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="tearDownAfterClass"/>
-          <include name="testGeneralTimedExchangeForUSDWeekAgo"/>
-          <include name="setUpBeforeClass"/>
+          <include name="create"/>
         </methods>
-      </class> <!-- testing._SmokeTest -->
+      </class> <!-- testing._DbTest -->
     </classes>
   </test> <!-- General test(failed) -->
 </suite> <!-- Failed suite [APISuite] -->

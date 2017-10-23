@@ -23,5 +23,9 @@ public class HttpXmlExchangeDownloaderFactory {
 		return new XMLStringNBPDownloader(
 				"exchangerates/tables/" + tableName.toLowerCase() + "/" + new Date2Str(time).parse()+"/"+new Date2Str(last).parse()+"/");
 	}
+	
+	public static String requestDatedTable(String tableName, Date time) {
+		return "http://api.nbp.pl/api/exchangerates/tables/" + tableName.toLowerCase() + "/" + new Date2Str(time).parse()+"/?format=xml";
+	}
 
 }

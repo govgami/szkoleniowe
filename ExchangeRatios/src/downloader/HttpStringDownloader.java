@@ -16,5 +16,10 @@ public class HttpStringDownloader implements StringDownloader {
 	public String download() {
 		return conn.download();
 	}
+	
+	public void alterSource(String newRequest) {
+		this.httpRequest = newRequest;
+		this.conn = new HttpConnection(new UrlParser(httpRequest).parse());
+	}
 
 }

@@ -2,7 +2,7 @@ package valueReading.xml.tableService;
 
 import java.util.HashMap;
 
-import valueReading.utility.CurrencyPrice;
+import db.table.CurrencyPrice;
 
 public class TablesC implements TableTextConversion {
 

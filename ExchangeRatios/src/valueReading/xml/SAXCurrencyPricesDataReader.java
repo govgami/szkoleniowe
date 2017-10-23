@@ -8,8 +8,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import logging.Log;
-import valueReading.utility.*;
+import db.table.CurrencyPrice;
 import valueReading.xml.tableService.TableTextConversion;
 import valueReading.ValueReader;
 

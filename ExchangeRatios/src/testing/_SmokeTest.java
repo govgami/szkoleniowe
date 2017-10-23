@@ -3,6 +3,9 @@ package testing;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+
+import db.table.CurrencyPrice;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeClass;
 
@@ -14,7 +17,6 @@ import java.util.List;
 import downloader.xml.XMLStringNBPDownloader;
 import downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
 import extraction.xml.specialized.SelectiveSaxDataReader;
-import valueReading.utility.CurrencyPrice;
 import valueReading.xml.CurrMarkSpecSAXNumericReader;
 import valueReading.xml.SAXCurrencyPricesDataReader;
 import valueReading.xml.SAXNumericReader;
@@ -44,7 +46,7 @@ public class _SmokeTest {
 		Calendar dateConst = Calendar.getInstance();
 		dateConst.set(2015, 5, 5);
 		Calendar dateConst2 = Calendar.getInstance();
-		dateConst2.set(2015, 5, 7);
+		dateConst2.set(2015, 5, 8);
 		Calendar date = Calendar.getInstance();
 		date.setTimeInMillis(date.getTimeInMillis() - 1000 * 3600 * 24 * 7);
 		timedGenInfo = HttpXmlExchangeDownloaderFactory.exchangeTableOnDay("a", dateConst.getTime());
@@ -90,7 +92,7 @@ public class _SmokeTest {
 		System.out.print(r + "\n");
 		List<CurrencyPrice> list = (List<CurrencyPrice>) respExtTable.readExt(r);
 		for(CurrencyPrice cp:list) {
-		System.out.println("loaded:"+cp.getEffectiveDate()+cp.getCurrencySign()+cp.getAvgCurrencyPrice());
+		System.out.println("loaded: "+cp.getEffectiveDate()+", "+cp.getCurrencySign()+", "+cp.getAvgCurrencyPrice());
 		}
 	}
 }
