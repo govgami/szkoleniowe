@@ -2,17 +2,16 @@
 <testng-results skipped="0" failed="1" ignored="0" total="5" passed="4">
   <reporter-output>
   </reporter-output>
-  <suite name="APISuite" duration-ms="4292" started-at="2017-10-23T08:12:04Z" finished-at="2017-10-23T08:12:08Z">
+  <suite name="APISuite" duration-ms="4704" started-at="2017-10-23T10:56:23Z" finished-at="2017-10-23T10:56:27Z">
     <groups>
     </groups>
-    <test name="General test" duration-ms="4292" started-at="2017-10-23T08:12:04Z" finished-at="2017-10-23T08:12:08Z">
+    <test name="General test" duration-ms="4704" started-at="2017-10-23T10:56:23Z" finished-at="2017-10-23T10:56:27Z">
       <class name="testing._DbTest">
-        <test-method status="FAIL" signature="create()[pri:0, instance:testing._DbTest@20e2cbe0]" name="create" duration-ms="3189" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:08Z">
-          <exception class="java.lang.ExceptionInInitializerError">
+        <test-method status="FAIL" signature="create()[pri:0, instance:testing._DbTest@457e2f02]" name="create" duration-ms="3511" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:27Z">
+          <exception class="java.lang.RuntimeException">
             <full-stacktrace>
-              <![CDATA[java.lang.ExceptionInInitializerError
-	at db.DbConnection.buildSessionFactory(DbConnection.java:99)
-	at db.DbConnection.<clinit>(DbConnection.java:88)
+              <![CDATA[java.lang.RuntimeException
+	at db.DbConnection.makeDefaultPostgreConnection(DbConnection.java:46)
 	at testing._DbTest.create(_DbTest.java:14)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -39,77 +38,67 @@
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: org.hibernate.boot.MappingNotFoundException: Mapping (RESOURCE) not found : db.table.Country : origin(db.table.Country)
-	at org.hibernate.boot.spi.XmlMappingBinderAccess.bind(XmlMappingBinderAccess.java:56)
-	at org.hibernate.boot.MetadataSources.addResource(MetadataSources.java:274)
-	at org.hibernate.boot.cfgxml.spi.MappingReference.apply(MappingReference.java:70)
-	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:413)
-	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:87)
-	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:691)
-	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:726)
-	at db.DbConnection.buildSessionFactory(DbConnection.java:95)
-	... 27 more
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.ExceptionInInitializerError -->
+          </exception> <!-- java.lang.RuntimeException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- create -->
       </class> <!-- testing._DbTest -->
       <class name="testing._SmokeTest">
-        <test-method status="PASS" signature="setUpBeforeClass()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="setUpBeforeClass" is-config="true" duration-ms="21" started-at="2017-10-23T10:12:04Z" finished-at="2017-10-23T10:12:04Z">
+        <test-method status="PASS" signature="setUpBeforeClass()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUpBeforeClass" is-config="true" duration-ms="21" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpBeforeClass -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="setUp" is-config="true" duration-ms="296" started-at="2017-10-23T10:12:04Z" finished-at="2017-10-23T10:12:04Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="95" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testActualExchangeForUSD()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="testActualExchangeForUSD" duration-ms="407" started-at="2017-10-23T10:12:04Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="testActualExchangeForUSD()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testActualExchangeForUSD" duration-ms="557" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testActualExchangeForUSD -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="setUp" is-config="true" duration-ms="2" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="1" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testGeneralExchangeForUSD()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="testGeneralExchangeForUSD" duration-ms="55" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="testGeneralExchangeForUSD()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testGeneralExchangeForUSD" duration-ms="81" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGeneralExchangeForUSD -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="setUp" is-config="true" duration-ms="1" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="1" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testGeneralPeriodTimedExchangeWeekAgo()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="testGeneralPeriodTimedExchangeWeekAgo" duration-ms="86" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="testGeneralPeriodTimedExchangeWeekAgo()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testGeneralPeriodTimedExchangeWeekAgo" duration-ms="247" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGeneralPeriodTimedExchangeWeekAgo -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="setUp" is-config="true" duration-ms="3" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="1" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testGeneralTimedExchangeForUSDWeekAgo()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="testGeneralTimedExchangeForUSDWeekAgo" duration-ms="62" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="testGeneralTimedExchangeForUSDWeekAgo()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testGeneralTimedExchangeForUSDWeekAgo" duration-ms="79" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGeneralTimedExchangeForUSDWeekAgo -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="5" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDownAfterClass()[pri:0, instance:testing._SmokeTest@2a5ca609]" name="tearDownAfterClass" is-config="true" duration-ms="1" started-at="2017-10-23T10:12:05Z" finished-at="2017-10-23T10:12:05Z">
+        <test-method status="PASS" signature="tearDownAfterClass()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDownAfterClass" is-config="true" duration-ms="0" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownAfterClass -->

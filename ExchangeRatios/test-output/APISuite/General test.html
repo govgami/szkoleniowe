@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>4/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon Oct 23 10:12:04 CEST 2017</td>
+<td>Started on:</td><td>Mon Oct 23 12:56:23 CEST 2017</td>
 </tr>
-<tr><td>Total time:</td><td>4 seconds (4292 ms)</td>
+<tr><td>Total time:</td><td>4 seconds (4704 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,24 +76,12 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='testing._DbTest.create()'><b>create</b><br>Test class: testing._DbTest</td>
-<td><div><pre>java.lang.ExceptionInInitializerError
-	at db.DbConnection.buildSessionFactory(DbConnection.java:99)
-	at db.DbConnection.&lt;clinit&gt;(DbConnection.java:88)
+<td><div><pre>java.lang.RuntimeException
+	at db.DbConnection.makeDefaultPostgreConnection(DbConnection.java:46)
 	at testing._DbTest.create(_DbTest.java:14)
-Caused by: org.hibernate.boot.MappingNotFoundException: Mapping (RESOURCE) not found : db.table.Country : origin(db.table.Country)
-	at org.hibernate.boot.spi.XmlMappingBinderAccess.bind(XmlMappingBinderAccess.java:56)
-	at org.hibernate.boot.MetadataSources.addResource(MetadataSources.java:274)
-	at org.hibernate.boot.cfgxml.spi.MappingReference.apply(MappingReference.java:70)
-	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:413)
-	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:87)
-	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:691)
-	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:726)
-	at db.DbConnection.buildSessionFactory(DbConnection.java:95)
-	... 27 more
-... Removed 25 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace205721196", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace205721196'><pre>java.lang.ExceptionInInitializerError
-	at db.DbConnection.buildSessionFactory(DbConnection.java:99)
-	at db.DbConnection.&lt;clinit&gt;(DbConnection.java:88)
+... Removed 25 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1363800072", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1363800072'><pre>java.lang.RuntimeException
+	at db.DbConnection.makeDefaultPostgreConnection(DbConnection.java:46)
 	at testing._DbTest.create(_DbTest.java:14)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -120,19 +108,9 @@ Caused by: org.hibernate.boot.MappingNotFoundException: Mapping (RESOURCE) not f
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: org.hibernate.boot.MappingNotFoundException: Mapping (RESOURCE) not found : db.table.Country : origin(db.table.Country)
-	at org.hibernate.boot.spi.XmlMappingBinderAccess.bind(XmlMappingBinderAccess.java:56)
-	at org.hibernate.boot.MetadataSources.addResource(MetadataSources.java:274)
-	at org.hibernate.boot.cfgxml.spi.MappingReference.apply(MappingReference.java:70)
-	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:413)
-	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:87)
-	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:691)
-	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:726)
-	at db.DbConnection.buildSessionFactory(DbConnection.java:95)
-	... 27 more
 </pre></div></td>
 <td>3</td>
-<td>testing._DbTest@20e2cbe0</td></tr>
+<td>testing._DbTest@457e2f02</td></tr>
 </table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
@@ -145,22 +123,22 @@ Caused by: org.hibernate.boot.MappingNotFoundException: Mapping (RESOURCE) not f
 <td title='testing._SmokeTest.testActualExchangeForUSD()'><b>testActualExchangeForUSD</b><br>Test class: testing._SmokeTest</td>
 <td></td>
 <td>0</td>
-<td>testing._SmokeTest@2a5ca609</td></tr>
+<td>testing._SmokeTest@4cc0edeb</td></tr>
 <tr>
 <td title='testing._SmokeTest.testGeneralExchangeForUSD()'><b>testGeneralExchangeForUSD</b><br>Test class: testing._SmokeTest</td>
 <td></td>
 <td>0</td>
-<td>testing._SmokeTest@2a5ca609</td></tr>
+<td>testing._SmokeTest@4cc0edeb</td></tr>
 <tr>
 <td title='testing._SmokeTest.testGeneralPeriodTimedExchangeWeekAgo()'><b>testGeneralPeriodTimedExchangeWeekAgo</b><br>Test class: testing._SmokeTest</td>
 <td></td>
 <td>0</td>
-<td>testing._SmokeTest@2a5ca609</td></tr>
+<td>testing._SmokeTest@4cc0edeb</td></tr>
 <tr>
 <td title='testing._SmokeTest.testGeneralTimedExchangeForUSDWeekAgo()'><b>testGeneralTimedExchangeForUSDWeekAgo</b><br>Test class: testing._SmokeTest</td>
 <td></td>
 <td>0</td>
-<td>testing._SmokeTest@2a5ca609</td></tr>
+<td>testing._SmokeTest@4cc0edeb</td></tr>
 </table><p>
 </body>
 </html>

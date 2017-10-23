@@ -38,7 +38,7 @@ public class CurrencyPrice {
 		return currencySign;
 	}
 
-	private void setCurrencySign(String currencySign) {
+	public void setCurrencySign(String currencySign) {
 		this.currencySign = currencySign;
 	}
 
@@ -46,14 +46,14 @@ public class CurrencyPrice {
 		return avgCurrencyPrice;
 	}
 
-	private void setAvgCurrencyPrice(BigDecimal avgCurrencyPrice) {
+	public void setAvgCurrencyPrice(BigDecimal avgCurrencyPrice) {
 		this.avgCurrencyPrice = avgCurrencyPrice;
 	}
 	public String getEffectiveDate() {
 		return effectiveDate;
 	}
 
-	private void setEffectiveDate(String effectiveDate) {
+	public void setEffectiveDate(String effectiveDate) {
 		this.effectiveDate = effectiveDate;
 	}
 

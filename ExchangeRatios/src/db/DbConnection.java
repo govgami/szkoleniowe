@@ -1,6 +1,5 @@
 package db;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,8 +7,13 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
+import db.table.Country;
+import db.table.Currency;
+import db.table.CurrencyRatios;
 import logging.Log;
 
 public class DbConnection {
@@ -84,28 +88,34 @@ public class DbConnection {
 
 		return this.conn.createStatement().executeUpdate(query);
 	}
-	
+
+	private static final Configuration configuration = new Configuration().addAnnotatedClass(Country.class)
+			.addAnnotatedClass(Currency.class).addAnnotatedClass(CurrencyRatios.class)
+			.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
+			.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
+			.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/currency_exchange")
+			.setProperty("hibernate.connection.username", "advent").setProperty("hibernate.connection.password",
+					"axt8")/* .configure(new File("src/db/table/hibernate.cfg.xml")) */;
+	private static ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+			.applySettings(configuration.getProperties()).build();
 	private static final SessionFactory sessionFactory = buildSessionFactory();
-    
-    private static SessionFactory buildSessionFactory()
-    {
-        try
-        {
-            // SessionFactory from hibernate.cfg.xml
-            return new Configuration().configure(new File("hibernate.cfg.xml")).buildSessionFactory();
-        }
-        catch (Throwable ex) {
-            Log.exception("Initial SessionFactory creation failed", ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-  
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-  
-    public static void shutdown() {
-        // Close caches and connection pools
-        getSessionFactory().close();
-    }
+
+	private static SessionFactory buildSessionFactory() {
+		try {
+			// SessionFactory from hibernate.cfg.xml
+			return configuration.buildSessionFactory(serviceRegistry);
+		} catch (Throwable ex) {
+			Log.exception("Initial SessionFactory creation failed", ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+	}
+
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public static void shutdown() {
+		// Close caches and connection pools
+		getSessionFactory().close();
+	}
 }

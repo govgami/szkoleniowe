@@ -25,12 +25,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       </dependency>
       <dependency>
       	<groupId>org.postgresql</groupId>
-      	<artifactId>postgresql</artifactId>
-      	<version>42.1.4.jre7</version>
-      	<type>bundle</type>
-      </dependency>
-      <dependency>
-      	<groupId>org.postgresql</groupId>
       	<artifactId>pgjdbc-versions</artifactId>
       	<version>1.1.2</version>
       	<type>pom</type>
@@ -45,6 +39,28 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       	<artifactId>pgjdbc-core-parent</artifactId>
       	<version>1.1.2</version>
       	<type>pom</type>
+      </dependency>
+      <dependency>
+      	<groupId>org.hibernate</groupId>
+      	<artifactId>hibernate-annotations</artifactId>
+      	<version>3.5.6-Final</version>
+      </dependency>
+      <dependency>
+      	<groupId>org.hibernate</groupId>
+      	<artifactId>ejb3-persistence</artifactId>
+      	<version>3.3.2.Beta1</version>
+      	<type>pom</type>
+      </dependency>
+      <dependency>
+      	<groupId>org.postgresql</groupId>
+      	<artifactId>pgjdbc-aggregate</artifactId>
+      	<version>42.1.4</version>
+      	<type>pom</type>
+      </dependency>
+      <dependency>
+      	<groupId>org.postgresql</groupId>
+      	<artifactId>postgresql</artifactId>
+      	<version>42.1.4</version>
       </dependency>
     </dependencies>
 </project>

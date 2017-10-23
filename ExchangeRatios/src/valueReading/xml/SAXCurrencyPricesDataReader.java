@@ -69,6 +69,7 @@ if(qName.equals(dateElement)) {
 	}
 
 	public void endDocument() throws SAXException {
+		readyForNewObject();
 	}
 
 	public void characters(char[] ch, int start, int length) throws SAXException {
