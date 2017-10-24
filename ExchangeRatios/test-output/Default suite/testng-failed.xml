@@ -3,15 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="testing._SmokeTest">
+      <class name="testing._DbTest">
         <methods>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="tearDownAfterClass"/>
-          <include name="testGeneralPeriodTimedExchangeWeekAgo"/>
-          <include name="setUpBeforeClass"/>
+          <include name="getData"/>
         </methods>
-      </class> <!-- testing._SmokeTest -->
+      </class> <!-- testing._DbTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

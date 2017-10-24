@@ -1,18 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="0" total="5" passed="4">
+<testng-results skipped="0" failed="1" ignored="0" total="6" passed="5">
   <reporter-output>
   </reporter-output>
-  <suite name="APISuite" duration-ms="4704" started-at="2017-10-23T10:56:23Z" finished-at="2017-10-23T10:56:27Z">
+  <suite name="APISuite" duration-ms="73772" started-at="2017-10-24T15:49:49Z" finished-at="2017-10-24T15:51:02Z">
     <groups>
     </groups>
-    <test name="General test" duration-ms="4704" started-at="2017-10-23T10:56:23Z" finished-at="2017-10-23T10:56:27Z">
+    <test name="General test" duration-ms="73772" started-at="2017-10-24T15:49:49Z" finished-at="2017-10-24T15:51:02Z">
       <class name="testing._DbTest">
-        <test-method status="FAIL" signature="create()[pri:0, instance:testing._DbTest@457e2f02]" name="create" duration-ms="3511" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:27Z">
+        <test-method status="PASS" signature="create()[pri:0, instance:testing._DbTest@457e2f02]" name="create" duration-ms="65660" started-at="2017-10-24T17:49:56Z" finished-at="2017-10-24T17:51:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- create -->
+        <test-method status="FAIL" signature="getData()[pri:0, instance:testing._DbTest@457e2f02]" name="getData" duration-ms="696" started-at="2017-10-24T17:51:02Z" finished-at="2017-10-24T17:51:02Z">
           <exception class="java.lang.RuntimeException">
+            <message>
+              <![CDATA[java.lang.NullPointerException]]>
+            </message>
             <full-stacktrace>
-              <![CDATA[java.lang.RuntimeException
-	at db.DbConnection.makeDefaultPostgreConnection(DbConnection.java:46)
-	at testing._DbTest.create(_DbTest.java:14)
+              <![CDATA[java.lang.RuntimeException: java.lang.NullPointerException
+	at parser.Str2BigDecimal.parse(Str2BigDecimal.java:32)
+	at persistence.db.table.currency.CurrencyPrice.avg(CurrencyPrice.java:30)
+	at valueReading.xml.tableService.TablesAB.serviceMapping(TablesAB.java:10)
+	at valueReading.xml.SAXCurrencyPricesDataReader.readyForNewObject(SAXCurrencyPricesDataReader.java:65)
+	at valueReading.xml.SAXCurrencyPricesDataReader.startElement(SAXCurrencyPricesDataReader.java:43)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:509)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:374)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2784)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:112)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:841)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:770)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1213)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:643)
+	at extraction.xml.specialized.SelectiveSaxDataReader.readAsSAX(SelectiveSaxDataReader.java:42)
+	at extraction.xml.specialized.SelectiveSaxDataReader.readExt(SelectiveSaxDataReader.java:31)
+	at main.HttpXmlNbpPeriodTableCurrency.getXMLSubData(HttpXmlNbpPeriodTableCurrency.java:39)
+	at main.HttpXmlNbpPeriodTableCurrency.iterateThoroughDates(HttpXmlNbpPeriodTableCurrency.java:74)
+	at main.HttpXmlNbpPeriodTableCurrency.takeTable(HttpXmlNbpPeriodTableCurrency.java:55)
+	at main.Helper.gatherData(Helper.java:20)
+	at testing._DbTest.getData(_DbTest.java:27)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -38,70 +66,75 @@
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: java.lang.NullPointerException
+	at java.text.DecimalFormat.parse(DecimalFormat.java:1997)
+	at java.text.NumberFormat.parse(NumberFormat.java:383)
+	at parser.Str2BigDecimal.parse(Str2BigDecimal.java:29)
+	... 47 more
 ]]>
             </full-stacktrace>
           </exception> <!-- java.lang.RuntimeException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- create -->
+        </test-method> <!-- getData -->
       </class> <!-- testing._DbTest -->
       <class name="testing._SmokeTest">
-        <test-method status="PASS" signature="setUpBeforeClass()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUpBeforeClass" is-config="true" duration-ms="21" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:23Z">
+        <test-method status="PASS" signature="setUpBeforeClass()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUpBeforeClass" is-config="true" duration-ms="96" started-at="2017-10-24T17:49:49Z" finished-at="2017-10-24T17:49:49Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpBeforeClass -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="95" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:23Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="4014" started-at="2017-10-24T17:49:49Z" finished-at="2017-10-24T17:49:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testActualExchangeForUSD()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testActualExchangeForUSD" duration-ms="557" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:23Z">
+        <test-method status="PASS" signature="testActualExchangeForUSD()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testActualExchangeForUSD" duration-ms="2354" started-at="2017-10-24T17:49:53Z" finished-at="2017-10-24T17:49:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testActualExchangeForUSD -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:23Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="1" started-at="2017-10-24T17:49:55Z" finished-at="2017-10-24T17:49:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="1" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:23Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="1" started-at="2017-10-24T17:49:55Z" finished-at="2017-10-24T17:49:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testGeneralExchangeForUSD()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testGeneralExchangeForUSD" duration-ms="81" started-at="2017-10-23T12:56:23Z" finished-at="2017-10-23T12:56:24Z">
+        <test-method status="PASS" signature="testGeneralExchangeForUSD()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testGeneralExchangeForUSD" duration-ms="38" started-at="2017-10-24T17:49:55Z" finished-at="2017-10-24T17:49:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGeneralExchangeForUSD -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-24T17:49:55Z" finished-at="2017-10-24T17:49:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="1" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="0" started-at="2017-10-24T17:49:55Z" finished-at="2017-10-24T17:49:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testGeneralPeriodTimedExchangeWeekAgo()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testGeneralPeriodTimedExchangeWeekAgo" duration-ms="247" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
+        <test-method status="PASS" signature="testGeneralPeriodTimedExchangeWeekAgo()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testGeneralPeriodTimedExchangeWeekAgo" duration-ms="424" started-at="2017-10-24T17:49:55Z" finished-at="2017-10-24T17:49:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGeneralPeriodTimedExchangeWeekAgo -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-24T17:49:56Z" finished-at="2017-10-24T17:49:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="1" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="setUp" is-config="true" duration-ms="1" started-at="2017-10-24T17:49:56Z" finished-at="2017-10-24T17:49:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testGeneralTimedExchangeForUSDWeekAgo()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testGeneralTimedExchangeForUSDWeekAgo" duration-ms="79" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
+        <test-method status="PASS" signature="testGeneralTimedExchangeForUSDWeekAgo()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="testGeneralTimedExchangeForUSDWeekAgo" duration-ms="36" started-at="2017-10-24T17:49:56Z" finished-at="2017-10-24T17:49:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGeneralTimedExchangeForUSDWeekAgo -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="5" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="tearDownAfterClass()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDownAfterClass" is-config="true" duration-ms="0" started-at="2017-10-23T12:56:24Z" finished-at="2017-10-23T12:56:24Z">
+        <test-method status="PASS" signature="tearDownAfterClass()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDownAfterClass" is-config="true" duration-ms="0" started-at="2017-10-24T17:49:56Z" finished-at="2017-10-24T17:49:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownAfterClass -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@4cc0edeb]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-24T17:49:56Z" finished-at="2017-10-24T17:49:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
       </class> <!-- testing._SmokeTest -->
     </test> <!-- General test -->
   </suite> <!-- APISuite -->

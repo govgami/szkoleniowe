@@ -4,19 +4,20 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-import db.table.CurrencyPrice;
+import persistence.db.table.currency.CurrencyPrice;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeClass;
 
 import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
 
 import java.util.Calendar;
 import java.util.List;
 
-import downloader.xml.XMLStringNBPDownloader;
-import downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
-import extraction.xml.specialized.SelectiveSaxDataReader;
+import nbp.downloader.xml.XMLStringNBPDownloader;
+import nbp.downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
+import nbp.extraction.xml.specialized.SelectiveSaxDataReader;
 import valueReading.xml.CurrMarkSpecSAXNumericReader;
 import valueReading.xml.SAXCurrencyPricesDataReader;
 import valueReading.xml.SAXNumericReader;
@@ -66,7 +67,7 @@ public class _SmokeTest {
 		System.out.print(r + "\n");
 		String readed = resp.read(r);
 		System.out.println(readed);
-		assertNotEquals(-1, Float.parseFloat(readed), 1);
+		assertNotNull(resp.readExt(r));
 	}
 
 	@Test
@@ -75,7 +76,7 @@ public class _SmokeTest {
 		System.out.print(r + "\n");
 		String readed = respExt.read(r);
 		System.out.println(readed);
-		assertNotEquals(-1, Float.parseFloat(readed), 1);
+		assertNotNull(respExt.readExt(r));
 	}
 
 	@Test
@@ -84,7 +85,7 @@ public class _SmokeTest {
 		System.out.print(r + "\n");
 		String readed = respExt.read(r);
 		System.out.println(readed);
-		assertNotEquals(-1, Float.parseFloat(readed), 1);
+		assertNotNull(respExt.readExt(r));
 	}
 	@Test
 	public void testGeneralPeriodTimedExchangeWeekAgo() {

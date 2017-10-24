@@ -5,7 +5,7 @@
     <classes>
       <class name="testing._DbTest">
         <methods>
-          <include name="create"/>
+          <include name="getData"/>
         </methods>
       </class> <!-- testing._DbTest -->
     </classes>

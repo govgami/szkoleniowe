@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">5 methods, 1 failed,   4 passed</span>
+                    <span class="method-stats">6 methods, 1 failed,   5 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -102,7 +102,7 @@
                     <div class="method-list-content failed suite-APISuite">
                       <span>
                         <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-APISuite" title="testing._DbTest" hash-for-method="create">create</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-APISuite" title="testing._DbTest" hash-for-method="getData">getData</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-APISuite -->
@@ -114,6 +114,11 @@
                       <a href="#" panel-name="suite-APISuite" class="show-methods passed suite-APISuite"> (show)</a> <!-- show-methods passed suite-APISuite -->
                     </span>
                     <div class="method-list-content passed suite-APISuite">
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-APISuite" title="testing._DbTest" hash-for-method="create">create</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-APISuite" title="testing._SmokeTest" hash-for-method="testActualExchangeForUSD">testActualExchangeForUSD</a> <!-- method navigator-link -->
@@ -154,12 +159,38 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="create">
-                  </a> <!-- create -->
-                  <span class="method-name">create</span>
-                  <div class="stack-trace">java.lang.RuntimeException
-	at db.DbConnection.makeDefaultPostgreConnection(DbConnection.java:46)
-	at testing._DbTest.create(_DbTest.java:14)
+                  <a name="getData">
+                  </a> <!-- getData -->
+                  <span class="method-name">getData</span>
+                  <div class="stack-trace">java.lang.RuntimeException: java.lang.NullPointerException
+	at parser.Str2BigDecimal.parse(Str2BigDecimal.java:32)
+	at persistence.db.table.currency.CurrencyPrice.avg(CurrencyPrice.java:30)
+	at valueReading.xml.tableService.TablesAB.serviceMapping(TablesAB.java:10)
+	at valueReading.xml.SAXCurrencyPricesDataReader.readyForNewObject(SAXCurrencyPricesDataReader.java:65)
+	at valueReading.xml.SAXCurrencyPricesDataReader.startElement(SAXCurrencyPricesDataReader.java:43)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:509)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:374)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2784)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:112)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:841)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:770)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1213)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:643)
+	at extraction.xml.specialized.SelectiveSaxDataReader.readAsSAX(SelectiveSaxDataReader.java:42)
+	at extraction.xml.specialized.SelectiveSaxDataReader.readExt(SelectiveSaxDataReader.java:31)
+	at main.HttpXmlNbpPeriodTableCurrency.getXMLSubData(HttpXmlNbpPeriodTableCurrency.java:39)
+	at main.HttpXmlNbpPeriodTableCurrency.iterateThoroughDates(HttpXmlNbpPeriodTableCurrency.java:74)
+	at main.HttpXmlNbpPeriodTableCurrency.takeTable(HttpXmlNbpPeriodTableCurrency.java:55)
+	at main.Helper.gatherData(Helper.java:20)
+	at testing._DbTest.getData(_DbTest.java:27)
+Caused by: java.lang.NullPointerException
+	at java.text.DecimalFormat.parse(DecimalFormat.java:1997)
+	at java.text.NumberFormat.parse(NumberFormat.java:383)
+	at parser.Str2BigDecimal.parse(Str2BigDecimal.java:29)
+	... 47 more
 ... Removed 25 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
@@ -198,6 +229,21 @@
                   <a name="testGeneralTimedExchangeForUSDWeekAgo">
                   </a> <!-- testGeneralTimedExchangeForUSDWeekAgo -->
                   <span class="method-name">testGeneralTimedExchangeForUSDWeekAgo</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-APISuite-class-passed -->
+          <div class="suite-APISuite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">testing._DbTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="create">
+                  </a> <!-- create -->
+                  <span class="method-name">create</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -255,32 +301,36 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(5);
+data.addRows(6);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'create')
 data.setCell(0, 2, 'testing._DbTest')
-data.setCell(0, 3, 3511);
+data.setCell(0, 3, 65660);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'testActualExchangeForUSD')
 data.setCell(1, 2, 'testing._SmokeTest')
-data.setCell(1, 3, 557);
+data.setCell(1, 3, 2354);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'testGeneralPeriodTimedExchangeWeekAgo')
-data.setCell(2, 2, 'testing._SmokeTest')
-data.setCell(2, 3, 247);
+data.setCell(2, 1, 'getData')
+data.setCell(2, 2, 'testing._DbTest')
+data.setCell(2, 3, 696);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'testGeneralExchangeForUSD')
+data.setCell(3, 1, 'testGeneralPeriodTimedExchangeWeekAgo')
 data.setCell(3, 2, 'testing._SmokeTest')
-data.setCell(3, 3, 81);
+data.setCell(3, 3, 424);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'testGeneralTimedExchangeForUSDWeekAgo')
+data.setCell(4, 1, 'testGeneralExchangeForUSD')
 data.setCell(4, 2, 'testing._SmokeTest')
-data.setCell(4, 3, 79);
+data.setCell(4, 3, 38);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'testGeneralTimedExchangeForUSDWeekAgo')
+data.setCell(5, 2, 'testing._SmokeTest')
+data.setCell(5, 3, 36);
 window.suiteTableData['APISuite']= { tableData: data, tableDiv: 'times-div-APISuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 4 seconds</span>
+              <span class="suite-total-time">Total running time: 1 minutes</span>
               <div id="times-div-APISuite">
               </div> <!-- times-div-APISuite -->
             </div> <!-- times-div -->
@@ -313,64 +363,68 @@ return data;
               </div> <!-- configuration-class before -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">37 ms</span>
+                <span class="method-start">107 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testActualExchangeForUSD</span>
-                <span class="method-start">132 ms</span>
+                <span class="method-start">4121 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">709 ms</span>
+                <span class="method-start">6477 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">711 ms</span>
+                <span class="method-start">6478 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testGeneralExchangeForUSD</span>
-                <span class="method-start">712 ms</span>
+                <span class="method-start">6479 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">798 ms</span>
+                <span class="method-start">6519 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">805 ms</span>
+                <span class="method-start">6520 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testGeneralPeriodTimedExchangeWeekAgo</span>
-                <span class="method-start">806 ms</span>
+                <span class="method-start">6520 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">1059 ms</span>
+                <span class="method-start">6946 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">1060 ms</span>
+                <span class="method-start">6946 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">testGeneralTimedExchangeForUSDWeekAgo</span>
-                <span class="method-start">1061 ms</span>
+                <span class="method-start">6947 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">1143 ms</span>
+                <span class="method-start">6985 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-class after">
                 <span class="method-name">tearDownAfterClass</span>
-                <span class="method-start">1149 ms</span>
+                <span class="method-start">6985 ms</span>
               </div> <!-- configuration-class after -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">testing._DbTest</div> <!-- chronological-class-name -->
               <div class="test-method">
+                <span class="method-name">create</span>
+                <span class="method-start">7054 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">create</span>
-                <span class="method-start">1151 ms</span>
+                <span class="method-name">getData</span>
+                <span class="method-start">72847 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

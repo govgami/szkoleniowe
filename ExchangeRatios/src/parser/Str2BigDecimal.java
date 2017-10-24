@@ -27,12 +27,9 @@ public class Str2BigDecimal implements InnerDataParser {
 
 			// parse the string
 			return (BigDecimal) decimalFormat.parse(state);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			Log.exception("failure:\n", e);
-			throw new RuntimeException("Parsing error of DecimalFormat");
-		}catch(NullPointerException e) {
-			Log.exception("null:\n", e);
-			return null;
+			throw new RuntimeException(e);
 		}
 	}
 
