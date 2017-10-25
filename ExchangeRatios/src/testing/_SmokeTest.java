@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeClass;
 
-import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.util.Calendar;
@@ -17,7 +16,6 @@ import nbp.CurrencyPrice;
 import nbp.downloader.xml.XMLStringNBPDownloader;
 import nbp.downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
 import nbp.extraction.xml.specialized.SelectiveSaxDataReader;
-import nbp.main.HttpXmlNbpPeriodTableCurrency;
 import valueReading.xml.CurrMarkSpecSAXNumericReader;
 import valueReading.xml.SAXCurrencyPricesDataReader;
 import valueReading.xml.SAXNumericReader;
@@ -98,15 +96,15 @@ public class _SmokeTest {
 		System.out.print(r + "\n");
 		List<CurrencyPrice> list = (List<CurrencyPrice>) respExtTable.readExt(r);
 		for(CurrencyPrice cp:list) {
-		System.out.println("loaded: "+cp.getEffectiveDate()+", "+cp.getCurrencySign()+", "+cp.getAvgCurrencyPrice());
+		System.out.println("loaded: "+cp.getCurrencyName()+" "+cp.getEffectiveDate()+", "+cp.getCurrencySign()+", "+cp.getAvgCurrencyPrice());
 		}
 	}
 	
-	@Test
-	public void testBlockGeneralPeriodTimedExchangeWeekAgo() {
-		List<CurrencyPrice> list = HttpXmlNbpPeriodTableCurrency.takeTable("a", date1, date2);
-		//for(CurrencyPrice cp:list) {
-		//System.out.println("loaded block: "+cp.getEffectiveDate()+", "+cp.getCurrencySign()+", "+cp.getAvgCurrencyPrice());
-		//}
-	}
+//	@Test
+//	public void testBlockGeneralPeriodTimedExchangeWeekAgo() {
+//		List<CurrencyPrice> list = HttpXmlNbpPeriodTableCurrency.takeTable("a", date1, date2);
+//		//for(CurrencyPrice cp:list) {
+//		//System.out.println("loaded block: "+cp.getEffectiveDate()+", "+cp.getCurrencySign()+", "+cp.getAvgCurrencyPrice());
+//		//}
+//	}
 }

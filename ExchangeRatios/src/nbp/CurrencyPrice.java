@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import parser.Str2BigDecimal;
 
 public class CurrencyPrice {
+	private String currencyName;
 	private String currencySign;
 	private BigDecimal avgCurrencyPrice;
 	private String effectiveDate;
@@ -14,24 +15,24 @@ public class CurrencyPrice {
 	//DEV insert for searching whole array of currency prices
 	public CurrencyPrice() {}
 	
-	public CurrencyPrice(String currencySign, BigDecimal avgPrice, String effectiveDate) {
+	public CurrencyPrice(String currencyName, String currencySign, BigDecimal avgPrice, String effectiveDate) {
 		this.currencySign=currencySign;
 		this.avgCurrencyPrice=avgPrice;
 		this.effectiveDate=effectiveDate;
 	}
-	public CurrencyPrice(String currencySign, BigDecimal sellPrice, BigDecimal buyPrice, String effectiveDate) {
+	public CurrencyPrice(String currencyName, String currencySign, BigDecimal sellPrice, BigDecimal buyPrice, String effectiveDate) {
 		this.currencySign=currencySign;
 		this.sellPrice=sellPrice;
 		this.buyPrice=buyPrice;
 		this.effectiveDate=effectiveDate;
 	}
 	
-	public static CurrencyPrice avg(String currencySign,String avgPrice, String effectiveDate) {
-		return new CurrencyPrice(currencySign, new Str2BigDecimal(avgPrice).parse(), effectiveDate);
+	public static CurrencyPrice avg(String currencyName, String currencySign,String avgPrice, String effectiveDate) {
+		return new CurrencyPrice(currencyName,currencySign, new Str2BigDecimal(avgPrice).parse(), effectiveDate);
 	}
 	
-	public static CurrencyPrice minMax(String currencySign, String sellPrice, String buyPrice, String effectiveDate) {
-		return new CurrencyPrice(currencySign, new Str2BigDecimal(sellPrice).parse(), new Str2BigDecimal(buyPrice).parse(), effectiveDate);	
+	public static CurrencyPrice minMax(String currencyName, String currencySign, String sellPrice, String buyPrice, String effectiveDate) {
+		return new CurrencyPrice(currencyName,currencySign, new Str2BigDecimal(sellPrice).parse(), new Str2BigDecimal(buyPrice).parse(), effectiveDate);	
 	}
 	
 	public String getCurrencySign() {
@@ -71,6 +72,14 @@ public class CurrencyPrice {
 
 	public void setBuyPrice(BigDecimal buyPrice) {
 		this.buyPrice = buyPrice;
+	}
+
+	public String getCurrencyName() {
+		return currencyName;
+	}
+
+	public void setCurrencyName(String currencyName) {
+		this.currencyName = currencyName;
 	}
 	
 }

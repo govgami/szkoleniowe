@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import nbp.CurrencyPrice;
-import nbp.downloader.Dates;
 import nbp.downloader.xml.XMLStringNBPDownloader;
 import nbp.downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
 import nbp.extraction.xml.specialized.SelectiveSaxDataReader;

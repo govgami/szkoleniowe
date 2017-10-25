@@ -3,12 +3,11 @@ package persistence.db;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.List;
 
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import logging.Log;
+import persistence.db.queries.PGQSelect;
 import persistence.db.table.currency.Country;
 import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
@@ -27,12 +26,44 @@ public class PGQuery {
 		}
 	}
 	
-	public static final void InsertCurrencyRatiosGroup(List<CurrencyRatios>list) {
-		for(Object o:list) {
-			Insert(o);
+	public static final void InsertActualizedCurrencyRatiosGroup(List<CurrencyRatios>list) {
+CurrencyRatios existance;
+		for(CurrencyRatios o:list) {
+			existance=PGQSelect.doesCurrencyRatioExist((CurrencyRatios)o);
+			if(existance!=null) {
+				InsertOrUpdate( mergeObjectRatiosData(existance,o));
+			}
+			else {
+				Insert(o);
+			}
 		}
 	}
 	
+	public static final CurrencyRatios mergeObjectRatiosData(CurrencyRatios base, CurrencyRatios update) {
+		if(update.getAskPrice()!=null) {
+			base.setAskPrice(update.getAskPrice());
+		}
+		if(update.getBidPrice()!=null) {
+			base.setBidPrice(update.getBidPrice());
+		}
+		if(update.getAvgPrice()!=null) {
+			base.setAvgPrice(update.getAvgPrice());
+		}
+		return base;
+	}
+	
+	
+	public static final void UpdateObject(Object obj) {
+		Session session=openTransaction();
+		session.update(obj);
+		closeSession(session);
+	}
+	
+	public static final void InsertOrUpdate(Object obj) {
+		Session session=openTransaction();
+		session.saveOrUpdate(obj);
+		closeSession(session);
+	}
 
 	public static final int Delete(Connection c, String tableName, int id) throws SQLException {
 
@@ -41,6 +72,12 @@ public class PGQuery {
 		stmt.executeUpdate(sql);
 		stmt.close();
 		return id;
+	}
+	
+	public static final void DeleteObject(Object o) {
+		Session session=openTransaction();
+		session.delete(o);
+		closeSession(session);
 	}
 
 	public static void createPreProgrammed(Connection conn) {

@@ -15,19 +15,20 @@ import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
 
 public class Helper {
+	
+	
 public static void gatherData() {
-	Date from=new Date(Calendar.getInstance().getTimeInMillis()-1000*3600*24*6);
+	Date from=new Date(Calendar.getInstance().getTimeInMillis()-1000*3600*24*7);
 	Date to=new Date(Calendar.getInstance().getTimeInMillis());
-	PGQuery.InsertCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
-	PGQuery.InsertCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
-	//PGQuery.Insert(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("b", from, to)));
-
+	gatherData(from, to);	//PGQuery.Insert(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("b", from, to)));
 
 }
 
 public static void gatherData(Date from, Date to) {
-	PGQuery.InsertCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
-	PGQuery.InsertCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("b", from, to)));
+	PGQuery.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
+	PGQuery.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("b", from, to)));
+	PGQuery.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("c", from, to)));
+
 }
 
 static List<CurrencyRatios> parsePrice2Ratios(List<CurrencyPrice> list) {
@@ -37,7 +38,7 @@ static List<CurrencyRatios> parsePrice2Ratios(List<CurrencyPrice> list) {
 	for(CurrencyPrice cp: list) {
 		t=new CurrencyRatios();
 		t.setDate((Date)new Str2SqlDate(cp.getEffectiveDate()).parse());
-		System.out.println(t.getCurrencyId()+" "+t.getDate());
+		//System.out.println(t.getCurrencyId()+" "+t.getDate());
 		t.setCurrencyId(map.get(cp.getCurrencySign()));
 		saveFromUnknownCurrency(cp, t,map);
 		adjustFieldsOf(cp, t);
@@ -57,9 +58,10 @@ static HashMap<String, Currency> getCurrencies(){
 
 static void saveFromUnknownCurrency(CurrencyPrice cp, CurrencyRatios cr, HashMap<String,Currency>map) {
 	if(cr.getCurrencyId()==null) {
-		PGQuery.Insert(new Currency(null, null, cp.getCurrencySign()));
+		PGQuery.Insert(new Currency(null, cp.getCurrencyName(), cp.getCurrencySign()));
 		map.clear();
 		map.putAll(getCurrencies());
+		cr.setCurrencyId(map.get(cp.getCurrencySign()));
 	}
 }
 
