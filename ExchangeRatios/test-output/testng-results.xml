@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="13047" started-at="2017-10-25T06:34:18Z" finished-at="2017-10-25T06:34:31Z">
+  <suite name="Default suite" duration-ms="8322" started-at="2017-10-25T15:14:41Z" finished-at="2017-10-25T15:14:49Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="13047" started-at="2017-10-25T06:34:18Z" finished-at="2017-10-25T06:34:31Z">
+    <test name="Default test" duration-ms="8322" started-at="2017-10-25T15:14:41Z" finished-at="2017-10-25T15:14:49Z">
       <class name="testing._DbTest">
-        <test-method status="PASS" signature="create()[pri:0, instance:testing._DbTest@d2cc05a]" name="create" duration-ms="2856" started-at="2017-10-25T08:34:18Z" finished-at="2017-10-25T08:34:20Z">
+        <test-method status="PASS" signature="createDefaultConnection()[pri:0, instance:testing._DbTest@d2cc05a]" name="createDefaultConnection" duration-ms="2959" started-at="2017-10-25T17:14:41Z" finished-at="2017-10-25T17:14:44Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- create -->
-        <test-method status="PASS" signature="getData()[pri:0, instance:testing._DbTest@d2cc05a]" name="getData" duration-ms="10108" started-at="2017-10-25T08:34:21Z" finished-at="2017-10-25T08:34:31Z">
+        </test-method> <!-- createDefaultConnection -->
+        <test-method status="PASS" signature="getData()[pri:0, instance:testing._DbTest@d2cc05a]" name="getData" duration-ms="5280" started-at="2017-10-25T17:14:44Z" finished-at="2017-10-25T17:14:49Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getData -->
+        <test-method status="PASS" signature="getSortedCurrency()[pri:0, instance:testing._DbTest@d2cc05a]" name="getSortedCurrency" duration-ms="19" started-at="2017-10-25T17:14:49Z" finished-at="2017-10-25T17:14:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getSortedCurrency -->
       </class> <!-- testing._DbTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

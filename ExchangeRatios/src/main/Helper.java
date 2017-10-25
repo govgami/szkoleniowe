@@ -19,9 +19,15 @@ public static void gatherData() {
 	Date from=new Date(Calendar.getInstance().getTimeInMillis()-1000*3600*24*6);
 	Date to=new Date(Calendar.getInstance().getTimeInMillis());
 	PGQuery.InsertCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
+	PGQuery.InsertCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
 	//PGQuery.Insert(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("b", from, to)));
 
 
+}
+
+public static void gatherData(Date from, Date to) {
+	PGQuery.InsertCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
+	PGQuery.InsertCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("b", from, to)));
 }
 
 static List<CurrencyRatios> parsePrice2Ratios(List<CurrencyPrice> list) {
@@ -41,7 +47,7 @@ static List<CurrencyRatios> parsePrice2Ratios(List<CurrencyPrice> list) {
 	return result;
 }
 static HashMap<String, Currency> getCurrencies(){
-	List<Currency> curr=PGQSelect.SelectAllCurriencies();
+	List<Currency> curr=PGQSelect.SelectAllFrom("Currency");
 	HashMap<String, Currency> map=new HashMap<String, Currency>();
 	for(Currency c:curr) {
 		map.put(c.getSign(), c);

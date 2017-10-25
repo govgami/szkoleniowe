@@ -12,8 +12,7 @@ public class PGQSelect extends PGQuery{
 	public static final <T> List<T> SelectAllFrom(String tableName) {
 		validateQueryArg(tableName);
 		Session session = openTransaction();
-		Query query = session.createQuery("FROM :tableName:");
-		query.setParameter(":tableName:", tableName);
+		Query query = session.createQuery("FROM "+tableName);
 		List<T> list = (List<T>) query.getResultList();
 		session.close();
 		return list;
@@ -31,10 +30,8 @@ public class PGQSelect extends PGQuery{
 		validateQueryArg(tableName);
 		validateQueryArg(orderBy);
 		Session session = openTransaction();
-		Query query = session.createQuery("FROM :tableName ORDER BY :orderBy :ascension");
-		query.setParameter("tableName", tableName);
-		query.setParameter("orderBy", orderBy);
-		query.setParameter("ascension", (ascending ? "ASC" : "DESC"));
+		Query query = session.createQuery("FROM "+tableName+" ORDER BY "+orderBy+"  "+(ascending ? "ASC" : "DESC"));
+		//query.setParameter("ascension", (ascending ? "ASC" : "DESC"));
 		List<T> list = (List<T>) query.getResultList();
 		session.close();
 		return list;

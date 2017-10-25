@@ -3,6 +3,7 @@ package testing;
 import static org.testng.Assert.assertNotNull;
 
 import java.sql.Connection;
+import java.util.List;
 
 import javax.management.Query;
 
@@ -16,7 +17,7 @@ import persistence.db.table.currency.Currency;
 
 public class _DbTest {
   @Test
-  public void create() {
+  public void createDefaultConnection() {
 	  Connection c=DbConnection.makeDefaultPostgreConnection();
 	  assertNotNull(c);
   }
@@ -28,8 +29,16 @@ public class _DbTest {
   public void getData() {
 	  Helper.gatherData();
 	  for(Currency c: PGQSelect.SelectAllCurriencies()) {
+		  System.out.print(c.getSign()+":  :");
+	  }
+  }
+  @Test
+  public void getSortedCurrency() {
+	  List<Currency> list=PGQSelect.SelectAllSortedFrom("Currency", "shortcut", true);
+	  for(Currency c: list) {
 		  System.out.println(c.getSign());
 	  }
   }
+  
 
 }

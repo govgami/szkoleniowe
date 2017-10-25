@@ -5,7 +5,7 @@
     <classes>
       <class name="testing._DbTest">
         <methods>
-          <include name="getData"/>
+          <include name="getSortedCurrency"/>
         </methods>
       </class> <!-- testing._DbTest -->
     </classes>
