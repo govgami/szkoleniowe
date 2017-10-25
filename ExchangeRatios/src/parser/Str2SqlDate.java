@@ -14,11 +14,11 @@ public Str2SqlDate(String textDate) {
 }
 
 @Override
-public <T> T parse() {
+public java.sql.Date parse() {
 	try {
 	java.util.Date date = sdf1.parse(input);
 	java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-	return null;
+	return sqlDate;
 }catch(Exception e) {
 Log.exception("attempted to parse: "+input+" with format "+sdf1.toPattern(), e);	
 throw new RuntimeException(e);

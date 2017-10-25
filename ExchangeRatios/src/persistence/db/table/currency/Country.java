@@ -14,7 +14,7 @@ public class Country implements Serializable{
 	private static final long serialVersionUID = 1872139910695816592L;	
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true, nullable = false)
 private	Integer id;
 	@Column(name = "NAME", unique = false, nullable = true, length = 100)

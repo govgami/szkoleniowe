@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import persistence.db.table.currency.CurrencyPrice;
+import nbp.CurrencyPrice;
 import nbp.downloader.Dates;
 import nbp.downloader.xml.XMLStringNBPDownloader;
 import nbp.downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
@@ -30,8 +30,9 @@ public class HttpXmlNbpPeriodTableCurrency extends AccessXMLInformation {
 
 	@Override
 	public List<CurrencyPrice> getXMLData() {
-		dates=Dates.markValidDates(from, to);
-		iterateThoroughDates();
+		//dates=Dates.markValidDates(from, to);
+		//iterateThoroughDates();
+		list=getXMLSubData();
 		return list;
 	}
 	
@@ -51,24 +52,25 @@ public class HttpXmlNbpPeriodTableCurrency extends AccessXMLInformation {
 		} else {
 			t = workWithAB(tableN, from, to);
 		}
-		t.dates=Dates.markValidDates(from, to);
-		t.iterateThoroughDates();
+		//t.dates=Dates.markValidDates(from, to);
+		//t.iterateThoroughDates();
 		return t.getXMLData();
 	}
 
 	static HttpXmlNbpPeriodTableCurrency workWithAB(String tableN, Date from, Date to) {
 		return new HttpXmlNbpPeriodTableCurrency(tableN, from, to,
-				HttpXmlExchangeDownloaderFactory.exchangeTableOnDay(tableN, from),
+				HttpXmlExchangeDownloaderFactory.exchangeTableOnDayTo(tableN, from, to),
 				new SAXCurrencyPricesDataReader(new TablesAB()));
 	}
 
 	static HttpXmlNbpPeriodTableCurrency workWithC(String tableN, Date from, Date to) {
 		return new HttpXmlNbpPeriodTableCurrency(tableN, from, to,
-				HttpXmlExchangeDownloaderFactory.exchangeTableOnDay(tableN, from),
+				HttpXmlExchangeDownloaderFactory.exchangeTableOnDayTo(tableN, from, to),
 				new SAXCurrencyPricesDataReader(new TablesC()));
 	}
 	
 void iterateThoroughDates() {
+	list.clear();
 	for(int i=0; i<dates.size();i++) {
 		info.alterSource(HttpXmlExchangeDownloaderFactory.requestDatedTable(tableN, dates.get(i)));
 		for(CurrencyPrice cp:getXMLSubData()) {

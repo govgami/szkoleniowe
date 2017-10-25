@@ -15,7 +15,10 @@ public class Date2Str implements InnerDataParser {
 	}
 
 	public Date2Str(Date time) {
+		if(time!=null)
 		date = time;
+		else
+			throw new RuntimeException("assigned null");
 	}
 
 	protected String dateFormat() throws RuntimeException {

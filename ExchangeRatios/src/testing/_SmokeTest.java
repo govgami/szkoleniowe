@@ -3,9 +3,6 @@ package testing;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-
-import persistence.db.table.currency.CurrencyPrice;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeClass;
 
@@ -13,11 +10,14 @@ import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import nbp.CurrencyPrice;
 import nbp.downloader.xml.XMLStringNBPDownloader;
 import nbp.downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
 import nbp.extraction.xml.specialized.SelectiveSaxDataReader;
+import nbp.main.HttpXmlNbpPeriodTableCurrency;
 import valueReading.xml.CurrMarkSpecSAXNumericReader;
 import valueReading.xml.SAXCurrencyPricesDataReader;
 import valueReading.xml.SAXNumericReader;
@@ -31,6 +31,9 @@ public class _SmokeTest {
 	SelectiveSaxDataReader resp;
 	SelectiveSaxDataReader respExt;
 	SelectiveSaxDataReader respExtTable;
+	
+	Date date1,date2;
+	
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -45,9 +48,11 @@ public class _SmokeTest {
 		specInfo = HttpXmlExchangeDownloaderFactory.exchangeRateA("usd");
 		genInfo = HttpXmlExchangeDownloaderFactory.exchangeTable("a");
 		Calendar dateConst = Calendar.getInstance();
-		dateConst.set(2015, 5, 5);
+		dateConst.set(2015, 5, 1);
+		date1=dateConst.getTime();
 		Calendar dateConst2 = Calendar.getInstance();
 		dateConst2.set(2015, 5, 8);
+		date2=dateConst2.getTime();
 		Calendar date = Calendar.getInstance();
 		date.setTimeInMillis(date.getTimeInMillis() - 1000 * 3600 * 24 * 7);
 		timedGenInfo = HttpXmlExchangeDownloaderFactory.exchangeTableOnDay("a", dateConst.getTime());
@@ -95,5 +100,13 @@ public class _SmokeTest {
 		for(CurrencyPrice cp:list) {
 		System.out.println("loaded: "+cp.getEffectiveDate()+", "+cp.getCurrencySign()+", "+cp.getAvgCurrencyPrice());
 		}
+	}
+	
+	@Test
+	public void testBlockGeneralPeriodTimedExchangeWeekAgo() {
+		List<CurrencyPrice> list = HttpXmlNbpPeriodTableCurrency.takeTable("a", date1, date2);
+		//for(CurrencyPrice cp:list) {
+		//System.out.println("loaded block: "+cp.getEffectiveDate()+", "+cp.getCurrencySign()+", "+cp.getAvgCurrencyPrice());
+		//}
 	}
 }

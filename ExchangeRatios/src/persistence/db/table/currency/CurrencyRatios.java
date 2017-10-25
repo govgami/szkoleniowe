@@ -1,5 +1,6 @@
 package persistence.db.table.currency;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 
@@ -8,10 +9,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "CURRENCY_RATIOS", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
-public class CurrencyRatios {
+public class CurrencyRatios implements Serializable{
+	
+	private static final long serialVersionUID = 4445757466460884024L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", unique = true, nullable = false)
 	BigDecimal id;
 	@ManyToOne

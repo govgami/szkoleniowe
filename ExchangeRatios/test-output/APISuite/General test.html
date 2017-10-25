@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>General test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>5/1/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>6/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Tue Oct 24 17:49:49 CEST 2017</td>
+<td>Started on:</td><td>Tue Oct 24 23:04:29 CEST 2017</td>
 </tr>
-<tr><td>Total time:</td><td>73 seconds (73772 ms)</td>
+<tr><td>Total time:</td><td>5 seconds (5574 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,59 +76,40 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='testing._DbTest.getData()'><b>getData</b><br>Test class: testing._DbTest</td>
-<td><div><pre>java.lang.RuntimeException: java.lang.NullPointerException
-	at parser.Str2BigDecimal.parse(Str2BigDecimal.java:32)
-	at persistence.db.table.currency.CurrencyPrice.avg(CurrencyPrice.java:30)
-	at valueReading.xml.tableService.TablesAB.serviceMapping(TablesAB.java:10)
-	at valueReading.xml.SAXCurrencyPricesDataReader.readyForNewObject(SAXCurrencyPricesDataReader.java:65)
-	at valueReading.xml.SAXCurrencyPricesDataReader.startElement(SAXCurrencyPricesDataReader.java:43)
-	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:509)
-	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:374)
-	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2784)
-	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
-	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:112)
-	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
-	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:841)
-	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:770)
-	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
-	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1213)
-	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:643)
-	at extraction.xml.specialized.SelectiveSaxDataReader.readAsSAX(SelectiveSaxDataReader.java:42)
-	at extraction.xml.specialized.SelectiveSaxDataReader.readExt(SelectiveSaxDataReader.java:31)
-	at main.HttpXmlNbpPeriodTableCurrency.getXMLSubData(HttpXmlNbpPeriodTableCurrency.java:39)
-	at main.HttpXmlNbpPeriodTableCurrency.iterateThoroughDates(HttpXmlNbpPeriodTableCurrency.java:74)
-	at main.HttpXmlNbpPeriodTableCurrency.takeTable(HttpXmlNbpPeriodTableCurrency.java:55)
-	at main.Helper.gatherData(Helper.java:20)
+<td><div><pre>java.lang.IllegalArgumentException: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token: : near line 1, column 6 [FROM :tableName]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:133)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:164)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:670)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:103)
+	at persistence.db.queries.PGQSelect.SelectAllFrom(PGQSelect.java:14)
+	at main.Helper.getCurrencies(Helper.java:42)
+	at main.Helper.parsePrice2Ratios(Helper.java:29)
+	at main.Helper.gatherData(Helper.java:21)
 	at testing._DbTest.getData(_DbTest.java:27)
-Caused by: java.lang.NullPointerException
-	at java.text.DecimalFormat.parse(DecimalFormat.java:1997)
-	at java.text.NumberFormat.parse(NumberFormat.java:383)
-	at parser.Str2BigDecimal.parse(Str2BigDecimal.java:29)
-	... 47 more
-... Removed 25 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace855501888", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace855501888'><pre>java.lang.RuntimeException: java.lang.NullPointerException
-	at parser.Str2BigDecimal.parse(Str2BigDecimal.java:32)
-	at persistence.db.table.currency.CurrencyPrice.avg(CurrencyPrice.java:30)
-	at valueReading.xml.tableService.TablesAB.serviceMapping(TablesAB.java:10)
-	at valueReading.xml.SAXCurrencyPricesDataReader.readyForNewObject(SAXCurrencyPricesDataReader.java:65)
-	at valueReading.xml.SAXCurrencyPricesDataReader.startElement(SAXCurrencyPricesDataReader.java:43)
-	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:509)
-	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:374)
-	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2784)
-	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
-	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:112)
-	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
-	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:841)
-	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:770)
-	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
-	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1213)
-	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:643)
-	at extraction.xml.specialized.SelectiveSaxDataReader.readAsSAX(SelectiveSaxDataReader.java:42)
-	at extraction.xml.specialized.SelectiveSaxDataReader.readExt(SelectiveSaxDataReader.java:31)
-	at main.HttpXmlNbpPeriodTableCurrency.getXMLSubData(HttpXmlNbpPeriodTableCurrency.java:39)
-	at main.HttpXmlNbpPeriodTableCurrency.iterateThoroughDates(HttpXmlNbpPeriodTableCurrency.java:74)
-	at main.HttpXmlNbpPeriodTableCurrency.takeTable(HttpXmlNbpPeriodTableCurrency.java:55)
-	at main.Helper.gatherData(Helper.java:20)
+Caused by: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token: : near line 1, column 6 [FROM :tableName]
+	at org.hibernate.hql.internal.ast.QuerySyntaxException.convert(QuerySyntaxException.java:74)
+	at org.hibernate.hql.internal.ast.ErrorCounter.throwQueryException(ErrorCounter.java:91)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.parse(QueryTranslatorImpl.java:291)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:186)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.compile(QueryTranslatorImpl.java:141)
+	at org.hibernate.engine.query.spi.HQLQueryPlan.&lt;init&gt;(HQLQueryPlan.java:115)
+	at org.hibernate.engine.query.spi.HQLQueryPlan.&lt;init&gt;(HQLQueryPlan.java:77)
+	at org.hibernate.engine.query.spi.QueryPlanCache.getHQLQueryPlan(QueryPlanCache.java:153)
+	at org.hibernate.internal.AbstractSharedSessionContract.getQueryPlan(AbstractSharedSessionContract.java:553)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:662)
+	... 31 more
+... Removed 25 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace205496410", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace205496410'><pre>java.lang.IllegalArgumentException: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token: : near line 1, column 6 [FROM :tableName]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:133)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:164)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:670)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:103)
+	at persistence.db.queries.PGQSelect.SelectAllFrom(PGQSelect.java:14)
+	at main.Helper.getCurrencies(Helper.java:42)
+	at main.Helper.parsePrice2Ratios(Helper.java:29)
+	at main.Helper.gatherData(Helper.java:21)
 	at testing._DbTest.getData(_DbTest.java:27)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -155,11 +136,18 @@ Caused by: java.lang.NullPointerException
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: java.lang.NullPointerException
-	at java.text.DecimalFormat.parse(DecimalFormat.java:1997)
-	at java.text.NumberFormat.parse(NumberFormat.java:383)
-	at parser.Str2BigDecimal.parse(Str2BigDecimal.java:29)
-	... 47 more
+Caused by: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token: : near line 1, column 6 [FROM :tableName]
+	at org.hibernate.hql.internal.ast.QuerySyntaxException.convert(QuerySyntaxException.java:74)
+	at org.hibernate.hql.internal.ast.ErrorCounter.throwQueryException(ErrorCounter.java:91)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.parse(QueryTranslatorImpl.java:291)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:186)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.compile(QueryTranslatorImpl.java:141)
+	at org.hibernate.engine.query.spi.HQLQueryPlan.&lt;init&gt;(HQLQueryPlan.java:115)
+	at org.hibernate.engine.query.spi.HQLQueryPlan.&lt;init&gt;(HQLQueryPlan.java:77)
+	at org.hibernate.engine.query.spi.QueryPlanCache.getHQLQueryPlan(QueryPlanCache.java:153)
+	at org.hibernate.internal.AbstractSharedSessionContract.getQueryPlan(AbstractSharedSessionContract.java:553)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:662)
+	... 31 more
 </pre></div></td>
 <td>0</td>
 <td>testing._DbTest@457e2f02</td></tr>
@@ -174,12 +162,17 @@ Caused by: java.lang.NullPointerException
 <tr>
 <td title='testing._DbTest.create()'><b>create</b><br>Test class: testing._DbTest</td>
 <td></td>
-<td>65</td>
+<td>4</td>
 <td>testing._DbTest@457e2f02</td></tr>
 <tr>
 <td title='testing._SmokeTest.testActualExchangeForUSD()'><b>testActualExchangeForUSD</b><br>Test class: testing._SmokeTest</td>
 <td></td>
-<td>2</td>
+<td>0</td>
+<td>testing._SmokeTest@4cc0edeb</td></tr>
+<tr>
+<td title='testing._SmokeTest.testBlockGeneralPeriodTimedExchangeWeekAgo()'><b>testBlockGeneralPeriodTimedExchangeWeekAgo</b><br>Test class: testing._SmokeTest</td>
+<td></td>
+<td>0</td>
 <td>testing._SmokeTest@4cc0edeb</td></tr>
 <tr>
 <td title='testing._SmokeTest.testGeneralExchangeForUSD()'><b>testGeneralExchangeForUSD</b><br>Test class: testing._SmokeTest</td>

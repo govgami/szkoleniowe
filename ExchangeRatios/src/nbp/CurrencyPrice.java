@@ -1,4 +1,4 @@
-package persistence.db.table.currency;
+package nbp;
 
 import java.math.BigDecimal;
 

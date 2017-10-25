@@ -12,7 +12,7 @@ public class Currency implements Serializable{
 	private static final long serialVersionUID = -1153042292800443513L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", unique = true, nullable = false)
 	int id;
 

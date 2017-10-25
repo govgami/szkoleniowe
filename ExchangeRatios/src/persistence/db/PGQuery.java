@@ -21,7 +21,13 @@ public class PGQuery {
 		closeSession(session);
 	}
 	
-	public static final void Insert(List<Object> list) {
+	public static final void InsertGroup(List<Object> list) {
+		for(Object o:list) {
+			Insert(o);
+		}
+	}
+	
+	public static final void InsertCurrencyRatiosGroup(List<CurrencyRatios>list) {
 		for(Object o:list) {
 			Insert(o);
 		}
@@ -46,7 +52,7 @@ public class PGQuery {
 			stmt.close();
 
 			stmt = conn.createStatement();
-			sql = "CREATE TABLE CURRENCY (ID INT PRIMARY KEY NOT NULL, COUNTRY_ID INT REFERENCES COUNTRY(ID) NOT NULL, CURRENCY_NAME  VARCHAR(50) NOT NULL,  SHORTCUT  VARCHAR(4)  NOT NULL )";
+			sql = "CREATE TABLE CURRENCY (ID INT PRIMARY KEY NOT NULL, COUNTRY_ID INT REFERENCES COUNTRY(ID), CURRENCY_NAME  VARCHAR(50),  SHORTCUT  VARCHAR(4)  NOT NULL )";
 			stmt.execute(sql);//executeUpdate(sql);
 			stmt.close();
 
@@ -54,6 +60,13 @@ public class PGQuery {
 			sql = "CREATE TABLE CURRENCY_RATIOS (ID NUMERIC PRIMARY KEY NOT NULL, CURRENCY_ID    INT REFERENCES CURRENCY(ID)    NOT NULL, EFFECTIVE_DATE DATE   NOT NULL, ASK_PRICE  NUMERIC , BID_PRICE NUMERIC  , AVG_PRICE NUMERIC     )";
 			stmt.execute(sql);
 			stmt.close();
+			
+			//seq
+			stmt = conn.createStatement();
+			sql = "CREATE SEQUENCE hibernate_sequence START WITH 1 INCREMENT BY 1  NO MAXVALUE  NO MINVALUE CACHE 1;";
+			stmt.execute(sql);
+			stmt.close();
+			
 			//alt. country
 			session = openTransaction();
 			Country country=new Country("Non-classified");
@@ -100,6 +113,7 @@ public class PGQuery {
 		return session;
 	}
 	protected static void closeSession(Session s) {
+		s.getTransaction().commit();
 		s.close();
 	}
 	
