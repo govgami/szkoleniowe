@@ -5,9 +5,9 @@ import java.math.BigDecimal;
 import nbp.downloader.xml.XMLStringNBPDownloader;
 import nbp.downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
 import nbp.extraction.xml.specialized.SelectiveSaxDataReader;
+import nbp.valueReading.ValueReader;
+import nbp.valueReading.xml.CurrMarkSpecSAXNumericReader;
 import parser.Str2BigDecimal;
-import valueReading.ValueReader;
-import valueReading.xml.CurrMarkSpecSAXNumericReader;
 
 public class HttpXmlNbpActTableCurrency extends AccessXMLInformation {
 

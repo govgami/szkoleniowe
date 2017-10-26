@@ -8,10 +8,10 @@ import nbp.CurrencyPrice;
 import nbp.downloader.xml.XMLStringNBPDownloader;
 import nbp.downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
 import nbp.extraction.xml.specialized.SelectiveSaxDataReader;
-import valueReading.ValueReader;
-import valueReading.xml.SAXCurrencyPricesDataReader;
-import valueReading.xml.tableService.TablesAB;
-import valueReading.xml.tableService.TablesC;
+import nbp.valueReading.ValueReader;
+import nbp.valueReading.xml.SAXCurrencyPricesDataReader;
+import nbp.valueReading.xml.table.TablesAB;
+import nbp.valueReading.xml.table.TablesC;
 
 public class HttpXmlNbpPeriodTableCurrency extends AccessXMLInformation {
 	String tableN;

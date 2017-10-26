@@ -1,4 +1,4 @@
-package valueReading;
+package nbp.valueReading;
 
 public interface ValueReader {
 	public String getFoundValueString();

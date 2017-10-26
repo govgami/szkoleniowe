@@ -1,4 +1,4 @@
-package valueReading.xml.tableService;
+package nbp.valueReading.xml.table;
 
 import java.util.HashMap;
 

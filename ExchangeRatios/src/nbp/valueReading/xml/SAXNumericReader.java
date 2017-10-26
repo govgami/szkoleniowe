@@ -1,23 +1,20 @@
-package valueReading.xml;
+package nbp.valueReading.xml;
 
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+
+import nbp.valueReading.ValueReader;
+import parser.Str2BigDecimal;
+
+import java.io.*;
 import java.math.BigDecimal;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
-import parser.Str2BigDecimal;
-import valueReading.ValueReader;
-
-public class SequentialSAXNumericReader extends DefaultHandler implements ValueReader {
+public class SAXNumericReader extends DefaultHandler implements ValueReader {
 	BigDecimal value = null;
-	boolean sequenceStarted;
-	String sequenceMarkName = null;
 	boolean valueFound = false;
 	String searchedQName = null;
 
-	public SequentialSAXNumericReader(String sequenceMarkName, String searchedQName) {
-		this.sequenceMarkName = sequenceMarkName;
+	public SAXNumericReader(String searchedQName) {
 		this.searchedQName = searchedQName;
 	}
 
@@ -25,9 +22,7 @@ public class SequentialSAXNumericReader extends DefaultHandler implements ValueR
 	}
 
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
-		if (qName.equals(sequenceMarkName)) {
-			sequenceStarted = true;
-		}
+
 		if (qName.equals(searchedQName)) {
 			valueFound = true;
 		}
@@ -36,7 +31,6 @@ public class SequentialSAXNumericReader extends DefaultHandler implements ValueR
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		if (qName.equals(searchedQName)) {
-			sequenceStarted = false;
 			valueFound = false;
 		}
 		super.endElement(uri, localName, qName);
@@ -46,9 +40,22 @@ public class SequentialSAXNumericReader extends DefaultHandler implements ValueR
 	}
 
 	public void characters(char[] ch, int start, int length) throws SAXException {
-		if (valueFound & sequenceStarted) {
+		if (valueFound) {
 			value = new Str2BigDecimal(new String(ch, start, length)).parse();
+			// value = Float.parseFloat(new String(ch, start, length));
 		}
+	}
+
+	private static String convertToFileURL(String filename) {
+		String path = new File(filename).getAbsolutePath();
+		if (File.separatorChar != '/') {
+			path = path.replace(File.separatorChar, '/');
+		}
+
+		if (!path.startsWith("/")) {
+			path = "/" + path;
+		}
+		return "file:" + path;
 	}
 
 	public BigDecimal getFoundValue() {

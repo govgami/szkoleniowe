@@ -1,4 +1,4 @@
-package valueReading.xml;
+package nbp.valueReading.xml;
 
 import java.math.BigDecimal;
 
@@ -6,8 +6,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import nbp.valueReading.ValueReader;
 import parser.Str2BigDecimal;
-import valueReading.ValueReader;
 
 public class CurrMarkSpecSAXNumericReader extends DefaultHandler implements ValueReader {
 

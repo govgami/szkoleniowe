@@ -11,9 +11,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import nbp.extraction.StringDataReading;
+import nbp.valueReading.ValueReader;
 import logging.Log;
 import parser.xml.XMLInputSourceParser;
-import valueReading.ValueReader;
 
 public class SelectiveSaxDataReader implements StringDataReading {
 	ValueReader reader;

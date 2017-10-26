@@ -1,4 +1,4 @@
-package valueReading.xml;
+package nbp.valueReading.xml;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,8 +9,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import nbp.CurrencyPrice;
-import valueReading.xml.tableService.TableTextConversion;
-import valueReading.ValueReader;
+import nbp.valueReading.ValueReader;
+import nbp.valueReading.xml.table.TableTextConversion;
 
 public class SAXCurrencyPricesDataReader extends DefaultHandler implements ValueReader{
 	TableTextConversion mapper=null;
