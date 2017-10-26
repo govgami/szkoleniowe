@@ -1,11 +1,13 @@
 package testing;
 
+import org.junit.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeClass;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.util.Calendar;
@@ -71,6 +73,7 @@ public class _SmokeTest {
 		String readed = resp.read(r);
 		System.out.println(readed);
 		assertNotNull(resp.readExt(r));
+		assertEquals(readed, "3.6006");
 	}
 
 	@Test
@@ -80,6 +83,7 @@ public class _SmokeTest {
 		String readed = respExt.read(r);
 		System.out.println(readed);
 		assertNotNull(respExt.readExt(r));
+		assertEquals(readed, "3.6006");
 	}
 
 	@Test

@@ -1,33 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="5" passed="5">
+<testng-results skipped="0" failed="0" ignored="0" total="4" passed="4">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="66411" started-at="2017-10-25T22:43:18Z" finished-at="2017-10-25T22:44:24Z">
+  <suite name="Default suite" duration-ms="655" started-at="2017-10-26T06:35:42Z" finished-at="2017-10-26T06:35:43Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="66411" started-at="2017-10-25T22:43:18Z" finished-at="2017-10-25T22:44:24Z">
-      <class name="testing._DbTest">
-        <test-method status="PASS" signature="createDefaultConnection()[pri:0, instance:testing._DbTest@d2cc05a]" name="createDefaultConnection" duration-ms="34280" started-at="2017-10-26T00:43:18Z" finished-at="2017-10-26T00:43:52Z">
+    <test name="Default test" duration-ms="655" started-at="2017-10-26T06:35:42Z" finished-at="2017-10-26T06:35:43Z">
+      <class name="testing._SmokeTest">
+        <test-method status="PASS" signature="setUpBeforeClass()[pri:0, instance:testing._SmokeTest@1b604f19]" name="setUpBeforeClass" is-config="true" duration-ms="15" started-at="2017-10-26T08:35:42Z" finished-at="2017-10-26T08:35:42Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- createDefaultConnection -->
-        <test-method status="PASS" signature="getData()[pri:0, instance:testing._DbTest@d2cc05a]" name="getData" duration-ms="31574" started-at="2017-10-26T00:43:52Z" finished-at="2017-10-26T00:44:24Z">
+        </test-method> <!-- setUpBeforeClass -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@1b604f19]" name="setUp" is-config="true" duration-ms="70" started-at="2017-10-26T08:35:42Z" finished-at="2017-10-26T08:35:42Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- getData -->
-        <test-method status="PASS" signature="getLimittedSortedCurrency()[pri:0, instance:testing._DbTest@d2cc05a]" name="getLimittedSortedCurrency" duration-ms="284" started-at="2017-10-26T00:44:24Z" finished-at="2017-10-26T00:44:24Z">
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testActualExchangeForUSD()[pri:0, instance:testing._SmokeTest@1b604f19]" name="testActualExchangeForUSD" duration-ms="278" started-at="2017-10-26T08:35:42Z" finished-at="2017-10-26T08:35:43Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- getLimittedSortedCurrency -->
-        <test-method status="PASS" signature="getLimittedSortedCurrencyRatiosLowestBidPrice()[pri:0, instance:testing._DbTest@d2cc05a]" name="getLimittedSortedCurrencyRatiosLowestBidPrice" duration-ms="6" started-at="2017-10-26T00:44:24Z" finished-at="2017-10-26T00:44:24Z">
+        </test-method> <!-- testActualExchangeForUSD -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@1b604f19]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-26T08:35:43Z" finished-at="2017-10-26T08:35:43Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- getLimittedSortedCurrencyRatiosLowestBidPrice -->
-        <test-method status="PASS" signature="getSortedCurrency()[pri:0, instance:testing._DbTest@d2cc05a]" name="getSortedCurrency" duration-ms="13" started-at="2017-10-26T00:44:24Z" finished-at="2017-10-26T00:44:24Z">
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@1b604f19]" name="setUp" is-config="true" duration-ms="8" started-at="2017-10-26T08:35:43Z" finished-at="2017-10-26T08:35:43Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- getSortedCurrency -->
-      </class> <!-- testing._DbTest -->
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testGeneralExchangeForUSD()[pri:0, instance:testing._SmokeTest@1b604f19]" name="testGeneralExchangeForUSD" duration-ms="41" started-at="2017-10-26T08:35:43Z" finished-at="2017-10-26T08:35:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGeneralExchangeForUSD -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@1b604f19]" name="tearDown" is-config="true" duration-ms="1" started-at="2017-10-26T08:35:43Z" finished-at="2017-10-26T08:35:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@1b604f19]" name="setUp" is-config="true" duration-ms="1" started-at="2017-10-26T08:35:43Z" finished-at="2017-10-26T08:35:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testGeneralPeriodTimedExchangeWeekAgo()[pri:0, instance:testing._SmokeTest@1b604f19]" name="testGeneralPeriodTimedExchangeWeekAgo" duration-ms="145" started-at="2017-10-26T08:35:43Z" finished-at="2017-10-26T08:35:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGeneralPeriodTimedExchangeWeekAgo -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@1b604f19]" name="tearDown" is-config="true" duration-ms="0" started-at="2017-10-26T08:35:43Z" finished-at="2017-10-26T08:35:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._SmokeTest@1b604f19]" name="setUp" is-config="true" duration-ms="1" started-at="2017-10-26T08:35:43Z" finished-at="2017-10-26T08:35:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testGeneralTimedExchangeForUSDWeekAgo()[pri:0, instance:testing._SmokeTest@1b604f19]" name="testGeneralTimedExchangeForUSDWeekAgo" duration-ms="27" started-at="2017-10-26T08:35:43Z" finished-at="2017-10-26T08:35:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGeneralTimedExchangeForUSDWeekAgo -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:testing._SmokeTest@1b604f19]" name="tearDown" is-config="true" duration-ms="1" started-at="2017-10-26T08:35:43Z" finished-at="2017-10-26T08:35:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="tearDownAfterClass()[pri:0, instance:testing._SmokeTest@1b604f19]" name="tearDownAfterClass" is-config="true" duration-ms="0" started-at="2017-10-26T08:35:43Z" finished-at="2017-10-26T08:35:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownAfterClass -->
+      </class> <!-- testing._SmokeTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
