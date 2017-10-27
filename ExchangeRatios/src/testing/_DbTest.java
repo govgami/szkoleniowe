@@ -23,10 +23,10 @@ public class _DbTest {
   }
 
   public void createPreConfigured() {
-	  PGQuery.createPreProgrammed(DbConnection.makeDefaultPostgreConnection());
+	  PGQuery.initDatabase(DbConnection.makeDefaultPostgreConnection());
   }
   @Test
-  public void getData() {
+  public void getGatheredCurrenciesData() {
 	  Helper.gatherData();
 	  List<Currency> list=PGQSelect.SelectAllCurriencies();
 	  for(Currency c: list) {

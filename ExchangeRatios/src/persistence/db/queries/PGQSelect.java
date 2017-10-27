@@ -13,7 +13,7 @@ import persistence.db.table.currency.CurrencyRatios;
 public class PGQSelect extends PGQuery{
 	
 	public static final <T> List<T> SelectAllFrom(String tableName) {
-		validateQueryArg(tableName);
+		validateQueryArgAgainstSQLInjection(tableName);
 		Session session = openTransaction();
 		Query query = session.createQuery("FROM "+tableName);
 		List<T> list = (List<T>) query.getResultList();
@@ -30,8 +30,8 @@ public class PGQSelect extends PGQuery{
 	}
 
 	public static final <T> List<T> SelectAllSortedFrom(String tableName, String orderBy, boolean ascending) {
-		validateQueryArg(tableName);
-		validateQueryArg(orderBy);
+		validateQueryArgAgainstSQLInjection(tableName);
+		validateQueryArgAgainstSQLInjection(orderBy);
 		Session session = openTransaction();
 		Query query = session.createQuery("FROM "+tableName+" ORDER BY "+orderBy+"  "+(ascending ? "ASC" : "DESC"));
 		//query.setParameter("ascension", (ascending ? "ASC" : "DESC"));
@@ -41,8 +41,8 @@ public class PGQSelect extends PGQuery{
 	}
 	
 	public static final <T> List<T> SelectFirstOfAllSortedFrom(String tableName, String orderBy, boolean ascending, int limit) {
-		validateQueryArg(tableName);
-		validateQueryArg(orderBy);
+		validateQueryArgAgainstSQLInjection(tableName);
+		validateQueryArgAgainstSQLInjection(orderBy);
 		Session session = openTransaction();
 		Query query = session.createQuery("FROM "+tableName+" ORDER BY "+orderBy+"  "+(ascending ? "ASC" : "DESC"));
 		query.setMaxResults(limit);

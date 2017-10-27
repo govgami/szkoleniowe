@@ -60,7 +60,7 @@ public class DbConnection {
 	}
 
 	public void createPreProgrammed() {
-		PGQuery.createPreProgrammed(conn);
+		PGQuery.initDatabase(conn);
 	}
 
 	public ResultSet execQuery(String query) throws SQLException {

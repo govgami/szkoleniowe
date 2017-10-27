@@ -80,7 +80,7 @@ CurrencyRatios existance;
 		closeSession(session);
 	}
 
-	public static void createPreProgrammed(Connection conn) {
+	public static void initDatabase(Connection conn) {
 		try {
 			Session session;
 			Statement stmt = conn.createStatement();
@@ -138,7 +138,7 @@ CurrencyRatios existance;
 		}
 	}
 
-	public static void validateQueryArg(String arg) {
+	public static void validateQueryArgAgainstSQLInjection(String arg) {
 		if (arg.split(" ").length > 1 | arg.isEmpty()) {
 			throw new RuntimeException("Invalid argument: " + arg);
 		}
