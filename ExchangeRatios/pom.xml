@@ -62,5 +62,10 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       	<artifactId>postgresql</artifactId>
       	<version>42.1.4</version>
       </dependency>
+      <dependency>
+      	<groupId>org.testng</groupId>
+      	<artifactId>testng</artifactId>
+      	<version>6.10</version>
+      </dependency>
     </dependencies>
 </project>
