@@ -4,6 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+@NamedNativeQueries({
+	 @NamedNativeQuery(
+	 name = "findCurrencyById",
+	 query = "select * from Currency currency where currency.ID = :id",
+	        resultClass = Currency.class
+	 )
+	})
 @Entity
 @Table(name = "CURRENCY", uniqueConstraints = { @UniqueConstraint(columnNames = "ID"),
 		@UniqueConstraint(columnNames = "SHORTCUT") })

@@ -84,7 +84,7 @@ CurrencyRatios existance;
 		try {
 			Session session;
 			Statement stmt = conn.createStatement();
-			String sql = "CREATE TABLE COUNTRY (ID INT PRIMARY KEY NOT NULL, NAME VARCHAR(50) NOT NULL );";
+			String sql = "CREATE TABLE COUNTRY (ID INT PRIMARY KEY NOT NULL, NAME VARCHAR(50) NOT NULL UNIQUE, CURRENCIES INT ARRAY);";
 			stmt.execute(sql);
 			stmt.close();
 
@@ -95,6 +95,11 @@ CurrencyRatios existance;
 
 			stmt = conn.createStatement();
 			sql = "CREATE TABLE CURRENCY_RATIOS (ID NUMERIC PRIMARY KEY NOT NULL, CURRENCY_ID    INT REFERENCES CURRENCY(ID)    NOT NULL, EFFECTIVE_DATE DATE   NOT NULL, ASK_PRICE  NUMERIC , BID_PRICE NUMERIC  , AVG_PRICE NUMERIC     )";
+			stmt.execute(sql);
+			stmt.close();
+			
+			stmt = conn.createStatement();
+			sql = "CREATE TABLE COUNTRY_CURRENCY (ID INT PRIMARY KEY NOT NULL, CURRENCY_ID    INT REFERENCES CURRENCY(ID)    NOT NULL, COUNTRY_ID INT REFERENCES COUNTRY(ID)   NOT NULL  )";
 			stmt.execute(sql);
 			stmt.close();
 			

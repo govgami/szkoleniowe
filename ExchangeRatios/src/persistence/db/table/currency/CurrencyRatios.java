@@ -6,7 +6,13 @@ import java.sql.Date;
 
 import javax.persistence.*;
 
-
+@NamedNativeQueries({
+	 @NamedNativeQuery(
+	 name = "findCurrencyRatioById",
+	 query = "select * from CurrencyRatio currencyRatio where currencyRatio.ID = :id",
+	        resultClass = CurrencyRatios.class
+	 )
+	})
 @Entity
 @Table(name = "CURRENCY_RATIOS", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
 public class CurrencyRatios implements Serializable{

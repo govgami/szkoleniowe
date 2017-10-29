@@ -5,7 +5,10 @@
     <classes>
       <class name="testing._DbTest">
         <methods>
-          <include name="getData"/>
+          <include name="setUp"/>
+          <include name="shouldInsertNewCurrency"/>
+          <include name="shouldCreateDefaultConnection"/>
+          <include name="shouldInsertNewCountry"/>
         </methods>
       </class> <!-- testing._DbTest -->
     </classes>
