@@ -3,6 +3,8 @@ package testing;
 import static org.testng.Assert.assertNotNull;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -40,7 +42,13 @@ public class _DbTest {
   }
   @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
   public void shouldGatheredCurrenciesData() {
-	  Helper.gatherData();
+		Calendar dateConst = Calendar.getInstance();
+		dateConst.set(2015, 5, 1);
+		Date date1=new Date( dateConst.getTime().getTime());
+		Calendar dateConst2 = Calendar.getInstance();
+		dateConst2.set(2015, 7, 30);//dateConst2.set(2015, 5, 8);
+		Date date2=new Date( dateConst2.getTime().getTime());
+	  Helper.gatherData(date1, date2);
 	  List<Currency> list=PGQSelect.SelectAllCurriencies();
 	  for(Currency c: list) {
 		  System.out.print(c.getSign()+":all:");
@@ -83,10 +91,14 @@ public class _DbTest {
   public void shouldInsertNewCountry() {
 	  PGQuery.Insert(objects.exampleCountry);
   }
-//  @Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCurrency" })
-//  public void shouldConnectAndDisconnectCurrencyCountry() {
-//	  PGQuery.Insert(objects.exampleCountry);
-//  }
+  @Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCurrency" })
+  public void shouldConnectCurrencyCountry() {
+	  PGQuery.ConnectCountryCurrency(objects.exampleCountry, objects.exampleCurrency);
+  }
+  @Test(dependsOnMethods = { "shouldConnectCurrencyCountry" })
+  public void shouldDisconnectCurrencyCountry() {
+	  PGQuery.DisconnectCountryCurrency(objects.exampleCountry, objects.exampleCurrency);
+  }
   
 
 }

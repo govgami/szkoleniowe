@@ -68,7 +68,18 @@ public void addCurrency(Currency curr) {
 	if(currencies==null) {
 		currencies=new HashSet<Currency>();
 	}
-	currencies.add(curr);
+	else if(!currencies.contains(curr)){
+		currencies.add(curr);
+	}
+	
+}
+public void removeCurrency(Currency curr) {
+	if(currencies==null) {
+		return;
+	}
+	else{
+		currencies.remove(curr);
+		}
 	
 }
 

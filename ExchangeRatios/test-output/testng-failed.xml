@@ -6,9 +6,8 @@
       <class name="testing._DbTest">
         <methods>
           <include name="setUp"/>
-          <include name="shouldInsertNewCurrency"/>
           <include name="shouldCreateDefaultConnection"/>
-          <include name="shouldInsertNewCountry"/>
+          <include name="shouldGatheredCurrenciesData"/>
         </methods>
       </class> <!-- testing._DbTest -->
     </classes>

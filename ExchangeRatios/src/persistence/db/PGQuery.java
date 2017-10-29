@@ -26,6 +26,20 @@ public class PGQuery {
 		}
 	}
 	
+	public static final void ConnectCountryCurrency(Country country, Currency currency) {
+		Session session=openTransaction();
+		country.addCurrency(currency);
+		InsertOrUpdate(country);
+		closeSession(session);
+	}
+	
+	public static final void DisconnectCountryCurrency(Country country, Currency currency) {
+		Session session=openTransaction();
+		country.removeCurrency(currency);
+		InsertOrUpdate(country);
+		closeSession(session);
+	}
+	
 	public static final void InsertActualizedCurrencyRatiosGroup(List<CurrencyRatios>list) {
 CurrencyRatios existance;
 		for(CurrencyRatios o:list) {
