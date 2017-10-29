@@ -12,6 +12,11 @@ import javax.persistence.*;
 	 name = "findCountryById",
 	 query = "select * from Country country where country.ID = :id",
 	        resultClass = Country.class
+	 ),
+	 @NamedNativeQuery(
+	 name = "findCountryByName",
+	 query = "select * from Country country where country.NAME = :name order by country.ID asc",
+	        resultClass = Country.class
 	 )
 	})
 @Entity

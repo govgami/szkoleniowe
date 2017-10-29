@@ -23,6 +23,12 @@ public class _DbTest {
 		objects=new TestObjects();
 	}
 	
+	@Test(expectedExceptions=RuntimeException.class)
+	public void shouldThrowRuntimeExceptionDueToWrongParameter() {
+		String str="drop database";
+		PGQuery.validateQueryArgAgainstSQLInjection(str);
+	}
+	
   @Test
   public void shouldCreateDefaultConnection() {
 	  Connection c=DbConnection.makeDefaultPostgreConnection();
@@ -62,11 +68,12 @@ public class _DbTest {
   
   @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
   public void shouldGetLimittedSortedCurrencyRatiosLowestBidPrice() {
-	  List<CurrencyRatios> list=PGQSelect.SelectFirstOfAllSortedFrom("CurrencyRatios", "bid_price", true, 3);
+	  List<CurrencyRatios> list=PGQSelect.SelectFirstOfLowestBidCurrencyRatios("USD", 3);
 	  for(CurrencyRatios c: list) {
 		  System.out.print(c.getBidPrice()+":crLowBid:");
 	  }
 	  System.out.print("\n");
+	  Assert.assertEquals(3, list.size());
   }
   @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
   public void shouldInsertNewCurrency() {

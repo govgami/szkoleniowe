@@ -9,6 +9,11 @@ import javax.persistence.*;
 	 name = "findCurrencyById",
 	 query = "select * from Currency currency where currency.ID = :id",
 	        resultClass = Currency.class
+	 ),
+	 @NamedNativeQuery(
+	 name = "findCurrencyBySign",
+	 query = "select * from Currency currency where currency.SHORTCUT = :shortcut",
+	        resultClass = Currency.class
 	 )
 	})
 @Entity

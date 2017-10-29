@@ -51,6 +51,18 @@ public class PGQSelect extends PGQuery{
 		return list;
 	}
 	
+	public static final <T> List<T> SelectFirstOfLowestBidCurrencyRatios(String shortcut, int limit) {
+		validateQueryArgAgainstSQLInjection(shortcut);
+		
+		Session session = openTransaction();
+		Query query = session.getNamedQuery("findLowestBidOfChosenSignCurrencyRatio");//session.createQuery("FROM "+tableName+" ORDER BY "+orderBy+"  "+(ascending ? "ASC" : "DESC"));
+query.setParameter(0, shortcut);
+		query.setMaxResults(limit);
+		List<T> list = (List<T>) query.getResultList();
+		session.close();
+		return list;
+	}
+	
 	public static final CurrencyRatios doesCurrencyRatioExist(CurrencyRatios cr) {
 		Session session=openTransaction();
 		Query query=session.createQuery("FROM CurrencyRatios WHERE currency_id="+cr.getCurrencyId().getId()+" AND effective_date= '"+new Date2Str(cr.getDate()).parse()+"'");

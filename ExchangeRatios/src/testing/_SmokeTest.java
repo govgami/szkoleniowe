@@ -51,7 +51,7 @@ public class _SmokeTest {
 		dateConst.set(2015, 5, 1);
 		date1=dateConst.getTime();
 		Calendar dateConst2 = Calendar.getInstance();
-		dateConst2.set(2015, 5, 8);
+		dateConst2.set(2015, 7, 30);//dateConst2.set(2015, 5, 8);
 		date2=dateConst2.getTime();
 		Calendar date = Calendar.getInstance();
 		date.setTimeInMillis(date.getTimeInMillis() - 1000 * 3600 * 24 * 7);
@@ -67,7 +67,7 @@ public class _SmokeTest {
 	}
 
 	@Test
-	public void testActualExchangeForUSD() {
+	public void shouldGetActualExchangeForUSD() {
 		String r = specInfo.download();
 		System.out.print(r + "\n");
 		String readed = resp.read(r);
@@ -77,7 +77,7 @@ public class _SmokeTest {
 	}
 
 	@Test
-	public void testGeneralExchangeForUSD() {
+	public void shouldGetTableAWithExchangeForUSD() {
 		String r = genInfo.download();
 		System.out.print(r + "\n");
 		String readed = respExt.read(r);
@@ -87,7 +87,7 @@ public class _SmokeTest {
 	}
 
 	@Test
-	public void testGeneralTimedExchangeForUSDWeekAgo() {
+	public void shouldGetTableAFromSpecifiedTimeForUSDWeekAgo() {
 		String r = timedGenInfo.download();
 		System.out.print(r + "\n");
 		String readed = respExt.read(r);
@@ -95,7 +95,7 @@ public class _SmokeTest {
 		assertNotNull(respExt.readExt(r));
 	}
 	@Test
-	public void testGeneralPeriodTimedExchangeWeekAgo() {
+	public void shouldGetTableFromSpecifiedPeriodWeekAgo() {
 		String r = timedPeriodGenInfo.download();
 		System.out.print(r + "\n");
 		List<CurrencyPrice> list = (List<CurrencyPrice>) respExtTable.readExt(r);

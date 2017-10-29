@@ -64,15 +64,6 @@ CurrencyRatios existance;
 		session.saveOrUpdate(obj);
 		closeSession(session);
 	}
-
-	public static final int Delete(Connection c, String tableName, int id) throws SQLException {
-
-		Statement stmt = c.createStatement();
-		String sql = "DELETE from " + tableName + " where ID = " + id;
-		stmt.executeUpdate(sql);
-		stmt.close();
-		return id;
-	}
 	
 	public static final void DeleteObject(Object o) {
 		Session session=openTransaction();

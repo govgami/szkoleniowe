@@ -11,7 +11,12 @@ import javax.persistence.*;
 	 name = "findCurrencyRatioById",
 	 query = "select * from CurrencyRatio currencyRatio where currencyRatio.ID = :id",
 	        resultClass = CurrencyRatios.class
-	 )
+	 ),
+	 @NamedNativeQuery(
+	 name = "findLowestBidOfChosenSignCurrencyRatio",
+	 query = "select * from CurrencyRatio currencyRatio where currencyRatio.SHORTCUT = :sign order by currencyRatio.BID_PRICE asc",
+	        resultClass = CurrencyRatios.class
+	 )	 
 	})
 @Entity
 @Table(name = "CURRENCY_RATIOS", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
