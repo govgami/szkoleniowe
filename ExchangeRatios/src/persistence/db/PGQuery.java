@@ -94,7 +94,7 @@ CurrencyRatios existance;
 			stmt.close();
 
 			stmt = conn.createStatement();
-			sql = "CREATE TABLE CURRENCY (ID INT PRIMARY KEY NOT NULL, COUNTRY_ID INT REFERENCES COUNTRY(ID), CURRENCY_NAME  VARCHAR(50),  SHORTCUT  VARCHAR(4)  NOT NULL )";
+			sql = "CREATE TABLE CURRENCY (ID INT PRIMARY KEY NOT NULL, COUNTRY_ID INT REFERENCES COUNTRY(ID), CURRENCY_NAME  VARCHAR(50),  SHORTCUT  VARCHAR(4)  NOT NULL UNIQUE )";
 			stmt.execute(sql);//executeUpdate(sql);
 			stmt.close();
 

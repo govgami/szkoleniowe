@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 
 import parser.Date2Str;
 import persistence.db.PGQuery;
+import persistence.db.table.currency.Country;
 import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
 
@@ -40,6 +41,30 @@ public class PGQSelect extends PGQuery{
 		return list;
 	}
 	
+	public static final Country SelectCountryByName(String name) {
+		//validateQueryArgAgainstSQLInjection(name);
+		Session session = openTransaction();
+		Query query = session.getNamedQuery("findCountryByName");
+		query.setParameter(0, name);
+		List<Country> list = (List<Country>) query.getResultList();
+		session.close();
+		if(!list.isEmpty())
+		return list.get(0);
+		else throw new RuntimeException("There is no such Country: "+name);
+	}
+	
+	public static final Currency SelectCurrencyByBySignShortcut(String name) {
+		validateQueryArgAgainstSQLInjection(name);
+		Session session = openTransaction();
+		Query query = session.getNamedQuery("findCurrencyBySign");
+		query.setParameter(0, name);
+		List<Currency> list = (List<Currency>) query.getResultList();
+		session.close();
+		if(!list.isEmpty())
+		return list.get(0);
+		else throw new RuntimeException("There is no such Currency: "+name);
+	}
+	
 	public static final <T> List<T> SelectFirstOfAllSortedFrom(String tableName, String orderBy, boolean ascending, int limit) {
 		validateQueryArgAgainstSQLInjection(tableName);
 		validateQueryArgAgainstSQLInjection(orderBy);
@@ -57,6 +82,18 @@ public class PGQSelect extends PGQuery{
 		Session session = openTransaction();
 		Query query = session.getNamedQuery("findLowestBidOfChosenSignCurrencyRatio");//session.createQuery("FROM "+tableName+" ORDER BY "+orderBy+"  "+(ascending ? "ASC" : "DESC"));
 query.setParameter(0, shortcut);
+		query.setMaxResults(limit);
+		List<T> list = (List<T>) query.getResultList();
+		session.close();
+		return list;
+	}
+	
+	public static final <T> List<T> SelectHighestPriceDifferenceOfCurrencyRatio(String shortcut, int limit) {
+		validateQueryArgAgainstSQLInjection(shortcut);
+		
+		Session session = openTransaction();
+		Query query = session.getNamedQuery("findHighestPriceDifferenceOfCurrencyRatio");
+		query.setParameter(0, shortcut);
 		query.setMaxResults(limit);
 		List<T> list = (List<T>) query.getResultList();
 		session.close();

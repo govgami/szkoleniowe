@@ -9,6 +9,11 @@ import javax.persistence.*;
 
 @NamedNativeQueries({
 	 @NamedNativeQuery(
+	 name = "findAllCountries",
+	 query = "select * from Country order by ID asc",
+	        resultClass = Country.class
+	 ),
+	 @NamedNativeQuery(
 	 name = "findCountryById",
 	 query = "select * from Country country where country.ID = :id",
 	        resultClass = Country.class

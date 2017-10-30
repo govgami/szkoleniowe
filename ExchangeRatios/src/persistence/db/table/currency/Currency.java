@@ -7,12 +7,12 @@ import javax.persistence.*;
 @NamedNativeQueries({
 	 @NamedNativeQuery(
 	 name = "findCurrencyById",
-	 query = "select * from Currency currency where currency.ID = :id",
+	 query = "select * from Currency currency where currency.ID = :id order by ID",
 	        resultClass = Currency.class
 	 ),
 	 @NamedNativeQuery(
 	 name = "findCurrencyBySign",
-	 query = "select * from Currency currency where currency.SHORTCUT = :shortcut",
+	 query = "select * from Currency currency where currency.SHORTCUT = :shortcut order by currency.SHORTCUT",
 	        resultClass = Currency.class
 	 )
 	})

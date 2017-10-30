@@ -15,6 +15,7 @@ import main.Helper;
 import persistence.db.DbConnection;
 import persistence.db.PGQuery;
 import persistence.db.queries.PGQSelect;
+import persistence.db.table.currency.Country;
 import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
 
@@ -36,11 +37,11 @@ public class _DbTest {
 	  Connection c=DbConnection.makeDefaultPostgreConnection();
 	  assertNotNull(c);
   }
-
+//@Test
   public void shouldInitializeDbStructure() {
 	  PGQuery.initDatabase(DbConnection.makeDefaultPostgreConnection());
   }
-  @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
+//  @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
   public void shouldGatheredCurrenciesData() {
 		Calendar dateConst = Calendar.getInstance();
 		dateConst.set(2015, 5, 1);
@@ -84,20 +85,56 @@ public class _DbTest {
 	  Assert.assertEquals(3, list.size());
   }
   @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
+  public void shouldGetHighestPriceDifferenceOfCurrencyRatios() {
+	  List<CurrencyRatios> list=PGQSelect.SelectHighestPriceDifferenceOfCurrencyRatio("USD", 3);
+	  for(CurrencyRatios c: list) {
+		  System.out.print(c.getBidPrice()+":crLowBid:");
+	  }
+	  System.out.print("\n");
+	  Assert.assertEquals(3, list.size());
+  }
+  @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
   public void shouldInsertNewCurrency() {
+//	  try{
 	  PGQuery.Insert(objects.exampleCurrency);
+//  }catch(RuntimeException e) {
+//	  Currency c=PGQSelect.SelectCurrencyByBySignShortcut(objects.exampleCurrency.getSign());
+//	  PGQuery.DeleteObject(c);
+//	  throw new RuntimeException(e);
+//  }
   }
   @Test(dependsOnMethods = { "shouldCreateDefaultConnection", "shouldInsertNewCurrency" })
   public void shouldInsertNewCountry() {
+//	  try {
 	  PGQuery.Insert(objects.exampleCountry);
+//	  }catch(RuntimeException e) {
+//		  Country c=PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
+//		  PGQuery.DeleteObject(c);
+//		  throw new RuntimeException(e);
+//	  }
   }
-  @Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCurrency" })
+  @Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCountry" })
   public void shouldConnectCurrencyCountry() {
-	  PGQuery.ConnectCountryCurrency(objects.exampleCountry, objects.exampleCurrency);
+	  try {
+		  Country c=PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
+		  Currency curr=PGQSelect.SelectCurrencyByBySignShortcut(objects.exampleCurrency.getSign());
+	  PGQuery.ConnectCountryCurrency(c, curr);
+	  }catch(RuntimeException e) {
+		  throw new RuntimeException(e);
+	  }
   }
   @Test(dependsOnMethods = { "shouldConnectCurrencyCountry" })
   public void shouldDisconnectCurrencyCountry() {
-	  PGQuery.DisconnectCountryCurrency(objects.exampleCountry, objects.exampleCurrency);
+	  Country c=PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
+	  Currency curr=PGQSelect.SelectCurrencyByBySignShortcut(objects.exampleCurrency.getSign());
+	  PGQuery.DisconnectCountryCurrency(c, curr);
+  }
+  @Test(dependsOnMethods = { "shouldDisconnectCurrencyCountry" })
+  public void shouldRemoveObjects() {
+	  Currency curr=PGQSelect.SelectCurrencyByBySignShortcut(objects.exampleCurrency.getSign());
+	  PGQuery.DeleteObject(curr);
+	  Country c=PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
+	  PGQuery.DeleteObject(c);
   }
   
 

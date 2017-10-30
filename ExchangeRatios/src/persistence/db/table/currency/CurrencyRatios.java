@@ -7,23 +7,15 @@ import java.sql.Date;
 import javax.persistence.*;
 
 @NamedNativeQueries({
-	 @NamedNativeQuery(
-	 name = "findCurrencyRatioById",
-	 query = "select * from CurrencyRatio currencyRatio where currencyRatio.ID = :id",
-	        resultClass = CurrencyRatios.class
-	 ),
-	 @NamedNativeQuery(
-	 name = "findLowestBidOfChosenSignCurrencyRatio",
-	 query = "select * from CurrencyRatio currencyRatio where currencyRatio.SHORTCUT = :sign order by currencyRatio.BID_PRICE asc",
-	        resultClass = CurrencyRatios.class
-	 )	 
-	})
+		@NamedNativeQuery(name = "findCurrencyRatioById", query = "select * from CurrencyRatio ratio where ratio.ID = :id", resultClass = CurrencyRatios.class),
+		@NamedNativeQuery(name = "findLowestBidOfChosenSignCurrencyRatio", query = "select * from CurrencyRatio ratio where ratio.SHORTCUT = :shortcut order by currencyRatio.BID_PRICE asc", resultClass = CurrencyRatios.class),
+		@NamedNativeQuery(name = "findHighestPriceDifferenceOfCurrencyRatio", query = "select *, ASK_PRICE-BID_PRICE as difference from CURRENCY_RATIOS inner join CURRENCY on CURRENCY_RATIOS.CURRENCY_ID=CURRENCY.ID chosen where chosen.SHORTCUT = :shortcut and ASK_PRICE is not null and BID_PRICE is not null order by difference desc", resultClass = CurrencyRatios.class) })
 @Entity
 @Table(name = "CURRENCY_RATIOS", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
-public class CurrencyRatios implements Serializable{
-	
+public class CurrencyRatios implements Serializable {
+
 	private static final long serialVersionUID = 4445757466460884024L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", unique = true, nullable = false)
