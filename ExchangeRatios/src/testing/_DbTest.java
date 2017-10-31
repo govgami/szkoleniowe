@@ -93,19 +93,28 @@ public class _DbTest {
 	  System.out.print("\n");
 	  Assert.assertEquals(3, list.size());
   }
- // @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
+  @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
   public void shouldInsertNewCurrency() {
 //	  try{
+	  Currency curr=PGQSelect.SelectCurrencyByBySignShortcut(objects.exampleCurrency.getSign());
+	  if(curr!=null) {
+		  PGQuery.DeleteObject(curr);
+	  }
 	  PGQuery.Insert(objects.exampleCurrency);
+	  
 //  }catch(RuntimeException e) {
 //	  Currency c=PGQSelect.SelectCurrencyByBySignShortcut(objects.exampleCurrency.getSign());
 //	  PGQuery.DeleteObject(c);
 //	  throw new RuntimeException(e);
 //  }
   }
- // @Test(dependsOnMethods = { "shouldCreateDefaultConnection", "shouldInsertNewCurrency" })
+  @Test(dependsOnMethods = { "shouldCreateDefaultConnection", "shouldInsertNewCurrency" })
   public void shouldInsertNewCountry() {
 //	  try {
+	  Country c=PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
+	  if(c!=null) {
+		  PGQuery.DeleteObject(c);
+	  }
 	  PGQuery.Insert(objects.exampleCountry);
 //	  }catch(RuntimeException e) {
 //		  Country c=PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
@@ -113,7 +122,7 @@ public class _DbTest {
 //		  throw new RuntimeException(e);
 //	  }
   }
-//  @Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCountry" })
+  @Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCountry" })
   public void shouldConnectCurrencyCountry() {
 	  try {
 		  Country c=PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
@@ -123,13 +132,13 @@ public class _DbTest {
 		  throw new RuntimeException(e);
 	  }
   }
-  //@Test(dependsOnMethods = { "shouldConnectCurrencyCountry" })
+  @Test(dependsOnMethods = { "shouldConnectCurrencyCountry" })
   public void shouldDisconnectCurrencyCountry() {
 	  Country c=PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
 	  Currency curr=PGQSelect.SelectCurrencyByBySignShortcut(objects.exampleCurrency.getSign());
 	  PGQuery.DisconnectCountryCurrency(c, curr);
   }
- // @Test(dependsOnMethods = { "shouldDisconnectCurrencyCountry" })
+  @Test(dependsOnMethods = { "shouldDisconnectCurrencyCountry" })
   public void shouldRemoveObjects() {
 	  Currency curr=PGQSelect.SelectCurrencyByBySignShortcut(objects.exampleCurrency.getSign());
 	  PGQuery.DeleteObject(curr);

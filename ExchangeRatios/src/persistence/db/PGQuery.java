@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
+
 import logging.Log;
 import persistence.db.queries.PGQSelect;
 import persistence.db.table.currency.Country;
@@ -15,72 +17,78 @@ import persistence.db.table.currency.CurrencyRatios;
 public class PGQuery {
 
 	public static final void Insert(Object object) {
-		Session session=openTransaction();
+		Session session = openTransaction();
 		session.save(object);
 		closeSession(session);
 	}
-	
+
 	public static final void InsertGroup(List<Object> list) {
-		for(Object o:list) {
+		for (Object o : list) {
 			Insert(o);
 		}
 	}
-	
+
 	public static final void ConnectCountryCurrency(Country country, Currency currency) {
-		Session session=openTransaction();
+		Session session = openTransaction();
 		country.addCurrency(currency);
 		InsertOrUpdate(country);
 		closeSession(session);
 	}
-	
+
 	public static final void DisconnectCountryCurrency(Country country, Currency currency) {
-		Session session=openTransaction();
+		Session session = openTransaction();
 		country.removeCurrency(currency);
 		InsertOrUpdate(country);
 		closeSession(session);
 	}
-	
-	public static final void InsertActualizedCurrencyRatiosGroup(List<CurrencyRatios>list) {
-CurrencyRatios existance;
-		for(CurrencyRatios o:list) {
-			existance=PGQSelect.doesCurrencyRatioExist((CurrencyRatios)o);
-			if(existance!=null) {
-				InsertOrUpdate( mergeObjectRatiosData(existance,o));
-			}
-			else {
+
+	public static final void InsertActualizedCurrencyRatiosGroup(List<CurrencyRatios> list) {
+		CurrencyRatios existance;
+		for (CurrencyRatios o : list) {
+			existance = PGQSelect.doesCurrencyRatioExist(o);
+			if (existance != null) {
+				InsertOrUpdate(mergeObjectRatiosData(existance, o));
+			} else {
 				Insert(o);
 			}
 		}
 	}
-	
+
 	public static final CurrencyRatios mergeObjectRatiosData(CurrencyRatios base, CurrencyRatios update) {
-		if(update.getAskPrice()!=null) {
+		if (update.getAskPrice() != null) {
 			base.setAskPrice(update.getAskPrice());
 		}
-		if(update.getBidPrice()!=null) {
+		if (update.getBidPrice() != null) {
 			base.setBidPrice(update.getBidPrice());
 		}
-		if(update.getAvgPrice()!=null) {
+		if (update.getAvgPrice() != null) {
 			base.setAvgPrice(update.getAvgPrice());
 		}
 		return base;
 	}
-	
-	
+
 	public static final void UpdateObject(Object obj) {
-		Session session=openTransaction();
+		Session session = openTransaction();
 		session.update(obj);
 		closeSession(session);
 	}
-	
+
+	public static final void ExUpdateObject(long id) {
+		Session session = openTransaction();
+		Currency c = session.find(Currency.class, 12);
+		c.setName("BGFH");
+		c.setName("BGFH2");
+		closeSession(session);
+	}
+
 	public static final void InsertOrUpdate(Object obj) {
-		Session session=openTransaction();
+		Session session = openTransaction();
 		session.saveOrUpdate(obj);
 		closeSession(session);
 	}
-	
+
 	public static final void DeleteObject(Object o) {
-		Session session=openTransaction();
+		Session session = openTransaction();
 		session.delete(o);
 		closeSession(session);
 	}
@@ -95,36 +103,34 @@ CurrencyRatios existance;
 
 			stmt = conn.createStatement();
 			sql = "CREATE TABLE CURRENCY (ID INT PRIMARY KEY NOT NULL, COUNTRY_ID INT REFERENCES COUNTRY(ID), CURRENCY_NAME  VARCHAR(50),  SHORTCUT  VARCHAR(4)  NOT NULL UNIQUE )";
-			stmt.execute(sql);//executeUpdate(sql);
+			stmt.execute(sql);// executeUpdate(sql);
 			stmt.close();
 
 			stmt = conn.createStatement();
 			sql = "CREATE TABLE CURRENCY_RATIOS (ID NUMERIC PRIMARY KEY NOT NULL, CURRENCY_ID    INT REFERENCES CURRENCY(ID)    NOT NULL, EFFECTIVE_DATE DATE   NOT NULL, ASK_PRICE  NUMERIC , BID_PRICE NUMERIC  , AVG_PRICE NUMERIC     )";
 			stmt.execute(sql);
 			stmt.close();
-			
+
 			stmt = conn.createStatement();
 			sql = "CREATE TABLE COUNTRY_CURRENCY (ID INT PRIMARY KEY NOT NULL, CURRENCY_ID    INT REFERENCES CURRENCY(ID)    NOT NULL, COUNTRY_ID INT REFERENCES COUNTRY(ID)   NOT NULL  )";
 			stmt.execute(sql);
 			stmt.close();
-			
-			//seq
+
+			// seq
 			stmt = conn.createStatement();
 			sql = "CREATE SEQUENCE hibernate_sequence START WITH 1 INCREMENT BY 1  NO MAXVALUE  NO MINVALUE CACHE 1;";
 			stmt.execute(sql);
 			stmt.close();
-			
-			//alt. country
+
+			// alt. country
 			session = openTransaction();
-			Country country=new Country("Non-classified");
+			Country country = new Country("Non-classified");
 			session.save(new Country("Non-classified"));
-			
-			
-			
-			//alt. currency
+
+			// alt. currency
 			session = openTransaction();
 			session.save(new Currency(country, "Non-specified Currency", "???"));
-			
+
 			closeQuery(conn);
 		} catch (SQLException e) {
 			Log.exception("DbConnection Create DB table", e);
@@ -134,8 +140,8 @@ CurrencyRatios existance;
 
 	public static void closeQuery(Connection conn) {
 		try {
-			if(!conn.getAutoCommit())
-			conn.commit();
+			if (!conn.getAutoCommit())
+				conn.commit();
 		} catch (SQLException e) {
 			try {
 				Log.exception("unable to commit", e);
@@ -159,10 +165,39 @@ CurrencyRatios existance;
 		session.beginTransaction();
 		return session;
 	}
+
 	protected static void closeSession(Session s) {
 		s.getTransaction().commit();
 		s.close();
 	}
-	
-	
+
+	protected static <T> List<T> presentQueryResultsAndFinishSession(Query<T> query, Session session) {
+		List<T> list = query.getResultList();
+		closeSession(session);
+		return list;
+	}
+
+	protected static <T> T presentQueryResultAndFinishSession(Query<T> query, Session session) {
+		List<T> list = query.getResultList();
+		closeSession(session);
+		if (!list.isEmpty())
+			return list.get(0);
+		else
+			throw new RuntimeException("Query didn't provide searched object: " + query.getQueryString());
+	}
+
+	protected static <T> List<T> presentQueryResultsAndJustCloseSession(Query<T> query, Session session) {
+		List<T> list = query.getResultList();
+		session.close();
+		return list;
+	}
+
+	protected static <T> T presentQueryResultAndJustCloseSession(Query<T> query, Session session) {
+		List<T> list = query.getResultList();
+		session.close();
+		if (!list.isEmpty())
+			return list.get(0);
+		else
+			throw new RuntimeException("Query didn't provide searched object: " + query.getQueryString());
+	}
 }

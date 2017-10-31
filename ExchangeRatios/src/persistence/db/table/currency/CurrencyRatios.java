@@ -7,9 +7,9 @@ import java.sql.Date;
 import javax.persistence.*;
 
 @NamedNativeQueries({
-		@NamedNativeQuery(name = "findCurrencyRatioById", query = "select * from CurrencyRatio ratio where ratio.ID = :id", resultClass = CurrencyRatios.class),
-		@NamedNativeQuery(name = "findLowestBidOfChosenSignCurrencyRatio", query = "select * from CurrencyRatio ratio where ratio.SHORTCUT = :sign order by currencyRatio.BID_PRICE asc", resultClass = CurrencyRatios.class),
-		@NamedNativeQuery(name = "findHighestPriceDifferenceOfCurrencyRatio", query = "select *, ASK_PRICE-BID_PRICE as difference from CURRENCY_RATIOS inner join CURRENCY on CURRENCY_RATIOS.CURRENCY_ID=CURRENCY.ID chosen where chosen.SHORTCUT = :sign and ASK_PRICE is not null and BID_PRICE is not null order by difference desc", resultClass = CurrencyRatios.class) })
+		@NamedNativeQuery(name = "findCurrencyRatioById", query = "select * from CURRENCY_RATIOS where ID = :id", resultClass = CurrencyRatios.class),
+		@NamedNativeQuery(name = "findLowestBidOfChosenSignCurrencyRatio", query = "select * from CURRENCY_RATIOS inner join CURRENCY on CURRENCY_RATIOS.CURRENCY_ID=CURRENCY.ID where SHORTCUT = :signShortcut order by BID_PRICE asc", resultClass = CurrencyRatios.class),
+		@NamedNativeQuery(name = "findHighestPriceDifferenceOfCurrencyRatio", query = "select *, ASK_PRICE-BID_PRICE as difference from CURRENCY_RATIOS inner join CURRENCY on CURRENCY_RATIOS.CURRENCY_ID=CURRENCY.ID where SHORTCUT = :signShortcut and ASK_PRICE is not null and BID_PRICE is not null order by difference desc", resultClass = CurrencyRatios.class) })
 @Entity
 @Table(name = "CURRENCY_RATIOS", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
 public class CurrencyRatios implements Serializable {
