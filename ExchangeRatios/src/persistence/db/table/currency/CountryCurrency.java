@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -19,10 +21,12 @@ public class CountryCurrency implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", unique = true, nullable = false)
-	int id;
-	@Column(name = "COUNTRY_ID", nullable = false)
+	Integer id;
+	@ManyToOne
+	@JoinColumn(name = "COUNTRY_ID", referencedColumnName = "ID")
 	Country country;
-	@Column(name = "CURRENCY_ID", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "CURRENCY_ID", referencedColumnName = "ID")
 	Currency currency;
 
 	protected CountryCurrency() {
@@ -33,7 +37,7 @@ public class CountryCurrency implements Serializable {
 		this.currency = currency;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

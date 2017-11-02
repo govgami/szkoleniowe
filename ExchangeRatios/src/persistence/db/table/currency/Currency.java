@@ -16,8 +16,9 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQueries({ @NamedQuery(name = "getAllCurrencies", query = "from Currency"),
-		@NamedQuery(name = "getCurrencyById", query = "from Currency where ID = ? order by ID"),
-		@NamedQuery(name = "getCurrencyByCode", query = "from Currency where CODE = ? order by CODE") })
+		@NamedQuery(name = "getAllCurrenciesSortedByCode", query = "from Currency order by CODE"),
+		@NamedQuery(name = "getCurrencyById", query = "from Currency where ID = ?"),
+		@NamedQuery(name = "getCurrencyByCode", query = "from Currency where CODE = ?") })
 @Entity
 @Table(name = "currency", uniqueConstraints = { @UniqueConstraint(columnNames = "ID"),
 		@UniqueConstraint(columnNames = "CODE") })
@@ -47,7 +48,7 @@ public class Currency implements Serializable {
 		this.code = code;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

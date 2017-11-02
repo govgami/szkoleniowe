@@ -1,5 +1,6 @@
 package testing;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.sql.Connection;
@@ -26,6 +27,8 @@ public class _DbTest {
 	Date date1;
 	Calendar dateConst2 = Calendar.getInstance();
 	Date date2;
+
+	final int practicalLimit = 5;
 
 	@BeforeMethod
 	public void setUp() {
@@ -67,7 +70,7 @@ public class _DbTest {
 
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGetSortedCurrency() {
-		List<Currency> list = PGQSelect.SelectAllSortedFrom("Currency", "shortcut", true);
+		List<Currency> list = PGQSelect.SelectAllCurrenciesSortedByCode(null);
 		for (Currency c : list) {
 			System.out.print(c.getCode() + ":sorted:");
 		}
@@ -76,7 +79,7 @@ public class _DbTest {
 
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGetLimittedSortedCurrency() {
-		List<Currency> list = PGQSelect.SelectFirstOfAllSortedFrom("Currency", "shortcut", true, 5);
+		List<Currency> list = PGQSelect.SelectAllCurrenciesSortedByCode(practicalLimit);
 		for (Currency c : list) {
 			System.out.print(c.getCode() + ":limit:");
 		}
@@ -85,22 +88,22 @@ public class _DbTest {
 
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGetLimittedSortedCurrencyRatiosLowestBidPrice() {
-		List<CurrencyRatios> list = PGQSelect.SelectFirstOfLowestBidCurrencyRatios("USD", 3);
+		List<CurrencyRatios> list = PGQSelect.SelectLowestBidCurrencyRatios("USD", practicalLimit);
 		for (CurrencyRatios c : list) {
 			System.out.print(c.getBidPrice() + ":crLowBid:");
 		}
 		System.out.print("\n");
-		Assert.assertEquals(3, list.size());
+		assertEquals(practicalLimit, list.size());
 	}
 
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGetHighestPriceDifferenceOfCurrencyRatios() {
-		List<CurrencyRatios> list = PGQSelect.SelectHighestPriceDifferenceOfCurrencyRatio("USD", 3);
+		List<CurrencyRatios> list = PGQSelect.SelectHighestPriceDifferenceOfCurrencyRatio("USD", practicalLimit);
 		for (CurrencyRatios c : list) {
 			System.out.print(c.getBidPrice() + ":crLowBid:");
 		}
 		System.out.print("\n");
-		Assert.assertEquals(3, list.size());
+		Assert.assertEquals(practicalLimit, list.size());
 	}
 
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })

@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class Country implements Serializable {
 	private Integer id;
 	@Column(name = "NAME", unique = true, length = 100)
 	private String name;
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "COUNTRY_CURRENCY", joinColumns = { @JoinColumn(name = "COUNTRY_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "CURRENCY_ID") })
 	@Column(name = "CURRENCIES", nullable = true)
@@ -48,7 +49,7 @@ public class Country implements Serializable {
 		this.name = name;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -69,10 +70,12 @@ public class Country implements Serializable {
 	}
 
 	public void addCurrency(Currency curr) {
-		if (currencies == null) {
-			currencies = new HashSet<Currency>();
-		} else if (!currencies.contains(curr)) {
-			currencies.add(curr);
+		if (!currencies.contains(curr) | currencies == null) {
+			Set<Currency> t = new HashSet<Currency>();
+			t.addAll(currencies);
+			t.add(curr);
+			this.setCurrencies(t);
+			// currencies.add(curr);
 		}
 
 	}

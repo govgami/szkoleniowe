@@ -1,6 +1,9 @@
 package persistence.db;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
 
 import org.hibernate.SessionFactory;
@@ -8,9 +11,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import persistence.db.queries.PGQuery;
-import persistence.db.table.currency.*;
 import logging.Log;
+import persistence.db.queries.PGQuery;
+import persistence.db.table.currency.Country;
+import persistence.db.table.currency.CountryCurrency;
+import persistence.db.table.currency.Currency;
+import persistence.db.table.currency.CurrencyRatios;
 
 public class DbConnection {
 	private Connection conn;
@@ -87,6 +93,7 @@ public class DbConnection {
 
 	private static final Configuration configuration = new Configuration().addAnnotatedClass(Country.class)
 			.addAnnotatedClass(Currency.class).addAnnotatedClass(CurrencyRatios.class)
+			.addAnnotatedClass(CountryCurrency.class)
 			.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
 			.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
 			.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/postgres")

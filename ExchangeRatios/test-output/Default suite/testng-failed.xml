@@ -5,11 +5,8 @@
     <classes>
       <class name="testing._DbTest">
         <methods>
-          <include name="shouldGetSortedCurrency"/>
           <include name="setUp"/>
           <include name="shouldRemoveObjects"/>
-          <include name="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice"/>
-          <include name="shouldGetLimittedSortedCurrency"/>
           <include name="shouldGetHighestPriceDifferenceOfCurrencyRatios"/>
           <include name="shouldDisconnectCurrencyCountry"/>
           <include name="shouldInsertNewCurrency"/>

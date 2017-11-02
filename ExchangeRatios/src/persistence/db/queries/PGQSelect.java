@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import parser.Date2Str;
 import persistence.db.table.currency.Country;
 import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
@@ -19,34 +18,16 @@ public class PGQSelect extends PGQuery {
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
-	public static final <T> List<T> SelectAllSortedFrom(String tableName, String orderBy, boolean ascending) {
-		validateQueryArgAgainstSQLInjection(tableName);
-		validateQueryArgAgainstSQLInjection(orderBy);
-		Session session = openTransaction();
-		Query<T> query = session
-				.createQuery("FROM " + tableName + " ORDER BY " + orderBy + "  " + (ascending ? "ASC" : "DESC"));
-		// query.setParameter("ascension", (ascending ? "ASC" : "DESC"));
-		List<T> list = query.getResultList();
-		session.close();
-		return list;
-	}
-
-	public static final <T> List<T> SelectFirstOfAllSortedFrom(String tableName, String orderBy, boolean ascending,
-			int limit) {
-		validateQueryArgAgainstSQLInjection(tableName);
-		validateQueryArgAgainstSQLInjection(orderBy);
-		Session session = openTransaction();
-		Query<T> query = session
-				.createQuery("FROM " + tableName + " ORDER BY " + orderBy + "  " + (ascending ? "ASC" : "DESC"));
-		query.setMaxResults(limit);
-		List<T> list = query.getResultList();
-		session.close();
-		return list;
-	}
-
 	public static final List<Currency> SelectAllCurriencies() {
 		Session session = openTransaction();
 		Query<Currency> query = session.getNamedQuery("getAllCurrencies");
+		return presentQueryResultsAndJustCloseSession(query, session);
+	}
+
+	public static final List<Currency> SelectAllCurrenciesSortedByCode(Integer limit) {
+		Session session = openTransaction();
+		Query<Currency> query = session.getNamedQuery("getAllCurrenciesSortedByCode");
+		applyOptionalLimitOnResultsNumber(query, limit);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
@@ -84,16 +65,14 @@ public class PGQSelect extends PGQuery {
 		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
 	}
 
-	public static final List<CurrencyRatios> SelectFirstOfLowestBidCurrencyRatios(String code, int limit) {
+	public static final List<CurrencyRatios> SelectLowestBidCurrencyRatios(String code, Integer limit) {
 		validateQueryArgAgainstSQLInjection(code);
 
 		Session session = openTransaction();
 		Query<CurrencyRatios> query = session.getNamedQuery("getLowestBidOfChosenSignCurrencyRatio");
 		query.setParameter(0, code);
-		query.setMaxResults(limit);
-		List<CurrencyRatios> list = query.getResultList();
-		session.close();
-		return list;
+		PGQSelect.applyOptionalLimitOnResultsNumber(query, limit);
+		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
 	public static final List<CurrencyRatios> SelectHighestPriceDifferenceOfCurrencyRatio(String code, int limit) {
@@ -108,15 +87,10 @@ public class PGQSelect extends PGQuery {
 
 	public static final CurrencyRatios attemptToGetCurrencyRatio(CurrencyRatios cr) {
 		Session session = openTransaction();
-		Query<CurrencyRatios> query = session.createQuery("FROM CurrencyRatios WHERE currency_id="
-				+ cr.getCurrencyId().getId() + " AND effective_date= '" + new Date2Str(cr.getDate()).parse() + "'");
-		List<CurrencyRatios> t = query.getResultList();
-		session.close();
-		if (t.isEmpty()) {
-			return null;
-		} else {
-			return t.get(0);
-		}
+		Query<CurrencyRatios> query = session.getNamedQuery("getCurrencyRatioByCurrencySignAndDay");
+		query.setParameter(0, cr.getCurrencyId().getId());
+		query.setParameter(1, cr.getDate());
+		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
 	}
 
 }

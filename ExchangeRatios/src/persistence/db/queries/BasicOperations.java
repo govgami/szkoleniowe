@@ -61,4 +61,11 @@ public class BasicOperations {
 		s.close();
 	}
 
+	protected static void applyOptionalLimitOnResultsNumber(Query query, Integer limit) {
+		if (limit != null) {
+			if (limit > 0)
+				query.setMaxResults(limit);
+		}
+	}
+
 }

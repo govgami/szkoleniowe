@@ -18,10 +18,11 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQueries({
+		@NamedQuery(name = "getCurrencyRatioByCurrencySignAndDay", query = "select e from CurrencyRatios e inner join e.currency where code = ? and e.effectiveDate = ?"),
 		@NamedQuery(name = "getLowestBidOfChosenSignCurrencyRatio", query = "select e from CurrencyRatios e inner join e.currency where code = ? order by e.bidPrice asc"),
 		@NamedQuery(name = "getHighestPriceDifferenceOfCurrencyRatio", query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join c.currency where code = ? and c.askPrice is not null and c.bidPrice is not null order by difference desc") })
 @Entity
-@Table(name = "currency_r", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
+@Table(name = "currency_ratios", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
 public class CurrencyRatios implements Serializable {
 
 	private static final long serialVersionUID = 4445757466460884024L;
@@ -34,7 +35,7 @@ public class CurrencyRatios implements Serializable {
 	@JoinColumn(name = "CURRENCY_ID")
 	Currency currency;
 	@Column(name = "EFFECTIVE_DATE")
-	Date date;
+	Date effectiveDate;
 	@Column(name = "AVG_PRICE")
 	BigDecimal avgPrice;
 	@Column(name = "ASK_PRICE")
@@ -55,11 +56,11 @@ public class CurrencyRatios implements Serializable {
 	}
 
 	public Date getDate() {
-		return date;
+		return effectiveDate;
 	}
 
 	public void setDate(Date date) {
-		this.date = date;
+		this.effectiveDate = date;
 	}
 
 	public BigDecimal getAvgPrice() {
