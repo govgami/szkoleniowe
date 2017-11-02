@@ -99,8 +99,8 @@ public class _DbTest {
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGetHighestPriceDifferenceOfCurrencyRatios() {
 		List<CurrencyRatios> list = PGQSelect.SelectHighestPriceDifferenceOfCurrencyRatio("USD", practicalLimit);
-		for (CurrencyRatios c : list) {
-			System.out.print(c.getBidPrice() + ":crLowBid:");
+		for (int i = 0; i < list.size(); i++) {
+			System.out.print(list.get(i).getBidPrice() + ":crHghDff:");
 		}
 		System.out.print("\n");
 		Assert.assertEquals(practicalLimit, list.size());

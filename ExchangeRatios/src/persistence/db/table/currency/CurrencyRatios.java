@@ -87,4 +87,8 @@ public class CurrencyRatios implements Serializable {
 		this.bidPrice = bidPrice;
 	}
 
+	@Override
+	public String toString() {
+		return id + effectiveDate.toString();
+	}
 }

@@ -1,5 +1,6 @@
 package persistence.db.queries;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -79,10 +80,15 @@ public class PGQSelect extends PGQuery {
 		validateQueryArgAgainstSQLInjection(code);
 
 		Session session = openTransaction();
-		Query<CurrencyRatios> query = session.getNamedQuery("getHighestPriceDifferenceOfCurrencyRatio");
+		Query<Object[]> query = session.getNamedQuery("getHighestPriceDifferenceOfCurrencyRatio");
 		query.setParameter(0, code);
 		applyOptionalLimitOnResultsNumber(query, limit);
-		return presentQueryResultsAndJustCloseSession(query, session);
+		List<Object[]> result = presentQueryComplexResultsAndJustCloseSession(query, session);
+		List<CurrencyRatios> extract = new ArrayList<CurrencyRatios>();
+		for (Object[] oa : result) {
+			extract.add((CurrencyRatios) oa[0]);
+		}
+		return extract;
 	}
 
 	public static final CurrencyRatios attemptToGetCurrencyRatio(CurrencyRatios cr) {

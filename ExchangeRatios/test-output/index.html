@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite, 3 failed tests</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">11 methods, 3 failed,  2 skipped,  6 passed</span>
+                    <span class="method-stats">11 methods, 1 failed,  2 skipped,  8 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -103,16 +103,6 @@
                       <span>
                         <img width="3%" src="failed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldConnectCurrencyCountry">shouldConnectCurrencyCountry</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldGetHighestPriceDifferenceOfCurrencyRatios">shouldGetHighestPriceDifferenceOfCurrencyRatios</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice">shouldGetLimittedSortedCurrencyRatiosLowestBidPrice</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_suite -->
@@ -150,7 +140,17 @@
                       <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldGetHighestPriceDifferenceOfCurrencyRatios">shouldGetHighestPriceDifferenceOfCurrencyRatios</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldGetLimittedSortedCurrency">shouldGetLimittedSortedCurrency</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice">shouldGetLimittedSortedCurrencyRatiosLowestBidPrice</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -236,7 +236,7 @@ Caused by: javax.persistence.PersistenceException: org.hibernate.exception.Const
 	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$100(JdbcResourceLocalTransactionCoordinatorImpl.java:38)
 	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:231)
 	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:68)
-	at persistence.db.queries.BasicOperations.closeSession(BasicOperations.java:60)
+	at persistence.db.queries.BasicOperations.closeSession(BasicOperations.java:67)
 	at persistence.db.queries.ObjectOperations.InsertOrUpdate(ObjectOperations.java:31)
 	at persistence.db.queries.PGQuery.ConnectCountryCurrency(PGQuery.java:20)
 	at testing._DbTest.shouldConnectCurrencyCountry(_DbTest.java:146)
@@ -257,7 +257,7 @@ Caused by: org.hibernate.exception.ConstraintViolationException: could not execu
 	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1437)
 	... 37 more
 Caused by: org.postgresql.util.PSQLException: ERROR: null value in column &quot;id&quot; violates not-null constraint
-  Detail: Failing row contains (null, 3882, 3883).
+  Detail: Failing row contains (null, 3908, 3909).
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
 	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
@@ -267,79 +267,6 @@ Caused by: org.postgresql.util.PSQLException: ERROR: null value in column &quot;
 	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:136)
 	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:175)
 	... 45 more
-
-</div> <!-- stack-trace -->
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="shouldGetHighestPriceDifferenceOfCurrencyRatios">
-                  </a> <!-- shouldGetHighestPriceDifferenceOfCurrencyRatios -->
-                  <span class="method-name">shouldGetHighestPriceDifferenceOfCurrencyRatios</span>
-                  <div class="stack-trace">java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to persistence.db.table.currency.CurrencyRatios
-	at testing._DbTest.shouldGetHighestPriceDifferenceOfCurrencyRatios(_DbTest.java:102)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:669)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:877)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1201)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-	at org.testng.TestRunner.privateRun(TestRunner.java:776)
-	at org.testng.TestRunner.run(TestRunner.java:634)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:425)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:420)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:385)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:334)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1318)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1243)
-	at org.testng.TestNG.runSuites(TestNG.java:1161)
-	at org.testng.TestNG.run(TestNG.java:1129)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-
-</div> <!-- stack-trace -->
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice">
-                  </a> <!-- shouldGetLimittedSortedCurrencyRatiosLowestBidPrice -->
-                  <span class="method-name">shouldGetLimittedSortedCurrencyRatiosLowestBidPrice</span>
-                  <div class="stack-trace">java.lang.ClassCastException: persistence.db.table.currency.CurrencyRatios cannot be cast to java.util.List
-	at persistence.db.queries.PGQSelect.SelectLowestBidCurrencyRatios(PGQSelect.java:76)
-	at testing._DbTest.shouldGetLimittedSortedCurrencyRatiosLowestBidPrice(_DbTest.java:91)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:669)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:877)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1201)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-	at org.testng.TestRunner.privateRun(TestRunner.java:776)
-	at org.testng.TestRunner.run(TestRunner.java:634)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:425)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:420)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:385)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:334)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1318)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1243)
-	at org.testng.TestNG.runSuites(TestNG.java:1161)
-	at org.testng.TestNG.run(TestNG.java:1129)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
@@ -425,9 +352,23 @@ Caused by: org.postgresql.util.PSQLException: ERROR: null value in column &quot;
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
+                  <a name="shouldGetHighestPriceDifferenceOfCurrencyRatios">
+                  </a> <!-- shouldGetHighestPriceDifferenceOfCurrencyRatios -->
+                  <span class="method-name">shouldGetHighestPriceDifferenceOfCurrencyRatios</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
                   <a name="shouldGetLimittedSortedCurrency">
                   </a> <!-- shouldGetLimittedSortedCurrency -->
                   <span class="method-name">shouldGetLimittedSortedCurrency</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice">
+                  </a> <!-- shouldGetLimittedSortedCurrencyRatiosLowestBidPrice -->
+                  <span class="method-name">shouldGetLimittedSortedCurrencyRatiosLowestBidPrice</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
@@ -463,7 +404,7 @@ Caused by: org.postgresql.util.PSQLException: ERROR: null value in column &quot;
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">/tmp/testng-eclipse--877311023/testng-customsuite.xml</span>
+            <span class="header-content">/tmp/testng-eclipse--2065643027/testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -516,43 +457,43 @@ data.addRows(11);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'shouldCreateDefaultConnection')
 data.setCell(0, 2, 'testing._DbTest')
-data.setCell(0, 3, 7340);
+data.setCell(0, 3, 4160);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'shouldGetHighestPriceDifferenceOfCurrencyRatios')
 data.setCell(1, 2, 'testing._DbTest')
-data.setCell(1, 3, 663);
+data.setCell(1, 3, 350);
 data.setCell(2, 0, 2)
 data.setCell(2, 1, 'shouldInsertNewCurrency')
 data.setCell(2, 2, 'testing._DbTest')
-data.setCell(2, 3, 271);
+data.setCell(2, 3, 273);
 data.setCell(3, 0, 3)
 data.setCell(3, 1, 'shouldConnectCurrencyCountry')
 data.setCell(3, 2, 'testing._DbTest')
-data.setCell(3, 3, 264);
+data.setCell(3, 3, 109);
 data.setCell(4, 0, 4)
 data.setCell(4, 1, 'shouldInsertNewCountry')
 data.setCell(4, 2, 'testing._DbTest')
-data.setCell(4, 3, 239);
+data.setCell(4, 3, 84);
 data.setCell(5, 0, 5)
 data.setCell(5, 1, 'shouldGetSortedCurrency')
 data.setCell(5, 2, 'testing._DbTest')
-data.setCell(5, 3, 36);
+data.setCell(5, 3, 67);
 data.setCell(6, 0, 6)
-data.setCell(6, 1, 'shouldThrowRuntimeExceptionDueToWrongParameter')
+data.setCell(6, 1, 'shouldGetLimittedSortedCurrencyRatiosLowestBidPrice')
 data.setCell(6, 2, 'testing._DbTest')
-data.setCell(6, 3, 35);
+data.setCell(6, 3, 9);
 data.setCell(7, 0, 7)
-data.setCell(7, 1, 'shouldGetLimittedSortedCurrency')
+data.setCell(7, 1, 'shouldThrowRuntimeExceptionDueToWrongParameter')
 data.setCell(7, 2, 'testing._DbTest')
-data.setCell(7, 3, 18);
+data.setCell(7, 3, 6);
 data.setCell(8, 0, 8)
-data.setCell(8, 1, 'shouldGetLimittedSortedCurrencyRatiosLowestBidPrice')
+data.setCell(8, 1, 'shouldGetLimittedSortedCurrency')
 data.setCell(8, 2, 'testing._DbTest')
-data.setCell(8, 3, 14);
+data.setCell(8, 3, 5);
 data.setCell(9, 0, 9)
 data.setCell(9, 1, 'shouldRemoveObjects')
 data.setCell(9, 2, 'testing._DbTest')
-data.setCell(9, 3, 4);
+data.setCell(9, 3, 0);
 data.setCell(10, 0, 10)
 data.setCell(10, 1, 'shouldDisconnectCurrencyCountry')
 data.setCell(10, 2, 'testing._DbTest')
@@ -561,7 +502,7 @@ window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 8 seconds</span>
+              <span class="suite-total-time">Total running time: 5 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -594,77 +535,73 @@ return data;
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldCreateDefaultConnection</span>
-                <span class="method-start">57 ms</span>
+                <span class="method-start">10 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">7400 ms</span>
+                <span class="method-start">4187 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldThrowRuntimeExceptionDueToWrongParameter</span>
-                <span class="method-start">7400 ms</span>
+                <span class="method-start">4188 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">7484 ms</span>
+                <span class="method-start">4204 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">shouldGetHighestPriceDifferenceOfCurrencyRatios</span>
-                <span class="method-start">7485 ms</span>
+                <span class="method-start">4205 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">8160 ms</span>
+                <span class="method-start">4557 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldGetLimittedSortedCurrency</span>
-                <span class="method-start">8160 ms</span>
+                <span class="method-start">4557 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">8188 ms</span>
+                <span class="method-start">4564 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">shouldGetLimittedSortedCurrencyRatiosLowestBidPrice</span>
-                <span class="method-start">8190 ms</span>
+                <span class="method-start">4564 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">8207 ms</span>
+                <span class="method-start">4574 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldGetSortedCurrency</span>
-                <span class="method-start">8290 ms</span>
+                <span class="method-start">4575 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">8329 ms</span>
+                <span class="method-start">4646 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldInsertNewCurrency</span>
-                <span class="method-start">8329 ms</span>
+                <span class="method-start">4647 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">8614 ms</span>
+                <span class="method-start">4924 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldInsertNewCountry</span>
-                <span class="method-start">8616 ms</span>
+                <span class="method-start">4925 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">8862 ms</span>
+                <span class="method-start">5018 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">shouldConnectCurrencyCountry</span>
-                <span class="method-start">8863 ms</span>
+                <span class="method-start">5020 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

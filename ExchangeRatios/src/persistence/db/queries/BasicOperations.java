@@ -36,6 +36,13 @@ public class BasicOperations {
 		return list;
 	}
 
+	protected static List<Object[]> presentQueryComplexResultsAndJustCloseSession(Query<Object[]> query,
+			Session session) {
+		List<Object[]> list = query.list();
+		session.close();
+		return list;
+	}
+
 	protected static <T> T presentQueryResultAndJustCloseSession(Query<T> query, Session session) {
 		List<T> list = query.getResultList();
 		session.close();
