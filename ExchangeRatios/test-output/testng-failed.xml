@@ -7,6 +7,7 @@
         <methods>
           <include name="setUp"/>
           <include name="shouldRemoveObjects"/>
+          <include name="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice"/>
           <include name="shouldGetHighestPriceDifferenceOfCurrencyRatios"/>
           <include name="shouldDisconnectCurrencyCountry"/>
           <include name="shouldInsertNewCurrency"/>

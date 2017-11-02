@@ -15,17 +15,15 @@ import persistence.db.table.currency.CurrencyRatios;
 public class PGQuery extends BasicOperations {
 
 	public static final void ConnectCountryCurrency(Country country, Currency currency) {
-		Session session = openTransaction();
+
 		country.addCurrency(currency);
 		ObjectOperations.InsertOrUpdate(country);
-		closeSession(session);
+
 	}
 
 	public static final void DisconnectCountryCurrency(Country country, Currency currency) {
-		Session session = openTransaction();
 		country.removeCurrency(currency);
 		ObjectOperations.InsertOrUpdate(country);
-		closeSession(session);
 	}
 
 	public static final void InsertActualizedCurrencyRatiosGroup(List<CurrencyRatios> list) {

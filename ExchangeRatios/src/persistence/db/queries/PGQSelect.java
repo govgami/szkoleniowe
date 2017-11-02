@@ -71,17 +71,17 @@ public class PGQSelect extends PGQuery {
 		Session session = openTransaction();
 		Query<CurrencyRatios> query = session.getNamedQuery("getLowestBidOfChosenSignCurrencyRatio");
 		query.setParameter(0, code);
-		PGQSelect.applyOptionalLimitOnResultsNumber(query, limit);
+		applyOptionalLimitOnResultsNumber(query, limit);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
-	public static final List<CurrencyRatios> SelectHighestPriceDifferenceOfCurrencyRatio(String code, int limit) {
+	public static final List<CurrencyRatios> SelectHighestPriceDifferenceOfCurrencyRatio(String code, Integer limit) {
 		validateQueryArgAgainstSQLInjection(code);
 
 		Session session = openTransaction();
 		Query<CurrencyRatios> query = session.getNamedQuery("getHighestPriceDifferenceOfCurrencyRatio");
 		query.setParameter(0, code);
-		query.setMaxResults(limit);
+		applyOptionalLimitOnResultsNumber(query, limit);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 

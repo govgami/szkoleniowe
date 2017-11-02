@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "country_Ccurrency", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
+@Table(name = "country_currency", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
 public class CountryCurrency implements Serializable {
 
 	private static final long serialVersionUID = -5465902396253799360L;
