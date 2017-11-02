@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import persistence.db.queries.PGQuery;
 import persistence.db.table.currency.*;
 import logging.Log;
 
@@ -60,7 +61,7 @@ public class DbConnection {
 	}
 
 	public void createPreProgrammed() {
-		PGQuery.initDatabase(conn);
+		PGQuery.initDatabaseStructure(conn);
 	}
 
 	public ResultSet execQuery(String query) throws SQLException {

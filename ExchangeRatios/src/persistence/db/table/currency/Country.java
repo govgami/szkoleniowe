@@ -13,15 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-@NamedNativeQueries({
-		@NamedNativeQuery(name = "findAllCountries", query = "select * from Country order by ID asc", resultClass = Country.class),
-		@NamedNativeQuery(name = "findCountryById", query = "select * from Country where ID = :id", resultClass = Country.class),
-		@NamedNativeQuery(name = "findCountryByName", query = "select * from Country where NAME = :name order by ID asc", resultClass = Country.class) })
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
+@NamedQueries({ @NamedQuery(name = "getAllCountries", query = "from Country"),
+		@NamedQuery(name = "getCountryById", query = "from Country where ID = ?"),
+		@NamedQuery(name = "getCountryByName", query = "from Country where NAME = ?") })
 @Entity
 @Table(name = "COUNTRY", uniqueConstraints = { @UniqueConstraint(columnNames = "ID"),
 		@UniqueConstraint(columnNames = "NAME") })

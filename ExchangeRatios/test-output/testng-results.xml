@@ -2,20 +2,20 @@
 <testng-results skipped="9" failed="1" ignored="0" total="11" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="6741" started-at="2017-10-31T12:15:11Z" finished-at="2017-10-31T12:15:18Z">
+  <suite name="Default suite" duration-ms="2957" started-at="2017-11-02T10:10:56Z" finished-at="2017-11-02T10:10:59Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="6741" started-at="2017-10-31T12:15:11Z" finished-at="2017-10-31T12:15:18Z">
+    <test name="Default test" duration-ms="2957" started-at="2017-11-02T10:10:56Z" finished-at="2017-11-02T10:10:59Z">
       <class name="testing._DbTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@724af044]" name="setUp" is-config="true" duration-ms="24" started-at="2017-10-31T13:15:11Z" finished-at="2017-10-31T13:15:11Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="10" started-at="2017-11-02T11:10:56Z" finished-at="2017-11-02T11:10:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="shouldCreateDefaultConnection()[pri:0, instance:testing._DbTest@724af044]" name="shouldCreateDefaultConnection" duration-ms="6484" started-at="2017-10-31T13:15:11Z" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="FAIL" signature="shouldCreateDefaultConnection()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldCreateDefaultConnection" duration-ms="2870" started-at="2017-11-02T11:10:56Z" finished-at="2017-11-02T11:10:59Z">
           <exception class="java.lang.ExceptionInInitializerError">
             <full-stacktrace>
               <![CDATA[java.lang.ExceptionInInitializerError
-	at testing._DbTest.shouldCreateDefaultConnection(_DbTest.java:37)
+	at testing._DbTest.shouldCreateDefaultConnection(_DbTest.java:48)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -42,20 +42,16 @@
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 Caused by: java.lang.RuntimeException: org.hibernate.HibernateException: Errors in named queries: 
-findAllCountries failed because of: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token: * near line 1, column 8 [select * from persistence.db.table.currency.Country order by ID asc]
-findCountryByName failed because of: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token: * near line 1, column 8 [select * from persistence.db.table.currency.Country where NAME = :name order by ID asc]
-findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token: * near line 1, column 8 [select * from persistence.db.table.currency.Country where ID = :id]
-	at persistence.db.DbConnection.buildSessionFactory(DbConnection.java:104)
-	at persistence.db.DbConnection.<clinit>(DbConnection.java:96)
+getLowestBidOfChosenSignCurrencyRatio failed because of: org.hibernate.QueryException: could not resolve property: currencycode of: persistence.db.table.currency.CurrencyRatios [select e from persistence.db.table.currency.CurrencyRatios e inner join e.currency where e.currencycode = ? order by e.bidPrice asc]
+	at persistence.db.DbConnection.buildSessionFactory(DbConnection.java:105)
+	at persistence.db.DbConnection.<clinit>(DbConnection.java:97)
 	... 26 more
 Caused by: org.hibernate.HibernateException: Errors in named queries: 
-findAllCountries failed because of: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token: * near line 1, column 8 [select * from persistence.db.table.currency.Country order by ID asc]
-findCountryByName failed because of: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token: * near line 1, column 8 [select * from persistence.db.table.currency.Country where NAME = :name order by ID asc]
-findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxException: unexpected token: * near line 1, column 8 [select * from persistence.db.table.currency.Country where ID = :id]
+getLowestBidOfChosenSignCurrencyRatio failed because of: org.hibernate.QueryException: could not resolve property: currencycode of: persistence.db.table.currency.CurrencyRatios [select e from persistence.db.table.currency.CurrencyRatios e inner join e.currency where e.currencycode = ? order by e.bidPrice asc]
 	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:338)
 	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:452)
 	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:710)
-	at persistence.db.DbConnection.buildSessionFactory(DbConnection.java:101)
+	at persistence.db.DbConnection.buildSessionFactory(DbConnection.java:102)
 	... 27 more
 ]]>
             </full-stacktrace>
@@ -63,19 +59,19 @@ findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxExc
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldCreateDefaultConnection -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@724af044]" name="setUp" is-config="true" duration-ms="0" started-at="2017-10-31T13:15:18Z" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-02T11:10:59Z" finished-at="2017-11-02T11:10:59Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldThrowRuntimeExceptionDueToWrongParameter()[pri:0, instance:testing._DbTest@724af044]" name="shouldThrowRuntimeExceptionDueToWrongParameter" duration-ms="5" started-at="2017-10-31T13:15:18Z" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="PASS" signature="shouldThrowRuntimeExceptionDueToWrongParameter()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldThrowRuntimeExceptionDueToWrongParameter" duration-ms="3" started-at="2017-11-02T11:10:59Z" finished-at="2017-11-02T11:10:59Z">
           <exception class="java.lang.RuntimeException">
             <message>
               <![CDATA[Invalid argument: drop database]]>
             </message>
             <full-stacktrace>
               <![CDATA[java.lang.RuntimeException: Invalid argument: drop database
-	at persistence.db.PGQuery.validateQueryArgAgainstSQLInjection(PGQuery.java:161)
-	at testing._DbTest.shouldThrowRuntimeExceptionDueToWrongParameter(_DbTest.java:32)
+	at persistence.db.queries.PGQuery.validateQueryArgAgainstSQLInjection(PGQuery.java:153)
+	at testing._DbTest.shouldThrowRuntimeExceptionDueToWrongParameter(_DbTest.java:43)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -107,13 +103,13 @@ findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxExc
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldThrowRuntimeExceptionDueToWrongParameter -->
-        <test-method status="SKIP" signature="shouldGetHighestPriceDifferenceOfCurrencyRatios()[pri:0, instance:testing._DbTest@724af044]" name="shouldGetHighestPriceDifferenceOfCurrencyRatios" duration-ms="0" started-at="2017-10-31T13:15:18Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="SKIP" signature="shouldGetHighestPriceDifferenceOfCurrencyRatios()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetHighestPriceDifferenceOfCurrencyRatios" duration-ms="0" started-at="2017-11-02T11:10:59Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T11:10:59Z">
           <exception class="java.lang.Throwable">
             <message>
-              <![CDATA[Method _DbTest.shouldGetHighestPriceDifferenceOfCurrencyRatios()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods]]>
+              <![CDATA[Method _DbTest.shouldGetHighestPriceDifferenceOfCurrencyRatios()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.Throwable: Method _DbTest.shouldGetHighestPriceDifferenceOfCurrencyRatios()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods
+              <![CDATA[java.lang.Throwable: Method _DbTest.shouldGetHighestPriceDifferenceOfCurrencyRatios()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
@@ -138,13 +134,13 @@ findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxExc
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetHighestPriceDifferenceOfCurrencyRatios -->
-        <test-method status="SKIP" signature="shouldGetLimittedSortedCurrency()[pri:0, instance:testing._DbTest@724af044]" name="shouldGetLimittedSortedCurrency" duration-ms="0" started-at="2017-10-31T13:15:18Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="SKIP" signature="shouldGetLimittedSortedCurrency()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetLimittedSortedCurrency" duration-ms="0" started-at="2017-11-02T11:10:59Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T11:10:59Z">
           <exception class="java.lang.Throwable">
             <message>
-              <![CDATA[Method _DbTest.shouldGetLimittedSortedCurrency()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods]]>
+              <![CDATA[Method _DbTest.shouldGetLimittedSortedCurrency()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.Throwable: Method _DbTest.shouldGetLimittedSortedCurrency()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods
+              <![CDATA[java.lang.Throwable: Method _DbTest.shouldGetLimittedSortedCurrency()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
@@ -169,13 +165,13 @@ findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxExc
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetLimittedSortedCurrency -->
-        <test-method status="SKIP" signature="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice()[pri:0, instance:testing._DbTest@724af044]" name="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice" duration-ms="0" started-at="2017-10-31T13:15:18Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="SKIP" signature="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice" duration-ms="0" started-at="2017-11-02T11:10:59Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T11:10:59Z">
           <exception class="java.lang.Throwable">
             <message>
-              <![CDATA[Method _DbTest.shouldGetLimittedSortedCurrencyRatiosLowestBidPrice()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods]]>
+              <![CDATA[Method _DbTest.shouldGetLimittedSortedCurrencyRatiosLowestBidPrice()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.Throwable: Method _DbTest.shouldGetLimittedSortedCurrencyRatiosLowestBidPrice()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods
+              <![CDATA[java.lang.Throwable: Method _DbTest.shouldGetLimittedSortedCurrencyRatiosLowestBidPrice()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
@@ -200,13 +196,13 @@ findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxExc
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetLimittedSortedCurrencyRatiosLowestBidPrice -->
-        <test-method status="SKIP" signature="shouldGetSortedCurrency()[pri:0, instance:testing._DbTest@724af044]" name="shouldGetSortedCurrency" duration-ms="0" started-at="2017-10-31T13:15:18Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="SKIP" signature="shouldGetSortedCurrency()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetSortedCurrency" duration-ms="0" started-at="2017-11-02T11:10:59Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T11:10:59Z">
           <exception class="java.lang.Throwable">
             <message>
-              <![CDATA[Method _DbTest.shouldGetSortedCurrency()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods]]>
+              <![CDATA[Method _DbTest.shouldGetSortedCurrency()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.Throwable: Method _DbTest.shouldGetSortedCurrency()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods
+              <![CDATA[java.lang.Throwable: Method _DbTest.shouldGetSortedCurrency()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
@@ -231,13 +227,13 @@ findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxExc
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetSortedCurrency -->
-        <test-method status="SKIP" signature="shouldInsertNewCurrency()[pri:0, instance:testing._DbTest@724af044]" name="shouldInsertNewCurrency" duration-ms="0" started-at="2017-10-31T13:15:18Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="SKIP" signature="shouldInsertNewCurrency()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldInsertNewCurrency" duration-ms="0" started-at="2017-11-02T11:10:59Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T11:10:59Z">
           <exception class="java.lang.Throwable">
             <message>
-              <![CDATA[Method _DbTest.shouldInsertNewCurrency()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods]]>
+              <![CDATA[Method _DbTest.shouldInsertNewCurrency()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.Throwable: Method _DbTest.shouldInsertNewCurrency()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods
+              <![CDATA[java.lang.Throwable: Method _DbTest.shouldInsertNewCurrency()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
@@ -262,13 +258,13 @@ findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxExc
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldInsertNewCurrency -->
-        <test-method status="SKIP" signature="shouldInsertNewCountry()[pri:0, instance:testing._DbTest@724af044]" name="shouldInsertNewCountry" duration-ms="0" started-at="2017-10-31T13:15:18Z" depends-on-methods="testing._DbTest.shouldInsertNewCurrency, testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="SKIP" signature="shouldInsertNewCountry()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldInsertNewCountry" duration-ms="0" started-at="2017-11-02T11:10:59Z" depends-on-methods="testing._DbTest.shouldInsertNewCurrency, testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T11:10:59Z">
           <exception class="java.lang.Throwable">
             <message>
-              <![CDATA[Method _DbTest.shouldInsertNewCountry()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods]]>
+              <![CDATA[Method _DbTest.shouldInsertNewCountry()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.Throwable: Method _DbTest.shouldInsertNewCountry()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods
+              <![CDATA[java.lang.Throwable: Method _DbTest.shouldInsertNewCountry()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
@@ -293,13 +289,13 @@ findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxExc
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldInsertNewCountry -->
-        <test-method status="SKIP" signature="shouldConnectCurrencyCountry()[pri:0, instance:testing._DbTest@724af044]" name="shouldConnectCurrencyCountry" duration-ms="0" started-at="2017-10-31T13:15:18Z" depends-on-methods="testing._DbTest.shouldInsertNewCountry, testing._DbTest.shouldInsertNewCurrency" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="SKIP" signature="shouldConnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldConnectCurrencyCountry" duration-ms="0" started-at="2017-11-02T11:10:59Z" depends-on-methods="testing._DbTest.shouldInsertNewCountry, testing._DbTest.shouldInsertNewCurrency" finished-at="2017-11-02T11:10:59Z">
           <exception class="java.lang.Throwable">
             <message>
-              <![CDATA[Method _DbTest.shouldConnectCurrencyCountry()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods]]>
+              <![CDATA[Method _DbTest.shouldConnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.Throwable: Method _DbTest.shouldConnectCurrencyCountry()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods
+              <![CDATA[java.lang.Throwable: Method _DbTest.shouldConnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
@@ -324,13 +320,13 @@ findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxExc
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldConnectCurrencyCountry -->
-        <test-method status="SKIP" signature="shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@724af044]" name="shouldDisconnectCurrencyCountry" duration-ms="0" started-at="2017-10-31T13:15:18Z" depends-on-methods="testing._DbTest.shouldConnectCurrencyCountry" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="SKIP" signature="shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldDisconnectCurrencyCountry" duration-ms="0" started-at="2017-11-02T11:10:59Z" depends-on-methods="testing._DbTest.shouldConnectCurrencyCountry" finished-at="2017-11-02T11:10:59Z">
           <exception class="java.lang.Throwable">
             <message>
-              <![CDATA[Method _DbTest.shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods]]>
+              <![CDATA[Method _DbTest.shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.Throwable: Method _DbTest.shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods
+              <![CDATA[java.lang.Throwable: Method _DbTest.shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
@@ -355,13 +351,13 @@ findCountryById failed because of: org.hibernate.hql.internal.ast.QuerySyntaxExc
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldDisconnectCurrencyCountry -->
-        <test-method status="SKIP" signature="shouldRemoveObjects()[pri:0, instance:testing._DbTest@724af044]" name="shouldRemoveObjects" duration-ms="0" started-at="2017-10-31T13:15:18Z" depends-on-methods="testing._DbTest.shouldDisconnectCurrencyCountry" finished-at="2017-10-31T13:15:18Z">
+        <test-method status="SKIP" signature="shouldRemoveObjects()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldRemoveObjects" duration-ms="0" started-at="2017-11-02T11:10:59Z" depends-on-methods="testing._DbTest.shouldDisconnectCurrencyCountry" finished-at="2017-11-02T11:10:59Z">
           <exception class="java.lang.Throwable">
             <message>
-              <![CDATA[Method _DbTest.shouldRemoveObjects()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods]]>
+              <![CDATA[Method _DbTest.shouldRemoveObjects()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.Throwable: Method _DbTest.shouldRemoveObjects()[pri:0, instance:testing._DbTest@724af044] depends on not successfully finished methods
+              <![CDATA[java.lang.Throwable: Method _DbTest.shouldRemoveObjects()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)

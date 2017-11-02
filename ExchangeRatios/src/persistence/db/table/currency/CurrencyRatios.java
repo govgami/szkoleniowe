@@ -4,14 +4,24 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-@NamedNativeQueries({
-		@NamedNativeQuery(name = "findCurrencyRatioById", query = "select * from CURRENCY_RATIOS where ID = :id", resultClass = CurrencyRatios.class),
-		@NamedNativeQuery(name = "findLowestBidOfChosenSignCurrencyRatio", query = "select * from CURRENCY_RATIOS inner join CURRENCY on CURRENCY_RATIOS.CURRENCY_ID=CURRENCY.ID where SHORTCUT = :signShortcut order by BID_PRICE asc", resultClass = CurrencyRatios.class),
-		@NamedNativeQuery(name = "findHighestPriceDifferenceOfCurrencyRatio", query = "select *, ASK_PRICE-BID_PRICE as difference from CURRENCY_RATIOS inner join CURRENCY on CURRENCY_RATIOS.CURRENCY_ID=CURRENCY.ID where SHORTCUT = :signShortcut and ASK_PRICE is not null and BID_PRICE is not null order by difference desc", resultClass = CurrencyRatios.class) })
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
+@NamedQueries({
+		@NamedQuery(name = "getLowestBidOfChosenSignCurrencyRatio", query = "select e from CurrencyRatios e inner join e.currency where code = ? order by e.bidPrice asc"),
+		@NamedQuery(name = "getHighestPriceDifferenceOfCurrencyRatio", query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join c.currency where code = ? and c.askPrice is not null and c.bidPrice is not null order by difference desc") })
 @Entity
-@Table(name = "CURRENCY_RATIOS", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
+@Table(name = "currency_r", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
 public class CurrencyRatios implements Serializable {
 
 	private static final long serialVersionUID = 4445757466460884024L;
