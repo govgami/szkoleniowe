@@ -57,6 +57,9 @@ public class _DbTest {
 		PGQuery.initDatabaseStructure(DbConnection.makeDefaultPostgreConnection());
 	}
 
+	// DEV check implementation for optimalization rows insertion by code -> batch
+	// DEV change implementation to lazy-fetching
+	// operations
 	// @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGatherCurrenciesData() {
 		Helper.gatherData(date1, date2);

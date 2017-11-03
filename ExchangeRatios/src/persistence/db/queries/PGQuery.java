@@ -70,7 +70,7 @@ public class PGQuery extends BasicOperations {
 			stmt.close();
 
 			stmt = conn.createStatement();
-			sql = "CREATE TABLE country_currency (ID int primary key not null, CURRENCY_ID    int references CURRENCY(ID)    not null, COUNTRY_ID INT foreign key references COUNTRY(ID)   not null  )";
+			sql = "CREATE TABLE country_currency (primary key (COUNTRY_ID, CURRENCY_ID), CURRENCY_ID    int references CURRENCY(ID)    not null, COUNTRY_ID INT foreign key references COUNTRY(ID)   not null  )";
 			stmt.execute(sql);
 			stmt.close();
 
