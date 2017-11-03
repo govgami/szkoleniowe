@@ -3,6 +3,7 @@ package persistence.db.queries;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -87,9 +88,11 @@ public class PGQuery extends BasicOperations {
 			session.save(new Country("Non-classified"));
 			session.close();
 
+			HashSet<Country> c = new HashSet<Country>();
+			c.add(country);
 			// alt. currency
 			session = openTransaction();
-			session.save(new Currency(country, "Non-specified Currency", "???"));
+			session.save(new Currency(c, "Non-specified Currency", "???"));
 			session.close();
 
 			closeQuery(conn);

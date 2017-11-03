@@ -1,6 +1,7 @@
 package persistence.db.table.currency;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +34,7 @@ public class Currency implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "COUNTRY_ID")
-	Country country;
+	Set<Country> country;
 	@Column(name = "CURRENCY_NAME", length = 100)
 	String name;
 	@Column(name = "CODE", unique = true, nullable = false, length = 4)
@@ -42,7 +43,7 @@ public class Currency implements Serializable {
 	protected Currency() {
 	}
 
-	public Currency(Country country, String name, String code) {
+	public Currency(Set<Country> country, String name, String code) {
 		this.country = country;
 		this.name = name;
 		this.code = code;
@@ -52,11 +53,11 @@ public class Currency implements Serializable {
 		return id;
 	}
 
-	public Country getCountry() {
+	public Set<Country> getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(Set<Country> country) {
 		this.country = country;
 	}
 
