@@ -18,14 +18,22 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQueries({
-		@NamedQuery(name = "getCurrencyRatioByCurrencySignAndDay", query = "select e from CurrencyRatios e where e.currency.code = ? and e.effectiveDate = ?"),
-		@NamedQuery(name = "getLowestBidOfChosenSignCurrencyRatio", query = "select e from CurrencyRatios e inner join e.currency where code = ? order by e.bidPrice asc"),
-		@NamedQuery(name = "getHighestPriceDifferenceOfCurrencyRatio", query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join c.currency where code = ? and c.askPrice is not null and c.bidPrice is not null order by difference desc") })
+		@NamedQuery(name = "getCurrencyRatioByCurrencySignAndDay", query = "select e from CurrencyRatios e inner join fetch e.currency where code = ? and e.effectiveDate = ?"),
+		@NamedQuery(name = "getLowestBidOfChosenSignCurrencyRatio", query = "select e from CurrencyRatios e inner join fetch e.currency where code = ? order by e.bidPrice asc"),
+		@NamedQuery(name = "getHighestPriceDifferenceOfCurrencyRatio", query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join fetch c.currency where code = ? and c.askPrice is not null and c.bidPrice is not null order by difference desc") })
 @Entity
 @Table(name = "currency_ratios", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
 public class CurrencyRatios implements Serializable {
 
 	private static final long serialVersionUID = 4445757466460884024L;
+
+	public static final String IdField = "id";
+	public static final String CurrencyField = "currency";
+	public static final String CodeField = "code";
+	public static final String Get_All = "getAllCurrencies";
+	public static final String Get_All_SortedByCode = "getAllCurrenciesSortedByCode";
+	public static final String Get_ById = "getCurrencyById";
+	public static final String Get_ByCode = "getCurrencyByCode";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
