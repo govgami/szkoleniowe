@@ -52,7 +52,7 @@ public class _DbTest {
 		assertNotNull(c);
 	}
 
-	// @Test
+	@Test
 	public void shouldInitializeDbStructure() {
 		PGQuery.initDatabaseStructure(DbConnection.makeDefaultPostgreConnection());
 	}

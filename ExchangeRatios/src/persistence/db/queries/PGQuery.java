@@ -54,23 +54,24 @@ public class PGQuery extends BasicOperations {
 	public static void initDatabaseStructure(Connection conn) {
 		try {
 			Session session;
-			Statement stmt = conn.createStatement();
+			Statement stmt;
+			stmt = conn.createStatement();
 			String sql = "CREATE TABLE country (ID int primary key not null, NAME varchar(50) not null unique, CURRENCIES int array);";
 			stmt.execute(sql);
 			stmt.close();
 
 			stmt = conn.createStatement();
-			sql = "CREATE TABLE currency (ID int primary key not null, COUNTRY_ID int references Country(ID), CURRENCY_NAME  varchar(50),  CODE  varchar(4)  not null unique )";
+			sql = "CREATE TABLE currency (ID int primary key not null, COUNTRY_ID int, CURRENCY_NAME  varchar(50),  CODE  varchar(4)  not null unique, foreign key(COUNTRY_ID) references Country(ID))";
 			stmt.execute(sql);
 			stmt.close();
 
 			stmt = conn.createStatement();
-			sql = "CREATE TABLE currency_ratios (ID numeric primary key not null, CURRENCY_ID    int foreign key references Currency(ID)    not null, EFFECTIVE_DATE DATE   not null, ASK_PRICE  numeric , BID_PRICE numeric  , AVG_PRICE numeric     )";
+			sql = "CREATE TABLE currency_ratios (ID numeric primary key not null, CURRENCY_ID    int    not null, EFFECTIVE_DATE DATE   not null, ASK_PRICE  numeric, BID_PRICE numeric, AVG_PRICE numeric, foreign key(CURRENCY_ID) references Currency(ID) )";
 			stmt.execute(sql);
 			stmt.close();
 
 			stmt = conn.createStatement();
-			sql = "CREATE TABLE country_currency (primary key (COUNTRY_ID, CURRENCY_ID), CURRENCY_ID    int references CURRENCY(ID)    not null, COUNTRY_ID INT foreign key references COUNTRY(ID)   not null  )";
+			sql = "CREATE TABLE country_currency (CURRENCY_ID    int    not null, COUNTRY_ID INT   not null , primary key (COUNTRY_ID, CURRENCY_ID), foreign key(COUNTRY_ID) references Country(ID), foreign key(CURRENCY_ID) references Currency(ID) )";
 			stmt.execute(sql);
 			stmt.close();
 
