@@ -1,15 +1,16 @@
 package persistence.db.table.currency;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -32,9 +33,8 @@ public class Currency implements Serializable {
 	@Column(name = "ID", unique = true, nullable = false)
 	Integer id;
 
-	@ManyToOne
-	@JoinColumn(name = "COUNTRY_ID")
-	Set<Country> country;
+	@ManyToMany(mappedBy = "currencies", fetch = FetchType.EAGER)
+	Set<Country> country = new HashSet<Country>();
 	@Column(name = "CURRENCY_NAME", length = 100)
 	String name;
 	@Column(name = "CODE", unique = true, nullable = false, length = 4)
@@ -77,4 +77,13 @@ public class Currency implements Serializable {
 		this.code = code;
 	}
 
+	public void addCountry(Country c) {
+		country.add(c);
+
+	}
+
+	public void removeCountry(Country c) {
+		country.remove(c);
+
+	}
 }

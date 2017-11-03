@@ -52,7 +52,7 @@ public class _DbTest {
 		assertNotNull(c);
 	}
 
-	@Test
+	// @Test
 	public void shouldInitializeDbStructure() {
 		PGQuery.initDatabaseStructure(DbConnection.makeDefaultPostgreConnection());
 	}
@@ -161,9 +161,10 @@ public class _DbTest {
 
 	@Test(dependsOnMethods = { "shouldDisconnectCurrencyCountry" })
 	public void shouldRemoveObjects() {
+
 		Currency curr = PGQSelect.SelectCurrencyByCode(objects.exampleCurrency.getCode());
-		ObjectOperations.DeleteObject(curr);
 		Country c = PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
+		ObjectOperations.DeleteObject(curr);
 		ObjectOperations.DeleteObject(c);
 	}
 

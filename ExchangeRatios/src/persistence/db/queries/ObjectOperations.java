@@ -1,5 +1,6 @@
 package persistence.db.queries;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -12,7 +13,7 @@ public class ObjectOperations extends BasicOperations {
 		closeSession(session);
 	}
 
-	// TODO insert whole lists for multiple rows?
+	// TODO insert whole lists for multiple rows with batch?
 	public static final void InsertGroup(List<Object> list) {
 		for (Object o : list) {
 			Insert(o);
@@ -37,4 +38,10 @@ public class ObjectOperations extends BasicOperations {
 		closeSession(session);
 	}
 
+	public static final <T extends Serializable> T GetObject(Class<T> cl, T obj) {
+		Session session = openTransaction();
+		T result = session.get(cl, obj);
+		closeSession(session);
+		return result;
+	}
 }

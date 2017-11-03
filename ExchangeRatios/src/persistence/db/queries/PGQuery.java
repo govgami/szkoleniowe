@@ -18,13 +18,17 @@ public class PGQuery extends BasicOperations {
 	public static final void ConnectCountryCurrency(Country country, Currency currency) {
 
 		country.addCurrency(currency);
+		currency.addCountry(country);
 		ObjectOperations.InsertOrUpdate(country);
+		ObjectOperations.InsertOrUpdate(currency);
 
 	}
 
 	public static final void DisconnectCountryCurrency(Country country, Currency currency) {
 		country.removeCurrency(currency);
+		currency.removeCountry(country);
 		ObjectOperations.InsertOrUpdate(country);
+		ObjectOperations.InsertOrUpdate(currency);
 	}
 
 	public static final void InsertActualizedCurrencyRatiosGroup(List<CurrencyRatios> list) {
@@ -56,13 +60,14 @@ public class PGQuery extends BasicOperations {
 		try {
 			Session session;
 			Statement stmt;
+
 			stmt = conn.createStatement();
-			String sql = "CREATE TABLE country (ID int primary key not null, NAME varchar(50) not null unique, CURRENCIES int array);";
+			String sql = "CREATE TABLE country (ID int primary key not null, NAME varchar(50) not null unique);";
 			stmt.execute(sql);
 			stmt.close();
 
 			stmt = conn.createStatement();
-			sql = "CREATE TABLE currency (ID int primary key not null, COUNTRY_ID int, CURRENCY_NAME  varchar(50),  CODE  varchar(4)  not null unique, foreign key(COUNTRY_ID) references Country(ID))";
+			sql = "CREATE TABLE currency (ID int primary key not null, CURRENCY_NAME  varchar(50),  CODE  varchar(4)  not null unique)";
 			stmt.execute(sql);
 			stmt.close();
 

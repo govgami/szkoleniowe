@@ -40,7 +40,7 @@ public class Country implements Serializable {
 	@JoinTable(name = "COUNTRY_CURRENCY", joinColumns = { @JoinColumn(name = "COUNTRY_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "CURRENCY_ID") })
 	@Column(name = "CURRENCIES", nullable = true)
-	private Set<Currency> currencies;
+	private Set<Currency> currencies = new HashSet<Currency>();
 
 	public Country() {
 	}
@@ -70,22 +70,12 @@ public class Country implements Serializable {
 	}
 
 	public void addCurrency(Currency curr) {
-		if (!currencies.contains(curr) | currencies == null) {
-			Set<Currency> t = new HashSet<Currency>();
-			t.addAll(currencies);
-			t.add(curr);
-			this.setCurrencies(t);
-			// currencies.add(curr);
-		}
+		currencies.add(curr);
 
 	}
 
 	public void removeCurrency(Currency curr) {
-		if (currencies == null) {
-			return;
-		} else {
-			currencies.remove(curr);
-		}
+		currencies.remove(curr);
 
 	}
 
