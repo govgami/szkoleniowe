@@ -2,24 +2,24 @@
 <testng-results skipped="2" failed="1" ignored="0" total="11" passed="8">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="5174" started-at="2017-11-02T14:42:44Z" finished-at="2017-11-02T14:42:49Z">
+  <suite name="Default suite" duration-ms="5421" started-at="2017-11-03T07:25:36Z" finished-at="2017-11-03T07:25:42Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="5174" started-at="2017-11-02T14:42:44Z" finished-at="2017-11-02T14:42:49Z">
+    <test name="Default test" duration-ms="5421" started-at="2017-11-03T07:25:36Z" finished-at="2017-11-03T07:25:42Z">
       <class name="testing._DbTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="10" started-at="2017-11-02T15:42:44Z" finished-at="2017-11-02T15:42:44Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="9" started-at="2017-11-03T08:25:36Z" finished-at="2017-11-03T08:25:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldCreateDefaultConnection()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldCreateDefaultConnection" duration-ms="4160" started-at="2017-11-02T15:42:44Z" finished-at="2017-11-02T15:42:48Z">
+        <test-method status="PASS" signature="shouldCreateDefaultConnection()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldCreateDefaultConnection" duration-ms="4340" started-at="2017-11-03T08:25:36Z" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldCreateDefaultConnection -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-02T15:42:48Z" finished-at="2017-11-02T15:42:48Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-03T08:25:41Z" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldThrowRuntimeExceptionDueToWrongParameter()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldThrowRuntimeExceptionDueToWrongParameter" duration-ms="6" started-at="2017-11-02T15:42:48Z" finished-at="2017-11-02T15:42:48Z">
+        <test-method status="PASS" signature="shouldThrowRuntimeExceptionDueToWrongParameter()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldThrowRuntimeExceptionDueToWrongParameter" duration-ms="8" started-at="2017-11-03T08:25:41Z" finished-at="2017-11-03T08:25:41Z">
           <exception class="java.lang.RuntimeException">
             <message>
               <![CDATA[Invalid argument: drop database]]>
@@ -59,59 +59,55 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldThrowRuntimeExceptionDueToWrongParameter -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-02T15:42:48Z" finished-at="2017-11-02T15:42:48Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-03T08:25:41Z" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldGetHighestPriceDifferenceOfCurrencyRatios()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetHighestPriceDifferenceOfCurrencyRatios" duration-ms="350" started-at="2017-11-02T15:42:48Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="PASS" signature="shouldGetHighestPriceDifferenceOfCurrencyRatios()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetHighestPriceDifferenceOfCurrencyRatios" duration-ms="354" started-at="2017-11-03T08:25:41Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetHighestPriceDifferenceOfCurrencyRatios -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-02T15:42:49Z" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-03T08:25:41Z" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldGetLimittedSortedCurrency()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetLimittedSortedCurrency" duration-ms="5" started-at="2017-11-02T15:42:49Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="PASS" signature="shouldGetLimittedSortedCurrency()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetLimittedSortedCurrency" duration-ms="10" started-at="2017-11-03T08:25:41Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetLimittedSortedCurrency -->
-        <test-method status="PASS" signature="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice" duration-ms="9" started-at="2017-11-02T15:42:49Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-03T08:25:41Z" finished-at="2017-11-03T08:25:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice" duration-ms="27" started-at="2017-11-03T08:25:41Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetLimittedSortedCurrencyRatiosLowestBidPrice -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-02T15:42:49Z" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="13" started-at="2017-11-03T08:25:41Z" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-02T15:42:49Z" finished-at="2017-11-02T15:42:49Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldGetSortedCurrency()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetSortedCurrency" duration-ms="67" started-at="2017-11-02T15:42:49Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="PASS" signature="shouldGetSortedCurrency()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldGetSortedCurrency" duration-ms="78" started-at="2017-11-03T08:25:41Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetSortedCurrency -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-02T15:42:49Z" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-03T08:25:41Z" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldInsertNewCurrency()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldInsertNewCurrency" duration-ms="273" started-at="2017-11-02T15:42:49Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="PASS" signature="shouldInsertNewCurrency()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldInsertNewCurrency" duration-ms="104" started-at="2017-11-03T08:25:41Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldInsertNewCurrency -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-02T15:42:49Z" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-03T08:25:41Z" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldInsertNewCountry()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldInsertNewCountry" duration-ms="84" started-at="2017-11-02T15:42:49Z" depends-on-methods="testing._DbTest.shouldInsertNewCurrency, testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="PASS" signature="shouldInsertNewCountry()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldInsertNewCountry" duration-ms="146" started-at="2017-11-03T08:25:41Z" depends-on-methods="testing._DbTest.shouldInsertNewCurrency, testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-03T08:25:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldInsertNewCountry -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-02T15:42:49Z" finished-at="2017-11-02T15:42:49Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="shouldConnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldConnectCurrencyCountry" duration-ms="109" started-at="2017-11-02T15:42:49Z" depends-on-methods="testing._DbTest.shouldInsertNewCountry, testing._DbTest.shouldInsertNewCurrency" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="FAIL" signature="shouldConnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldConnectCurrencyCountry" duration-ms="147" started-at="2017-11-03T08:25:41Z" depends-on-methods="testing._DbTest.shouldInsertNewCountry, testing._DbTest.shouldInsertNewCurrency" finished-at="2017-11-03T08:25:42Z">
           <exception class="java.lang.RuntimeException">
             <message>
               <![CDATA[javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement]]>
@@ -178,7 +174,7 @@ Caused by: org.hibernate.exception.ConstraintViolationException: could not execu
 	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1437)
 	... 37 more
 Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "id" violates not-null constraint
-  Detail: Failing row contains (null, 3908, 3909).
+  Detail: Failing row contains (null, 30924, 30925).
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
 	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
@@ -194,7 +190,11 @@ Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "id" v
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldConnectCurrencyCountry -->
-        <test-method status="SKIP" signature="shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldDisconnectCurrencyCountry" duration-ms="0" started-at="2017-11-02T15:42:49Z" depends-on-methods="testing._DbTest.shouldConnectCurrencyCountry" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@cc285f4]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-03T08:25:41Z" finished-at="2017-11-03T08:25:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="SKIP" signature="shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldDisconnectCurrencyCountry" duration-ms="0" started-at="2017-11-03T08:25:42Z" depends-on-methods="testing._DbTest.shouldConnectCurrencyCountry" finished-at="2017-11-03T08:25:42Z">
           <exception class="java.lang.Throwable">
             <message>
               <![CDATA[Method _DbTest.shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods]]>
@@ -225,7 +225,7 @@ Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "id" v
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldDisconnectCurrencyCountry -->
-        <test-method status="SKIP" signature="shouldRemoveObjects()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldRemoveObjects" duration-ms="0" started-at="2017-11-02T15:42:49Z" depends-on-methods="testing._DbTest.shouldDisconnectCurrencyCountry" finished-at="2017-11-02T15:42:49Z">
+        <test-method status="SKIP" signature="shouldRemoveObjects()[pri:0, instance:testing._DbTest@cc285f4]" name="shouldRemoveObjects" duration-ms="0" started-at="2017-11-03T08:25:42Z" depends-on-methods="testing._DbTest.shouldDisconnectCurrencyCountry" finished-at="2017-11-03T08:25:42Z">
           <exception class="java.lang.Throwable">
             <message>
               <![CDATA[Method _DbTest.shouldRemoveObjects()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods]]>

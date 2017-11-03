@@ -2,7 +2,6 @@ package main;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,36 +16,53 @@ import persistence.db.table.currency.CurrencyRatios;
 
 public class Helper {
 
-	public static void gatherData() {
-		Date from = new Date(Calendar.getInstance().getTimeInMillis() - 1000 * 3600 * 24 * 7);
-		Date to = new Date(Calendar.getInstance().getTimeInMillis());
-		gatherData(from, to);
+	static final int timeRange = -1000 * 3600 * 24 * 90;
+
+	// public static void gatherLastWeekData() {
+	// Date from = new Date(Calendar.getInstance().getTimeInMillis() - 1000 * 3600 *
+	// 24 * 7);
+	// Date to = new Date(Calendar.getInstance().getTimeInMillis());
+	// gatherData(from, to);
+	//
+	// }
+
+	public static void gatherData(Date from, Date to) {
+		System.out.println(from + ":" + to);
+		Date intermediary = new Date(from.getTime());
+		Date intermediaryEnd = new Date(intermediary.getTime());
+		intermediaryEnd.setMonth(intermediary.getMonth() + 3);
+		while (intermediaryEnd.getTime() < to.getTime()) {
+			System.out.println(intermediary + ":inter:" + intermediaryEnd);
+			getAllDataFromPeriod(intermediary, intermediaryEnd);
+			intermediary.setMonth(intermediary.getMonth() + 3);
+			intermediaryEnd.setMonth(intermediary.getMonth() + 3);
+		}
+		getAllDataFromPeriod(intermediary, to);
 
 	}
 
-	public static void gatherData(Date from, Date to) {
-
+	public static void getAllDataFromPeriod(Date from, Date to) {
+		System.out.println(from + ":" + to);
 		PGQuery.InsertActualizedCurrencyRatiosGroup(
 				parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
 		PGQuery.InsertActualizedCurrencyRatiosGroup(
 				parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("b", from, to)));
 		PGQuery.InsertActualizedCurrencyRatiosGroup(
 				parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("c", from, to)));
-
 	}
 
 	static List<CurrencyRatios> parsePrice2Ratios(List<CurrencyPrice> list) {
 		List<CurrencyRatios> result = new ArrayList<CurrencyRatios>();
 		HashMap<String, Currency> map = getCurrencies();
 		CurrencyRatios t;
+
 		for (CurrencyPrice cp : list) {
 			t = new CurrencyRatios();
 			t.setDate(new Str2SqlDate(cp.getEffectiveDate()).parse());
-			// System.out.println(t.getCurrencyId()+" "+t.getDate());
-			t.setCurrencyId(map.get(cp.getCurrencySign()));
+			t.setCurrency(map.get(cp.getCurrencySign()));
 			saveFromUnknownCurrency(cp, t, map);
 			adjustFieldsOf(cp, t);
-			// TODO fix!!
+			// TODO fix missing naming!!
 			result.add(t);
 		}
 		return result;
@@ -62,11 +78,11 @@ public class Helper {
 	}
 
 	static void saveFromUnknownCurrency(CurrencyPrice cp, CurrencyRatios cr, HashMap<String, Currency> map) {
-		if (cr.getCurrencyId() == null) {
+		if (cr.getCurrency() == null) {
 			ObjectOperations.Insert(new Currency(null, cp.getCurrencyName(), cp.getCurrencySign()));
 			map.clear();
 			map.putAll(getCurrencies());
-			cr.setCurrencyId(map.get(cp.getCurrencySign()));
+			cr.setCurrency(map.get(cp.getCurrencySign()));
 		}
 	}
 

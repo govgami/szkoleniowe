@@ -61,22 +61,22 @@ public class PGQuery extends BasicOperations {
 
 			stmt = conn.createStatement();
 			sql = "CREATE TABLE currency (ID int primary key not null, COUNTRY_ID int references Country(ID), CURRENCY_NAME  varchar(50),  CODE  varchar(4)  not null unique )";
-			stmt.execute(sql);// executeUpdate(sql);
-			stmt.close();
-			// DEV remake SHORTCUT for CODE Query classes
-			stmt = conn.createStatement();
-			sql = "CREATE TABLE currency_ratios (ID numeric primary key not null, CURRENCY_ID    int references Currency(ID)    not null, EFFECTIVE_DATE DATE   not null, ASK_PRICE  numeric , BID_PRICE numeric  , AVG_PRICE numeric     )";
 			stmt.execute(sql);
 			stmt.close();
 
 			stmt = conn.createStatement();
-			sql = "CREATE TABLE country_currency (ID INT PRIMARY KEY NOT NULL, CURRENCY_ID    INT REFERENCES CURRENCY(ID)    NOT NULL, COUNTRY_ID INT REFERENCES COUNTRY(ID)   NOT NULL  )";
+			sql = "CREATE TABLE currency_ratios (ID numeric primary key not null, CURRENCY_ID    int foreign key references Currency(ID)    not null, EFFECTIVE_DATE DATE   not null, ASK_PRICE  numeric , BID_PRICE numeric  , AVG_PRICE numeric     )";
+			stmt.execute(sql);
+			stmt.close();
+
+			stmt = conn.createStatement();
+			sql = "CREATE TABLE country_currency (ID int primary key not null, CURRENCY_ID    int references CURRENCY(ID)    not null, COUNTRY_ID INT foreign key references COUNTRY(ID)   not null  )";
 			stmt.execute(sql);
 			stmt.close();
 
 			// seq
 			stmt = conn.createStatement();
-			sql = "CREATE SEQUENCE hibernate_sequence START WITH 1 INCREMENT BY 1  NO MAXVALUE  NO MINVALUE CACHE 1;";
+			sql = "CREATE SEQUENCE hibernate_sequence start with 1 increment by 1  no maxvalue  no minvalue cache 1;";
 			stmt.execute(sql);
 			stmt.close();
 

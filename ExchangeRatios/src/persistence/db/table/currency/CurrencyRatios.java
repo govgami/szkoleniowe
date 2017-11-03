@@ -18,7 +18,7 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQueries({
-		@NamedQuery(name = "getCurrencyRatioByCurrencySignAndDay", query = "select e from CurrencyRatios e inner join e.currency where code = ? and e.effectiveDate = ?"),
+		@NamedQuery(name = "getCurrencyRatioByCurrencySignAndDay", query = "select e from CurrencyRatios e where e.currency.code = ? and e.effectiveDate = ?"),
 		@NamedQuery(name = "getLowestBidOfChosenSignCurrencyRatio", query = "select e from CurrencyRatios e inner join e.currency where code = ? order by e.bidPrice asc"),
 		@NamedQuery(name = "getHighestPriceDifferenceOfCurrencyRatio", query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join c.currency where code = ? and c.askPrice is not null and c.bidPrice is not null order by difference desc") })
 @Entity
@@ -47,11 +47,11 @@ public class CurrencyRatios implements Serializable {
 		return id;
 	}
 
-	public Currency getCurrencyId() {
+	public Currency getCurrency() {
 		return currency;
 	}
 
-	public void setCurrencyId(Currency currencyId) {
+	public void setCurrency(Currency currencyId) {
 		this.currency = currencyId;
 	}
 

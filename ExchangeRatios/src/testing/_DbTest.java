@@ -33,10 +33,10 @@ public class _DbTest {
 	@BeforeMethod
 	public void setUp() {
 		objects = new TestObjects();
-		dateConst.set(2015, 5, 1);
+		dateConst.set(2015, 9, 1);
 		date1 = new Date(dateConst.getTime().getTime());
 		Calendar dateConst2 = Calendar.getInstance();
-		dateConst2.set(2015, 7, 30);// dateConst2.set(2015, 5, 8);
+		dateConst2.set(2016, 7, 30);
 		date2 = new Date(dateConst2.getTime().getTime());
 	}
 
@@ -58,7 +58,7 @@ public class _DbTest {
 	}
 
 	// @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
-	public void shouldGatheredCurrenciesData() {
+	public void shouldGatherCurrenciesData() {
 		Helper.gatherData(date1, date2);
 		List<Currency> list = PGQSelect.SelectAllCurriencies();
 		for (Currency c : list) {

@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>8/1/2</td>
 </tr><tr>
-<td>Started on:</td><td>Thu Nov 02 15:42:44 CET 2017</td>
+<td>Started on:</td><td>Fri Nov 03 08:25:36 CET 2017</td>
 </tr>
-<tr><td>Total time:</td><td>5 seconds (5174 ms)</td>
+<tr><td>Total time:</td><td>5 seconds (5421 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -137,7 +137,7 @@ Caused by: org.hibernate.exception.ConstraintViolationException: could not execu
 	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1437)
 	... 37 more
 Caused by: org.postgresql.util.PSQLException: ERROR: null value in column &quot;id&quot; violates not-null constraint
-  Detail: Failing row contains (null, 3908, 3909).
+  Detail: Failing row contains (null, 30924, 30925).
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
 	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
@@ -147,8 +147,8 @@ Caused by: org.postgresql.util.PSQLException: ERROR: null value in column &quot;
 	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:136)
 	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:175)
 	... 45 more
-</pre></div><a href='#' onClick='toggleBox("stack-trace946884592", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace946884592'><pre>java.lang.RuntimeException: javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement
+</pre></div><a href='#' onClick='toggleBox("stack-trace1315038402", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1315038402'><pre>java.lang.RuntimeException: javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement
 	at testing._DbTest.shouldConnectCurrencyCountry(_DbTest.java:148)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -209,7 +209,7 @@ Caused by: org.hibernate.exception.ConstraintViolationException: could not execu
 	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1437)
 	... 37 more
 Caused by: org.postgresql.util.PSQLException: ERROR: null value in column &quot;id&quot; violates not-null constraint
-  Detail: Failing row contains (null, 3908, 3909).
+  Detail: Failing row contains (null, 30924, 30925).
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
 	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
@@ -356,8 +356,8 @@ Caused by: org.postgresql.util.PSQLException: ERROR: null value in column &quot;
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1315038402", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1315038402'><pre>java.lang.Throwable: Method _DbTest.shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
+</pre></div><a href='#' onClick='toggleBox("stack-trace920632751", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace920632751'><pre>java.lang.Throwable: Method _DbTest.shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
@@ -400,8 +400,8 @@ Caused by: org.postgresql.util.PSQLException: ERROR: null value in column &quot;
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace920632751", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace920632751'><pre>java.lang.Throwable: Method _DbTest.shouldRemoveObjects()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
+</pre></div><a href='#' onClick='toggleBox("stack-trace235195640", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace235195640'><pre>java.lang.Throwable: Method _DbTest.shouldRemoveObjects()[pri:0, instance:testing._DbTest@cc285f4] depends on not successfully finished methods
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)

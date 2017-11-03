@@ -94,7 +94,7 @@ public class PGQSelect extends PGQuery {
 	public static final CurrencyRatios attemptToGetCurrencyRatio(CurrencyRatios cr) {
 		Session session = openTransaction();
 		Query<CurrencyRatios> query = session.getNamedQuery("getCurrencyRatioByCurrencySignAndDay");
-		query.setParameter(0, cr.getCurrencyId().getId());
+		query.setParameter(0, cr.getCurrency().getCode());
 		query.setParameter(1, cr.getDate());
 		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
 	}

@@ -12,7 +12,7 @@ public class CurrencyRatiosComparator implements Comparator<CurrencyRatios> {
 	}
 
 	protected boolean identity(CurrencyRatios o1, CurrencyRatios o2) {
-		return o1.getDate() == o2.getDate() & o1.getCurrencyId().getId() == o2.getCurrencyId().getId();
+		return o1.getDate() == o2.getDate() & o1.getCurrency().getId() == o2.getCurrency().getId();
 	}
 
 }
