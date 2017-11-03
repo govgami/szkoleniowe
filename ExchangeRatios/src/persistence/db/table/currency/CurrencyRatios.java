@@ -27,9 +27,12 @@ public class CurrencyRatios implements Serializable {
 
 	private static final long serialVersionUID = 4445757466460884024L;
 
-	public static final String IdField = "id";
-	public static final String CurrencyField = "currency";
-	public static final String CodeField = "code";
+	public static final String FieldId = "id";
+	public static final String FieldCurrency = "currency";
+	public static final String FieldDate = "effectiveDate";
+	public static final String FieldAvgPrice = "avgPrice";
+	public static final String FieldAskPrice = "askPrice";
+	public static final String FieldBidPrice = "bidPrice";
 	public static final String Get_All = "getAllCurrencies";
 	public static final String Get_All_SortedByCode = "getAllCurrenciesSortedByCode";
 	public static final String Get_ById = "getCurrencyById";

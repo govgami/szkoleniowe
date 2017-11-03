@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>10/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Fri Nov 03 11:44:09 CET 2017</td>
+<td>Started on:</td><td>Fri Nov 03 12:49:28 CET 2017</td>
 </tr>
-<tr><td>Total time:</td><td>5 seconds (5246 ms)</td>
+<tr><td>Total time:</td><td>12 seconds (12743 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -91,7 +91,7 @@ function toggleAllBoxes() {
 	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:68)
 	at persistence.db.queries.BasicOperations.closeSession(BasicOperations.java:67)
 	at persistence.db.queries.ObjectOperations.DeleteObject(ObjectOperations.java:38)
-	at testing._DbTest.shouldRemoveObjects(_DbTest.java:189)
+	at testing._DbTest.shouldRemoveObjects(_DbTest.java:193)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -134,7 +134,7 @@ Caused by: org.hibernate.exception.ConstraintViolationException: could not execu
 	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1437)
 	... 36 more
 Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &quot;currency&quot; violates foreign key constraint &quot;country_currency_currency_id_fkey&quot; on table &quot;country_currency&quot;
-  Detail: Key (id)=(13503) is still referenced from table &quot;country_currency&quot;.
+  Detail: Key (id)=(13512) is still referenced from table &quot;country_currency&quot;.
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
 	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
@@ -144,8 +144,8 @@ Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &
 	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:136)
 	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:175)
 	... 45 more
-</pre></div><a href='#' onClick='toggleBox("stack-trace635739314", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace635739314'><pre>javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement
+</pre></div><a href='#' onClick='toggleBox("stack-trace775911842", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace775911842'><pre>javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement
 	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:149)
 	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
 	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:164)
@@ -160,7 +160,7 @@ Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &
 	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:68)
 	at persistence.db.queries.BasicOperations.closeSession(BasicOperations.java:67)
 	at persistence.db.queries.ObjectOperations.DeleteObject(ObjectOperations.java:38)
-	at testing._DbTest.shouldRemoveObjects(_DbTest.java:189)
+	at testing._DbTest.shouldRemoveObjects(_DbTest.java:193)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -203,7 +203,7 @@ Caused by: org.hibernate.exception.ConstraintViolationException: could not execu
 	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1437)
 	... 36 more
 Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &quot;currency&quot; violates foreign key constraint &quot;country_currency_currency_id_fkey&quot; on table &quot;country_currency&quot;
-  Detail: Key (id)=(13503) is still referenced from table &quot;country_currency&quot;.
+  Detail: Key (id)=(13512) is still referenced from table &quot;country_currency&quot;.
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
 	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
@@ -232,7 +232,7 @@ Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &
 <tr>
 <td title='testing._DbTest.shouldCreateDefaultConnection()'><b>shouldCreateDefaultConnection</b><br>Test class: testing._DbTest</td>
 <td></td>
-<td>3</td>
+<td>7</td>
 <td>testing._DbTest@8bd1b6a</td></tr>
 <tr>
 <td title='testing._DbTest.shouldDisconnectCurrencyCountry()'><b>shouldDisconnectCurrencyCountry</b><br>Test class: testing._DbTest</td>
@@ -242,7 +242,7 @@ Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &
 <tr>
 <td title='testing._DbTest.shouldGetHighestPriceDifferenceOfCurrencyRatios()'><b>shouldGetHighestPriceDifferenceOfCurrencyRatios</b><br>Test class: testing._DbTest</td>
 <td></td>
-<td>0</td>
+<td>3</td>
 <td>testing._DbTest@8bd1b6a</td></tr>
 <tr>
 <td title='testing._DbTest.shouldGetLimittedSortedCurrency()'><b>shouldGetLimittedSortedCurrency</b><br>Test class: testing._DbTest</td>
@@ -299,8 +299,8 @@ Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1736150547", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1736150547'><pre>java.lang.RuntimeException: Invalid argument: drop database
+</pre></div><a href='#' onClick='toggleBox("stack-trace1175154004", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1175154004'><pre>java.lang.RuntimeException: Invalid argument: drop database
 	at persistence.db.queries.PGQuery.validateQueryArgAgainstSQLInjection(PGQuery.java:163)
 	at testing._DbTest.shouldThrowRuntimeExceptionDueToWrongParameter(_DbTest.java:48)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

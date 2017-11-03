@@ -30,6 +30,12 @@ public class Country implements Serializable {
 
 	private static final long serialVersionUID = 1872139910695816592L;
 
+	public static final String FieldId = "id";
+	public static final String FieldName = "name";
+	public static final String Get_All = "getAllCountries";
+	public static final String Get_ById = "getCountryById";
+	public static final String Get_ByCode = "getCountryByName";
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", unique = true, nullable = false)

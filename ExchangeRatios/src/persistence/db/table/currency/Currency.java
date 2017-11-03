@@ -28,9 +28,9 @@ public class Currency implements Serializable {
 
 	private static final long serialVersionUID = -1153042292800443513L;
 
-	public static final String IdField = "id";
-	public static final String NameField = "name";
-	public static final String CodeField = "code";
+	public static final String FieldId = "id";
+	public static final String FieldName = "name";
+	public static final String FieldCode = "code";
 	public static final String Get_All = "getAllCurrencies";
 	public static final String Get_All_SortedByCode = "getAllCurrenciesSortedByCode";
 	public static final String Get_ById = "getCurrencyById";
