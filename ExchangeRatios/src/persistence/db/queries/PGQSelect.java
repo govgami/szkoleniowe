@@ -21,48 +21,62 @@ public class PGQSelect extends PGQuery {
 
 	public static final List<Currency> SelectAllCurriencies() {
 		Session session = openTransaction();
-		Query<Currency> query = session.getNamedQuery("getAllCurrencies");
+		Query<Currency> query = session.getNamedQuery(Currency.Get_All);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
-	public static final List<Currency> SelectAllCurrenciesSortedByCode(Integer limit) {
+	public static final List<Currency> SelectAllCurrenciesSortedAscByCode(Integer limit) {
 		Session session = openTransaction();
-		Query<Currency> query = session.getNamedQuery("getAllCurrenciesSortedByCode");
+		Query<Currency> query = session.getNamedQuery(Currency.Get_All_SortedByCode);
 		applyOptionalLimitOnResultsNumber(query, limit);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
 	public static final List<Country> SelectAllCountries() {
 		Session session = openTransaction();
-		Query<Country> query = session.getNamedQuery("getAllCountries");
+		Query<Country> query = session.getNamedQuery(Country.Get_All);
 		return presentQueryResultsAndJustCloseSession(query, session);
+	}
+
+	public static final Country FetchCountryByName(String name) {
+		Session session = openTransaction();
+		Query<Country> query = session.getNamedQuery(Country.Fetch_ByName);
+		query.setParameter(Country.FieldName, name);
+		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
 	public static final Country SelectCountryByName(String name) {
 		Session session = openTransaction();
-		Query<Country> query = session.getNamedQuery("getCountryByName");
-		query.setParameter(0, name);
+		Query<Country> query = session.getNamedQuery(Country.Get_ByName);
+		query.setParameter(Country.FieldName, name);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
 	public static final Currency SelectCurrencyByCode(String code) {
 		Session session = openTransaction();
 		Query<Currency> query = session.getNamedQuery("getCurrencyByCode");
-		query.setParameter(0, code);
+		query.setParameter(Currency.FieldCode, code);
+		return presentQueryResultAndJustCloseSession(query, session);
+	}
+
+	public static final Currency FetchCurrencyByCode(String code) {
+		Session session = openTransaction();
+		Query<Currency> query = session.getNamedQuery(Currency.Fetch_ByCode);
+		query.setParameter(Currency.FieldCode, code);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
 	public static final Currency checkCurrencyCodeExistence(String code) {
 		Session session = openTransaction();
-		Query<Currency> query = session.getNamedQuery("getCurrencyByCode");
-		query.setParameter(0, code);
+		Query<Currency> query = session.getNamedQuery(Currency.Get_ByCode);
+		query.setParameter(Currency.FieldCode, code);
 		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
 	}
 
 	public static final Country checkCountryExistence(String name) {
 		Session session = openTransaction();
-		Query<Country> query = session.getNamedQuery("getCountryByName");
-		query.setParameter(0, name);
+		Query<Country> query = session.getNamedQuery(Country.Get_ByName);
+		query.setParameter(Country.FieldName, name);
 		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
 	}
 
@@ -70,8 +84,8 @@ public class PGQSelect extends PGQuery {
 		validateQueryArgAgainstSQLInjection(code);
 
 		Session session = openTransaction();
-		Query<CurrencyRatios> query = session.getNamedQuery("getLowestBidOfChosenSignCurrencyRatio");
-		query.setParameter(0, code);
+		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.Get_LowestBidPriceOfChosenCode);
+		query.setParameter(Currency.FieldCode, code);
 		applyOptionalLimitOnResultsNumber(query, limit);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
@@ -80,8 +94,8 @@ public class PGQSelect extends PGQuery {
 		validateQueryArgAgainstSQLInjection(code);
 
 		Session session = openTransaction();
-		Query<Object[]> query = session.getNamedQuery("getHighestPriceDifferenceOfCurrencyRatio");
-		query.setParameter(0, code);
+		Query<Object[]> query = session.getNamedQuery(CurrencyRatios.Get_HighestDifferenceOf_AskAndBidPrice);
+		query.setParameter(Currency.FieldCode, code);
 		applyOptionalLimitOnResultsNumber(query, limit);
 		List<Object[]> result = presentQueryComplexResultsAndJustCloseSession(query, session);
 		List<CurrencyRatios> extract = new ArrayList<CurrencyRatios>();
@@ -91,11 +105,12 @@ public class PGQSelect extends PGQuery {
 		return extract;
 	}
 
+	// TODO use index for searching
 	public static final CurrencyRatios attemptToGetCurrencyRatio(CurrencyRatios cr) {
 		Session session = openTransaction();
-		Query<CurrencyRatios> query = session.getNamedQuery("getCurrencyRatioByCurrencySignAndDay");
-		query.setParameter(0, cr.getCurrency().getCode());
-		query.setParameter(1, cr.getDate());
+		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.Get_ByCurrencyCodeAndDate);
+		query.setParameter(Currency.FieldCode, cr.getCurrency().getCode());
+		query.setParameter(CurrencyRatios.FieldDate, cr.getDate());
 		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
 	}
 

@@ -14,6 +14,7 @@ import org.hibernate.service.ServiceRegistry;
 import logging.Log;
 import persistence.db.queries.PGQuery;
 import persistence.db.table.currency.Country;
+import persistence.db.table.currency.CountryCurrency;
 import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
 
@@ -92,7 +93,7 @@ public class DbConnection {
 
 	private static final Configuration configuration = new Configuration().addAnnotatedClass(Country.class)
 			.addAnnotatedClass(Currency.class).addAnnotatedClass(CurrencyRatios.class)
-			// .addAnnotatedClass(CountryCurrency.class)
+			.addAnnotatedClass(CountryCurrency.class)
 			.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
 			.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
 			.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/postgres")

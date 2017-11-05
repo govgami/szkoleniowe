@@ -38,7 +38,7 @@ public class ObjectOperations extends BasicOperations {
 		closeSession(session);
 	}
 
-	public static final <T extends Serializable> T GetObject(Class<T> cl, T obj) {
+	public static final <T, T2 extends Serializable> T GetObject(Class<T> cl, T2 obj) {
 		Session session = openTransaction();
 		T result = session.get(cl, obj);
 		closeSession(session);

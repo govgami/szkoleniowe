@@ -3,20 +3,18 @@ package persistence.db.table.currency;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQueries({
-		@NamedQuery(name = "getCountryCurrencyByComponents", query = "from CountryCurrency where country = ? and currency = ?") })
+		@NamedQuery(name = "getCountryCurrencyByComponents", query = "from CountryCurrency where country = :country and currency = :currency") })
 @Entity
 @IdClass(CountryCurrencyId.class)
-@Table(name = "country_currency", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
+@Table(name = "country_currency")
 public class CountryCurrency implements Serializable {
 
 	private static final long serialVersionUID = -5465902396253799360L;
@@ -25,11 +23,10 @@ public class CountryCurrency implements Serializable {
 	public static final String FieldCurrency = "currency";
 	public static final String Get_ByComponents = "getCountryCurrencyByComponents";
 
-	@ManyToOne
-	@JoinColumn(name = "COUNTRY_ID", referencedColumnName = "ID")
+	@Id
 	Country country;
-	@ManyToOne
-	@JoinColumn(name = "CURRENCY_ID", referencedColumnName = "ID")
+
+	@Id
 	Currency currency;
 
 	protected CountryCurrency() {
@@ -44,7 +41,7 @@ public class CountryCurrency implements Serializable {
 		return country;
 	}
 
-	public void setCountryId(Country country) {
+	protected void setCountryId(Country country) {
 		this.country = country;
 	}
 
@@ -52,7 +49,7 @@ public class CountryCurrency implements Serializable {
 		return currency;
 	}
 
-	public void setCurrencyId(Currency currency) {
+	protected void setCurrencyId(Currency currency) {
 		this.currency = currency;
 	}
 

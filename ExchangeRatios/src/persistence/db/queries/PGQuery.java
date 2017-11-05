@@ -3,13 +3,14 @@ package persistence.db.queries;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashSet;
 import java.util.List;
 
 import org.hibernate.Session;
 
 import logging.Log;
 import persistence.db.table.currency.Country;
+import persistence.db.table.currency.CountryCurrency;
+import persistence.db.table.currency.CountryCurrencyId;
 import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
 
@@ -21,17 +22,18 @@ public class PGQuery extends BasicOperations {
 		currency.addCountry(country);
 		ObjectOperations.InsertOrUpdate(country);
 		ObjectOperations.InsertOrUpdate(currency);
+		ObjectOperations.InsertOrUpdate(new CountryCurrency(country, currency));
 
 	}
 
 	public static final void DisconnectCountryCurrency(Country country, Currency currency) {
 		country.removeCurrency(currency);
 		currency.removeCountry(country);
-		// CountryCurrency ccurr = ObjectOperations.GetObject(CountryCurrency.class,
-		// new CountryCurrency(country, currency));
+		CountryCurrency ccurr = ObjectOperations.GetObject(CountryCurrency.class,
+				new CountryCurrencyId(country, currency));
 		ObjectOperations.InsertOrUpdate(country);
 		ObjectOperations.InsertOrUpdate(currency);
-		// ObjectOperations.DeleteObject(ccurr);
+		ObjectOperations.DeleteObject(ccurr);
 	}
 
 	public static final void InsertActualizedCurrencyRatiosGroup(List<CurrencyRatios> list) {
@@ -60,84 +62,55 @@ public class PGQuery extends BasicOperations {
 	}
 
 	public static void initDatabaseStructure(Connection conn) {
-		try {
-			Session session;
-			Statement stmt;
+		Session session;
 
-			stmt = conn.createStatement();
-			String sql = "CREATE TABLE country (ID int primary key not null, NAME varchar(50) not null unique);";
-			stmt.execute(sql);
-			stmt.close();
+		executeStatement(conn, "CREATE TABLE country (ID int primary key not null, NAME varchar(50) not null unique);");
+		executeStatement(conn,
+				"CREATE TABLE currency (ID int primary key not null, CURRENCY_NAME  varchar(50),  CODE  varchar(4)  not null unique)");
+		executeStatement(conn,
+				"CREATE TABLE currency_ratios (ID numeric primary key not null, CURRENCY_ID    int    not null, EFFECTIVE_DATE DATE   not null, ASK_PRICE  numeric, BID_PRICE numeric, AVG_PRICE numeric, foreign key(CURRENCY_ID) references Currency(ID) )");
+		executeStatement(conn,
+				"CREATE TABLE country_currency (CURRENCY_ID int not null, COUNTRY_ID INT not null, primary key (COUNTRY_ID, CURRENCY_ID), foreign key(COUNTRY_ID) references Country(ID), foreign key(CURRENCY_ID) references Currency(ID) )");
 
-			stmt = conn.createStatement();
-			sql = "CREATE TABLE currency (ID int primary key not null, CURRENCY_NAME  varchar(50),  CODE  varchar(4)  not null unique)";
-			stmt.execute(sql);
-			stmt.close();
+		executeStatement(conn, "CREATE INDEX effective_day on currency_ratios (effective_date)");
 
-			stmt = conn.createStatement();
-			sql = "CREATE TABLE currency_ratios (ID numeric primary key not null, CURRENCY_ID    int    not null, EFFECTIVE_DATE DATE   not null, ASK_PRICE  numeric, BID_PRICE numeric, AVG_PRICE numeric, foreign key(CURRENCY_ID) references Currency(ID) )";
-			stmt.execute(sql);
-			stmt.close();
+		executeStatement(conn,
+				"CREATE SEQUENCE hibernate_sequence start with 1 increment by 1  no maxvalue  no minvalue cache 1;");
 
-			stmt = conn.createStatement();
-			sql = "CREATE TABLE country_currency (CURRENCY_ID    int    not null, COUNTRY_ID INT   not null , primary key (COUNTRY_ID, CURRENCY_ID), foreign key(COUNTRY_ID) references Country(ID), foreign key(CURRENCY_ID) references Currency(ID) )";
-			stmt.execute(sql);
-			stmt.close();
+		// // alt. country
+		// session = openTransaction();
+		// Country country = new Country("Non-classified");
+		// session.save(new Country("Non-classified"));
+		// session.close();
+		//
+		// HashSet<Country> c = new HashSet<Country>();
+		// c.add(country);
+		// // alt. currency
+		// session = openTransaction();
+		// session.save(new Currency(c, "Non-specified Currency", "???"));
+		// session.close();
 
-			// seq
-			stmt = conn.createStatement();
-			sql = "CREATE SEQUENCE hibernate_sequence start with 1 increment by 1  no maxvalue  no minvalue cache 1;";
-			stmt.execute(sql);
-			stmt.close();
+		closeQuery(conn);
 
-			// alt. country
-			session = openTransaction();
-			Country country = new Country("Non-classified");
-			session.save(new Country("Non-classified"));
-			session.close();
-
-			HashSet<Country> c = new HashSet<Country>();
-			c.add(country);
-			// alt. currency
-			session = openTransaction();
-			session.save(new Currency(c, "Non-specified Currency", "???"));
-			session.close();
-
-			closeQuery(conn);
-		} catch (SQLException e) {
-			Log.exception("DbConnection Create DB tablea", e);
-			throw new RuntimeException(e);
-		}
 	}
 
 	public static void dropDatabaseStructure(Connection conn) {
+
+		executeStatement(conn, "DROP table country_currency;");
+		executeStatement(conn, "DROP index effective_day");
+		executeStatement(conn, "DROP table currency_ratios");
+		executeStatement(conn, "DROP table currency");
+		executeStatement(conn, "DROP table country");
+		executeStatement(conn, "DROP sequence hibernate_sequence");
+	}
+
+	protected static void executeStatement(Connection conn, String query) {
 		try {
 			Statement stmt = conn.createStatement();
-			String sql = "DROP table country_currency;";
-			stmt.execute(sql);
+			stmt.execute(query);
 			stmt.close();
-
-			stmt = conn.createStatement();
-			sql = "DROP table currency_ratios";
-			stmt.execute(sql);
-			stmt.close();
-
-			stmt = conn.createStatement();
-			sql = "DROP table currency";
-			stmt.execute(sql);
-			stmt.close();
-
-			stmt = conn.createStatement();
-			sql = "DROP table country";
-			stmt.execute(sql);
-			stmt.close();
-
-			stmt = conn.createStatement();
-			sql = "DROP sequence hibernate_sequence";
-			stmt.execute(sql);
-			stmt.close();
-		} catch (Exception e) {
-			Log.exception("Db Connection Drop DB tables", e);
+		} catch (SQLException e) {
+			Log.exception(query, e);
 			throw new RuntimeException(e);
 		}
 	}

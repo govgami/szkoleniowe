@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,11 +19,12 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQueries({
-		@NamedQuery(name = "getCurrencyRatioByCurrencySignAndDay", query = "select e from CurrencyRatios e inner join fetch e.currency where code = ? and e.effectiveDate = ?"),
-		@NamedQuery(name = "getLowestBidOfChosenSignCurrencyRatio", query = "select e from CurrencyRatios e inner join fetch e.currency where code = ? order by e.bidPrice asc"),
-		@NamedQuery(name = "getHighestPriceDifferenceOfCurrencyRatio", query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join fetch c.currency where code = ? and c.askPrice is not null and c.bidPrice is not null order by difference desc") })
+		@NamedQuery(name = "getCurrencyRatioByCurrencySignAndDay", query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code and e.effectiveDate = :effectiveDate"),
+		@NamedQuery(name = "getLowestBidOfChosenSignCurrencyRatio", query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code order by e.bidPrice asc"),
+		@NamedQuery(name = "getHighestPriceDifferenceOfCurrencyRatio", query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join fetch c.currency where code = :code and c.askPrice is not null and c.bidPrice is not null order by difference desc") })
 @Entity
-@Table(name = "currency_ratios", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
+@Table(name = "currency_ratios", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") }, indexes = {
+		@Index(name = "effective_day", columnList = "effective_date") })
 public class CurrencyRatios implements Serializable {
 
 	private static final long serialVersionUID = 4445757466460884024L;
@@ -33,10 +35,9 @@ public class CurrencyRatios implements Serializable {
 	public static final String FieldAvgPrice = "avgPrice";
 	public static final String FieldAskPrice = "askPrice";
 	public static final String FieldBidPrice = "bidPrice";
-	public static final String Get_All = "getAllCurrencies";
-	public static final String Get_All_SortedByCode = "getAllCurrenciesSortedByCode";
-	public static final String Get_ById = "getCurrencyById";
-	public static final String Get_ByCode = "getCurrencyByCode";
+	public static final String Get_ByCurrencyCodeAndDate = "getCurrencyRatioByCurrencySignAndDay";
+	public static final String Get_LowestBidPriceOfChosenCode = "getLowestBidOfChosenSignCurrencyRatio";
+	public static final String Get_HighestDifferenceOf_AskAndBidPrice = "getHighestPriceDifferenceOfCurrencyRatio";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -96,6 +97,10 @@ public class CurrencyRatios implements Serializable {
 
 	public void setBidPrice(BigDecimal bidPrice) {
 		this.bidPrice = bidPrice;
+	}
+
+	public BigDecimal getAskBidPricesDifference() {
+		return askPrice.subtract(bidPrice);
 	}
 
 	@Override

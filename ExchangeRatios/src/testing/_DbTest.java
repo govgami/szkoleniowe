@@ -16,9 +16,12 @@ import persistence.db.queries.ObjectOperations;
 import persistence.db.queries.PGQSelect;
 import persistence.db.queries.PGQuery;
 import persistence.db.table.currency.Country;
+import persistence.db.table.currency.CountryCurrency;
+import persistence.db.table.currency.CountryCurrencyId;
 import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
 import persistence.db.table.currency.util.CurrencyCodeUnicodeComparator;
+import persistence.db.table.currency.util.CurrencyRatiosReverseAskBidDiffComparator;
 
 public class _DbTest {
 	TestObjects objects;
@@ -62,8 +65,7 @@ public class _DbTest {
 	}
 
 	// DEV check implementation for optimalization rows insertion by code -> batch
-	// DEV change implementation to lazy-fetching
-	// operations
+	// DEV change countries to lazy-fetching
 	// @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGatherCurrenciesData() {
 		// when
@@ -79,21 +81,17 @@ public class _DbTest {
 	}
 
 	// TODO maven artifact
-	// TODO rename queries
-	// TODO indexes
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGetSortedCurrency() {
 		// Given
-		List<Currency> list = PGQSelect.SelectAllCurrenciesSortedByCode(null);
+		List<Currency> list = PGQSelect.SelectAllCurrenciesSortedAscByCode(null);
 
 		for (Currency c : list) {
 			System.out.print(c.getCode() + ":sorted:");
 		}
 		System.out.print("\n");
 
-		// TODO assert all
 		// TODO kaskady
-		// TODO użyć ma
 		// then
 		assertThat(list).isSortedAccordingTo(new CurrencyCodeUnicodeComparator());
 	}
@@ -101,7 +99,7 @@ public class _DbTest {
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGetLimittedSortedCurrency() {
 		// When
-		List<Currency> list = PGQSelect.SelectAllCurrenciesSortedByCode(practicalLimit);
+		List<Currency> list = PGQSelect.SelectAllCurrenciesSortedAscByCode(practicalLimit);
 		for (Currency c : list) {
 			System.out.print(c.getCode() + ":limit:");
 		}
@@ -132,7 +130,7 @@ public class _DbTest {
 		}
 		System.out.print("\n");
 		// Then
-		assertThat(list).hasSize(practicalLimit);
+		assertThat(list).hasSize(practicalLimit).isSortedAccordingTo(new CurrencyRatiosReverseAskBidDiffComparator());
 	}
 
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
@@ -147,10 +145,10 @@ public class _DbTest {
 
 		// Then
 		curr = PGQSelect.checkCurrencyCodeExistence(objects.exampleCurrency.getCode());
-		assertThat(curr).hasFieldOrPropertyWithValue("code", objects.exampleCurrency.getCode());
+		assertThat(curr).hasFieldOrPropertyWithValue(Currency.FieldCode, objects.exampleCurrency.getCode());
 	}
 
-	@Test(dependsOnMethods = { "shouldCreateDefaultConnection", "shouldInsertNewCurrency" })
+	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldInsertNewCountry() {
 		// try {
 		Country c = PGQSelect.checkCountryExistence(objects.exampleCountry.getName());
@@ -160,18 +158,20 @@ public class _DbTest {
 		ObjectOperations.Insert(objects.exampleCountry);
 		// Then
 		c = PGQSelect.checkCountryExistence(objects.exampleCountry.getName());
-		assertThat(c).hasFieldOrPropertyWithValue("name", objects.exampleCountry.getName());
+		assertThat(c).hasFieldOrPropertyWithValue(Country.FieldName, objects.exampleCountry.getName());
 	}
 
 	@Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCountry" })
 	public void shouldConnectCurrencyCountry() {
 		try {
 			// Given
-			Country c = PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
-			Currency curr = PGQSelect.SelectCurrencyByCode(objects.exampleCurrency.getCode());
+			Country c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());
+			Currency curr = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency.getCode());
 			// When
 			PGQuery.ConnectCountryCurrency(c, curr);
 			// Then
+			CountryCurrency ccurr = ObjectOperations.GetObject(CountryCurrency.class, new CountryCurrencyId(c, curr));
+			assertThat(ccurr).isNotNull();
 
 		} catch (RuntimeException e) {
 			throw new RuntimeException(e);
@@ -180,18 +180,29 @@ public class _DbTest {
 
 	@Test(dependsOnMethods = { "shouldConnectCurrencyCountry" })
 	public void shouldDisconnectCurrencyCountry() {
-		Country c = PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
-		Currency curr = PGQSelect.SelectCurrencyByCode(objects.exampleCurrency.getCode());
+		// given
+		Country c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());
+		Currency curr = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency.getCode());
+		// when
 		PGQuery.DisconnectCountryCurrency(c, curr);
+		// then
+		CountryCurrency ccurr = ObjectOperations.GetObject(CountryCurrency.class, new CountryCurrencyId(c, curr));
+		assertThat(ccurr).isNull();
 	}
 
 	@Test(dependsOnMethods = { "shouldDisconnectCurrencyCountry" })
 	public void shouldRemoveObjects() {
-
+		// given
 		Currency curr = PGQSelect.SelectCurrencyByCode(objects.exampleCurrency.getCode());
 		Country c = PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
+		// when
 		ObjectOperations.DeleteObject(curr);
 		ObjectOperations.DeleteObject(c);
+		// then
+		curr = PGQSelect.SelectCurrencyByCode(objects.exampleCurrency.getCode());
+		c = PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
+		assertThat(curr).isNull();
+		assertThat(c).isNull();
 	}
 
 }

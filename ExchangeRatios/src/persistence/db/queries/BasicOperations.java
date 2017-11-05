@@ -49,7 +49,10 @@ public class BasicOperations {
 		if (!list.isEmpty())
 			return list.get(0);
 		else
-			throw new RuntimeException("Query didn't provide searched object: " + query.getQueryString());
+			return null;
+		// else
+		// throw new RuntimeException("Query didn't provide searched object: " +
+		// query.getQueryString());
 	}
 
 	protected static <T> T checkQueryResultObjectExistenceAndJustCloseSession(Query<T> query, Session session) {

@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">11 methods, 1 failed,   10 passed</span>
+                    <span class="method-stats">11 methods, 1 failed,  2 skipped,  8 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -102,10 +102,29 @@
                     <div class="method-list-content failed suite-Default_suite">
                       <span>
                         <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldRemoveObjects">shouldRemoveObjects</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldConnectCurrencyCountry">shouldConnectCurrencyCountry</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_suite -->
+                  </li>
+                  <li>
+                    <span class="method-list-title skipped">Skipped methods</span>
+                    <span class="show-or-hide-methods skipped">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods skipped suite-Default_suite"> (hide)</a> <!-- hide-methods skipped suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods skipped suite-Default_suite"> (show)</a> <!-- show-methods skipped suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content skipped suite-Default_suite">
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldDisconnectCurrencyCountry">shouldDisconnectCurrencyCountry</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="skipped.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldRemoveObjects">shouldRemoveObjects</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content skipped suite-Default_suite -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -116,17 +135,7 @@
                     <div class="method-list-content passed suite-Default_suite">
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldConnectCurrencyCountry">shouldConnectCurrencyCountry</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldCreateDefaultConnection">shouldCreateDefaultConnection</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldDisconnectCurrencyCountry">shouldDisconnectCurrencyCountry</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -184,25 +193,11 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="shouldRemoveObjects">
-                  </a> <!-- shouldRemoveObjects -->
-                  <span class="method-name">shouldRemoveObjects</span>
-                  <div class="stack-trace">javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement
-	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:149)
-	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)
-	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:164)
-	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1443)
-	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:493)
-	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3207)
-	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2413)
-	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:467)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:156)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$100(JdbcResourceLocalTransactionCoordinatorImpl.java:38)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:231)
-	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:68)
-	at persistence.db.queries.BasicOperations.closeSession(BasicOperations.java:67)
-	at persistence.db.queries.ObjectOperations.DeleteObject(ObjectOperations.java:38)
-	at testing._DbTest.shouldRemoveObjects(_DbTest.java:193)
+                  <a name="shouldConnectCurrencyCountry">
+                  </a> <!-- shouldConnectCurrencyCountry -->
+                  <span class="method-name">shouldConnectCurrencyCountry</span>
+                  <div class="stack-trace">java.lang.RuntimeException: java.lang.NullPointerException
+	at testing._DbTest.shouldConnectCurrencyCountry(_DbTest.java:177)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -228,39 +223,80 @@
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement
-	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:112)
-	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:111)
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:97)
-	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:178)
-	at org.hibernate.engine.jdbc.batch.internal.NonBatchingBatch.addToBatch(NonBatchingBatch.java:45)
-	at org.hibernate.persister.entity.AbstractEntityPersister.delete(AbstractEntityPersister.java:3325)
-	at org.hibernate.persister.entity.AbstractEntityPersister.delete(AbstractEntityPersister.java:3562)
-	at org.hibernate.action.internal.EntityDeleteAction.execute(EntityDeleteAction.java:99)
-	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:589)
-	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:463)
-	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:337)
-	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:39)
-	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1437)
-	... 36 more
-Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &quot;currency&quot; violates foreign key constraint &quot;country_currency_currency_id_fkey&quot; on table &quot;country_currency&quot;
-  Detail: Key (id)=(13512) is still referenced from table &quot;country_currency&quot;.
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2477)
-	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2190)
-	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:300)
-	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:428)
-	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:354)
-	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:169)
-	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:136)
-	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:175)
-	... 45 more
+Caused by: java.lang.NullPointerException
+	at persistence.db.queries.PGQuery.ConnectCountryCurrency(PGQuery.java:21)
+	at testing._DbTest.shouldConnectCurrencyCountry(_DbTest.java:171)
+	... 25 more
 
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
           </div> <!-- suite-Default_suite-class-failed -->
+          <div class="suite-Default_suite-class-skipped">
+            <div class="main-panel-header rounded-window-top">
+              <img src="skipped.png"/>
+              <span class="class-name">testing._DbTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="shouldDisconnectCurrencyCountry">
+                  </a> <!-- shouldDisconnectCurrencyCountry -->
+                  <span class="method-name">shouldDisconnectCurrencyCountry</span>
+                  <div class="stack-trace">java.lang.Throwable: Method _DbTest.shouldDisconnectCurrencyCountry()[pri:0, instance:testing._DbTest@8bd1b6a] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:776)
+	at org.testng.TestRunner.run(TestRunner.java:634)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:425)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:420)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:385)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:334)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1318)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1243)
+	at org.testng.TestNG.runSuites(TestNG.java:1161)
+	at org.testng.TestNG.run(TestNG.java:1129)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="shouldRemoveObjects">
+                  </a> <!-- shouldRemoveObjects -->
+                  <span class="method-name">shouldRemoveObjects</span>
+                  <div class="stack-trace">java.lang.Throwable: Method _DbTest.shouldRemoveObjects()[pri:0, instance:testing._DbTest@8bd1b6a] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1092)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:776)
+	at org.testng.TestRunner.run(TestRunner.java:634)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:425)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:420)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:385)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:334)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1318)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1243)
+	at org.testng.TestNG.runSuites(TestNG.java:1161)
+	at org.testng.TestNG.run(TestNG.java:1129)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-skipped -->
           <div class="suite-Default_suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -269,23 +305,9 @@ Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="shouldConnectCurrencyCountry">
-                  </a> <!-- shouldConnectCurrencyCountry -->
-                  <span class="method-name">shouldConnectCurrencyCountry</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
                   <a name="shouldCreateDefaultConnection">
                   </a> <!-- shouldCreateDefaultConnection -->
                   <span class="method-name">shouldCreateDefaultConnection</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="shouldDisconnectCurrencyCountry">
-                  </a> <!-- shouldDisconnectCurrencyCountry -->
-                  <span class="method-name">shouldDisconnectCurrencyCountry</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
@@ -342,7 +364,7 @@ Caused by: org.postgresql.util.PSQLException: ERROR: update or delete on table &
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">/tmp/testng-eclipse--2025944205/testng-customsuite.xml</span>
+            <span class="header-content">/tmp/testng-eclipse-3784039/testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -395,52 +417,52 @@ data.addRows(11);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'shouldCreateDefaultConnection')
 data.setCell(0, 2, 'testing._DbTest')
-data.setCell(0, 3, 7838);
+data.setCell(0, 3, 3390);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'shouldGetHighestPriceDifferenceOfCurrencyRatios')
 data.setCell(1, 2, 'testing._DbTest')
-data.setCell(1, 3, 3068);
+data.setCell(1, 3, 273);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'shouldInsertNewCurrency')
+data.setCell(2, 1, 'shouldInsertNewCountry')
 data.setCell(2, 2, 'testing._DbTest')
-data.setCell(2, 3, 397);
+data.setCell(2, 3, 111);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'shouldRemoveObjects')
+data.setCell(3, 1, 'shouldGetSortedCurrency')
 data.setCell(3, 2, 'testing._DbTest')
-data.setCell(3, 3, 291);
+data.setCell(3, 3, 110);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'shouldGetSortedCurrency')
+data.setCell(4, 1, 'shouldInsertNewCurrency')
 data.setCell(4, 2, 'testing._DbTest')
-data.setCell(4, 3, 137);
+data.setCell(4, 3, 49);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'shouldThrowRuntimeExceptionDueToWrongParameter')
+data.setCell(5, 1, 'shouldGetLimittedSortedCurrencyRatiosLowestBidPrice')
 data.setCell(5, 2, 'testing._DbTest')
-data.setCell(5, 3, 81);
+data.setCell(5, 3, 25);
 data.setCell(6, 0, 6)
 data.setCell(6, 1, 'shouldGetLimittedSortedCurrency')
 data.setCell(6, 2, 'testing._DbTest')
-data.setCell(6, 3, 75);
+data.setCell(6, 3, 15);
 data.setCell(7, 0, 7)
-data.setCell(7, 1, 'shouldDisconnectCurrencyCountry')
+data.setCell(7, 1, 'shouldConnectCurrencyCountry')
 data.setCell(7, 2, 'testing._DbTest')
-data.setCell(7, 3, 58);
+data.setCell(7, 3, 10);
 data.setCell(8, 0, 8)
-data.setCell(8, 1, 'shouldGetLimittedSortedCurrencyRatiosLowestBidPrice')
+data.setCell(8, 1, 'shouldThrowRuntimeExceptionDueToWrongParameter')
 data.setCell(8, 2, 'testing._DbTest')
-data.setCell(8, 3, 51);
+data.setCell(8, 3, 5);
 data.setCell(9, 0, 9)
-data.setCell(9, 1, 'shouldConnectCurrencyCountry')
+data.setCell(9, 1, 'shouldRemoveObjects')
 data.setCell(9, 2, 'testing._DbTest')
-data.setCell(9, 3, 47);
+data.setCell(9, 3, 0);
 data.setCell(10, 0, 10)
-data.setCell(10, 1, 'shouldInsertNewCountry')
+data.setCell(10, 1, 'shouldDisconnectCurrencyCountry')
 data.setCell(10, 2, 'testing._DbTest')
-data.setCell(10, 3, 31);
+data.setCell(10, 3, 0);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 12 seconds</span>
+              <span class="suite-total-time">Total running time: 3 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -473,89 +495,73 @@ return data;
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldCreateDefaultConnection</span>
-                <span class="method-start">43 ms</span>
+                <span class="method-start">17 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">7889 ms</span>
+                <span class="method-start">3412 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldThrowRuntimeExceptionDueToWrongParameter</span>
-                <span class="method-start">7889 ms</span>
+                <span class="method-start">3413 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">8069 ms</span>
+                <span class="method-start">3437 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldGetHighestPriceDifferenceOfCurrencyRatios</span>
-                <span class="method-start">8069 ms</span>
+                <span class="method-start">3437 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">11142 ms</span>
+                <span class="method-start">3718 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldGetLimittedSortedCurrency</span>
-                <span class="method-start">11143 ms</span>
+                <span class="method-start">3720 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">11220 ms</span>
+                <span class="method-start">3743 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldGetLimittedSortedCurrencyRatiosLowestBidPrice</span>
-                <span class="method-start">11221 ms</span>
+                <span class="method-start">3744 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">11277 ms</span>
+                <span class="method-start">3777 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldGetSortedCurrency</span>
-                <span class="method-start">11574 ms</span>
+                <span class="method-start">3786 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">11714 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="test-method">
-                <span class="method-name">shouldInsertNewCurrency</span>
-                <span class="method-start">11714 ms</span>
-              </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">12118 ms</span>
+                <span class="method-start">3901 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldInsertNewCountry</span>
-                <span class="method-start">12118 ms</span>
+                <span class="method-start">3902 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">12155 ms</span>
+                <span class="method-start">4029 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">shouldConnectCurrencyCountry</span>
-                <span class="method-start">12155 ms</span>
+                <span class="method-name">shouldInsertNewCurrency</span>
+                <span class="method-start">4030 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">12210 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="test-method">
-                <span class="method-name">shouldDisconnectCurrencyCountry</span>
-                <span class="method-start">12210 ms</span>
-              </div> <!-- test-method -->
-              <div class="configuration-method before">
-                <span class="method-name">setUp</span>
-                <span class="method-start">12273 ms</span>
+                <span class="method-start">4082 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">shouldRemoveObjects</span>
-                <span class="method-start">12274 ms</span>
+                <span class="method-name">shouldConnectCurrencyCountry</span>
+                <span class="method-start">4082 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +20,9 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQueries({ @NamedQuery(name = "getAllCountries", query = "from Country"),
-		@NamedQuery(name = "getCountryById", query = "from Country where ID = ?"),
-		@NamedQuery(name = "getCountryByName", query = "from Country where NAME = ?") })
+		@NamedQuery(name = "getCountryById", query = "from Country where id = :id"),
+		@NamedQuery(name = "getCountryByName", query = "from Country where name = :name"),
+		@NamedQuery(name = "fetchCountryByName", query = "select c from Country c inner join fetch c.currencies where c.name = :name") })
 @Entity
 @Table(name = "COUNTRY", uniqueConstraints = { @UniqueConstraint(columnNames = "ID"),
 		@UniqueConstraint(columnNames = "NAME") })
@@ -34,7 +34,8 @@ public class Country implements Serializable {
 	public static final String FieldName = "name";
 	public static final String Get_All = "getAllCountries";
 	public static final String Get_ById = "getCountryById";
-	public static final String Get_ByCode = "getCountryByName";
+	public static final String Get_ByName = "getCountryByName";
+	public static final String Fetch_ByName = "fetchCountryByName";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,7 +43,7 @@ public class Country implements Serializable {
 	private Integer id;
 	@Column(name = "NAME", unique = true, length = 100)
 	private String name;
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "COUNTRY_CURRENCY", joinColumns = { @JoinColumn(name = "COUNTRY_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "CURRENCY_ID") })
 	@Column(name = "CURRENCIES", nullable = true)

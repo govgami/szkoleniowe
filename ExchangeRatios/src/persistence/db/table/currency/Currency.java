@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,9 +17,10 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQueries({ @NamedQuery(name = "getAllCurrencies", query = "from Currency"),
-		@NamedQuery(name = "getAllCurrenciesSortedByCode", query = "from Currency order by CODE"),
-		@NamedQuery(name = "getCurrencyById", query = "from Currency where ID = ?"),
-		@NamedQuery(name = "getCurrencyByCode", query = "from Currency where CODE = ?") })
+		@NamedQuery(name = "getAllCurrenciesSortedByCode", query = "from Currency order by code"),
+		@NamedQuery(name = "getCurrencyById", query = "from Currency where id = :id"),
+		@NamedQuery(name = "getCurrencyByCode", query = "from Currency where code = :code"),
+		@NamedQuery(name = "fetchCurrencyByCode", query = "select c from Currency c inner join fetch c.countries where c.code = :code") })
 @Entity
 @Table(name = "currency", uniqueConstraints = { @UniqueConstraint(columnNames = "ID"),
 		@UniqueConstraint(columnNames = "CODE") })
@@ -35,14 +35,16 @@ public class Currency implements Serializable {
 	public static final String Get_All_SortedByCode = "getAllCurrenciesSortedByCode";
 	public static final String Get_ById = "getCurrencyById";
 	public static final String Get_ByCode = "getCurrencyByCode";
+	public static final String Fetch_ByCode = "fetchCurrencyByCode";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", unique = true, nullable = false)
 	Integer id;
-
-	@ManyToMany(mappedBy = "currencies", fetch = FetchType.EAGER)
-	Set<Country> country = new HashSet<Country>();
+	// TODO finish instructions for fetching and finish manytomany Country &
+	// Currency
+	@ManyToMany(mappedBy = "currencies")
+	Set<Country> countries = new HashSet<Country>();
 	@Column(name = "CURRENCY_NAME", length = 100)
 	String name;
 	@Column(name = "CODE", unique = true, nullable = false, length = 4)
@@ -52,7 +54,7 @@ public class Currency implements Serializable {
 	}
 
 	public Currency(Set<Country> country, String name, String code) {
-		this.country = country;
+		this.countries = country;
 		this.name = name;
 		this.code = code;
 	}
@@ -62,11 +64,11 @@ public class Currency implements Serializable {
 	}
 
 	public Set<Country> getCountry() {
-		return country;
+		return countries;
 	}
 
 	public void setCountry(Set<Country> country) {
-		this.country = country;
+		this.countries = country;
 	}
 
 	public String getName() {
@@ -86,12 +88,12 @@ public class Currency implements Serializable {
 	}
 
 	public void addCountry(Country c) {
-		country.add(c);
+		countries.add(c);
 
 	}
 
 	public void removeCountry(Country c) {
-		country.remove(c);
+		countries.remove(c);
 
 	}
 }

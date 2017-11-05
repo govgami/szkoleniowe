@@ -1,10 +1,46 @@
 package persistence.db.table.currency;
 
-import javax.persistence.Id;
+import java.io.Serializable;
 
-public class CountryCurrencyId {
-	@Id
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+public class CountryCurrencyId implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4263109482621119962L;
+
+	@ManyToOne
+	@JoinColumn(name = "COUNTRY_ID", referencedColumnName = "ID")
 	Country country;
-	@Id
+	@ManyToOne
+	@JoinColumn(name = "CURRENCY_ID", referencedColumnName = "ID")
 	Currency currency;
+
+	public CountryCurrencyId() {
+	}
+
+	public CountryCurrencyId(Country country, Currency currency) {
+		this.country = country;
+		this.currency = currency;
+	}
+
+	protected void setCountry(Country country) {
+		this.country = country;
+	}
+
+	protected void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public Currency getCurrency() {
+		return currency;
+	}
+
 }
