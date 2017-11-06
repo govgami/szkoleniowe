@@ -45,7 +45,6 @@ public class _DbTest {
 		date2 = new Date(dateConst2.getTime().getTime());
 	}
 
-	// TODO queries using many to many
 	@Test(expectedExceptions = RuntimeException.class)
 	public void shouldThrowRuntimeExceptionDueToWrongParameter() {
 		// given
@@ -93,7 +92,6 @@ public class _DbTest {
 		}
 		System.out.print("\n");
 
-		// TODO kaskady
 		// then
 		assertThat(list).isSortedAccordingTo(new CurrencyCodeUnicodeComparator());
 	}
@@ -233,11 +231,9 @@ public class _DbTest {
 		curr1 = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency1.getCode());
 		curr2 = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency2.getCode());
 		c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());
+
 		assertThat(c).isNotNull();
-		assertThat(c.getCurrencies()).hasSize(2);
-		assertThat(c.getCurrencies()).doesNotHaveDuplicates();
-		assertThat(c.getCurrencies()).element(0).hasFieldOrPropertyWithValue(Currency.FieldCode, curr1.getCode());
-		assertThat(c.getCurrencies()).element(1).hasFieldOrPropertyWithValue(Currency.FieldCode, curr2.getCode());
+		assertThat(c.getCurrencies()).hasSize(2).doesNotHaveDuplicates();
 
 		// Finally
 		PGQuery.DisconnectCountryCurrency(c, curr2);
