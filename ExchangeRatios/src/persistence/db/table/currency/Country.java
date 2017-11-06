@@ -22,7 +22,7 @@ import org.hibernate.annotations.NamedQuery;
 @NamedQueries({ @NamedQuery(name = "getAllCountries", query = "from Country"),
 		@NamedQuery(name = "getCountryById", query = "from Country where id = :id"),
 		@NamedQuery(name = "getCountryByName", query = "from Country where name = :name"),
-		@NamedQuery(name = "fetchCountryByName", query = "select c from Country c inner join fetch c.currencies where c.name = :name") })
+		@NamedQuery(name = "fetchCountryByName", query = "select c from Country c left join fetch c.currencies where c.name = :name") })
 @Entity
 @Table(name = "COUNTRY", uniqueConstraints = { @UniqueConstraint(columnNames = "ID"),
 		@UniqueConstraint(columnNames = "NAME") })

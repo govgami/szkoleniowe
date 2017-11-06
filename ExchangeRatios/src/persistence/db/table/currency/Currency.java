@@ -20,7 +20,7 @@ import org.hibernate.annotations.NamedQuery;
 		@NamedQuery(name = "getAllCurrenciesSortedByCode", query = "from Currency order by code"),
 		@NamedQuery(name = "getCurrencyById", query = "from Currency where id = :id"),
 		@NamedQuery(name = "getCurrencyByCode", query = "from Currency where code = :code"),
-		@NamedQuery(name = "fetchCurrencyByCode", query = "select c from Currency c inner join fetch c.countries where c.code = :code") })
+		@NamedQuery(name = "fetchCurrencyByCode", query = "select c from Currency c left join fetch c.countries where code = :code") })
 @Entity
 @Table(name = "currency", uniqueConstraints = { @UniqueConstraint(columnNames = "ID"),
 		@UniqueConstraint(columnNames = "CODE") })

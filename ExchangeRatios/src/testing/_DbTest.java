@@ -162,6 +162,16 @@ public class _DbTest {
 	}
 
 	@Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCountry" })
+	public void shouldFetchObjects() {
+		// When
+		Country c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());
+		Currency curr = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency.getCode());
+		// Then
+		assertThat(curr).isNotNull();
+		assertThat(c).isNotNull();
+	}
+
+	@Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCountry", "shouldFetchObjects" })
 	public void shouldConnectCurrencyCountry() {
 		try {
 			// Given
