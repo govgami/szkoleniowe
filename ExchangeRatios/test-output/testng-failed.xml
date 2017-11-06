@@ -5,15 +5,20 @@
     <classes>
       <class name="testing._DbTest">
         <methods>
+          <include name="shouldGetSortedCurrency"/>
           <include name="setUp"/>
           <include name="shouldRemoveObjects"/>
+          <include name="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice"/>
+          <include name="shouldGetLimittedSortedCurrency"/>
+          <include name="shouldGetCurrencyRatio"/>
+          <include name="shouldCreateDefaultConnection"/>
+          <include name="shouldInsertNewCountry"/>
           <include name="shouldFetchObjects"/>
           <include name="shouldConnectSecondCurrencyCountry"/>
+          <include name="shouldGetHighestPriceDifferenceOfCurrencyRatios"/>
           <include name="shouldDisconnectCurrencyCountry"/>
           <include name="shouldInsertNewCurrency"/>
           <include name="shouldConnectCurrencyCountry"/>
-          <include name="shouldCreateDefaultConnection"/>
-          <include name="shouldInsertNewCountry"/>
         </methods>
       </class> <!-- testing._DbTest -->
     </classes>

@@ -30,6 +30,9 @@ public class _DbTest {
 	Calendar dateConst2 = Calendar.getInstance();
 	Date date2;
 
+	Country c;
+	Currency curr1, curr2;
+
 	final int practicalLimit = 5;
 
 	@BeforeMethod
@@ -108,6 +111,25 @@ public class _DbTest {
 		assertThat(list).hasSize(practicalLimit).isSortedAccordingTo(new CurrencyCodeUnicodeComparator());
 	}
 
+	@Test(dependsOnMethods = { "shouldInsertNewCurrency" })
+	public void shouldGetCurrencyRatio() {
+		// Given
+		Currency curr = PGQSelect.checkCurrencyCodeExistence(objects.exampleCurrency1.getCode());
+		CurrencyRatios ratio = PGQSelect.attemptToGetCurrencyRatio(objects.ratio1);
+		if (ratio != null) {
+			ObjectOperations.DeleteObject(ratio);
+		}
+		// When
+		objects.ratio1.setCurrency(curr);
+		ObjectOperations.Insert(objects.ratio1);
+
+		// Then
+		ratio = PGQSelect.attemptToGetCurrencyRatio(ratio);
+		assertThat(ratio).isNotNull();
+		assertThat(ratio.getCurrency()).hasFieldOrPropertyWithValue(Currency.FieldCode,
+				objects.ratio1.getCurrency().getCode());
+	}
+
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGetLimittedSortedCurrencyRatiosLowestBidPrice() {
 		// Given
@@ -137,7 +159,7 @@ public class _DbTest {
 		// Given
 		Currency curr = PGQSelect.checkCurrencyCodeExistence(objects.exampleCurrency1.getCode());
 		if (curr != null) {
-			ObjectOperations.DeleteObject(curr);
+			ObjectOperations.DeleteCurrency(curr);
 		}
 		// When
 		ObjectOperations.Insert(objects.exampleCurrency1);
@@ -190,15 +212,12 @@ public class _DbTest {
 	@Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCountry", "shouldFetchObjects" })
 	public void shouldConnectSecondCurrencyCountry() {
 		// Given
-		Country c;
-		Currency curr1, curr2;
-
 		curr2 = PGQSelect.checkCurrencyCodeExistence(objects.exampleCurrency2.getCode());
 		if (curr2 != null) {
 			ObjectOperations.DeleteObject(curr2);
 		}
-
 		ObjectOperations.Insert(objects.exampleCurrency2);
+
 		curr2 = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency2.getCode());
 		c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());
 		// When
@@ -217,7 +236,7 @@ public class _DbTest {
 
 		// Finally
 		PGQuery.DisconnectCountryCurrency(c, curr2);
-		ObjectOperations.DeleteObject(curr2);
+		ObjectOperations.DeleteCurrency(curr2);
 
 	}
 

@@ -57,9 +57,8 @@ public class Helper {
 		CurrencyRatios t;
 
 		for (CurrencyPrice cp : list) {
-			t = new CurrencyRatios();
-			t.setDate(new Str2SqlDate(cp.getEffectiveDate()).parse());
-			t.setCurrency(map.get(cp.getCurrencySign()));
+			t = new CurrencyRatios(map.get(cp.getCurrencySign()), new Str2SqlDate(cp.getEffectiveDate()).parse(), null,
+					null, null);
 			saveFromUnknownCurrency(cp, t, map);
 			adjustFieldsOf(cp, t);
 			// TODO fix missing naming!!

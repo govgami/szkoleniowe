@@ -20,7 +20,8 @@ import org.hibernate.annotations.NamedQuery;
 		@NamedQuery(name = "getAllCurrenciesSortedByCode", query = "from Currency order by code"),
 		@NamedQuery(name = "getCurrencyById", query = "from Currency where id = :id"),
 		@NamedQuery(name = "getCurrencyByCode", query = "from Currency where code = :code"),
-		@NamedQuery(name = "fetchCurrencyByCode", query = "select c from Currency c left join fetch c.countries where code = :code") })
+		@NamedQuery(name = "fetchCurrencyByCode", query = "select c from Currency c left join fetch c.countries where code = :code"),
+		@NamedQuery(name = "dropCurrencyByCode", query = "delete CurrencyRatios c where c.currency.code = :code") })
 @Entity
 @Table(name = "currency", uniqueConstraints = { @UniqueConstraint(columnNames = "ID"),
 		@UniqueConstraint(columnNames = "CODE") })
@@ -36,6 +37,7 @@ public class Currency implements Serializable {
 	public static final String Get_ById = "getCurrencyById";
 	public static final String Get_ByCode = "getCurrencyByCode";
 	public static final String Fetch_ByCode = "fetchCurrencyByCode";
+	public static final String Drop_ByCode = "dropCurrencyByCode";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
