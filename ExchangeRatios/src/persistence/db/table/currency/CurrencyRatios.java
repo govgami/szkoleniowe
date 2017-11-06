@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -18,7 +20,7 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQueries({
-		@NamedQuery(name = "getCurrencyRatioByCurrencySignAndDay", query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code and e.effectiveDate = :effectiveDate"),
+		@NamedQuery(name = "getCurrencyRatioByCurrencySignAndDay", query = "select e from CurrencyRatios e left join fetch e.currency where code = :code and e.effectiveDate = :effectiveDate"),
 		@NamedQuery(name = "getLowestBidOfChosenSignCurrencyRatio", query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code order by e.bidPrice asc"),
 		@NamedQuery(name = "getHighestPriceDifferenceOfCurrencyRatio", query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join fetch c.currency where code = :code and c.askPrice is not null and c.bidPrice is not null order by difference desc"),
 		@NamedQuery(name = "dropByCode", query = "delete CurrencyRatios c where c.currency.code = :code") })
@@ -46,6 +48,7 @@ public class CurrencyRatios implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", unique = true, nullable = false)
 	BigDecimal id;
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "CURRENCY_ID")
 	Currency currency;
 	@Column(name = "EFFECTIVE_DATE")

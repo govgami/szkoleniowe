@@ -1,5 +1,6 @@
 package persistence.db.queries;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,4 +123,12 @@ public class PGQSelect extends PGQuery {
 		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
 	}
 
+	public static final CurrencyRatios getCurrencyRatio(String code, Date effectiveDay) {
+		Session session = openTransaction();
+		// session.getCriteriaBuilder().
+		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.Get_ByCurrencyCodeAndDate);
+		query.setParameter(Currency.FieldCode, code);
+		query.setParameter(CurrencyRatios.FieldDate, effectiveDay);
+		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
+	}
 }

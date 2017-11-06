@@ -47,7 +47,7 @@ public class ObjectOperations extends BasicOperations {
 	}
 
 	public static final void DeleteCurrency(Currency o) {
-		DeleteCurrencyRatiosByForeignKey(o.getCode());
+		// DeleteCurrencyRatiosByForeignKey(o.getCode());
 		DeleteObject(o);
 
 	}

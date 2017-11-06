@@ -119,12 +119,16 @@ public class _DbTest {
 		if (ratio != null) {
 			ObjectOperations.DeleteObject(ratio);
 		}
+		assertThat(ratio).isNull();
 		// When
 		objects.ratio1.setCurrency(curr);
 		ObjectOperations.Insert(objects.ratio1);
 
+		ratio = PGQSelect.attemptToGetCurrencyRatio(objects.ratio1);
 		// Then
-		ratio = PGQSelect.attemptToGetCurrencyRatio(ratio);
+		System.out.println(ratio.getCurrency().getCode() + ":code:" + objects.ratio1.getCurrency().getCode());
+		System.out.println(ratio.getDate() + ":date:" + objects.ratio1.getDate());
+		ratio = PGQSelect.getCurrencyRatio(ratio.getCurrency().getCode(), ratio.getDate());
 		assertThat(ratio).isNotNull();
 		assertThat(ratio.getCurrency()).hasFieldOrPropertyWithValue(Currency.FieldCode,
 				objects.ratio1.getCurrency().getCode());
@@ -231,6 +235,7 @@ public class _DbTest {
 		c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());
 		assertThat(c).isNotNull();
 		assertThat(c.getCurrencies()).hasSize(2);
+		assertThat(c.getCurrencies()).doesNotHaveDuplicates();
 		assertThat(c.getCurrencies()).element(0).hasFieldOrPropertyWithValue(Currency.FieldCode, curr1.getCode());
 		assertThat(c.getCurrencies()).element(1).hasFieldOrPropertyWithValue(Currency.FieldCode, curr2.getCode());
 
@@ -252,7 +257,7 @@ public class _DbTest {
 		assertThat(ccurr).isNull();
 	}
 
-	@Test(dependsOnMethods = { "shouldDisconnectCurrencyCountry" })
+	@Test(dependsOnMethods = { "shouldDisconnectCurrencyCountry", "shouldGetCurrencyRatio" })
 	public void shouldRemoveObjects() {
 		// given
 		Currency curr = PGQSelect.SelectCurrencyByCode(objects.exampleCurrency1.getCode());

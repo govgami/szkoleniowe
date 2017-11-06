@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -51,6 +53,8 @@ public class Currency implements Serializable {
 	String name;
 	@Column(name = "CODE", unique = true, nullable = false, length = 4)
 	String code;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "currency")
+	Set<CurrencyRatios> ratios = new HashSet<CurrencyRatios>();
 
 	protected Currency() {
 	}
@@ -98,4 +102,13 @@ public class Currency implements Serializable {
 		countries.remove(c);
 
 	}
+
+	public Set<CurrencyRatios> getRatios() {
+		return ratios;
+	}
+
+	public void setRatios(Set<CurrencyRatios> ratios) {
+		this.ratios = ratios;
+	}
+
 }
