@@ -17,9 +17,6 @@ public class ObjectOperations extends BasicOperations {
 		Session session = openTransaction();
 		session.save(list);
 		closeSession(session);
-		// for (Object o : list) {
-		// Insert(o);
-		// }
 	}
 
 	public static final void UpdateObject(Object obj) {

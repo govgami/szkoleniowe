@@ -38,7 +38,7 @@ public class _DbTest {
 	@BeforeMethod
 	public void setUp() {
 		objects = new TestObjects();
-		dateConst.set(2016, 9, 1);
+		dateConst.set(2004, 9, 1);
 		date1 = new Date(dateConst.getTime().getTime());
 		Calendar dateConst2 = Calendar.getInstance();
 		dateConst2.set(2017, 7, 30);
@@ -53,6 +53,7 @@ public class _DbTest {
 		PGQuery.validateQueryArgAgainstSQLInjection(str);
 	}
 
+	// 133800 349s/ 222s/
 	@Test
 	public void shouldCreateDefaultConnection() {
 		// when
@@ -66,7 +67,12 @@ public class _DbTest {
 		PGQuery.initDatabaseStructure(DbConnection.makeDefaultPostgreConnection());
 	}
 
-	// DEV check implementation for optimalization rows insertion by code -> batch
+	// @Test
+	public void shouldDestroyDbStructure() {
+		PGQuery.dropDatabaseStructure(DbConnection.makeDefaultPostgreConnection());
+	}
+
+	// DEV better to use component ID?
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGatherCurrenciesData() {
 		// when

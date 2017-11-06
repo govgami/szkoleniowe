@@ -6,15 +6,8 @@
       <class name="testing._DbTest">
         <methods>
           <include name="setUp"/>
-          <include name="shouldRemoveObjects"/>
-          <include name="shouldFetchObjects"/>
-          <include name="shouldGetCurrencyRatio"/>
-          <include name="shouldConnectSecondCurrencyCountry"/>
-          <include name="shouldDisconnectCurrencyCountry"/>
-          <include name="shouldInsertNewCurrency"/>
-          <include name="shouldConnectCurrencyCountry"/>
+          <include name="shouldGatherCurrenciesData"/>
           <include name="shouldCreateDefaultConnection"/>
-          <include name="shouldInsertNewCountry"/>
         </methods>
       </class> <!-- testing._DbTest -->
     </classes>

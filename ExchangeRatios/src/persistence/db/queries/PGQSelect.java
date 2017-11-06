@@ -116,7 +116,6 @@ public class PGQSelect extends PGQuery {
 	// TODO use index for searching
 	public static final CurrencyRatios attemptToGetCurrencyRatio(CurrencyRatios cr) {
 		Session session = openTransaction();
-		// session.getCriteriaBuilder().
 		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.Get_ByCurrencyCodeAndDate);
 		query.setParameter(Currency.FieldCode, cr.getCurrency().getCode());
 		query.setParameter(CurrencyRatios.FieldDate, cr.getDate());
@@ -125,7 +124,6 @@ public class PGQSelect extends PGQuery {
 
 	public static final CurrencyRatios getCurrencyRatio(String code, Date effectiveDay) {
 		Session session = openTransaction();
-		// session.getCriteriaBuilder().
 		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.Get_ByCurrencyCodeAndDate);
 		query.setParameter(Currency.FieldCode, code);
 		query.setParameter(CurrencyRatios.FieldDate, effectiveDay);

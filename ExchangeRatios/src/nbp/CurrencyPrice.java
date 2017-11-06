@@ -12,29 +12,35 @@ public class CurrencyPrice {
 	private BigDecimal sellPrice;
 	private BigDecimal buyPrice;
 
-	//DEV insert for searching whole array of currency prices
-	public CurrencyPrice() {}
-	
+	public CurrencyPrice() {
+	}
+
 	public CurrencyPrice(String currencyName, String currencySign, BigDecimal avgPrice, String effectiveDate) {
-		this.currencySign=currencySign;
-		this.avgCurrencyPrice=avgPrice;
-		this.effectiveDate=effectiveDate;
+		this.currencyName = currencyName;
+		this.currencySign = currencySign;
+		this.avgCurrencyPrice = avgPrice;
+		this.effectiveDate = effectiveDate;
 	}
-	public CurrencyPrice(String currencyName, String currencySign, BigDecimal sellPrice, BigDecimal buyPrice, String effectiveDate) {
-		this.currencySign=currencySign;
-		this.sellPrice=sellPrice;
-		this.buyPrice=buyPrice;
-		this.effectiveDate=effectiveDate;
+
+	public CurrencyPrice(String currencyName, String currencySign, BigDecimal sellPrice, BigDecimal buyPrice,
+			String effectiveDate) {
+		this.currencyName = currencyName;
+		this.currencySign = currencySign;
+		this.sellPrice = sellPrice;
+		this.buyPrice = buyPrice;
+		this.effectiveDate = effectiveDate;
 	}
-	
-	public static CurrencyPrice avg(String currencyName, String currencySign,String avgPrice, String effectiveDate) {
-		return new CurrencyPrice(currencyName,currencySign, new Str2BigDecimal(avgPrice).parse(), effectiveDate);
+
+	public static CurrencyPrice avg(String currencyName, String currencySign, String avgPrice, String effectiveDate) {
+		return new CurrencyPrice(currencyName, currencySign, new Str2BigDecimal(avgPrice).parse(), effectiveDate);
 	}
-	
-	public static CurrencyPrice minMax(String currencyName, String currencySign, String sellPrice, String buyPrice, String effectiveDate) {
-		return new CurrencyPrice(currencyName,currencySign, new Str2BigDecimal(sellPrice).parse(), new Str2BigDecimal(buyPrice).parse(), effectiveDate);	
+
+	public static CurrencyPrice minMax(String currencyName, String currencySign, String sellPrice, String buyPrice,
+			String effectiveDate) {
+		return new CurrencyPrice(currencyName, currencySign, new Str2BigDecimal(sellPrice).parse(),
+				new Str2BigDecimal(buyPrice).parse(), effectiveDate);
 	}
-	
+
 	public String getCurrencySign() {
 		return currencySign;
 	}
@@ -50,6 +56,7 @@ public class CurrencyPrice {
 	public void setAvgCurrencyPrice(BigDecimal avgCurrencyPrice) {
 		this.avgCurrencyPrice = avgCurrencyPrice;
 	}
+
 	public String getEffectiveDate() {
 		return effectiveDate;
 	}
@@ -81,5 +88,5 @@ public class CurrencyPrice {
 	public void setCurrencyName(String currencyName) {
 		this.currencyName = currencyName;
 	}
-	
+
 }

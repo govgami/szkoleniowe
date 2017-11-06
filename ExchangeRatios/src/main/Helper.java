@@ -16,8 +16,6 @@ import persistence.db.table.currency.CurrencyRatios;
 
 public class Helper {
 
-	static final int timeRange = -1000 * 3600 * 24 * 90;
-
 	public static void gatherData(Date from, Date to) {
 		int batch_No = 0;
 		System.out.println(from + ":" + to);
@@ -29,6 +27,7 @@ public class Helper {
 			getAllDataFromPeriod(intermediary, intermediaryEnd);
 			intermediary.setMonth(intermediary.getMonth() + 3);
 			intermediaryEnd.setMonth(intermediary.getMonth() + 3);
+			batch_No++;
 		}
 		getAllDataFromPeriod(intermediary, to);
 
@@ -53,7 +52,6 @@ public class Helper {
 					null, null);
 			saveFromUnknownCurrency(cp, t, map);
 			adjustFieldsOf(cp, t);
-			// TODO fix missing naming!!
 			result.add(t);
 		}
 		return result;
@@ -74,6 +72,7 @@ public class Helper {
 			map.clear();
 			map.putAll(getCurrencies());
 			cr.setCurrency(map.get(cp.getCurrencySign()));
+			System.out.println(cp.getCurrencyName());
 		}
 	}
 

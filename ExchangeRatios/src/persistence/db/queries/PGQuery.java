@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import logging.Log;
 import persistence.db.table.currency.Country;
@@ -37,14 +38,20 @@ public class PGQuery extends BasicOperations {
 	}
 
 	public static final void InsertActualizedCurrencyRatiosGroup(List<CurrencyRatios> list) {
-		CurrencyRatios existance;
+		Session session;
+		List<CurrencyRatios> resultList;
 		for (CurrencyRatios o : list) {
-			existance = PGQSelect.attemptToGetCurrencyRatio(o);
-			if (existance != null) {
-				ObjectOperations.InsertOrUpdate(mergeObjectRatiosData(existance, o));
+			session = openTransaction();
+			Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.Get_ByCurrencyCodeAndDate);
+			query.setParameter(Currency.FieldCode, o.getCurrency().getCode());
+			query.setParameter(CurrencyRatios.FieldDate, o.getDate());
+			resultList = query.getResultList();
+			if (!resultList.isEmpty()) {
+				session.saveOrUpdate(mergeObjectRatiosData(resultList.get(0), o));
 			} else {
-				ObjectOperations.Insert(o);
+				session.save(o);
 			}
+			closeSession(session);
 		}
 	}
 
