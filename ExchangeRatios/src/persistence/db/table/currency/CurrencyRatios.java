@@ -22,8 +22,7 @@ import org.hibernate.annotations.NamedQuery;
 @NamedQueries({
 		@NamedQuery(name = "getCurrencyRatioByCurrencySignAndDay", query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code and e.effectiveDate = :effectiveDate"),
 		@NamedQuery(name = "getLowestBidOfChosenSignCurrencyRatio", query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code order by e.bidPrice asc"),
-		@NamedQuery(name = "getHighestPriceDifferenceOfCurrencyRatio", query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join fetch c.currency where code = :code and c.askPrice is not null and c.bidPrice is not null order by difference desc"),
-		@NamedQuery(name = "dropByCode", query = "delete CurrencyRatios c where c.currency.code = :code") })
+		@NamedQuery(name = "getHighestPriceDifferenceOfCurrencyRatio", query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join fetch c.currency where code = :code and c.askPrice is not null and c.bidPrice is not null order by difference desc") })
 
 @Entity
 @Table(name = "currency_ratios", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") }, indexes = {
@@ -42,7 +41,6 @@ public class CurrencyRatios implements Serializable {
 	public static final String Get_ByCurrencyCodeAndDate = "getCurrencyRatioByCurrencySignAndDay";
 	public static final String Get_LowestBidPriceOfChosenCode = "getLowestBidOfChosenSignCurrencyRatio";
 	public static final String Get_HighestDifferenceOf_AskAndBidPrice = "getHighestPriceDifferenceOfCurrencyRatio";
-	public static final String Drop_ByCode = "dropByCode";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

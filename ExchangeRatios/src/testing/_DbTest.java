@@ -38,10 +38,10 @@ public class _DbTest {
 	@BeforeMethod
 	public void setUp() {
 		objects = new TestObjects();
-		dateConst.set(2015, 9, 1);
+		dateConst.set(2016, 9, 1);
 		date1 = new Date(dateConst.getTime().getTime());
 		Calendar dateConst2 = Calendar.getInstance();
-		dateConst2.set(2016, 7, 30);
+		dateConst2.set(2017, 7, 30);
 		date2 = new Date(dateConst2.getTime().getTime());
 	}
 
@@ -67,7 +67,7 @@ public class _DbTest {
 	}
 
 	// DEV check implementation for optimalization rows insertion by code -> batch
-	// @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
+	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGatherCurrenciesData() {
 		// when
 		Helper.gatherData(date1, date2);
@@ -161,7 +161,7 @@ public class _DbTest {
 		// Given
 		Currency curr = PGQSelect.checkCurrencyCodeExistence(objects.exampleCurrency1.getCode());
 		if (curr != null) {
-			ObjectOperations.DeleteCurrency(curr);
+			ObjectOperations.DeleteObject(curr);
 		}
 		// When
 		ObjectOperations.Insert(objects.exampleCurrency1);
@@ -212,7 +212,7 @@ public class _DbTest {
 	}
 
 	@Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCountry", "shouldFetchObjects" })
-	public void shouldConnectSecondCurrencyCountry() {
+	public void shouldTemporaryConnectSecondCurrencyCountry() {
 		// Given
 		curr2 = PGQSelect.checkCurrencyCodeExistence(objects.exampleCurrency2.getCode());
 		if (curr2 != null) {
@@ -237,11 +237,11 @@ public class _DbTest {
 
 		// Finally
 		PGQuery.DisconnectCountryCurrency(c, curr2);
-		ObjectOperations.DeleteCurrency(curr2);
+		ObjectOperations.DeleteObject(curr2);
 
 	}
 
-	@Test(dependsOnMethods = { "shouldConnectCurrencyCountry", "shouldConnectSecondCurrencyCountry" })
+	@Test(dependsOnMethods = { "shouldConnectCurrencyCountry", "shouldTemporaryConnectSecondCurrencyCountry" })
 	public void shouldDisconnectCurrencyCountry() {
 		// given
 		Country c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());

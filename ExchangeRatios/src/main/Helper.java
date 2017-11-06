@@ -18,21 +18,14 @@ public class Helper {
 
 	static final int timeRange = -1000 * 3600 * 24 * 90;
 
-	// public static void gatherLastWeekData() {
-	// Date from = new Date(Calendar.getInstance().getTimeInMillis() - 1000 * 3600 *
-	// 24 * 7);
-	// Date to = new Date(Calendar.getInstance().getTimeInMillis());
-	// gatherData(from, to);
-	//
-	// }
-
 	public static void gatherData(Date from, Date to) {
+		int batch_No = 0;
 		System.out.println(from + ":" + to);
 		Date intermediary = new Date(from.getTime());
 		Date intermediaryEnd = new Date(intermediary.getTime());
 		intermediaryEnd.setMonth(intermediary.getMonth() + 3);
 		while (intermediaryEnd.getTime() < to.getTime()) {
-			System.out.println(intermediary + ":inter:" + intermediaryEnd);
+			System.out.println(intermediary + ":inter:" + intermediaryEnd + ":part " + batch_No);
 			getAllDataFromPeriod(intermediary, intermediaryEnd);
 			intermediary.setMonth(intermediary.getMonth() + 3);
 			intermediaryEnd.setMonth(intermediary.getMonth() + 3);
@@ -41,8 +34,7 @@ public class Helper {
 
 	}
 
-	public static void getAllDataFromPeriod(Date from, Date to) {
-		System.out.println(from + ":" + to);
+	protected static void getAllDataFromPeriod(Date from, Date to) {
 		PGQuery.InsertActualizedCurrencyRatiosGroup(
 				parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
 		PGQuery.InsertActualizedCurrencyRatiosGroup(
