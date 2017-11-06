@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">12 methods,   12 passed</span>
+                    <span class="method-stats">13 methods,   13 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -103,6 +103,11 @@
                       <span>
                         <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldConnectCurrencyCountry">shouldConnectCurrencyCountry</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="testing._DbTest" hash-for-method="shouldConnectSecondCurrencyCountry">shouldConnectSecondCurrencyCountry</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -187,6 +192,13 @@
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
+                  <a name="shouldConnectSecondCurrencyCountry">
+                  </a> <!-- shouldConnectSecondCurrencyCountry -->
+                  <span class="method-name">shouldConnectSecondCurrencyCountry</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
                   <a name="shouldCreateDefaultConnection">
                   </a> <!-- shouldCreateDefaultConnection -->
                   <span class="method-name">shouldCreateDefaultConnection</span>
@@ -267,7 +279,7 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">/tmp/testng-eclipse-505544450/testng-customsuite.xml</span>
+            <span class="header-content">/tmp/testng-eclipse--1980252560/testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -316,60 +328,64 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(12);
+data.addRows(13);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'shouldCreateDefaultConnection')
 data.setCell(0, 2, 'testing._DbTest')
-data.setCell(0, 3, 4499);
+data.setCell(0, 3, 3203);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'shouldGetHighestPriceDifferenceOfCurrencyRatios')
 data.setCell(1, 2, 'testing._DbTest')
-data.setCell(1, 3, 280);
+data.setCell(1, 3, 305);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'shouldInsertNewCountry')
+data.setCell(2, 1, 'shouldConnectSecondCurrencyCountry')
 data.setCell(2, 2, 'testing._DbTest')
-data.setCell(2, 3, 272);
+data.setCell(2, 3, 143);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'shouldDisconnectCurrencyCountry')
+data.setCell(3, 1, 'shouldGetSortedCurrency')
 data.setCell(3, 2, 'testing._DbTest')
-data.setCell(3, 3, 268);
+data.setCell(3, 3, 138);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'shouldRemoveObjects')
+data.setCell(4, 1, 'shouldInsertNewCountry')
 data.setCell(4, 2, 'testing._DbTest')
-data.setCell(4, 3, 220);
+data.setCell(4, 3, 113);
 data.setCell(5, 0, 5)
 data.setCell(5, 1, 'shouldConnectCurrencyCountry')
 data.setCell(5, 2, 'testing._DbTest')
-data.setCell(5, 3, 191);
+data.setCell(5, 3, 81);
 data.setCell(6, 0, 6)
-data.setCell(6, 1, 'shouldInsertNewCurrency')
+data.setCell(6, 1, 'shouldDisconnectCurrencyCountry')
 data.setCell(6, 2, 'testing._DbTest')
-data.setCell(6, 3, 170);
+data.setCell(6, 3, 45);
 data.setCell(7, 0, 7)
-data.setCell(7, 1, 'shouldGetSortedCurrency')
+data.setCell(7, 1, 'shouldRemoveObjects')
 data.setCell(7, 2, 'testing._DbTest')
-data.setCell(7, 3, 106);
+data.setCell(7, 3, 44);
 data.setCell(8, 0, 8)
-data.setCell(8, 1, 'shouldGetLimittedSortedCurrencyRatiosLowestBidPrice')
+data.setCell(8, 1, 'shouldFetchObjects')
 data.setCell(8, 2, 'testing._DbTest')
-data.setCell(8, 3, 27);
+data.setCell(8, 3, 24);
 data.setCell(9, 0, 9)
-data.setCell(9, 1, 'shouldThrowRuntimeExceptionDueToWrongParameter')
+data.setCell(9, 1, 'shouldGetLimittedSortedCurrencyRatiosLowestBidPrice')
 data.setCell(9, 2, 'testing._DbTest')
 data.setCell(9, 3, 18);
 data.setCell(10, 0, 10)
-data.setCell(10, 1, 'shouldFetchObjects')
+data.setCell(10, 1, 'shouldInsertNewCurrency')
 data.setCell(10, 2, 'testing._DbTest')
 data.setCell(10, 3, 15);
 data.setCell(11, 0, 11)
 data.setCell(11, 1, 'shouldGetLimittedSortedCurrency')
 data.setCell(11, 2, 'testing._DbTest')
-data.setCell(11, 3, 10);
+data.setCell(11, 3, 13);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'shouldThrowRuntimeExceptionDueToWrongParameter')
+data.setCell(12, 2, 'testing._DbTest')
+data.setCell(12, 3, 7);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 6 seconds</span>
+              <span class="suite-total-time">Total running time: 4 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -406,91 +422,99 @@ return data;
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">4524 ms</span>
+                <span class="method-start">3227 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldThrowRuntimeExceptionDueToWrongParameter</span>
-                <span class="method-start">4525 ms</span>
+                <span class="method-start">3227 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">4561 ms</span>
+                <span class="method-start">3249 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldGetHighestPriceDifferenceOfCurrencyRatios</span>
-                <span class="method-start">4563 ms</span>
+                <span class="method-start">3250 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">4846 ms</span>
+                <span class="method-start">3566 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldGetLimittedSortedCurrency</span>
-                <span class="method-start">4846 ms</span>
+                <span class="method-start">3567 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">4859 ms</span>
+                <span class="method-start">3586 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldGetLimittedSortedCurrencyRatiosLowestBidPrice</span>
-                <span class="method-start">4859 ms</span>
+                <span class="method-start">3587 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">4900 ms</span>
+                <span class="method-start">3613 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldGetSortedCurrency</span>
-                <span class="method-start">4909 ms</span>
+                <span class="method-start">3623 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">5017 ms</span>
+                <span class="method-start">3784 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldInsertNewCountry</span>
-                <span class="method-start">5034 ms</span>
+                <span class="method-start">3785 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">5308 ms</span>
+                <span class="method-start">3903 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldInsertNewCurrency</span>
-                <span class="method-start">5309 ms</span>
+                <span class="method-start">3904 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">5481 ms</span>
+                <span class="method-start">3926 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldFetchObjects</span>
-                <span class="method-start">5482 ms</span>
+                <span class="method-start">3927 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">5506 ms</span>
+                <span class="method-start">3961 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldConnectCurrencyCountry</span>
-                <span class="method-start">5506 ms</span>
+                <span class="method-start">3965 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">5700 ms</span>
+                <span class="method-start">4049 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">shouldConnectSecondCurrencyCountry</span>
+                <span class="method-start">4049 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">4194 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldDisconnectCurrencyCountry</span>
-                <span class="method-start">5700 ms</span>
+                <span class="method-start">4194 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">5970 ms</span>
+                <span class="method-start">4241 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">shouldRemoveObjects</span>
-                <span class="method-start">5971 ms</span>
+                <span class="method-start">4241 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

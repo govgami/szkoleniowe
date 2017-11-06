@@ -35,6 +35,7 @@ public class CurrencyRatios implements Serializable {
 	public static final String FieldAvgPrice = "avgPrice";
 	public static final String FieldAskPrice = "askPrice";
 	public static final String FieldBidPrice = "bidPrice";
+	public static final String IndexOnDay = "effective_day";
 	public static final String Get_ByCurrencyCodeAndDate = "getCurrencyRatioByCurrencySignAndDay";
 	public static final String Get_LowestBidPriceOfChosenCode = "getLowestBidOfChosenSignCurrencyRatio";
 	public static final String Get_HighestDifferenceOf_AskAndBidPrice = "getHighestPriceDifferenceOfCurrencyRatio";

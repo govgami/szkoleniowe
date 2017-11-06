@@ -22,7 +22,8 @@ import org.hibernate.annotations.NamedQuery;
 @NamedQueries({ @NamedQuery(name = "getAllCountries", query = "from Country"),
 		@NamedQuery(name = "getCountryById", query = "from Country where id = :id"),
 		@NamedQuery(name = "getCountryByName", query = "from Country where name = :name"),
-		@NamedQuery(name = "fetchCountryByName", query = "select c from Country c left join fetch c.currencies where c.name = :name") })
+		@NamedQuery(name = "fetchCountryByName", query = "select c from Country c left join fetch c.currencies where c.name = :name"),
+		@NamedQuery(name = "fetchFullCountryByName", query = "select c from Country c inner join fetch c.currencies where c.name = :name") })
 @Entity
 @Table(name = "COUNTRY", uniqueConstraints = { @UniqueConstraint(columnNames = "ID"),
 		@UniqueConstraint(columnNames = "NAME") })
@@ -36,6 +37,7 @@ public class Country implements Serializable {
 	public static final String Get_ById = "getCountryById";
 	public static final String Get_ByName = "getCountryByName";
 	public static final String Fetch_ByName = "fetchCountryByName";
+	public static final String Fetch_AllConnected_ByName = "fetchCountryByName";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -45,6 +45,13 @@ public class PGQSelect extends PGQuery {
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
+	public static final Country FetchCountryConnectedByName(String name) {
+		Session session = openTransaction();
+		Query<Country> query = session.getNamedQuery(Country.Fetch_AllConnected_ByName);
+		query.setParameter(Country.FieldName, name);
+		return presentQueryResultAndJustCloseSession(query, session);
+	}
+
 	public static final Country SelectCountryByName(String name) {
 		Session session = openTransaction();
 		Query<Country> query = session.getNamedQuery(Country.Get_ByName);

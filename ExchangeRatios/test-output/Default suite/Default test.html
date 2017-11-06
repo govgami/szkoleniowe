@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>12/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>13/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon Nov 06 07:51:03 CET 2017</td>
+<td>Started on:</td><td>Mon Nov 06 08:38:13 CET 2017</td>
 </tr>
-<tr><td>Total time:</td><td>6 seconds (6251 ms)</td>
+<tr><td>Total time:</td><td>4 seconds (4316 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -80,9 +80,14 @@ function toggleAllBoxes() {
 <td>0</td>
 <td>testing._DbTest@8bd1b6a</td></tr>
 <tr>
+<td title='testing._DbTest.shouldConnectSecondCurrencyCountry()'><b>shouldConnectSecondCurrencyCountry</b><br>Test class: testing._DbTest</td>
+<td></td>
+<td>0</td>
+<td>testing._DbTest@8bd1b6a</td></tr>
+<tr>
 <td title='testing._DbTest.shouldCreateDefaultConnection()'><b>shouldCreateDefaultConnection</b><br>Test class: testing._DbTest</td>
 <td></td>
-<td>4</td>
+<td>3</td>
 <td>testing._DbTest@8bd1b6a</td></tr>
 <tr>
 <td title='testing._DbTest.shouldDisconnectCurrencyCountry()'><b>shouldDisconnectCurrencyCountry</b><br>Test class: testing._DbTest</td>
@@ -159,8 +164,8 @@ function toggleAllBoxes() {
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1679002380", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1679002380'><pre>java.lang.RuntimeException: Invalid argument: drop database
+</pre></div><a href='#' onClick='toggleBox("stack-trace199000084", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace199000084'><pre>java.lang.RuntimeException: Invalid argument: drop database
 	at persistence.db.queries.PGQuery.validateQueryArgAgainstSQLInjection(PGQuery.java:136)
 	at testing._DbTest.shouldThrowRuntimeExceptionDueToWrongParameter(_DbTest.java:51)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

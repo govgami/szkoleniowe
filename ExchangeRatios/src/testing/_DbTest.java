@@ -65,7 +65,6 @@ public class _DbTest {
 	}
 
 	// DEV check implementation for optimalization rows insertion by code -> batch
-	// DEV change countries to lazy-fetching
 	// @Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldGatherCurrenciesData() {
 		// when
@@ -136,16 +135,16 @@ public class _DbTest {
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
 	public void shouldInsertNewCurrency() {
 		// Given
-		Currency curr = PGQSelect.checkCurrencyCodeExistence(objects.exampleCurrency.getCode());
+		Currency curr = PGQSelect.checkCurrencyCodeExistence(objects.exampleCurrency1.getCode());
 		if (curr != null) {
 			ObjectOperations.DeleteObject(curr);
 		}
 		// When
-		ObjectOperations.Insert(objects.exampleCurrency);
+		ObjectOperations.Insert(objects.exampleCurrency1);
 
 		// Then
-		curr = PGQSelect.checkCurrencyCodeExistence(objects.exampleCurrency.getCode());
-		assertThat(curr).hasFieldOrPropertyWithValue(Currency.FieldCode, objects.exampleCurrency.getCode());
+		curr = PGQSelect.checkCurrencyCodeExistence(objects.exampleCurrency1.getCode());
+		assertThat(curr).hasFieldOrPropertyWithValue(Currency.FieldCode, objects.exampleCurrency1.getCode());
 	}
 
 	@Test(dependsOnMethods = { "shouldCreateDefaultConnection" })
@@ -165,7 +164,7 @@ public class _DbTest {
 	public void shouldFetchObjects() {
 		// When
 		Country c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());
-		Currency curr = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency.getCode());
+		Currency curr = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency1.getCode());
 		// Then
 		assertThat(curr).isNotNull();
 		assertThat(c).isNotNull();
@@ -176,7 +175,7 @@ public class _DbTest {
 		try {
 			// Given
 			Country c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());
-			Currency curr = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency.getCode());
+			Currency curr = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency1.getCode());
 			// When
 			PGQuery.ConnectCountryCurrency(c, curr);
 			// Then
@@ -188,11 +187,45 @@ public class _DbTest {
 		}
 	}
 
-	@Test(dependsOnMethods = { "shouldConnectCurrencyCountry" })
+	@Test(dependsOnMethods = { "shouldInsertNewCurrency", "shouldInsertNewCountry", "shouldFetchObjects" })
+	public void shouldConnectSecondCurrencyCountry() {
+		// Given
+		Country c;
+		Currency curr1, curr2;
+
+		curr2 = PGQSelect.checkCurrencyCodeExistence(objects.exampleCurrency2.getCode());
+		if (curr2 != null) {
+			ObjectOperations.DeleteObject(curr2);
+		}
+
+		ObjectOperations.Insert(objects.exampleCurrency2);
+		curr2 = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency2.getCode());
+		c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());
+		// When
+		PGQuery.ConnectCountryCurrency(c, curr2);
+		// Then
+		CountryCurrency ccurr = ObjectOperations.GetObject(CountryCurrency.class, new CountryCurrencyId(c, curr2));
+		assertThat(ccurr).isNotNull();
+
+		curr1 = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency1.getCode());
+		curr2 = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency2.getCode());
+		c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());
+		assertThat(c).isNotNull();
+		assertThat(c.getCurrencies()).hasSize(2);
+		assertThat(c.getCurrencies()).element(0).hasFieldOrPropertyWithValue(Currency.FieldCode, curr1.getCode());
+		assertThat(c.getCurrencies()).element(1).hasFieldOrPropertyWithValue(Currency.FieldCode, curr2.getCode());
+
+		// Finally
+		PGQuery.DisconnectCountryCurrency(c, curr2);
+		ObjectOperations.DeleteObject(curr2);
+
+	}
+
+	@Test(dependsOnMethods = { "shouldConnectCurrencyCountry", "shouldConnectSecondCurrencyCountry" })
 	public void shouldDisconnectCurrencyCountry() {
 		// given
 		Country c = PGQSelect.FetchCountryByName(objects.exampleCountry.getName());
-		Currency curr = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency.getCode());
+		Currency curr = PGQSelect.FetchCurrencyByCode(objects.exampleCurrency1.getCode());
 		// when
 		PGQuery.DisconnectCountryCurrency(c, curr);
 		// then
@@ -203,13 +236,13 @@ public class _DbTest {
 	@Test(dependsOnMethods = { "shouldDisconnectCurrencyCountry" })
 	public void shouldRemoveObjects() {
 		// given
-		Currency curr = PGQSelect.SelectCurrencyByCode(objects.exampleCurrency.getCode());
+		Currency curr = PGQSelect.SelectCurrencyByCode(objects.exampleCurrency1.getCode());
 		Country c = PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
 		// when
 		ObjectOperations.DeleteObject(curr);
 		ObjectOperations.DeleteObject(c);
 		// then
-		curr = PGQSelect.SelectCurrencyByCode(objects.exampleCurrency.getCode());
+		curr = PGQSelect.SelectCurrencyByCode(objects.exampleCurrency1.getCode());
 		c = PGQSelect.SelectCountryByName(objects.exampleCountry.getName());
 		assertThat(curr).isNull();
 		assertThat(c).isNull();
