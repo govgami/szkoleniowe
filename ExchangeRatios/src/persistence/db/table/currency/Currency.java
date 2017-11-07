@@ -48,7 +48,7 @@ public class Currency implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", unique = true, nullable = false)
-	Integer id;
+	Long id;
 	@ManyToMany(mappedBy = "currencies")
 	Set<Country> countries = new HashSet<Country>();
 	@Column(name = "CURRENCY_NAME", length = 100)
@@ -67,7 +67,7 @@ public class Currency implements Serializable {
 		this.code = code;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 

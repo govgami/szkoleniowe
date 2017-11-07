@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 import nbp.CurrencyPrice;
 import nbp.downloader.xml.XMLStringNBPDownloader;
 import nbp.downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
-import nbp.extraction.xml.specialized.SelectiveSaxDataReader;
+import nbp.extractor.xml.specialized.SelectiveSaxDataReader;
 import nbp.valueReading.xml.CurrMarkSpecSAXNumericReader;
 import nbp.valueReading.xml.SAXCurrencyPricesDataReader;
 import nbp.valueReading.xml.SAXNumericReader;

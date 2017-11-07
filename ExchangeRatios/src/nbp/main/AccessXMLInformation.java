@@ -2,7 +2,7 @@
 package nbp.main;
 
 import nbp.downloader.StringDownloader;
-import nbp.extraction.xml.specialized.SelectiveSaxDataReader;
+import nbp.extractor.xml.specialized.SelectiveSaxDataReader;
 
 public abstract class AccessXMLInformation {
 

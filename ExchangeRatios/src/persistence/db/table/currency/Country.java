@@ -25,7 +25,7 @@ import org.hibernate.annotations.NamedQuery;
 	@NamedQuery(name = Country.GET_BY_ID, query = "from Country where id = :id"),
 	@NamedQuery(name = Country.GET_BY_NAME, query = "from Country where name = :name"),
 	@NamedQuery(name = Country.FETCH_BY_NAME, query = "select c from Country c left join fetch c.currencies where c.name = :name"),
-	@NamedQuery(name = Country.FETCH_ALL_WITH_COUNTRY_ON_DAY, query = "select c from Country c inner join fetch c.currencies d inner join fetch d.ratios r where c.name = :name and r.effectiveDate= :date")
+	@NamedQuery(name = Country.FETCH_ALL_WITH_COUNTRY_ON_DAY, query = "select r from CurrencyRatios r inner join Country c where r.currency.countries = :name and r.effectiveDate= :effectiveDate")
 })
 @Entity
 @Table(name = "COUNTRY", uniqueConstraints = {
@@ -48,7 +48,7 @@ public class Country implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID", unique = true, nullable = false)
-	private Integer id;
+	private Long id;
 	@Column(name = "NAME", unique = true, length = 100)
 	private String name;
 	@ManyToMany(cascade = {
@@ -69,7 +69,7 @@ public class Country implements Serializable {
 		this.name = name;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 

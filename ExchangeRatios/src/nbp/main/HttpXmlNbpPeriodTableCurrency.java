@@ -8,7 +8,7 @@ import java.util.List;
 import nbp.CurrencyPrice;
 import nbp.downloader.xml.XMLStringNBPDownloader;
 import nbp.downloader.xml.factory.HttpXmlExchangeDownloaderFactory;
-import nbp.extraction.xml.specialized.SelectiveSaxDataReader;
+import nbp.extractor.xml.specialized.SelectiveSaxDataReader;
 import nbp.valueReading.ValueReader;
 import nbp.valueReading.xml.SAXCurrencyPricesDataReader;
 import nbp.valueReading.xml.table.TablesAB;

@@ -19,7 +19,7 @@ import persistence.db.table.currency.CountryCurrency;
 import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
 
-public class DbConnection {
+public class DbAccess {
 
 	private Connection conn;
 	private String host;
@@ -27,10 +27,10 @@ public class DbConnection {
 	private String user;
 	private String pass;
 
-	protected DbConnection() {
+	protected DbAccess() {
 	}
 
-	public DbConnection(String host, String dbName, String user, String pass) {
+	public DbAccess(String host, String dbName, String user, String pass) {
 
 		this.host = host;
 		this.dbName = dbName;
@@ -41,7 +41,8 @@ public class DbConnection {
 	public static Connection makeDefaultPostgreConnection() {
 		try {
 			Class.forName("org.postgresql.Driver");
-			Connection c = DriverManager.getConnection(DbContact.HOST + DbContact.DB_NAME, DbContact.USERNAME, DbContact.PASSWORD);
+			Connection c = DriverManager.getConnection(DefaultDbContact.HOST + DefaultDbContact.DB_NAME, DefaultDbContact.USERNAME,
+					DefaultDbContact.PASSWORD);
 			return c;
 		} catch (ClassNotFoundException | SQLException e) {
 			Log.exception("DbConnection", e);
@@ -92,7 +93,7 @@ public class DbConnection {
 		return this.conn.createStatement().executeUpdate(query);
 	}
 
-	private static final Configuration configuration =
+	private static final Configuration CONFIGURATION =
 			new Configuration().addAnnotatedClass(Country.class).addAnnotatedClass(Currency.class).addAnnotatedClass(CurrencyRatios.class)
 					.addAnnotatedClass(CountryCurrency.class).setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
 					.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
@@ -100,13 +101,13 @@ public class DbConnection {
 					.setProperty("hibernate.connection.username", "postgres")
 					.setProperty("hibernate.connection.password", "postgres")/* .configure(new File("src/db/table/hibernate.cfg.xml")) */;
 	private static ServiceRegistry serviceRegistry =
-			new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-	private static final SessionFactory sessionFactory = buildSessionFactory();
+			new StandardServiceRegistryBuilder().applySettings(CONFIGURATION.getProperties()).build();
+	private static final SessionFactory SESSION_FACTORY = buildSessionFactory();
 
 	private static SessionFactory buildSessionFactory() {
 		try {
 			// SessionFactory from hibernate.cfg.xml
-			return configuration.buildSessionFactory(serviceRegistry);
+			return CONFIGURATION.buildSessionFactory(serviceRegistry);
 		} catch (Throwable ex) {
 			Log.exception("Initial SessionFactory creation failed", ex);
 			throw new RuntimeException(ex);
@@ -114,7 +115,7 @@ public class DbConnection {
 	}
 
 	public static SessionFactory getSessionFactory() {
-		return sessionFactory;
+		return SESSION_FACTORY;
 	}
 
 	public static void shutdown() {

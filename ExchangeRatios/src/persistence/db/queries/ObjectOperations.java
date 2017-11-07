@@ -7,7 +7,7 @@ import org.hibernate.Session;
 
 public class ObjectOperations extends BasicOperations {
 
-	public static final void Insert(Object object) {
+	public static final void insert(Object object) {
 		Session session = openTransaction();
 		session.save(object);
 		closeSession(session);
@@ -31,7 +31,7 @@ public class ObjectOperations extends BasicOperations {
 		closeSession(session);
 	}
 
-	public static final void InsertOrUpdate(Object obj) {
+	public static final void insertOrUpdate(Object obj) {
 		Session session = openTransaction();
 		session.saveOrUpdate(obj);
 		closeSession(session);
@@ -43,17 +43,17 @@ public class ObjectOperations extends BasicOperations {
 		closeSession(session);
 	}
 
-	public static final void DeleteObject(Object o) {
+	public static final void deleteObject(Object o) {
 		Session session = openTransaction();
 		session.delete(o);
 		closeSession(session);
 	}
 
 	public static final <T> void DeleteGroup(List<T> list) {
-		DeleteObject(list);
+		deleteObject(list);
 	}
 
-	public static final <T, T2 extends Serializable> T GetObject(Class<T> cl, T2 obj) {
+	public static final <T, T2 extends Serializable> T getObject(Class<T> cl, T2 obj) {
 		Session session = openTransaction();
 		T result = session.get(cl, obj);
 		closeSession(session);

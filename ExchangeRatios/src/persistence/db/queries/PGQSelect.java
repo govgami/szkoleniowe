@@ -14,62 +14,62 @@ import persistence.db.table.currency.CurrencyRatios;
 
 public class PGQSelect extends PGQuery {
 
-	public static final List<Currency> SelectAllCurriencies() {
+	public static final List<Currency> selectAllCurriencies() {
 		Session session = openTransaction();
 		Query<Currency> query = session.getNamedQuery(Currency.GET_ALL);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
-	public static final List<Currency> SelectAllCurrenciesSortedAscByCode(Integer limit) {
+	public static final List<Currency> selectAllCurrenciesSortedAscByCode(Integer limit) {
 		Session session = openTransaction();
 		Query<Currency> query = session.getNamedQuery(Currency.GET_ALL_SORTED_BY_CODE);
 		applyOptionalLimitOnResultsNumber(query, limit);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
-	public static final List<Country> SelectAllCountries() {
+	public static final List<Country> selectAllCountries() {
 		Session session = openTransaction();
 		Query<Country> query = session.getNamedQuery(Country.GET_ALL);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
-	public static final Country FetchCountryByName(String name) {
+	public static final Country fetchCountry_ByName(String name) {
 		Session session = openTransaction();
 		Query<Country> query = session.getNamedQuery(Country.FETCH_BY_NAME);
 		query.setParameter(Country.FIELD_NAME, name);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final Country FetchCountryConnectedByNameAndDay(String name, Date day) {
+	public static final Object fetchCountryAssociates_ByNameAndDay(String name, Date day) {
 		Session session = openTransaction();
-		Query<Country> query = session.getNamedQuery(Country.FETCH_ALL_WITH_COUNTRY_ON_DAY);
+		Query<Object> query = session.getNamedQuery(Country.FETCH_ALL_WITH_COUNTRY_ON_DAY);
 		query.setParameter(Country.FIELD_NAME, name);
 		query.setParameter(CurrencyRatios.FIELD_DATE, day);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final Country SelectCountryByName(String name) {
+	public static final Country selectCountry_ByName(String name) {
 		Session session = openTransaction();
 		Query<Country> query = session.getNamedQuery(Country.GET_BY_NAME);
 		query.setParameter(Country.FIELD_NAME, name);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final Currency SelectCurrencyByCode(String code) {
+	public static final Currency selectCurrency_ByCode(String code) {
 		Session session = openTransaction();
 		Query<Currency> query = session.getNamedQuery(Currency.GET_BY_CODE);
 		query.setParameter(Currency.FIELD_CODE, code);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final Currency FetchCurrencyByCode(String code) {
+	public static final Currency fetchCurrency_ByCode(String code) {
 		Session session = openTransaction();
 		Query<Currency> query = session.getNamedQuery(Currency.FETCH_BY_CODE);
 		query.setParameter(Currency.FIELD_CODE, code);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final List<CurrencyRatios> SelectLowestBidCurrencyRatios(String code, Integer limit) {
+	public static final List<CurrencyRatios> selectLowestBidCurrencyRatios(String code, Integer limit) {
 		validateQueryArgAgainstSimpleSQLInjection(code);
 
 		Session session = openTransaction();
@@ -79,7 +79,7 @@ public class PGQSelect extends PGQuery {
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
-	public static final List<CurrencyRatios> SelectHighestPriceDifferenceOfCurrencyRatio(String code, Integer limit) {
+	public static final List<CurrencyRatios> selectHighestPriceDifferenceOfCurrencyRatio(String code, Integer limit) {
 		validateQueryArgAgainstSimpleSQLInjection(code);
 
 		Session session = openTransaction();
@@ -119,7 +119,7 @@ public class PGQSelect extends PGQuery {
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final Country findById(Long id) {
+	public static final Country getCountryById(Long id) {
 		Session session = openTransaction();
 		Query<Country> query = session.getNamedQuery(Country.GET_BY_ID);
 		query.setParameter(Country.FIELD_ID, id);
@@ -138,5 +138,6 @@ public class PGQSelect extends PGQuery {
 	//
 	// TODO select countries with multiple currencies
 	// TODO select countries using specified currency
+	// TODO select county, currencies and
 
 }

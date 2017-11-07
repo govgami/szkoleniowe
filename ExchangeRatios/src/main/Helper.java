@@ -56,7 +56,7 @@ public class Helper {
 
 	// TODO try merging method and IN selection parameter
 	static HashMap<String, Currency> getCurrencies() {
-		List<Currency> curr = PGQSelect.SelectAllCurriencies();
+		List<Currency> curr = PGQSelect.selectAllCurriencies();
 		HashMap<String, Currency> map = new HashMap<String, Currency>();
 		for (Currency c : curr) {
 			map.put(c.getCode(), c);
@@ -66,7 +66,7 @@ public class Helper {
 
 	static void saveFromUnknownCurrency(CurrencyPrice cp, CurrencyRatios cr, HashMap<String, Currency> map) {
 		if (cr.getCurrency() == null) {
-			ObjectOperations.Insert(new Currency(null, cp.getCurrencyName(), cp.getCurrencySign()));
+			ObjectOperations.insert(new Currency(null, cp.getCurrencyName(), cp.getCurrencySign()));
 			map.clear();
 			map.putAll(getCurrencies());
 			cr.setCurrency(map.get(cp.getCurrencySign()));

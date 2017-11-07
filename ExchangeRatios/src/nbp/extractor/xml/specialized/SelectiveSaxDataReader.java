@@ -1,5 +1,5 @@
 
-package nbp.extraction.xml.specialized;
+package nbp.extractor.xml.specialized;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import logging.Log;
-import nbp.extraction.StringDataReading;
+import nbp.extractor.StringDataReading;
 import nbp.valueReading.ValueReader;
 import parser.xml.XMLInputSourceParser;
 

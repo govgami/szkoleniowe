@@ -1,5 +1,5 @@
 
-package nbp.extraction;
+package nbp.extractor;
 
 public interface StringDataReading {
 

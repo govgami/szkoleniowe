@@ -1,3 +1,4 @@
+
 package persistence.db.queries;
 
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import logging.Log;
+import persistence.db.DbAccess;
 import persistence.db.table.currency.Country;
 import persistence.db.table.currency.CountryCurrency;
 import persistence.db.table.currency.CountryCurrencyId;
@@ -17,22 +19,20 @@ import persistence.db.table.currency.CurrencyRatios;
 
 public class PGQuery extends BasicOperations {
 
-	public static final void ConnectCountryCurrency(Country country, Currency currency) {
+	public static final void connectCountryCurrency(Country country, Currency currency) {
 
 		country.addCurrency(currency);
-		ObjectOperations.InsertOrUpdate(country);
-		// ObjectOperations.InsertOrUpdate(new CountryCurrency(country, currency));
+		ObjectOperations.insertOrUpdate(country);
 
 	}
 
-	public static final void DisconnectCountryCurrency(Country country, Currency currency) {
+	public static final void disconnect_CountryCurrency(Country country, Currency currency) {
 		// country.removeCurrency(currency);
 		// currency.removeCountry(country);
-		CountryCurrency ccurr = ObjectOperations.GetObject(CountryCurrency.class,
-				new CountryCurrencyId(country, currency));
+		CountryCurrency ccurr = ObjectOperations.getObject(CountryCurrency.class, new CountryCurrencyId(country, currency));
 		// ObjectOperations.InsertOrUpdate(country);
 		// ObjectOperations.InsertOrUpdate(currency);
-		ObjectOperations.DeleteObject(ccurr);
+		ObjectOperations.deleteObject(ccurr);
 	}
 
 	public static final void InsertActualizedCurrencyRatiosGroup(List<CurrencyRatios> list) {
@@ -53,6 +53,20 @@ public class PGQuery extends BasicOperations {
 		}
 	}
 
+	// for (CurrencyRatios o : list) {
+	// session = openTransaction();
+	// Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.GET_BY_CURRENCY_CODE_AND_DATE);
+	// query.setParameter(Currency.FIELD_CODE, o.getCurrency().getCode());
+	// query.setParameter(CurrencyRatios.FIELD_DATE, o.getDate());
+	// resultList = query.getResultList();
+	// if (!resultList.isEmpty()) {
+	// session.saveOrUpdate(mergeObjectRatiosData(resultList.get(0), o));
+	// } else {
+	// session.save(o);
+	// }
+	// closeSession(session);
+	// }
+
 	public static final CurrencyRatios mergeObjectRatiosData(CurrencyRatios base, CurrencyRatios update) {
 		if (update.getAskPrice() != null) {
 			base.setAskPrice(update.getAskPrice());
@@ -67,7 +81,6 @@ public class PGQuery extends BasicOperations {
 	}
 
 	public static void initDatabaseStructure(Connection conn) {
-		Session session;
 
 		executeStatement(conn, "CREATE TABLE country (ID int primary key not null, NAME varchar(50) not null unique);");
 		executeStatement(conn,
@@ -79,21 +92,7 @@ public class PGQuery extends BasicOperations {
 
 		executeStatement(conn, "CREATE INDEX effective_day on currency_ratios (effective_date)");
 
-		executeStatement(conn,
-				"CREATE SEQUENCE hibernate_sequence start with 1 increment by 1  no maxvalue  no minvalue cache 1;");
-
-		// // alt. country
-		// session = openTransaction();
-		// Country country = new Country("Non-classified");
-		// session.save(new Country("Non-classified"));
-		// session.close();
-		//
-		// HashSet<Country> c = new HashSet<Country>();
-		// c.add(country);
-		// // alt. currency
-		// session = openTransaction();
-		// session.save(new Currency(c, "Non-specified Currency", "???"));
-		// session.close();
+		executeStatement(conn, "CREATE SEQUENCE hibernate_sequence start with 1 increment by 1  no maxvalue  no minvalue cache 1;");
 
 		closeQuery(conn);
 
@@ -118,6 +117,10 @@ public class PGQuery extends BasicOperations {
 			Log.exception(query, e);
 			throw new RuntimeException(e);
 		}
+	}
+
+	public static void executeSingleStatement(String query) {
+		executeStatement(DbAccess.makeDefaultPostgreConnection(), query);
 	}
 
 	public static void closeQuery(Connection conn) {

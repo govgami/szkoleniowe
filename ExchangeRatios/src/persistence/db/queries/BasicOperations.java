@@ -6,12 +6,12 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import persistence.db.DbConnection;
+import persistence.db.DbAccess;
 
 public class BasicOperations {
 
 	protected static Session openTransaction() {
-		Session session = DbConnection.getSessionFactory().openSession();
+		Session session = DbAccess.getSessionFactory().openSession();
 		session.beginTransaction();
 		return session;
 	}
@@ -50,9 +50,6 @@ public class BasicOperations {
 			return list.get(0);
 		else
 			return null;
-		// else
-		// throw new RuntimeException("Query didn't provide searched object: " +
-		// query.getQueryString());
 	}
 
 	protected static void closeSession(Session s) {
