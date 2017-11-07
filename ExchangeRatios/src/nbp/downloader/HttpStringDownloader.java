@@ -1,9 +1,11 @@
+
 package nbp.downloader;
 
 import nbp.connection.HttpConnection;
 import parser.url.UrlParser;
 
 public class HttpStringDownloader implements StringDownloader {
+
 	protected String httpRequest;
 	protected HttpConnection conn;
 
@@ -16,7 +18,8 @@ public class HttpStringDownloader implements StringDownloader {
 	public String download() {
 		return conn.download();
 	}
-	
+
+	@Override
 	public void alterSource(String newRequest) {
 		this.httpRequest = newRequest;
 		this.conn = new HttpConnection(new UrlParser(httpRequest).parse());

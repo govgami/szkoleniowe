@@ -1,3 +1,4 @@
+
 package persistence.db.table.currency;
 
 import java.io.Serializable;
@@ -18,26 +19,31 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
-@NamedQueries({ @NamedQuery(name = "getAllCurrencies", query = "from Currency"),
-		@NamedQuery(name = "getAllCurrenciesSortedByCode", query = "from Currency order by code"),
-		@NamedQuery(name = "getCurrencyById", query = "from Currency where id = :id"),
-		@NamedQuery(name = "getCurrencyByCode", query = "from Currency where code = :code"),
-		@NamedQuery(name = "fetchCurrencyByCode", query = "select c from Currency c left join fetch c.countries where code = :code") })
+@NamedQueries({
+	@NamedQuery(name = Currency.GET_ALL, query = "from Currency"),
+	@NamedQuery(name = Currency.GET_ALL_SORTED_BY_CODE, query = "from Currency order by code"),
+	@NamedQuery(name = Currency.GET_BY_ID, query = "from Currency where id = :id"),
+	@NamedQuery(name = Currency.GET_BY_CODE, query = "from Currency where code = :code"),
+	@NamedQuery(name = Currency.FETCH_BY_CODE, query = "select c from Currency c left join fetch c.countries where code = :code")
+})
 @Entity
-@Table(name = "currency", uniqueConstraints = { @UniqueConstraint(columnNames = "ID"),
-		@UniqueConstraint(columnNames = "CODE") })
+@Table(name = "currency", uniqueConstraints = {
+	@UniqueConstraint(columnNames = "ID"),
+	@UniqueConstraint(columnNames = "CODE")
+})
 public class Currency implements Serializable {
 
 	private static final long serialVersionUID = -1153042292800443513L;
 
-	public static final String FieldId = "id";
-	public static final String FieldName = "name";
-	public static final String FieldCode = "code";
-	public static final String Get_All = "getAllCurrencies";
-	public static final String Get_All_SortedByCode = "getAllCurrenciesSortedByCode";
-	public static final String Get_ById = "getCurrencyById";
-	public static final String Get_ByCode = "getCurrencyByCode";
-	public static final String Fetch_ByCode = "fetchCurrencyByCode";
+	public static final String FIELD_ID = "id";
+	public static final String FIELD_NAME = "name";
+	public static final String FIELD_CODE = "code";
+
+	public static final String GET_ALL = "allCurrencies";
+	public static final String GET_ALL_SORTED_BY_CODE = "allCurrenciesSortedByCode";
+	public static final String GET_BY_ID = "currencyWithGivenId";
+	public static final String GET_BY_CODE = "currencyWithGivenCode";
+	public static final String FETCH_BY_CODE = "fetchCurrencyByCode";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -65,7 +71,7 @@ public class Currency implements Serializable {
 		return id;
 	}
 
-	public Set<Country> getCountry() {
+	public Set<Country> getCountries() {
 		return countries;
 	}
 

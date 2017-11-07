@@ -1,3 +1,4 @@
+
 package nbp.connection;
 
 import java.io.BufferedReader;
@@ -5,15 +6,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import logging.Log;
 
 public class HttpConnection implements Connectivity {
+
 	URL request;
 
 	public HttpConnection(URL request) {
 		this.request = request;
 	}
 
+	@Override
 	public String download() {
 		HttpURLConnection conn = null;
 		try {

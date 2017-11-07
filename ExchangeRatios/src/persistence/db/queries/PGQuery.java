@@ -20,9 +20,7 @@ public class PGQuery extends BasicOperations {
 	public static final void ConnectCountryCurrency(Country country, Currency currency) {
 
 		country.addCurrency(currency);
-		// currency.addCountry(country);
 		ObjectOperations.InsertOrUpdate(country);
-		// ObjectOperations.InsertOrUpdate(currency);
 		// ObjectOperations.InsertOrUpdate(new CountryCurrency(country, currency));
 
 	}
@@ -42,9 +40,9 @@ public class PGQuery extends BasicOperations {
 		List<CurrencyRatios> resultList;
 		for (CurrencyRatios o : list) {
 			session = openTransaction();
-			Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.Get_ByCurrencyCodeAndDate);
-			query.setParameter(Currency.FieldCode, o.getCurrency().getCode());
-			query.setParameter(CurrencyRatios.FieldDate, o.getDate());
+			Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.GET_BY_CURRENCY_CODE_AND_DATE);
+			query.setParameter(Currency.FIELD_CODE, o.getCurrency().getCode());
+			query.setParameter(CurrencyRatios.FIELD_DATE, o.getDate());
 			resultList = query.getResultList();
 			if (!resultList.isEmpty()) {
 				session.saveOrUpdate(mergeObjectRatiosData(resultList.get(0), o));
@@ -138,7 +136,7 @@ public class PGQuery extends BasicOperations {
 		}
 	}
 
-	public static void validateQueryArgAgainstSQLInjection(String arg) {
+	public static void validateQueryArgAgainstSimpleSQLInjection(String arg) {
 		if (arg.split(" ").length > 1 | arg.isEmpty()) {
 			throw new RuntimeException("Invalid argument: " + arg);
 		}

@@ -1,3 +1,4 @@
+
 package persistence.db.queries;
 
 import java.sql.Date;
@@ -13,97 +14,77 @@ import persistence.db.table.currency.CurrencyRatios;
 
 public class PGQSelect extends PGQuery {
 
-	public static final <T> List<T> SelectAllFrom(String tableName) {
-		validateQueryArgAgainstSQLInjection(tableName);
-		Session session = openTransaction();
-		Query<T> query = session.createQuery("FROM " + tableName);
-		return presentQueryResultsAndJustCloseSession(query, session);
-	}
-
 	public static final List<Currency> SelectAllCurriencies() {
 		Session session = openTransaction();
-		Query<Currency> query = session.getNamedQuery(Currency.Get_All);
+		Query<Currency> query = session.getNamedQuery(Currency.GET_ALL);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
 	public static final List<Currency> SelectAllCurrenciesSortedAscByCode(Integer limit) {
 		Session session = openTransaction();
-		Query<Currency> query = session.getNamedQuery(Currency.Get_All_SortedByCode);
+		Query<Currency> query = session.getNamedQuery(Currency.GET_ALL_SORTED_BY_CODE);
 		applyOptionalLimitOnResultsNumber(query, limit);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
 	public static final List<Country> SelectAllCountries() {
 		Session session = openTransaction();
-		Query<Country> query = session.getNamedQuery(Country.Get_All);
+		Query<Country> query = session.getNamedQuery(Country.GET_ALL);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
 	public static final Country FetchCountryByName(String name) {
 		Session session = openTransaction();
-		Query<Country> query = session.getNamedQuery(Country.Fetch_ByName);
-		query.setParameter(Country.FieldName, name);
+		Query<Country> query = session.getNamedQuery(Country.FETCH_BY_NAME);
+		query.setParameter(Country.FIELD_NAME, name);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final Country FetchCountryConnectedByName(String name) {
+	public static final Country FetchCountryConnectedByNameAndDay(String name, Date day) {
 		Session session = openTransaction();
-		Query<Country> query = session.getNamedQuery(Country.Fetch_AllConnected_ByName);
-		query.setParameter(Country.FieldName, name);
+		Query<Country> query = session.getNamedQuery(Country.FETCH_ALL_WITH_COUNTRY_ON_DAY);
+		query.setParameter(Country.FIELD_NAME, name);
+		query.setParameter(CurrencyRatios.FIELD_DATE, day);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
 	public static final Country SelectCountryByName(String name) {
 		Session session = openTransaction();
-		Query<Country> query = session.getNamedQuery(Country.Get_ByName);
-		query.setParameter(Country.FieldName, name);
+		Query<Country> query = session.getNamedQuery(Country.GET_BY_NAME);
+		query.setParameter(Country.FIELD_NAME, name);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
 	public static final Currency SelectCurrencyByCode(String code) {
 		Session session = openTransaction();
-		Query<Currency> query = session.getNamedQuery("getCurrencyByCode");
-		query.setParameter(Currency.FieldCode, code);
+		Query<Currency> query = session.getNamedQuery(Currency.GET_BY_CODE);
+		query.setParameter(Currency.FIELD_CODE, code);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
 	public static final Currency FetchCurrencyByCode(String code) {
 		Session session = openTransaction();
-		Query<Currency> query = session.getNamedQuery(Currency.Fetch_ByCode);
-		query.setParameter(Currency.FieldCode, code);
+		Query<Currency> query = session.getNamedQuery(Currency.FETCH_BY_CODE);
+		query.setParameter(Currency.FIELD_CODE, code);
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final Currency checkCurrencyCodeExistence(String code) {
-		Session session = openTransaction();
-		Query<Currency> query = session.getNamedQuery(Currency.Get_ByCode);
-		query.setParameter(Currency.FieldCode, code);
-		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
-	}
-
-	public static final Country checkCountryExistence(String name) {
-		Session session = openTransaction();
-		Query<Country> query = session.getNamedQuery(Country.Get_ByName);
-		query.setParameter(Country.FieldName, name);
-		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
-	}
-
 	public static final List<CurrencyRatios> SelectLowestBidCurrencyRatios(String code, Integer limit) {
-		validateQueryArgAgainstSQLInjection(code);
+		validateQueryArgAgainstSimpleSQLInjection(code);
 
 		Session session = openTransaction();
-		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.Get_LowestBidPriceOfChosenCode);
-		query.setParameter(Currency.FieldCode, code);
+		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.GET_LOWEST_BID_PRICE_OF_CHOSEN_CODE);
+		query.setParameter(Currency.FIELD_CODE, code);
 		applyOptionalLimitOnResultsNumber(query, limit);
 		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
 	public static final List<CurrencyRatios> SelectHighestPriceDifferenceOfCurrencyRatio(String code, Integer limit) {
-		validateQueryArgAgainstSQLInjection(code);
+		validateQueryArgAgainstSimpleSQLInjection(code);
 
 		Session session = openTransaction();
-		Query<Object[]> query = session.getNamedQuery(CurrencyRatios.Get_HighestDifferenceOf_AskAndBidPrice);
-		query.setParameter(Currency.FieldCode, code);
+		Query<Object[]> query = session.getNamedQuery(CurrencyRatios.GET_HIGHEST_DIFFERENCE_OF_ASK_AND_BID_PRICE);
+		query.setParameter(Currency.FIELD_CODE, code);
 		applyOptionalLimitOnResultsNumber(query, limit);
 		List<Object[]> result = presentQueryComplexResultsAndJustCloseSession(query, session);
 		List<CurrencyRatios> extract = new ArrayList<CurrencyRatios>();
@@ -113,20 +94,49 @@ public class PGQSelect extends PGQuery {
 		return extract;
 	}
 
-	// TODO use index for searching
 	public static final CurrencyRatios attemptToGetCurrencyRatio(CurrencyRatios cr) {
 		Session session = openTransaction();
-		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.Get_ByCurrencyCodeAndDate);
-		query.setParameter(Currency.FieldCode, cr.getCurrency().getCode());
-		query.setParameter(CurrencyRatios.FieldDate, cr.getDate());
-		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
+		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.GET_BY_CURRENCY_CODE_AND_DATE);
+		query.setParameter(Currency.FIELD_CODE, cr.getCurrency().getCode());
+		query.setParameter(CurrencyRatios.FIELD_DATE, cr.getDate());
+		return presentQueryResultAndJustCloseSession(query, session);
+	}
+
+	public static final CurrencyRatios getCurrencyRatiosInPeriod(String code, Date from, Date to) {
+		Session session = openTransaction();
+		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.GET_BY_CURRENCY_CODE_AND_DATE);
+		query.setParameter(Currency.FIELD_CODE, code);
+		query.setParameter("from", from);
+		query.setParameter("to", to);
+		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
 	public static final CurrencyRatios getCurrencyRatio(String code, Date effectiveDay) {
 		Session session = openTransaction();
-		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.Get_ByCurrencyCodeAndDate);
-		query.setParameter(Currency.FieldCode, code);
-		query.setParameter(CurrencyRatios.FieldDate, effectiveDay);
-		return checkQueryResultObjectExistenceAndJustCloseSession(query, session);
+		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.GET_BY_CURRENCY_CODE_AND_DATE);
+		query.setParameter(Currency.FIELD_CODE, code);
+		query.setParameter(CurrencyRatios.FIELD_DATE, effectiveDay);
+		return presentQueryResultAndJustCloseSession(query, session);
 	}
+
+	public static final Country findById(Long id) {
+		Session session = openTransaction();
+		Query<Country> query = session.getNamedQuery(Country.GET_BY_ID);
+		query.setParameter(Country.FIELD_ID, id);
+		return presentQueryResultAndJustCloseSession(query, session);
+
+	}
+
+	public static final Currency getCurrencyById(Long id) {
+		Session session = openTransaction();
+		Query<Currency> query = session.getNamedQuery(Currency.GET_BY_ID);
+		query.setParameter(Currency.FIELD_ID, id);
+		return presentQueryResultAndJustCloseSession(query, session);
+
+	}
+	// compress instant deploy
+	//
+	// TODO select countries with multiple currencies
+	// TODO select countries using specified currency
+
 }

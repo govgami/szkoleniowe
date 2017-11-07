@@ -1,3 +1,4 @@
+
 package nbp.main;
 
 import java.math.BigDecimal;
@@ -16,10 +17,12 @@ public class HttpXmlNbpActTableCurrency extends AccessXMLInformation {
 		resp = new SelectiveSaxDataReader(reader);
 	}
 
+	@Override
 	public String getXMLDataString() {
 		return resp.read(info.download());
 	}
 
+	@Override
 	public BigDecimal getXMLData() {
 		return new Str2BigDecimal(getXMLDataString()).parse();
 	}
@@ -35,8 +38,7 @@ public class HttpXmlNbpActTableCurrency extends AccessXMLInformation {
 	}
 
 	public static HttpXmlNbpActSpecCurrency linkActCurrConn(String tableName, String currencyShortcut) {
-		return new HttpXmlNbpActSpecCurrency(currencyShortcut,
-				HttpXmlExchangeDownloaderFactory.exchangeTable(tableName.toLowerCase()),
+		return new HttpXmlNbpActSpecCurrency(currencyShortcut, HttpXmlExchangeDownloaderFactory.exchangeTable(tableName.toLowerCase()),
 				new CurrMarkSpecSAXNumericReader(currencyShortcut, "Mid"));
 	}
 }

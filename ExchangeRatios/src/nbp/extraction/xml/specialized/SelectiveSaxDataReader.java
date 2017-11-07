@@ -1,6 +1,8 @@
+
 package nbp.extraction.xml.specialized;
 
 import java.io.IOException;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -10,23 +12,25 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import logging.Log;
 import nbp.extraction.StringDataReading;
 import nbp.valueReading.ValueReader;
-import logging.Log;
 import parser.xml.XMLInputSourceParser;
 
 public class SelectiveSaxDataReader implements StringDataReading {
+
 	ValueReader reader;
 
 	public SelectiveSaxDataReader(ValueReader valueReader) {
 		reader = valueReader;
 	}
 
+	@Override
 	public String read(String xmlText) {
 		readAsSAX(new XMLInputSourceParser(xmlText).parse());
 		return reader.getFoundValueString();
 	}
-	
+
 	public Object readExt(String xmlText) {
 		readAsSAX(new XMLInputSourceParser(xmlText).parse());
 		return reader.getFoundValue();

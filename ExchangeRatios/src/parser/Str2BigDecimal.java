@@ -1,8 +1,10 @@
+
 package parser;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+
 import logging.Log;
 
 public class Str2BigDecimal implements InnerDataParser {
@@ -10,8 +12,8 @@ public class Str2BigDecimal implements InnerDataParser {
 	String state;
 
 	public Str2BigDecimal(String numericString) {
-		if(numericString!=null)
-		state = numericString;
+		if (numericString != null)
+			state = numericString;
 		else
 			throw new RuntimeException("null argument");
 	}

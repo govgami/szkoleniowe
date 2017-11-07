@@ -1,3 +1,4 @@
+
 package nbp.valueReading.xml;
 
 import java.math.BigDecimal;
@@ -25,9 +26,11 @@ public class CurrMarkSpecSAXNumericReader extends DefaultHandler implements Valu
 		this.searchedQName = searchedQName;
 	}
 
+	@Override
 	public void startDocument() throws SAXException {
 	}
 
+	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 		if (qName.equals(sequenceMarkName)) {
 			sequenceStarted = true;
@@ -47,9 +50,11 @@ public class CurrMarkSpecSAXNumericReader extends DefaultHandler implements Valu
 		super.endElement(uri, localName, qName);
 	}
 
+	@Override
 	public void endDocument() throws SAXException {
 	}
 
+	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException {
 		if (sequenceStarted & searchedSequenceContent.equals(new String(ch, start, length))) {
 			sequenceAccepted = true;
@@ -59,10 +64,12 @@ public class CurrMarkSpecSAXNumericReader extends DefaultHandler implements Valu
 		}
 	}
 
+	@Override
 	public BigDecimal getFoundValue() {
 		return value;
 	}
 
+	@Override
 	public String getFoundValueString() {
 		return value.toString();
 	}

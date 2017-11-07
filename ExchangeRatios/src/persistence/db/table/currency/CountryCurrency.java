@@ -1,3 +1,4 @@
+
 package persistence.db.table.currency;
 
 import java.io.Serializable;
@@ -11,7 +12,8 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQueries({
-		@NamedQuery(name = "getCountryCurrencyByComponents", query = "from CountryCurrency where country = :country and currency = :currency") })
+	@NamedQuery(name = CountryCurrency.GET_BY_COMPONENTS, query = "from CountryCurrency where country = :country and currency = :currency")
+})
 @Entity
 @IdClass(CountryCurrencyId.class)
 @Table(name = "country_currency")
@@ -19,9 +21,10 @@ public class CountryCurrency implements Serializable {
 
 	private static final long serialVersionUID = -5465902396253799360L;
 
-	public static final String FieldCountry = "country";
-	public static final String FieldCurrency = "currency";
-	public static final String Get_ByComponents = "getCountryCurrencyByComponents";
+	public static final String FIELD_COUNTRY = "country";
+	public static final String FIELD_CURRENCY = "currency";
+
+	public static final String GET_BY_COMPONENTS = "getCountryCurrencyByComponents";
 
 	@Id
 	Country country;

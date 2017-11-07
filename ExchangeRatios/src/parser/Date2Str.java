@@ -1,3 +1,4 @@
+
 package parser;
 
 import java.text.SimpleDateFormat;
@@ -15,8 +16,8 @@ public class Date2Str implements InnerDataParser {
 	}
 
 	public Date2Str(Date time) {
-		if(time!=null)
-		date = time;
+		if (time != null)
+			date = time;
 		else
 			throw new RuntimeException("assigned null");
 	}

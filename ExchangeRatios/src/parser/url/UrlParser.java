@@ -1,3 +1,4 @@
+
 package parser.url;
 
 import java.net.MalformedURLException;
@@ -7,6 +8,7 @@ import logging.Log;
 import parser.InnerDataParser;
 
 public class UrlParser implements InnerDataParser {
+
 	String url;
 
 	public UrlParser(String urlString) {

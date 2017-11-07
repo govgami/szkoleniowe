@@ -1,3 +1,4 @@
+
 package persistence.db.table.currency;
 
 import java.io.Serializable;

@@ -1,3 +1,4 @@
+
 package persistence.db.table.currency;
 
 import java.io.Serializable;
@@ -20,27 +21,32 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQueries({
-		@NamedQuery(name = "getCurrencyRatioByCurrencySignAndDay", query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code and e.effectiveDate = :effectiveDate"),
-		@NamedQuery(name = "getLowestBidOfChosenSignCurrencyRatio", query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code order by e.bidPrice asc"),
-		@NamedQuery(name = "getHighestPriceDifferenceOfCurrencyRatio", query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join fetch c.currency where code = :code and c.askPrice is not null and c.bidPrice is not null order by difference desc") })
-
+	@NamedQuery(name = CurrencyRatios.GET_BY_CURRENCY_CODE_AND_DATE, query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code and e.effectiveDate = :effectiveDate"),
+	@NamedQuery(name = CurrencyRatios.GET_LOWEST_BID_PRICE_OF_CHOSEN_CODE, query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code order by e.bidPrice asc"),
+	@NamedQuery(name = CurrencyRatios.GET_HIGHEST_DIFFERENCE_OF_ASK_AND_BID_PRICE, query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join fetch c.currency where code = :code and c.askPrice is not null and c.bidPrice is not null order by difference desc"),
+	@NamedQuery(name = CurrencyRatios.GET_BY_CURRENCY_CODE_AND_PERIOD, query = "select e from CurrencyRatios e where e.currency.code = :code and e.effectiveDate > :from and e.effectiveDate< :to")
+})
 @Entity
-@Table(name = "currency_ratios", uniqueConstraints = { @UniqueConstraint(columnNames = "ID") }, indexes = {
-		@Index(name = "effective_day", columnList = "effective_date") })
+@Table(name = "currency_ratios", uniqueConstraints = {
+	@UniqueConstraint(columnNames = "ID")
+}, indexes = {
+	@Index(name = "effective_day", columnList = "effective_date")
+})
 public class CurrencyRatios implements Serializable {
 
 	private static final long serialVersionUID = 4445757466460884024L;
 
-	public static final String FieldId = "id";
-	public static final String FieldCurrency = "currency";
-	public static final String FieldDate = "effectiveDate";
-	public static final String FieldAvgPrice = "avgPrice";
-	public static final String FieldAskPrice = "askPrice";
-	public static final String FieldBidPrice = "bidPrice";
-	public static final String IndexOnDay = "effective_day";
-	public static final String Get_ByCurrencyCodeAndDate = "getCurrencyRatioByCurrencySignAndDay";
-	public static final String Get_LowestBidPriceOfChosenCode = "getLowestBidOfChosenSignCurrencyRatio";
-	public static final String Get_HighestDifferenceOf_AskAndBidPrice = "getHighestPriceDifferenceOfCurrencyRatio";
+	public static final String FIELD_ID = "id";
+	public static final String FIELD_CURRENCY = "currency";
+	public static final String FIELD_DATE = "effectiveDate";
+	public static final String FIELD_AVERAGE_PRICE = "avgPrice";
+	public static final String FIELD_ASK_PRICE = "askPrice";
+	public static final String FIELD_BID_PRICE = "bidPrice";
+	public static final String INDEX_ON_DAY = "effective_day";
+	public static final String GET_BY_CURRENCY_CODE_AND_DATE = "getCurrencyRatioByCurrencySignAndDay";
+	public static final String GET_LOWEST_BID_PRICE_OF_CHOSEN_CODE = "getLowestBidOfChosenSignCurrencyRatio";
+	public static final String GET_HIGHEST_DIFFERENCE_OF_ASK_AND_BID_PRICE = "getHighestPriceDifferenceOfCurrencyRatio";
+	public static final String GET_BY_CURRENCY_CODE_AND_PERIOD = "getByCurrencyCodeAndPeriod";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -61,8 +67,7 @@ public class CurrencyRatios implements Serializable {
 	protected CurrencyRatios() {
 	}
 
-	public CurrencyRatios(Currency currency, Date effectiveDate, BigDecimal avgPrice, BigDecimal askPrice,
-			BigDecimal bidPrice) {
+	public CurrencyRatios(Currency currency, Date effectiveDate, BigDecimal avgPrice, BigDecimal askPrice, BigDecimal bidPrice) {
 		this.currency = currency;
 		this.effectiveDate = effectiveDate;
 		this.avgPrice = avgPrice;

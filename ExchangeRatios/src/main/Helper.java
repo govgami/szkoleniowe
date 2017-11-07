@@ -1,3 +1,4 @@
+
 package main;
 
 import java.sql.Date;
@@ -34,12 +35,9 @@ public class Helper {
 	}
 
 	protected static void getAllDataFromPeriod(Date from, Date to) {
-		PGQuery.InsertActualizedCurrencyRatiosGroup(
-				parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
-		PGQuery.InsertActualizedCurrencyRatiosGroup(
-				parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("b", from, to)));
-		PGQuery.InsertActualizedCurrencyRatiosGroup(
-				parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("c", from, to)));
+		PGQuery.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
+		PGQuery.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("b", from, to)));
+		PGQuery.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("c", from, to)));
 	}
 
 	static List<CurrencyRatios> parsePrice2Ratios(List<CurrencyPrice> list) {
@@ -48,8 +46,7 @@ public class Helper {
 		CurrencyRatios t;
 
 		for (CurrencyPrice cp : list) {
-			t = new CurrencyRatios(map.get(cp.getCurrencySign()), new Str2SqlDate(cp.getEffectiveDate()).parse(), null,
-					null, null);
+			t = new CurrencyRatios(map.get(cp.getCurrencySign()), new Str2SqlDate(cp.getEffectiveDate()).parse(), null, null, null);
 			saveFromUnknownCurrency(cp, t, map);
 			adjustFieldsOf(cp, t);
 			result.add(t);
@@ -57,8 +54,9 @@ public class Helper {
 		return result;
 	}
 
+	// TODO try merging method and IN selection parameter
 	static HashMap<String, Currency> getCurrencies() {
-		List<Currency> curr = PGQSelect.SelectAllFrom("Currency");
+		List<Currency> curr = PGQSelect.SelectAllCurriencies();
 		HashMap<String, Currency> map = new HashMap<String, Currency>();
 		for (Currency c : curr) {
 			map.put(c.getCode(), c);

@@ -1,3 +1,4 @@
+
 package logging;
 
 import java.util.logging.Logger;
@@ -5,6 +6,7 @@ import java.util.logging.Logger;
 import org.apache.log4j.BasicConfigurator;
 
 public class Log {
+
 	static Logger log;
 	static {
 		log = Logger.getLogger("");

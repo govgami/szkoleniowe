@@ -1,3 +1,4 @@
+
 package persistence.db.queries;
 
 import java.util.List;
@@ -36,8 +37,7 @@ public class BasicOperations {
 		return list;
 	}
 
-	protected static List<Object[]> presentQueryComplexResultsAndJustCloseSession(Query<Object[]> query,
-			Session session) {
+	protected static List<Object[]> presentQueryComplexResultsAndJustCloseSession(Query<Object[]> query, Session session) {
 		List<Object[]> list = query.list();
 		session.close();
 		return list;
@@ -51,17 +51,6 @@ public class BasicOperations {
 		else
 			return null;
 		// else
-		// throw new RuntimeException("Query didn't provide searched object: " +
-		// query.getQueryString());
-	}
-
-	protected static <T> T checkQueryResultObjectExistenceAndJustCloseSession(Query<T> query, Session session) {
-		List<T> list = query.getResultList();
-		session.close();
-		if (!list.isEmpty())
-			return list.get(0);
-		else
-			return null;
 		// throw new RuntimeException("Query didn't provide searched object: " +
 		// query.getQueryString());
 	}

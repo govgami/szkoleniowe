@@ -1,3 +1,4 @@
+
 package nbp.valueReading.xml;
 
 import java.util.ArrayList;
@@ -12,82 +13,89 @@ import nbp.CurrencyPrice;
 import nbp.valueReading.ValueReader;
 import nbp.valueReading.xml.table.TableTextConversion;
 
-public class SAXCurrencyPricesDataReader extends DefaultHandler implements ValueReader{
-	TableTextConversion mapper=null;
-	HashMap<String, String> readedObject=new HashMap<String, String>();
-	
-List<CurrencyPrice> prices=new ArrayList<CurrencyPrice>();
+public class SAXCurrencyPricesDataReader extends DefaultHandler implements ValueReader {
 
-	CurrencyPrice t=null;
-	
-	String dateElement="EffectiveDate";
+	TableTextConversion mapper = null;
+	HashMap<String, String> readedObject = new HashMap<String, String>();
+
+	List<CurrencyPrice> prices = new ArrayList<CurrencyPrice>();
+
+	CurrencyPrice t = null;
+
+	String dateElement = "EffectiveDate";
 	boolean dateReload;
-	String effectiveDate=null;
-	
-	String borderElement="Rate";
+	String effectiveDate = null;
+
+	String borderElement = "Rate";
 	boolean processingElement;
-	String currentElement=null;
+	String currentElement = null;
 
 	public SAXCurrencyPricesDataReader(TableTextConversion mp) {
-		mapper=mp;
+		mapper = mp;
 	}
 
+	@Override
 	public void startDocument() throws SAXException {
 	}
 
+	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
-		if(qName.equals(dateElement)) {
-			dateReload=true;
-		}
-		else if(qName.equals(borderElement)) {
+		if (qName.equals(dateElement)) {
+			dateReload = true;
+		} else if (qName.equals(borderElement)) {
 			readyForNewObject();
 		}
-		//Log.info(localName+"::"+qName);
-		currentElement=qName;
+		// Log.info(localName+"::"+qName);
+		currentElement = qName;
 	}
 
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-if(qName.equals(dateElement)) {
-	dateReload=false;
-}
-//else if(qName.equals(borderElement)) {
-//	readyForNewObject();
-//}
+		if (qName.equals(dateElement)) {
+			dateReload = false;
+		}
+		// else if(qName.equals(borderElement)) {
+		// readyForNewObject();
+		// }
 		super.endElement(uri, localName, qName);
 	}
-	
+
 	void readyForNewObject() {
-		processingElement=true;
-		if(readedObject.isEmpty()) {/*Log.info("SAXCurrencyPricesDataReader: empty object");*/return;}
-		else {
-		readedObject.put(dateElement, effectiveDate);
-		t=mapper.serviceMapping(readedObject);
-		prices.add(t);
-		readedObject.clear();
-	}
+		processingElement = true;
+		if (readedObject.isEmpty()) {
+			/* Log.info("SAXCurrencyPricesDataReader: empty object"); */return;
+		} else {
+			readedObject.put(dateElement, effectiveDate);
+			t = mapper.serviceMapping(readedObject);
+			prices.add(t);
+			readedObject.clear();
+		}
 	}
 
+	@Override
 	public void endDocument() throws SAXException {
 		readyForNewObject();
 	}
 
+	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException {
 		if (dateReload) {
-			effectiveDate=new String(ch, start,length);
+			effectiveDate = new String(ch, start, length);
 		}
 		if (processingElement) {
 			readedObject.put(currentElement, new String(ch, start, length));
-			//Log.info(currentElement+":processed:"+new String(ch, start, length));
+			// Log.info(currentElement+":processed:"+new String(ch, start, length));
 		}
 	}
 
+	@Override
 	public List<CurrencyPrice> getFoundValue() {
 		return prices;
 	}
 
+	@Override
 	public String getFoundValueString() {
 		return prices.toString();
 	}
-	
+
 }

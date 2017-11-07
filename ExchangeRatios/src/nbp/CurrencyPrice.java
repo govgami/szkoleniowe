@@ -1,3 +1,4 @@
+
 package nbp;
 
 import java.math.BigDecimal;
@@ -5,6 +6,7 @@ import java.math.BigDecimal;
 import parser.Str2BigDecimal;
 
 public class CurrencyPrice {
+
 	private String currencyName;
 	private String currencySign;
 	private BigDecimal avgCurrencyPrice;
@@ -22,8 +24,7 @@ public class CurrencyPrice {
 		this.effectiveDate = effectiveDate;
 	}
 
-	public CurrencyPrice(String currencyName, String currencySign, BigDecimal sellPrice, BigDecimal buyPrice,
-			String effectiveDate) {
+	public CurrencyPrice(String currencyName, String currencySign, BigDecimal sellPrice, BigDecimal buyPrice, String effectiveDate) {
 		this.currencyName = currencyName;
 		this.currencySign = currencySign;
 		this.sellPrice = sellPrice;
@@ -35,10 +36,9 @@ public class CurrencyPrice {
 		return new CurrencyPrice(currencyName, currencySign, new Str2BigDecimal(avgPrice).parse(), effectiveDate);
 	}
 
-	public static CurrencyPrice minMax(String currencyName, String currencySign, String sellPrice, String buyPrice,
-			String effectiveDate) {
-		return new CurrencyPrice(currencyName, currencySign, new Str2BigDecimal(sellPrice).parse(),
-				new Str2BigDecimal(buyPrice).parse(), effectiveDate);
+	public static CurrencyPrice minMax(String currencyName, String currencySign, String sellPrice, String buyPrice, String effectiveDate) {
+		return new CurrencyPrice(currencyName, currencySign, new Str2BigDecimal(sellPrice).parse(), new Str2BigDecimal(buyPrice).parse(),
+				effectiveDate);
 	}
 
 	public String getCurrencySign() {

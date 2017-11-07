@@ -1,3 +1,4 @@
+
 package nbp.valueReading.xml;
 
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import nbp.valueReading.ValueReader;
 import parser.Str2BigDecimal;
 
 public class SequentialSAXNumericReader extends DefaultHandler implements ValueReader {
+
 	BigDecimal value = null;
 	boolean sequenceStarted;
 	String sequenceMarkName = null;
@@ -21,9 +23,11 @@ public class SequentialSAXNumericReader extends DefaultHandler implements ValueR
 		this.searchedQName = searchedQName;
 	}
 
+	@Override
 	public void startDocument() throws SAXException {
 	}
 
+	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 		if (qName.equals(sequenceMarkName)) {
 			sequenceStarted = true;
@@ -42,19 +46,23 @@ public class SequentialSAXNumericReader extends DefaultHandler implements ValueR
 		super.endElement(uri, localName, qName);
 	}
 
+	@Override
 	public void endDocument() throws SAXException {
 	}
 
+	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException {
 		if (valueFound & sequenceStarted) {
 			value = new Str2BigDecimal(new String(ch, start, length)).parse();
 		}
 	}
 
+	@Override
 	public BigDecimal getFoundValue() {
 		return value;
 	}
 
+	@Override
 	public String getFoundValueString() {
 		return value.toString();
 	}
