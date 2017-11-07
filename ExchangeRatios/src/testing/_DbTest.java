@@ -38,7 +38,7 @@ public class _DbTest {
 	@BeforeMethod
 	public void setUp() {
 		objects = new TestObjects();
-		dateConst.set(2004, 9, 1);
+		dateConst.set(2016, 9, 1);
 		date1 = new Date(dateConst.getTime().getTime());
 		Calendar dateConst2 = Calendar.getInstance();
 		dateConst2.set(2017, 7, 30);

@@ -20,20 +20,20 @@ public class PGQuery extends BasicOperations {
 	public static final void ConnectCountryCurrency(Country country, Currency currency) {
 
 		country.addCurrency(currency);
-		currency.addCountry(country);
+		// currency.addCountry(country);
 		ObjectOperations.InsertOrUpdate(country);
-		ObjectOperations.InsertOrUpdate(currency);
-		ObjectOperations.InsertOrUpdate(new CountryCurrency(country, currency));
+		// ObjectOperations.InsertOrUpdate(currency);
+		// ObjectOperations.InsertOrUpdate(new CountryCurrency(country, currency));
 
 	}
 
 	public static final void DisconnectCountryCurrency(Country country, Currency currency) {
-		country.removeCurrency(currency);
-		currency.removeCountry(country);
+		// country.removeCurrency(currency);
+		// currency.removeCountry(country);
 		CountryCurrency ccurr = ObjectOperations.GetObject(CountryCurrency.class,
 				new CountryCurrencyId(country, currency));
-		ObjectOperations.InsertOrUpdate(country);
-		ObjectOperations.InsertOrUpdate(currency);
+		// ObjectOperations.InsertOrUpdate(country);
+		// ObjectOperations.InsertOrUpdate(currency);
 		ObjectOperations.DeleteObject(ccurr);
 	}
 
@@ -77,7 +77,7 @@ public class PGQuery extends BasicOperations {
 		executeStatement(conn,
 				"CREATE TABLE currency_ratios (ID numeric primary key not null, CURRENCY_ID    int    not null, EFFECTIVE_DATE DATE   not null, ASK_PRICE  numeric, BID_PRICE numeric, AVG_PRICE numeric, foreign key(CURRENCY_ID) references Currency(ID) )");
 		executeStatement(conn,
-				"CREATE TABLE country_currency (CURRENCY_ID int not null, COUNTRY_ID INT not null, primary key (COUNTRY_ID, CURRENCY_ID), foreign key(COUNTRY_ID) references Country(ID), foreign key(CURRENCY_ID) references Currency(ID) )");
+				"CREATE TABLE country_currency (CURRENCY_ID int not null, COUNTRY_ID INT not null, primary key (COUNTRY_ID, CURRENCY_ID), foreign key(COUNTRY_ID) references Country(ID) on delete restrict, foreign key(CURRENCY_ID) references Currency(ID) on delete restrict )");
 
 		executeStatement(conn, "CREATE INDEX effective_day on currency_ratios (effective_date)");
 

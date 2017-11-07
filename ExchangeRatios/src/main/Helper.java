@@ -17,7 +17,7 @@ import persistence.db.table.currency.CurrencyRatios;
 public class Helper {
 
 	public static void gatherData(Date from, Date to) {
-		int batch_No = 0;
+		int batch_No = 1;
 		System.out.println(from + ":" + to);
 		Date intermediary = new Date(from.getTime());
 		Date intermediaryEnd = new Date(intermediary.getTime());
@@ -72,7 +72,6 @@ public class Helper {
 			map.clear();
 			map.putAll(getCurrencies());
 			cr.setCurrency(map.get(cp.getCurrencySign()));
-			System.out.println(cp.getCurrencyName());
 		}
 	}
 
