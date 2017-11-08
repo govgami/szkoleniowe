@@ -1,5 +1,5 @@
 
-package persistence.db;
+package persistence.db.connection;
 
 public interface DefaultDbContact {
 

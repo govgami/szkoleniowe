@@ -1,5 +1,5 @@
 
-package persistence.db;
+package persistence.db.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

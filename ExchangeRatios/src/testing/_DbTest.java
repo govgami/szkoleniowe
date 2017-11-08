@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import main.Helper;
-import persistence.db.DbAccess;
+import persistence.db.connection.DbAccess;
 import persistence.db.queries.ObjectOperations;
 import persistence.db.queries.PGQSelect;
 import persistence.db.queries.PGQuery;

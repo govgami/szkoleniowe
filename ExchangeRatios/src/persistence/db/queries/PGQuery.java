@@ -10,7 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import logging.Log;
-import persistence.db.DbAccess;
+import persistence.db.connection.DbAccess;
 import persistence.db.table.currency.Country;
 import persistence.db.table.currency.CountryCurrency;
 import persistence.db.table.currency.CountryCurrencyId;
