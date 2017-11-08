@@ -11,7 +11,7 @@ import persistence.db.DbAccess;
 public class BasicOperations {
 
 	protected static Session openTransaction() {
-		Session session = DbAccess.getSessionFactory().openSession();
+		Session session = DbAccess.openSession();
 		session.beginTransaction();
 		return session;
 	}

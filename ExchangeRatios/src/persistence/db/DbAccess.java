@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -21,10 +22,10 @@ import persistence.db.table.currency.CurrencyRatios;
 public class DbAccess {
 
 	private static Connection conn;
-	private static DbLogin login;
+	private static PostgreDbLogin login;
 
 	public static void setDbUser(String host, String dbName, String username, String password) {
-		login = new DbLogin(host, dbName, username, password);
+		login = new PostgreDbLogin(host, dbName, username, password);
 	}
 
 	public static Connection makeDefaultPostgreConnection() {
@@ -45,6 +46,10 @@ public class DbAccess {
 
 	public void createPreProgrammed() {
 		PGQuery.initDatabaseStructure(conn);
+	}
+
+	public void dropDbStructure() {
+		PGQuery.dropDatabaseStructure(conn);
 	}
 
 	public ResultSet execQuery(String query) throws SQLException {
@@ -72,9 +77,9 @@ public class DbAccess {
 			new Configuration().addAnnotatedClass(Country.class).addAnnotatedClass(Currency.class).addAnnotatedClass(CurrencyRatios.class)
 					.addAnnotatedClass(CountryCurrency.class).setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect")
 					.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
-					.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/postgres")
-					.setProperty("hibernate.connection.username", "postgres")
-					.setProperty("hibernate.connection.password", "postgres")/* .configure(new File("src/db/table/hibernate.cfg.xml")) */;
+					.setProperty("hibernate.connection.url", DefaultDbContact.HOST + DefaultDbContact.DB_NAME)
+					.setProperty("hibernate.connection.username", DefaultDbContact.USERNAME)
+					.setProperty("hibernate.connection.password", DefaultDbContact.PASSWORD);
 	private static ServiceRegistry serviceRegistry =
 			new StandardServiceRegistryBuilder().applySettings(CONFIGURATION.getProperties()).build();
 	private static final SessionFactory SESSION_FACTORY = buildSessionFactory();
@@ -89,8 +94,12 @@ public class DbAccess {
 		}
 	}
 
-	public static SessionFactory getSessionFactory() {
+	protected static SessionFactory getSessionFactory() {
 		return SESSION_FACTORY;
+	}
+
+	public static Session openSession() {
+		return SESSION_FACTORY.openSession();
 	}
 
 	public static void shutdown() {
