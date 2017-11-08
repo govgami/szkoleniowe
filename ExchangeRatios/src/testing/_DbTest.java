@@ -291,7 +291,7 @@ public class _DbTest {
 				currencies.add((Currency) results.get(0)[i]);
 			else if (results.get(0)[i].getClass() == CurrencyRatios.class)
 				ratios.add((CurrencyRatios) results.get(0)[i]);
-			System.out.println(i + " " + results.get(0)[i]);
+			System.out.println(i + " " + results.get(0)[i] + " " + ((CurrencyRatios) results.get(0)[i]).getCurrency());
 		}
 
 		// assertThat(countries).isNotNull();// assertThat(countries).isNotEmpty().hasSize(1);

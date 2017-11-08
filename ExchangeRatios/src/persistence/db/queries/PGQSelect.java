@@ -81,7 +81,6 @@ public class PGQSelect extends PGQuery {
 	}
 
 	public static final List<CurrencyRatios> selectHighestPriceDifferenceOfCurrencyRatio(String code, Integer limit) {
-		validateQueryArgAgainstSimpleSQLInjection(code);
 
 		Session session = openTransaction();
 		Query<Object[]> query = session.getNamedQuery(CurrencyRatios.GET_HIGHEST_DIFFERENCE_OF_ASK_AND_BID_PRICE);
@@ -139,6 +138,5 @@ public class PGQSelect extends PGQuery {
 	//
 	// TODO select countries with multiple currencies
 	// TODO select countries using specified currency
-	// TODO select county, currencies and
 
 }
