@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import logging.Log;
 
-public class Credecentials {
+public class DbLogin {
 
 	protected String driverName = "org.postgresql.Driver";
 	protected String host = "jdbc:postgresql://localhost:5432/";
@@ -15,10 +15,10 @@ public class Credecentials {
 	protected String username = "postgres";// advent
 	protected String password = "postgres";// axt8
 
-	public Credecentials() {
+	public DbLogin() {
 	}
 
-	public Credecentials(String host, String db_name, String username, String password) {
+	public DbLogin(String host, String db_name, String username, String password) {
 		this.host = host;
 		this.dbName = db_name;
 		this.username = username;

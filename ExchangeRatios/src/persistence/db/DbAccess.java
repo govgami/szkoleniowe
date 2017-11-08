@@ -50,6 +50,7 @@ public class DbAccess {
 		}
 	}
 
+	// DEV try something ith custom access
 	public boolean connect() throws SQLException, ClassNotFoundException {
 		checkCredecentials();
 		Class.forName("org.postgresql.Driver");

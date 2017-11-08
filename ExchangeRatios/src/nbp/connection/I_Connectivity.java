@@ -1,7 +1,7 @@
 
 package nbp.connection;
 
-public interface Connectivity {
+public interface I_Connectivity {
 
 	public String download();
 }

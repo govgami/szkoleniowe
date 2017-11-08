@@ -9,7 +9,7 @@ import java.net.URL;
 
 import logging.Log;
 
-public class HttpConnection implements Connectivity {
+public class HttpConnection implements I_Connectivity {
 
 	URL request;
 

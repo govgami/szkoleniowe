@@ -25,7 +25,7 @@ import org.hibernate.annotations.NamedQuery;
 	@NamedQuery(name = Country.GET_BY_ID, query = "from Country where id = :id"),
 	@NamedQuery(name = Country.GET_BY_NAME, query = "from Country where name = :name"),
 	@NamedQuery(name = Country.FETCH_BY_NAME, query = "select c from Country c left join fetch c.currencies where c.name = :name"),
-	@NamedQuery(name = Country.FETCH_ALL_WITH_COUNTRY_ON_DAY, query = "select r from CurrencyRatios r inner join Country c where r.currency.countries = :name and r.effectiveDate= :effectiveDate")
+	@NamedQuery(name = Country.FETCH_ALL_WITH_COUNTRY_ON_DAY, query = "select c, r from Country c, CountryCurrency cc, Currency cu, CurrencyRatios r where c.name = :name and c.id=cc.country.id and cu.id=cc.currency.id and r.currency.id=cu.id and r.effectiveDate= :effectiveDate")
 })
 @Entity
 @Table(name = "COUNTRY", uniqueConstraints = {

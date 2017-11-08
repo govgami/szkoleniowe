@@ -40,12 +40,13 @@ public class PGQSelect extends PGQuery {
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final Object fetchCountryAssociates_ByNameAndDay(String name, Date day) {
+	public static final List<Object[]> getCountryAssociates_ByNameAndDay(String name, Date day) {
 		Session session = openTransaction();
-		Query<Object> query = session.getNamedQuery(Country.FETCH_ALL_WITH_COUNTRY_ON_DAY);
+		Query<Object[]> query = session.getNamedQuery(Country.FETCH_ALL_WITH_COUNTRY_ON_DAY);
 		query.setParameter(Country.FIELD_NAME, name);
 		query.setParameter(CurrencyRatios.FIELD_DATE, day);
-		return presentQueryResultAndJustCloseSession(query, session);
+		System.out.println(query.toString());
+		return presentQueryComplexResultsAndJustCloseSession(query, session);
 	}
 
 	public static final Country selectCountry_ByName(String name) {
