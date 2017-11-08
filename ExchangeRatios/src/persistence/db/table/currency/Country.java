@@ -25,8 +25,8 @@ import org.hibernate.annotations.NamedQuery;
 	@NamedQuery(name = Country.GET_BY_ID, query = "from Country where id = :id"),
 	@NamedQuery(name = Country.GET_BY_NAME, query = "from Country where name = :name"),
 	@NamedQuery(name = Country.FETCH_BY_NAME, query = "select c from Country c left join fetch c.currencies where c.name = :name"),
-	@NamedQuery(name = Country.GET_WITH_CURRENCYCOUNT, query = "select c, count(elements(c.currencies)) as curr from Country c group by c "),
-	@NamedQuery(name = Country.GET_WITH_MULTICURRENCIES, query = "select c, count(elements(c.currencies)) as curr from Country c group by c order by curr")
+	@NamedQuery(name = Country.GET_WITH_CURRENCYCOUNT, query = "select c from Country c order by c.currencies.size desc"),
+	@NamedQuery(name = Country.GET_WITH_MULTICURRENCIES, query = "select c from Country c where c.currencies.size>1 order by c.currencies.size desc")
 })
 @Entity
 @Table(name = "COUNTRY", uniqueConstraints = {

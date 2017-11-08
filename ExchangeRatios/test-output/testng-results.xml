@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="0" total="16" passed="16">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="3857" started-at="2017-11-08T11:06:24Z" finished-at="2017-11-08T11:06:28Z">
+  <suite name="Default suite" duration-ms="4079" started-at="2017-11-08T12:28:25Z" finished-at="2017-11-08T12:28:29Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="3857" started-at="2017-11-08T11:06:24Z" finished-at="2017-11-08T11:06:28Z">
+    <test name="Default test" duration-ms="4079" started-at="2017-11-08T12:28:25Z" finished-at="2017-11-08T12:28:29Z">
       <class name="testing._DbTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="17" started-at="2017-11-08T12:06:24Z" finished-at="2017-11-08T12:06:24Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="26" started-at="2017-11-08T13:28:25Z" finished-at="2017-11-08T13:28:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldCreateDefaultConnection()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldCreateDefaultConnection" duration-ms="2730" started-at="2017-11-08T12:06:24Z" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="shouldCreateDefaultConnection()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldCreateDefaultConnection" duration-ms="3194" started-at="2017-11-08T13:28:25Z" finished-at="2017-11-08T13:28:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldCreateDefaultConnection -->
-        <test-method status="PASS" signature="shouldThrowRuntimeExceptionDueToWrongParameter()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldThrowRuntimeExceptionDueToWrongParameter" duration-ms="4" started-at="2017-11-08T12:06:27Z" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="shouldThrowRuntimeExceptionDueToWrongParameter()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldThrowRuntimeExceptionDueToWrongParameter" duration-ms="5" started-at="2017-11-08T13:28:28Z" finished-at="2017-11-08T13:28:28Z">
           <exception class="java.lang.RuntimeException">
             <message>
               <![CDATA[Invalid argument: drop database]]>
@@ -23,7 +23,7 @@
             <full-stacktrace>
               <![CDATA[java.lang.RuntimeException: Invalid argument: drop database
 	at persistence.db.queries.PGQuery.validateQueryArgAgainstSimpleSQLInjection(PGQuery.java:144)
-	at testing._DbTest.shouldThrowRuntimeExceptionDueToWrongParameter(_DbTest.java:58)
+	at testing._DbTest.shouldThrowRuntimeExceptionDueToWrongParameter(_DbTest.java:57)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -55,119 +55,119 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldThrowRuntimeExceptionDueToWrongParameter -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T12:06:27Z" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T13:28:28Z" finished-at="2017-11-08T13:28:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-08T12:06:27Z" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-08T13:28:28Z" finished-at="2017-11-08T13:28:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldGetHighestPriceDifferenceOfCurrencyRatios()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetHighestPriceDifferenceOfCurrencyRatios" duration-ms="358" started-at="2017-11-08T12:06:27Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="shouldGetHighestPriceDifferenceOfCurrencyRatios()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetHighestPriceDifferenceOfCurrencyRatios" duration-ms="229" started-at="2017-11-08T13:28:28Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T13:28:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetHighestPriceDifferenceOfCurrencyRatios -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T12:06:27Z" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T13:28:28Z" finished-at="2017-11-08T13:28:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldGetLimittedSortedCurrency()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetLimittedSortedCurrency" duration-ms="8" started-at="2017-11-08T12:06:27Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="shouldGetLimittedSortedCurrency()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetLimittedSortedCurrency" duration-ms="6" started-at="2017-11-08T13:28:28Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T13:28:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetLimittedSortedCurrency -->
-        <test-method status="PASS" signature="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice" duration-ms="16" started-at="2017-11-08T12:06:27Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-08T13:28:28Z" finished-at="2017-11-08T13:28:28Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetLimittedSortedCurrencyRatiosLowestBidPrice" duration-ms="11" started-at="2017-11-08T13:28:28Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T13:28:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetLimittedSortedCurrencyRatiosLowestBidPrice -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T12:06:27Z" finished-at="2017-11-08T12:06:27Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="7" started-at="2017-11-08T12:06:27Z" finished-at="2017-11-08T12:06:27Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldGetSortedCurrency()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetSortedCurrency" duration-ms="116" started-at="2017-11-08T12:06:27Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="shouldGetSortedCurrency()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetSortedCurrency" duration-ms="47" started-at="2017-11-08T13:28:28Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T13:28:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetSortedCurrency -->
-        <test-method status="PASS" signature="shouldInsertNewCountry()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldInsertNewCountry" duration-ms="110" started-at="2017-11-08T12:06:27Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T13:28:28Z" finished-at="2017-11-08T13:28:28Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-08T13:28:28Z" finished-at="2017-11-08T13:28:28Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="shouldInsertNewCountry()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldInsertNewCountry" duration-ms="78" started-at="2017-11-08T13:28:28Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldInsertNewCountry -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T12:06:27Z" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-08T13:28:29Z" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="4" started-at="2017-11-08T12:06:27Z" finished-at="2017-11-08T12:06:27Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldInsertNewCurrency()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldInsertNewCurrency" duration-ms="41" started-at="2017-11-08T12:06:27Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="shouldInsertNewCurrency()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldInsertNewCurrency" duration-ms="33" started-at="2017-11-08T13:28:29Z" depends-on-methods="testing._DbTest.shouldCreateDefaultConnection" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldInsertNewCurrency -->
-        <test-method status="PASS" signature="shouldEnsureFetchingResults()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldEnsureFetchingResults" duration-ms="15" started-at="2017-11-08T12:06:27Z" depends-on-methods="testing._DbTest.shouldInsertNewCountry, testing._DbTest.shouldInsertNewCurrency" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T13:28:29Z" finished-at="2017-11-08T13:28:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="shouldEnsureFetchingResults()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldEnsureFetchingResults" duration-ms="19" started-at="2017-11-08T13:28:29Z" depends-on-methods="testing._DbTest.shouldInsertNewCountry, testing._DbTest.shouldInsertNewCurrency" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldEnsureFetchingResults -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T12:06:27Z" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-08T13:28:29Z" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T12:06:27Z" finished-at="2017-11-08T12:06:27Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldGetCurrencyRatio()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetCurrencyRatio" duration-ms="26" started-at="2017-11-08T12:06:27Z" depends-on-methods="testing._DbTest.shouldInsertNewCurrency" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="shouldGetCurrencyRatio()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetCurrencyRatio" duration-ms="32" started-at="2017-11-08T13:28:29Z" depends-on-methods="testing._DbTest.shouldInsertNewCurrency" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetCurrencyRatio -->
-        <test-method status="PASS" signature="shouldConnectCurrencyCountry()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldConnectCurrencyCountry" duration-ms="71" started-at="2017-11-08T12:06:27Z" depends-on-methods="testing._DbTest.shouldInsertNewCountry, testing._DbTest.shouldInsertNewCurrency, testing._DbTest.shouldEnsureFetchingResults" finished-at="2017-11-08T12:06:28Z">
+        <test-method status="PASS" signature="shouldConnectCurrencyCountry()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldConnectCurrencyCountry" duration-ms="132" started-at="2017-11-08T13:28:29Z" depends-on-methods="testing._DbTest.shouldInsertNewCountry, testing._DbTest.shouldInsertNewCurrency, testing._DbTest.shouldEnsureFetchingResults" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldConnectCurrencyCountry -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T12:06:27Z" finished-at="2017-11-08T12:06:27Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T13:28:29Z" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldTemporaryConnectSecondCurrencyCountry()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldTemporaryConnectSecondCurrencyCountry" duration-ms="86" started-at="2017-11-08T12:06:28Z" depends-on-methods="testing._DbTest.shouldInsertNewCountry, testing._DbTest.shouldInsertNewCurrency, testing._DbTest.shouldEnsureFetchingResults" finished-at="2017-11-08T12:06:28Z">
+        <test-method status="PASS" signature="shouldGetAllRatiosConnectedToCountryOnDay()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetAllRatiosConnectedToCountryOnDay" duration-ms="8" started-at="2017-11-08T13:28:29Z" depends-on-methods="testing._DbTest.shouldConnectCurrencyCountry, testing._DbTest.shouldGetCurrencyRatio" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- shouldTemporaryConnectSecondCurrencyCountry -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T12:06:28Z" finished-at="2017-11-08T12:06:28Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-08T12:06:28Z" finished-at="2017-11-08T12:06:28Z">
+        </test-method> <!-- shouldGetAllRatiosConnectedToCountryOnDay -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T13:28:29Z" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldGetAllConnectedToCountryOnDay()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetAllConnectedToCountryOnDay" duration-ms="16" started-at="2017-11-08T12:06:28Z" depends-on-methods="testing._DbTest.shouldTemporaryConnectSecondCurrencyCountry, testing._DbTest.shouldGetCurrencyRatio" finished-at="2017-11-08T12:06:28Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- shouldGetAllConnectedToCountryOnDay -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-08T12:06:28Z" finished-at="2017-11-08T12:06:28Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T13:28:29Z" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldGetCurrencyCountForEachCountry()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetCurrencyCountForEachCountry" duration-ms="8" started-at="2017-11-08T12:06:28Z" depends-on-methods="testing._DbTest.shouldTemporaryConnectSecondCurrencyCountry, testing._DbTest.shouldGetCurrencyRatio" finished-at="2017-11-08T12:06:28Z">
+        <test-method status="PASS" signature="shouldGetCurrencyCountForEachCountry()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetCurrencyCountForEachCountry" duration-ms="3" started-at="2017-11-08T13:28:29Z" depends-on-methods="testing._DbTest.shouldConnectCurrencyCountry, testing._DbTest.shouldGetCurrencyRatio" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldGetCurrencyCountForEachCountry -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-08T12:06:28Z" finished-at="2017-11-08T12:06:28Z">
+        <test-method status="PASS" signature="shouldGetOnlyMultiCurrencyCountries()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldGetOnlyMultiCurrencyCountries" duration-ms="4" started-at="2017-11-08T13:28:29Z" depends-on-methods="testing._DbTest.shouldGetCurrencyCountForEachCountry" finished-at="2017-11-08T13:28:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldGetOnlyMultiCurrencyCountries -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T13:28:29Z" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldDisconnectCurrencyCountryRelations()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldDisconnectCurrencyCountryRelations" duration-ms="42" started-at="2017-11-08T12:06:28Z" depends-on-methods="testing._DbTest.shouldGetAllConnectedToCountryOnDay, testing._DbTest.shouldTemporaryConnectSecondCurrencyCountry, testing._DbTest.shouldConnectCurrencyCountry" finished-at="2017-11-08T12:06:28Z">
+        <test-method status="PASS" signature="shouldDisconnectCurrencyCountryRelations()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldDisconnectCurrencyCountryRelations" duration-ms="59" started-at="2017-11-08T13:28:29Z" depends-on-methods="testing._DbTest.shouldGetAllRatiosConnectedToCountryOnDay, testing._DbTest.shouldConnectCurrencyCountry, testing._DbTest.shouldGetOnlyMultiCurrencyCountries" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldDisconnectCurrencyCountryRelations -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-08T12:06:28Z" finished-at="2017-11-08T12:06:28Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="0" started-at="2017-11-08T13:28:29Z" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="shouldRemoveObjects()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldRemoveObjects" duration-ms="64" started-at="2017-11-08T12:06:28Z" depends-on-methods="testing._DbTest.shouldDisconnectCurrencyCountryRelations, testing._DbTest.shouldGetCurrencyRatio" finished-at="2017-11-08T12:06:28Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testing._DbTest@8bd1b6a]" name="setUp" is-config="true" duration-ms="1" started-at="2017-11-08T13:28:29Z" finished-at="2017-11-08T13:28:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="shouldRemoveObjects()[pri:0, instance:testing._DbTest@8bd1b6a]" name="shouldRemoveObjects" duration-ms="86" started-at="2017-11-08T13:28:29Z" depends-on-methods="testing._DbTest.shouldDisconnectCurrencyCountryRelations, testing._DbTest.shouldGetCurrencyRatio" finished-at="2017-11-08T13:28:29Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldRemoveObjects -->

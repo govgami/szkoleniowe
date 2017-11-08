@@ -135,10 +135,17 @@ public class PGQSelect extends PGQuery {
 
 	}
 
-	public static final List<Object[]> getCountriesWithCurrencyCount() {
+	public static final List<Country> getCountriesWithCurrencyCount() {
 		Session session = openTransaction();
-		Query<Object[]> query = session.getNamedQuery(Country.GET_WITH_CURRENCYCOUNT);
-		return presentQueryComplexResultsAndJustCloseSession(query, session);
+		Query<Country> query = session.getNamedQuery(Country.GET_WITH_CURRENCYCOUNT);
+		return presentQueryResultsAndJustCloseSession(query, session);
+
+	}
+
+	public static final List<Country> getCountriesWithMultiCurrencyCount() {
+		Session session = openTransaction();
+		Query<Country> query = session.getNamedQuery(Country.GET_WITH_MULTICURRENCIES);
+		return presentQueryResultsAndJustCloseSession(query, session);
 
 	}
 	// TODO select countries using specified currency

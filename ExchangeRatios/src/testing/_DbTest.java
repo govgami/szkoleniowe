@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -172,18 +171,16 @@ public class _DbTest {
 	})
 	public void shouldInsertNewCurrency() {
 
-		// Given
-		Currency curr = PGQSelect.selectCurrency_ByCode(examples.currency1.getCode());
-		if (curr != null) {
-			ObjectOperations.deleteObject(curr);
-		}
-
+		Currency curr;
 		// When
-		ObjectOperations.insert(examples.currency1);
+		TestUtils.exampleCurrencyInsert(examples.currency1);
+		TestUtils.exampleCurrencyInsert(examples.currency2);
 
 		// Then
 		curr = PGQSelect.selectCurrency_ByCode(examples.currency1.getCode());
 		assertThat(curr).hasFieldOrPropertyWithValue(Currency.FIELD_CODE, examples.currency1.getCode());
+		curr = PGQSelect.selectCurrency_ByCode(examples.currency2.getCode());
+		assertThat(curr).hasFieldOrPropertyWithValue(Currency.FIELD_CODE, examples.currency2.getCode());
 	}
 
 	@Test(dependsOnMethods = {
@@ -192,15 +189,12 @@ public class _DbTest {
 	public void shouldInsertNewCountry() {
 
 		// When
-		Country c = PGQSelect.selectCountry_ByName(examples.country.getName());
-		if (c != null) {
-			ObjectOperations.deleteObject(c);
-		}
-		ObjectOperations.insert(examples.country);
+		TestUtils.exampleCountryInsert(examples.country1);
+		TestUtils.exampleCountryInsert(examples.country2);
 
 		// Then
-		c = PGQSelect.selectCountry_ByName(examples.country.getName());
-		assertThat(c).hasFieldOrPropertyWithValue(Country.FIELD_NAME, examples.country.getName());
+		c = PGQSelect.selectCountry_ByName(examples.country1.getName());
+		assertThat(c).hasFieldOrPropertyWithValue(Country.FIELD_NAME, examples.country1.getName());
 	}
 
 	@Test(dependsOnMethods = {
@@ -210,7 +204,7 @@ public class _DbTest {
 	public void shouldEnsureFetchingResults() {
 
 		// When
-		Country c = PGQSelect.fetchCountry_ByName(examples.country.getName());
+		Country c = PGQSelect.fetchCountry_ByName(examples.country1.getName());
 		Currency curr = PGQSelect.fetchCurrency_ByCode(examples.currency1.getCode());
 
 		// Then
@@ -226,62 +220,45 @@ public class _DbTest {
 	public void shouldConnectCurrencyCountry() {
 
 		// Given
-		Country c = PGQSelect.fetchCountry_ByName(examples.country.getName());
+		Country c = PGQSelect.fetchCountry_ByName(examples.country1.getName());
 		Currency curr = PGQSelect.fetchCurrency_ByCode(examples.currency1.getCode());
+		Country c2 = PGQSelect.fetchCountry_ByName(examples.country2.getName());
+		Currency curr2 = PGQSelect.fetchCurrency_ByCode(examples.currency2.getCode());
 
 		// When
 		PGQuery.connectCountryCurrency(c, curr);
+		PGQuery.connectCountryCurrency(c, curr2);
+		PGQuery.connectCountryCurrency(c2, curr2);
 
 		// Then
 		CountryCurrency ccurr = ObjectOperations.getObject(CountryCurrency.class, new CountryCurrencyId(c, curr));
 		assertThat(ccurr).isNotNull();
-
-	}
-
-	@Test(dependsOnMethods = {
-		"shouldInsertNewCurrency",
-		"shouldInsertNewCountry",
-		"shouldEnsureFetchingResults"
-	})
-	public void shouldTemporaryConnectSecondCurrencyCountry() {
-
-		// Given
-		curr2 = PGQSelect.selectCurrency_ByCode(examples.currency2.getCode());
-		if (curr2 != null) {
-			ObjectOperations.deleteObject(curr2);
-		}
-		ObjectOperations.insert(examples.currency2);
-
-		curr2 = PGQSelect.fetchCurrency_ByCode(examples.currency2.getCode());
-		c = PGQSelect.fetchCountry_ByName(examples.country.getName());
-
-		// When
-		PGQuery.connectCountryCurrency(c, curr2);
-
-		// Then
-		CountryCurrency ccurr = ObjectOperations.getObject(CountryCurrency.class, new CountryCurrencyId(c, curr2));
+		ccurr = ObjectOperations.getObject(CountryCurrency.class, new CountryCurrencyId(c, curr2));
+		assertThat(ccurr).isNotNull();
+		ccurr = ObjectOperations.getObject(CountryCurrency.class, new CountryCurrencyId(c2, curr2));
 		assertThat(ccurr).isNotNull();
 
-		curr1 = PGQSelect.fetchCurrency_ByCode(examples.currency1.getCode());
-		curr2 = PGQSelect.fetchCurrency_ByCode(examples.currency2.getCode());
-		c = PGQSelect.fetchCountry_ByName(examples.country.getName());
-
+		c = PGQSelect.fetchCountry_ByName(examples.country1.getName());
 		assertThat(c).isNotNull();
 		assertThat(c.getCurrencies()).hasSize(2).doesNotHaveDuplicates();
+
+		c = PGQSelect.fetchCountry_ByName(examples.country2.getName());
+		assertThat(c).isNotNull();
+		assertThat(c.getCurrencies()).hasSize(1);
 
 	}
 
 	// TODO try prolonging transaction when inserting mass of new data
 	@Test(dependsOnMethods = {
 		"shouldGetCurrencyRatio",
-		"shouldTemporaryConnectSecondCurrencyCountry"
+		"shouldConnectCurrencyCountry"
 	})
-	public void shouldGetAllConnectedToCountryOnDay() {
+	public void shouldGetAllRatiosConnectedToCountryOnDay() {
 
 		// When
 		// List<Object[]> results = PGQSelect.getCountryAssociates_ByNameAndDay(examples.country.getName(), examples.ratio1.getDate());
 		List<CurrencyRatios> results =
-				PGQSelect.selectCountryAssociates_ByNameAndDay(examples.country.getName(), examples.ratio1.getDate());
+				PGQSelect.selectCountryAssociates_ByNameAndDay(examples.country1.getName(), examples.ratio1.getDate());
 		// Then
 		assertThat(results).isNotEmpty().hasSize(1);
 
@@ -304,45 +281,48 @@ public class _DbTest {
 
 	@Test(dependsOnMethods = {
 		"shouldGetCurrencyRatio",
-		"shouldTemporaryConnectSecondCurrencyCountry"
+		"shouldConnectCurrencyCountry"
 	})
 	public void shouldGetCurrencyCountForEachCountry() {
 
 		// When
-		List<Object[]> results = PGQSelect.getCountriesWithCurrencyCount(); // Then
+		List<Country> results = PGQSelect.getCountriesWithCurrencyCount();
 
-		List<Country> currencies = new ArrayList<Country>();
-		List<Integer> ratios = new ArrayList<Integer>();
-		for (int i = 1; i < results.get(0).length; i++) {
-			if (results.get(0)[i].getClass() == Country.class)
-				currencies.add((Country) results.get(0)[i]);
-			else if (results.get(0)[i].getClass() == Integer.class)
-				ratios.add((Integer) results.get(0)[i]);
-			System.out.println(i + " " + results.get(0)[i].toString());
-		}
-		System.out.println(results.size());
+		// Then
+		assertThat(results).isNotNull().hasSize(2);
 
-		// assertThat(countries).isNotNull();// assertThat(countries).isNotEmpty().hasSize(1);
-		// assertThat(currencies).isNotEmpty().hasSize(2);
-		// assertThat(ratios).isNotEmpty().hasSize(1);
+	}
+
+	@Test(dependsOnMethods = {
+		"shouldGetCurrencyCountForEachCountry"
+	})
+	public void shouldGetOnlyMultiCurrencyCountries() {
+
+		// When
+		List<Country> results = PGQSelect.getCountriesWithMultiCurrencyCount();
+
+		// Then
+		assertThat(results).isNotNull().hasSize(1);
 
 	}
 
 	@Test(dependsOnMethods = {
 		"shouldConnectCurrencyCountry",
-		"shouldTemporaryConnectSecondCurrencyCountry",
-		"shouldGetAllConnectedToCountryOnDay"
+		"shouldGetAllRatiosConnectedToCountryOnDay",
+		"shouldGetOnlyMultiCurrencyCountries"
 	})
 	public void shouldDisconnectCurrencyCountryRelations() {
 
 		// Given
-		Country c = PGQSelect.fetchCountry_ByName(examples.country.getName());
+		Country c = PGQSelect.fetchCountry_ByName(examples.country1.getName());
+		Country c2 = PGQSelect.fetchCountry_ByName(examples.country2.getName());
 		Currency curr = PGQSelect.fetchCurrency_ByCode(examples.currency1.getCode());
 		Currency curr2 = PGQSelect.fetchCurrency_ByCode(examples.currency2.getCode());
 
 		// When
 		PGQuery.disconnect_CountryCurrency(c, curr);
 		PGQuery.disconnect_CountryCurrency(c, curr2);
+		PGQuery.disconnect_CountryCurrency(c2, curr2);
 
 		// Then
 		CountryCurrency ccurr = ObjectOperations.getObject(CountryCurrency.class, new CountryCurrencyId(c, curr));
@@ -360,18 +340,22 @@ public class _DbTest {
 		// Given
 		Currency curr = PGQSelect.selectCurrency_ByCode(examples.currency1.getCode());
 		Currency curr2 = PGQSelect.selectCurrency_ByCode(examples.currency2.getCode());
-		Country c = PGQSelect.selectCountry_ByName(examples.country.getName());
+		Country c = PGQSelect.selectCountry_ByName(examples.country1.getName());
+		Country c2 = PGQSelect.selectCountry_ByName(examples.country2.getName());
 		// When
 		ObjectOperations.deleteObject(curr);
 		ObjectOperations.deleteObject(curr2);
 		ObjectOperations.deleteObject(c);
+		ObjectOperations.deleteObject(c2);
 		// Then
 		curr = PGQSelect.selectCurrency_ByCode(examples.currency1.getCode());
 		curr2 = PGQSelect.selectCurrency_ByCode(examples.currency2.getCode());
-		c = PGQSelect.selectCountry_ByName(examples.country.getName());
+		c = PGQSelect.selectCountry_ByName(examples.country1.getName());
+		c2 = PGQSelect.selectCountry_ByName(examples.country2.getName());
 		assertThat(curr).isNull();
 		assertThat(curr2).isNull();
 		assertThat(c).isNull();
+		assertThat(c2).isNull();
 
 	}
 
