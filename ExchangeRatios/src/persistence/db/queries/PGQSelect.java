@@ -40,13 +40,13 @@ public class PGQSelect extends PGQuery {
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final List<Object[]> getCountryAssociates_ByNameAndDay(String name, Date day) {
+	public static final List<CurrencyRatios> selectCountryAssociates_ByNameAndDay(String name, Date day) {
 		Session session = openTransaction();
-		Query<Object[]> query = session.getNamedQuery(Country.FETCH_ALL_WITH_COUNTRY_ON_DAY);
+		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.GET_ALL_RATIOS_CURRENCY_RELATED_WITH_COUNTRY_ON_DAY);
 		query.setParameter(Country.FIELD_NAME, name);
 		query.setParameter(CurrencyRatios.FIELD_DATE, day);
 		System.out.println(query.toString());
-		return presentQueryComplexResultsAndJustCloseSession(query, session);
+		return presentQueryResultsAndJustCloseSession(query, session);
 	}
 
 	public static final Country selectCountry_ByName(String name) {
@@ -94,7 +94,7 @@ public class PGQSelect extends PGQuery {
 		return extract;
 	}
 
-	public static final CurrencyRatios attemptToGetCurrencyRatio(CurrencyRatios cr) {
+	public static final CurrencyRatios selectCurrencyRatioByCodeAndDate(CurrencyRatios cr) {
 		Session session = openTransaction();
 		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.GET_BY_CURRENCY_CODE_AND_DATE);
 		query.setParameter(Currency.FIELD_CODE, cr.getCurrency().getCode());
@@ -102,7 +102,7 @@ public class PGQSelect extends PGQuery {
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final CurrencyRatios getCurrencyRatiosInPeriod(String code, Date from, Date to) {
+	public static final CurrencyRatios selectCurrencyRatiosInPeriod(String code, Date from, Date to) {
 		Session session = openTransaction();
 		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.GET_BY_CURRENCY_CODE_AND_DATE);
 		query.setParameter(Currency.FIELD_CODE, code);
@@ -111,7 +111,7 @@ public class PGQSelect extends PGQuery {
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final CurrencyRatios getCurrencyRatio(String code, Date effectiveDay) {
+	public static final CurrencyRatios selectCurrencyRatioByCodeAndDate(String code, Date effectiveDay) {
 		Session session = openTransaction();
 		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.GET_BY_CURRENCY_CODE_AND_DATE);
 		query.setParameter(Currency.FIELD_CODE, code);
@@ -119,7 +119,7 @@ public class PGQSelect extends PGQuery {
 		return presentQueryResultAndJustCloseSession(query, session);
 	}
 
-	public static final Country getCountryById(Long id) {
+	public static final Country selectCountryById(Long id) {
 		Session session = openTransaction();
 		Query<Country> query = session.getNamedQuery(Country.GET_BY_ID);
 		query.setParameter(Country.FIELD_ID, id);
@@ -134,9 +134,13 @@ public class PGQSelect extends PGQuery {
 		return presentQueryResultAndJustCloseSession(query, session);
 
 	}
-	// compress instant deploy
-	//
-	// TODO select countries with multiple currencies
+
+	public static final List<Object[]> getCountriesWithCurrencyCount() {
+		Session session = openTransaction();
+		Query<Object[]> query = session.getNamedQuery(Country.GET_WITH_CURRENCYCOUNT);
+		return presentQueryComplexResultsAndJustCloseSession(query, session);
+
+	}
 	// TODO select countries using specified currency
 
 }

@@ -125,7 +125,7 @@ public class _DbTest {
 
 		// Given
 		Currency curr = PGQSelect.selectCurrency_ByCode(examples.currency1.getCode());
-		CurrencyRatios ratio = PGQSelect.attemptToGetCurrencyRatio(examples.ratio1);
+		CurrencyRatios ratio = PGQSelect.selectCurrencyRatioByCodeAndDate(examples.ratio1);
 		if (ratio != null) {
 			ObjectOperations.deleteObject(ratio);
 		}
@@ -135,10 +135,10 @@ public class _DbTest {
 		examples.ratio1.setCurrency(curr);
 		ObjectOperations.insert(examples.ratio1);
 
-		ratio = PGQSelect.attemptToGetCurrencyRatio(examples.ratio1);
+		ratio = PGQSelect.selectCurrencyRatioByCodeAndDate(examples.ratio1);
 
 		// Then
-		ratio = PGQSelect.getCurrencyRatio(ratio.getCurrency().getCode(), ratio.getDate());
+		ratio = PGQSelect.selectCurrencyRatioByCodeAndDate(ratio.getCurrency().getCode(), ratio.getDate());
 		assertThat(ratio).isNotNull();
 		assertThat(ratio.getCurrency()).hasFieldOrPropertyWithValue(Currency.FIELD_CODE, examples.ratio1.getCurrency().getCode());
 	}
@@ -279,24 +279,52 @@ public class _DbTest {
 	public void shouldGetAllConnectedToCountryOnDay() {
 
 		// When
-		List<Object[]> results = PGQSelect.getCountryAssociates_ByNameAndDay(examples.country.getName(), examples.ratio1.getDate());
-
+		// List<Object[]> results = PGQSelect.getCountryAssociates_ByNameAndDay(examples.country.getName(), examples.ratio1.getDate());
+		List<CurrencyRatios> results =
+				PGQSelect.selectCountryAssociates_ByNameAndDay(examples.country.getName(), examples.ratio1.getDate());
 		// Then
-		assertThat(results).isNotEmpty();
-		Country country = (Country) results.get(0)[0];
-		List<Currency> currencies = new ArrayList<Currency>();
-		List<CurrencyRatios> ratios = new ArrayList<CurrencyRatios>();
-		for (int i = 1; i < results.get(0).length; i++) {
-			if (results.get(0)[i].getClass() == Currency.class)
-				currencies.add((Currency) results.get(0)[i]);
-			else if (results.get(0)[i].getClass() == CurrencyRatios.class)
-				ratios.add((CurrencyRatios) results.get(0)[i]);
-			System.out.println(i + " " + results.get(0)[i] + " " + ((CurrencyRatios) results.get(0)[i]).getCurrency());
-		}
+		assertThat(results).isNotEmpty().hasSize(1);
+
+		// Country country = (Country) results.get(0)[0];
+		// List<Currency> currencies = new ArrayList<Currency>();
+		// List<CurrencyRatios> ratios = new ArrayList<CurrencyRatios>();
+		// for (int i = 1; i < results.get(0).length; i++) {
+		// if (results.get(0)[i].getClass() == Currency.class)
+		// currencies.add((Currency) results.get(0)[i]);
+		// else if (results.get(0)[i].getClass() == CurrencyRatios.class)
+		// ratios.add((CurrencyRatios) results.get(0)[i]);
+		// System.out.println(i + " " + results.get(0)[i] + " " + ((CurrencyRatios) results.get(0)[i]).getCurrency());
+		// }
 
 		// assertThat(countries).isNotNull();// assertThat(countries).isNotEmpty().hasSize(1);
 		// assertThat(currencies).isNotEmpty().hasSize(2);
-		assertThat(ratios).isNotEmpty().hasSize(1);
+		// assertThat(ratios).isNotEmpty().hasSize(1);
+
+	}
+
+	@Test(dependsOnMethods = {
+		"shouldGetCurrencyRatio",
+		"shouldTemporaryConnectSecondCurrencyCountry"
+	})
+	public void shouldGetCurrencyCountForEachCountry() {
+
+		// When
+		List<Object[]> results = PGQSelect.getCountriesWithCurrencyCount(); // Then
+
+		List<Country> currencies = new ArrayList<Country>();
+		List<Integer> ratios = new ArrayList<Integer>();
+		for (int i = 1; i < results.get(0).length; i++) {
+			if (results.get(0)[i].getClass() == Country.class)
+				currencies.add((Country) results.get(0)[i]);
+			else if (results.get(0)[i].getClass() == Integer.class)
+				ratios.add((Integer) results.get(0)[i]);
+			System.out.println(i + " " + results.get(0)[i].toString());
+		}
+		System.out.println(results.size());
+
+		// assertThat(countries).isNotNull();// assertThat(countries).isNotEmpty().hasSize(1);
+		// assertThat(currencies).isNotEmpty().hasSize(2);
+		// assertThat(ratios).isNotEmpty().hasSize(1);
 
 	}
 

@@ -25,7 +25,8 @@ import org.hibernate.annotations.NamedQuery;
 	@NamedQuery(name = Country.GET_BY_ID, query = "from Country where id = :id"),
 	@NamedQuery(name = Country.GET_BY_NAME, query = "from Country where name = :name"),
 	@NamedQuery(name = Country.FETCH_BY_NAME, query = "select c from Country c left join fetch c.currencies where c.name = :name"),
-	@NamedQuery(name = Country.FETCH_ALL_WITH_COUNTRY_ON_DAY, query = "select c, r from Country c, CountryCurrency cc, CurrencyRatios r where c.name = :name and c.id=cc.country.id and r.currency.id=cc.currency.id and r.effectiveDate= :effectiveDate")
+	@NamedQuery(name = Country.GET_WITH_CURRENCYCOUNT, query = "select c, count(elements(c.currencies)) as curr from Country c group by c "),
+	@NamedQuery(name = Country.GET_WITH_MULTICURRENCIES, query = "select c, count(elements(c.currencies)) as curr from Country c group by c order by curr")
 })
 @Entity
 @Table(name = "COUNTRY", uniqueConstraints = {
@@ -42,8 +43,9 @@ public class Country implements Serializable {
 	public static final String GET_ALL = "allCountries";
 	public static final String GET_BY_ID = "countryWithGivenId";
 	public static final String GET_BY_NAME = "countryWithGivenName";
-	public static final String FETCH_BY_NAME = "fetchCountryByName";
-	public static final String FETCH_ALL_WITH_COUNTRY_ON_DAY = "fetchCountryByNameAndDate";
+	public static final String FETCH_BY_NAME = "fetchCountryWithGivenName";
+	public static final String GET_WITH_CURRENCYCOUNT = "getCountriesWithCurriencyCount";
+	public static final String GET_WITH_MULTICURRENCIES = "getCountriesWithMultipleCurriency";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

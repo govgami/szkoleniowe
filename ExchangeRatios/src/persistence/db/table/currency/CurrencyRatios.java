@@ -24,7 +24,9 @@ import org.hibernate.annotations.NamedQuery;
 	@NamedQuery(name = CurrencyRatios.GET_BY_CURRENCY_CODE_AND_DATE, query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code and e.effectiveDate = :effectiveDate"),
 	@NamedQuery(name = CurrencyRatios.GET_LOWEST_BID_PRICE_OF_CHOSEN_CODE, query = "select e from CurrencyRatios e inner join fetch e.currency where code = :code order by e.bidPrice asc"),
 	@NamedQuery(name = CurrencyRatios.GET_HIGHEST_DIFFERENCE_OF_ASK_AND_BID_PRICE, query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join fetch c.currency where code = :code and c.askPrice is not null and c.bidPrice is not null order by difference desc"),
-	@NamedQuery(name = CurrencyRatios.GET_BY_CURRENCY_CODE_AND_PERIOD, query = "select e from CurrencyRatios e where e.currency.code = :code and e.effectiveDate > :from and e.effectiveDate< :to")
+	@NamedQuery(name = CurrencyRatios.GET_BY_CURRENCY_CODE_AND_PERIOD, query = "select e from CurrencyRatios e where e.currency.code = :code and e.effectiveDate > :from and e.effectiveDate< :to"),
+	@NamedQuery(name = CurrencyRatios.GET_ALL_RATIOS_CURRENCY_RELATED_WITH_COUNTRY_ON_DAY, query = "select r from Country c, CountryCurrency cc, CurrencyRatios r where c.name = :name and c.id=cc.country.id and r.currency.id=cc.currency.id and r.effectiveDate= :effectiveDate order by r.currency.id"),
+
 })
 @Entity
 @Table(name = "currency_ratios", uniqueConstraints = {
@@ -49,6 +51,7 @@ public class CurrencyRatios implements Serializable {
 	public static final String GET_LOWEST_BID_PRICE_OF_CHOSEN_CODE = "getLowestBidOfChosenSignCurrencyRatio";
 	public static final String GET_HIGHEST_DIFFERENCE_OF_ASK_AND_BID_PRICE = "getHighestPriceDifferenceOfCurrencyRatio";
 	public static final String GET_BY_CURRENCY_CODE_AND_PERIOD = "getByCurrencyCodeAndPeriod";
+	public static final String GET_ALL_RATIOS_CURRENCY_RELATED_WITH_COUNTRY_ON_DAY = "fetchCountryRatios_ByNameAndDate";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
