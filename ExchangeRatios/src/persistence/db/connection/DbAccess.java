@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +14,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import logging.Log;
-import persistence.db.queries.PGQuery;
 import persistence.db.table.currency.Country;
 import persistence.db.table.currency.CountryCurrency;
 import persistence.db.table.currency.Currency;
@@ -21,11 +21,15 @@ import persistence.db.table.currency.CurrencyRatios;
 
 public class DbAccess {
 
-	private static Connection conn;
-	private static PostgreDbLogin login;
+	private static BasicLogin login;
 
-	public static void setDbUser(String host, String dbName, String username, String password) {
-		login = new PostgreDbLogin(host, dbName, username, password);
+	static {
+		// XXX temporary measure
+		login = new PostgreDbLogin(DefaultDbContact.HOST, DefaultDbContact.DB_NAME, DefaultDbContact.USERNAME, DefaultDbContact.PASSWORD);
+	}
+
+	public static void setDbUser(BasicLogin newLogin) {
+		login = newLogin;
 	}
 
 	public static Connection makeDefaultPostgreConnection() {
@@ -48,16 +52,12 @@ public class DbAccess {
 		return login.openNewSession();
 	}
 
-	public void createPreProgrammed() {
-		PGQuery.initDatabaseStructure(conn);
+	public static Statement createStatement() {
+		return login.createNewStatement();
 	}
 
-	public void dropDbStructure() {
-		PGQuery.dropDatabaseStructure(conn);
-	}
-
-	public ResultSet execQuery(String query) throws SQLException {
-		return this.conn.createStatement().executeQuery(query);
+	public static ResultSet execQuery(String query) throws SQLException {
+		return login.getExistingConnection().createStatement().executeQuery(query);
 	}
 
 	// public int insert(String table, Map<String, String> values) throws SQLException {

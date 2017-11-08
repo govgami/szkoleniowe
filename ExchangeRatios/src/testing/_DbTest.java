@@ -68,14 +68,14 @@ public class _DbTest {
 		assertThat(c).isNotNull();
 	}
 
-	// @Test
+	@Test
 	public void shouldInitializeDbStructure() {
-		PGQuery.initDatabaseStructure(DbAccess.makeDefaultPostgreConnection());
+		PGQuery.initDatabaseStructure(DbAccess.makeCustomPostgreConnection());
 	}
 
-	// @Test
+	@Test
 	public void shouldDestroyDbStructure() {
-		PGQuery.dropDatabaseStructure(DbAccess.makeDefaultPostgreConnection());
+		PGQuery.dropDatabaseStructure(DbAccess.makeCustomPostgreConnection());
 	}
 
 	// DEV better to use component ID?

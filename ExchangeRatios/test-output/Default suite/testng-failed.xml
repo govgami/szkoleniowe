@@ -6,14 +6,7 @@
       <class name="testing._DbTest">
         <methods>
           <include name="setUp"/>
-          <include name="shouldEnsureFetchingResults"/>
-          <include name="shouldGetCurrencyRatio"/>
-          <include name="shouldGetOnlyMultiCurrencyCountries"/>
-          <include name="shouldInsertNewCurrency"/>
-          <include name="shouldConnectCurrencyCountry"/>
-          <include name="shouldGetCurrencyCountForEachCountry"/>
-          <include name="shouldCreateDefaultConnection"/>
-          <include name="shouldInsertNewCountry"/>
+          <include name="shouldDestroyDbStructure"/>
         </methods>
       </class> <!-- testing._DbTest -->
     </classes>

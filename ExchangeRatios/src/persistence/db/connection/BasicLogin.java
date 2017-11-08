@@ -4,6 +4,7 @@ package persistence.db.connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -34,7 +35,7 @@ public abstract class BasicLogin {
 		this.dbName = db_name;
 		this.username = username;
 		this.password = password;
-		makeCustomConfig();
+		this.conf = makeCustomConfig();
 		servRegistry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
 		sessionFactory = conf.buildSessionFactory(servRegistry);
 		this.conn = openNewConnection();
@@ -76,11 +77,33 @@ public abstract class BasicLogin {
 		checkCredecentials();
 		try {
 			Class.forName(driverName);
-
+			clearEarlierConnection();
 			conn = DriverManager.getConnection(host + dbName, username, password);
 			return conn;
 		} catch (SQLException | ClassNotFoundException e) {
 			Log.exception("Connection opening failed", e);
+			throw new RuntimeException(e);
+		}
+	}
+
+	public Connection getExistingConnection() {
+		if (!isConnectionOpened()) {
+			return openNewConnection();
+		} else {
+			return conn;
+		}
+	}
+
+	protected boolean isConnectionOpened() {
+		try {
+			if (conn == null)
+				return false;
+			else if (conn.isClosed())
+				return false;
+			else
+				return true;
+		} catch (SQLException e) {
+			Log.exception("exception when attempting to check whether is Connection Closed", e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -100,6 +123,15 @@ public abstract class BasicLogin {
 
 	public Session openNewSession() {
 		return sessionFactory.openSession();
+	}
+
+	public Statement createNewStatement() {
+		try {
+			return getExistingConnection().createStatement();
+		} catch (SQLException e) {
+			Log.exception("unable to create new statement", e);
+			throw new RuntimeException(e);
+		}
 	}
 
 	protected void checkCredecentials() {
