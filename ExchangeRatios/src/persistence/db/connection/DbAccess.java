@@ -41,7 +41,11 @@ public class DbAccess {
 	}
 
 	public static Connection makeCustomPostgreConnection() {
-		return login.openConnection();
+		return login.openNewConnection();
+	}
+
+	public static Session openCustomSession() {
+		return login.openNewSession();
 	}
 
 	public void createPreProgrammed() {
