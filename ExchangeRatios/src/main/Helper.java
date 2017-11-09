@@ -10,8 +10,8 @@ import nbp.CurrencyPrice;
 import nbp.main.HttpXmlNbpPeriodTableCurrency;
 import parser.Str2SqlDate;
 import persistence.db.queries.ObjectOperations;
-import persistence.db.queries.PGQSelect;
-import persistence.db.queries.PGQuery;
+import persistence.db.queries.PreparedSelections;
+import persistence.db.queries.PreparedQueries;
 import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
 
@@ -35,9 +35,9 @@ public class Helper {
 	}
 
 	protected static void getAllDataFromPeriod(Date from, Date to) {
-		PGQuery.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
-		PGQuery.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("b", from, to)));
-		PGQuery.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("c", from, to)));
+		PreparedQueries.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("a", from, to)));
+		PreparedQueries.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("b", from, to)));
+		PreparedQueries.InsertActualizedCurrencyRatiosGroup(parsePrice2Ratios(HttpXmlNbpPeriodTableCurrency.takeTable("c", from, to)));
 	}
 
 	static List<CurrencyRatios> parsePrice2Ratios(List<CurrencyPrice> list) {
@@ -56,7 +56,7 @@ public class Helper {
 
 	// TODO try merging method and IN selection parameter
 	static HashMap<String, Currency> getCurrencies() {
-		List<Currency> curr = PGQSelect.selectAllCurriencies();
+		List<Currency> curr = PreparedSelections.selectAllCurriencies();
 		HashMap<String, Currency> map = new HashMap<String, Currency>();
 		for (Currency c : curr) {
 			map.put(c.getCode(), c);

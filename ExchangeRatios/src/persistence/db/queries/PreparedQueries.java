@@ -17,9 +17,9 @@ import persistence.db.table.currency.CountryCurrencyId;
 import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
 
-public class PGQuery extends BasicOperations {
+public class PreparedQueries extends SessionAssist {
 
-	public static final void connectCountryCurrency(Country country, Currency currency) {
+	public static final void connect_CountryCurrency(Country country, Currency currency) {
 
 		country.addCurrency(currency);
 		ObjectOperations.insertOrUpdate(country);
@@ -139,9 +139,10 @@ public class PGQuery extends BasicOperations {
 		}
 	}
 
-	public static void validateQueryArgAgainstSimpleSQLInjection(String arg) {
-		if (arg.split(" ").length > 1 | arg.isEmpty()) {
-			throw new RuntimeException("Invalid argument: " + arg);
+	protected static <T> void applyOptionalLimitOnResultsNumber(Query<T> query, Integer limit) {
+		if (limit != null) {
+			if (limit > 0)
+				query.setMaxResults(limit);
 		}
 	}
 

@@ -14,8 +14,8 @@ import org.testng.annotations.Test;
 import main.Helper;
 import persistence.db.connection.DbAccess;
 import persistence.db.queries.ObjectOperations;
-import persistence.db.queries.PGQSelect;
-import persistence.db.queries.PGQuery;
+import persistence.db.queries.PreparedQueries;
+import persistence.db.queries.PreparedSelections;
 import persistence.db.table.currency.Country;
 import persistence.db.table.currency.CountryCurrency;
 import persistence.db.table.currency.CountryCurrencyId;
@@ -47,16 +47,6 @@ public class _DbTest {
 		date2 = new Date(dateConst2.getTime().getTime());
 	}
 
-	@Test(expectedExceptions = RuntimeException.class)
-	public void shouldThrowRuntimeExceptionDueToWrongParameter() {
-
-		// Given
-		String str = "drop database";
-
-		// When
-		PGQuery.validateQueryArgAgainstSimpleSQLInjection(str);
-	}
-
 	// 133800 349s/ 222s/
 	@Test
 	public void shouldCreateDefaultConnection() {
@@ -68,25 +58,25 @@ public class _DbTest {
 		assertThat(c).isNotNull();
 	}
 
-	@Test
+	// @Test
 	public void shouldInitializeDbStructure() {
-		PGQuery.initDatabaseStructure(DbAccess.makeCustomPostgreConnection());
+		PreparedQueries.initDatabaseStructure(DbAccess.makeCustomPostgreConnection());
 	}
 
-	@Test
+	// @Test
 	public void shouldDestroyDbStructure() {
-		PGQuery.dropDatabaseStructure(DbAccess.makeCustomPostgreConnection());
+		PreparedQueries.dropDatabaseStructure(DbAccess.makeCustomPostgreConnection());
 	}
 
 	// DEV better to use component ID?
-	// @Test(dependsOnMethods = {
-	// "shouldCreateDefaultConnection"
-	// })
+	@Test(dependsOnMethods = {
+		"shouldCreateDefaultConnection"
+	})
 	public void shouldGatherCurrenciesData() {
 		// When
 		Helper.gatherData(date1, date2);
 
-		List<Currency> list = PGQSelect.selectAllCurriencies();
+		List<Currency> list = PreparedSelections.selectAllCurriencies();
 
 		// Then
 		assertThat(list).isNotEmpty();
@@ -99,7 +89,7 @@ public class _DbTest {
 	public void shouldGetSortedCurrency() {
 
 		// Given
-		List<Currency> list = PGQSelect.selectAllCurrenciesSortedAscByCode(null);
+		List<Currency> list = PreparedSelections.selectAllCurrenciesSortedAscByCode(null);
 
 		// Then
 		assertThat(list).isSortedAccordingTo(new CurrencyCodeUnicodeComparator());
@@ -111,7 +101,7 @@ public class _DbTest {
 	public void shouldGetLimittedSortedCurrency() {
 
 		// When
-		List<Currency> list = PGQSelect.selectAllCurrenciesSortedAscByCode(LIMIT_OF_5);
+		List<Currency> list = PreparedSelections.selectAllCurrenciesSortedAscByCode(LIMIT_OF_5);
 
 		// Then
 		assertThat(list).hasSize(LIMIT_OF_5).isSortedAccordingTo(new CurrencyCodeUnicodeComparator());
@@ -123,8 +113,8 @@ public class _DbTest {
 	public void shouldGetCurrencyRatio() {
 
 		// Given
-		Currency curr = PGQSelect.selectCurrency_ByCode(examples.currency1.getCode());
-		CurrencyRatios ratio = PGQSelect.selectCurrencyRatioByCodeAndDate(examples.ratio1);
+		Currency curr = PreparedSelections.selectCurrency_ByCode(examples.currency1.getCode());
+		CurrencyRatios ratio = PreparedSelections.selectCurrencyRatioByCodeAndDate(examples.ratio1);
 		if (ratio != null) {
 			ObjectOperations.deleteObject(ratio);
 		}
@@ -134,10 +124,10 @@ public class _DbTest {
 		examples.ratio1.setCurrency(curr);
 		ObjectOperations.insert(examples.ratio1);
 
-		ratio = PGQSelect.selectCurrencyRatioByCodeAndDate(examples.ratio1);
+		ratio = PreparedSelections.selectCurrencyRatioByCodeAndDate(examples.ratio1);
 
 		// Then
-		ratio = PGQSelect.selectCurrencyRatioByCodeAndDate(ratio.getCurrency().getCode(), ratio.getDate());
+		ratio = PreparedSelections.selectCurrencyRatioByCodeAndDate(ratio.getCurrency().getCode(), ratio.getDate());
 		assertThat(ratio).isNotNull();
 		assertThat(ratio.getCurrency()).hasFieldOrPropertyWithValue(Currency.FIELD_CODE, examples.ratio1.getCurrency().getCode());
 	}
@@ -148,7 +138,7 @@ public class _DbTest {
 	public void shouldGetLimittedSortedCurrencyRatiosLowestBidPrice() {
 
 		// Given
-		List<CurrencyRatios> list = PGQSelect.selectLowestBidCurrencyRatios("USD", LIMIT_OF_5);
+		List<CurrencyRatios> list = PreparedSelections.selectLowestBidCurrencyRatios("USD", LIMIT_OF_5);
 
 		// Then
 		assertThat(list).hasSize(LIMIT_OF_5);
@@ -160,7 +150,7 @@ public class _DbTest {
 	public void shouldGetHighestPriceDifferenceOfCurrencyRatios() {
 
 		// Given
-		List<CurrencyRatios> list = PGQSelect.selectHighestPriceDifferenceOfCurrencyRatio("USD", LIMIT_OF_5);
+		List<CurrencyRatios> list = PreparedSelections.selectHighestPriceDifferenceOfCurrencyRatio("USD", LIMIT_OF_5);
 
 		// Then
 		assertThat(list).hasSize(LIMIT_OF_5).isSortedAccordingTo(new CurrencyRatiosReverseAskBidDiffComparator());
@@ -177,9 +167,9 @@ public class _DbTest {
 		TestUtils.exampleCurrencyInsert(examples.currency2);
 
 		// Then
-		curr = PGQSelect.selectCurrency_ByCode(examples.currency1.getCode());
+		curr = PreparedSelections.selectCurrency_ByCode(examples.currency1.getCode());
 		assertThat(curr).hasFieldOrPropertyWithValue(Currency.FIELD_CODE, examples.currency1.getCode());
-		curr = PGQSelect.selectCurrency_ByCode(examples.currency2.getCode());
+		curr = PreparedSelections.selectCurrency_ByCode(examples.currency2.getCode());
 		assertThat(curr).hasFieldOrPropertyWithValue(Currency.FIELD_CODE, examples.currency2.getCode());
 	}
 
@@ -193,7 +183,7 @@ public class _DbTest {
 		TestUtils.exampleCountryInsert(examples.country2);
 
 		// Then
-		c = PGQSelect.selectCountry_ByName(examples.country1.getName());
+		c = PreparedSelections.selectCountry_ByName(examples.country1.getName());
 		assertThat(c).hasFieldOrPropertyWithValue(Country.FIELD_NAME, examples.country1.getName());
 	}
 
@@ -204,8 +194,8 @@ public class _DbTest {
 	public void shouldEnsureFetchingResults() {
 
 		// When
-		Country c = PGQSelect.fetchCountry_ByName(examples.country1.getName());
-		Currency curr = PGQSelect.fetchCurrency_ByCode(examples.currency1.getCode());
+		Country c = PreparedSelections.fetchCountry_ByName(examples.country1.getName());
+		Currency curr = PreparedSelections.fetchCurrency_ByCode(examples.currency1.getCode());
 
 		// Then
 		assertThat(curr.getCountries()).isEmpty();
@@ -220,15 +210,15 @@ public class _DbTest {
 	public void shouldConnectCurrencyCountry() {
 
 		// Given
-		Country c = PGQSelect.fetchCountry_ByName(examples.country1.getName());
-		Currency curr = PGQSelect.fetchCurrency_ByCode(examples.currency1.getCode());
-		Country c2 = PGQSelect.fetchCountry_ByName(examples.country2.getName());
-		Currency curr2 = PGQSelect.fetchCurrency_ByCode(examples.currency2.getCode());
+		Country c = PreparedSelections.fetchCountry_ByName(examples.country1.getName());
+		Currency curr = PreparedSelections.fetchCurrency_ByCode(examples.currency1.getCode());
+		Country c2 = PreparedSelections.fetchCountry_ByName(examples.country2.getName());
+		Currency curr2 = PreparedSelections.fetchCurrency_ByCode(examples.currency2.getCode());
 
 		// When
-		PGQuery.connectCountryCurrency(c, curr);
-		PGQuery.connectCountryCurrency(c, curr2);
-		PGQuery.connectCountryCurrency(c2, curr2);
+		PreparedQueries.connect_CountryCurrency(c, curr);
+		PreparedQueries.connect_CountryCurrency(c, curr2);
+		PreparedQueries.connect_CountryCurrency(c2, curr2);
 
 		// Then
 		CountryCurrency ccurr = ObjectOperations.getObject(CountryCurrency.class, new CountryCurrencyId(c, curr));
@@ -238,11 +228,11 @@ public class _DbTest {
 		ccurr = ObjectOperations.getObject(CountryCurrency.class, new CountryCurrencyId(c2, curr2));
 		assertThat(ccurr).isNotNull();
 
-		c = PGQSelect.fetchCountry_ByName(examples.country1.getName());
+		c = PreparedSelections.fetchCountry_ByName(examples.country1.getName());
 		assertThat(c).isNotNull();
 		assertThat(c.getCurrencies()).hasSize(2).doesNotHaveDuplicates();
 
-		c = PGQSelect.fetchCountry_ByName(examples.country2.getName());
+		c = PreparedSelections.fetchCountry_ByName(examples.country2.getName());
 		assertThat(c).isNotNull();
 		assertThat(c.getCurrencies()).hasSize(1);
 
@@ -258,7 +248,7 @@ public class _DbTest {
 		// When
 		// List<Object[]> results = PGQSelect.getCountryAssociates_ByNameAndDay(examples.country.getName(), examples.ratio1.getDate());
 		List<CurrencyRatios> results =
-				PGQSelect.selectCountryAssociates_ByNameAndDay(examples.country1.getName(), examples.ratio1.getDate());
+				PreparedSelections.selectCountryAssociates_ByNameAndDay(examples.country1.getName(), examples.ratio1.getDate());
 		// Then
 		assertThat(results).isNotEmpty().hasSize(1);
 
@@ -286,7 +276,7 @@ public class _DbTest {
 	public void shouldGetCurrencyCountForEachCountry() {
 
 		// When
-		List<Country> results = PGQSelect.getCountriesWithCurrencyCount();
+		List<Country> results = PreparedSelections.getCountriesWithCurrencyCount();
 
 		// Then
 		assertThat(results).isNotNull().hasSize(2);
@@ -299,7 +289,7 @@ public class _DbTest {
 	public void shouldGetOnlyMultiCurrencyCountries() {
 
 		// When
-		List<Country> results = PGQSelect.getCountriesWithMultiCurrencyCount();
+		List<Country> results = PreparedSelections.getCountriesWithMultiCurrencyCount();
 
 		// Then
 		assertThat(results).isNotNull().hasSize(1);
@@ -314,15 +304,15 @@ public class _DbTest {
 	public void shouldDisconnectCurrencyCountryRelations() {
 
 		// Given
-		Country c = PGQSelect.fetchCountry_ByName(examples.country1.getName());
-		Country c2 = PGQSelect.fetchCountry_ByName(examples.country2.getName());
-		Currency curr = PGQSelect.fetchCurrency_ByCode(examples.currency1.getCode());
-		Currency curr2 = PGQSelect.fetchCurrency_ByCode(examples.currency2.getCode());
+		Country c = PreparedSelections.fetchCountry_ByName(examples.country1.getName());
+		Country c2 = PreparedSelections.fetchCountry_ByName(examples.country2.getName());
+		Currency curr = PreparedSelections.fetchCurrency_ByCode(examples.currency1.getCode());
+		Currency curr2 = PreparedSelections.fetchCurrency_ByCode(examples.currency2.getCode());
 
 		// When
-		PGQuery.disconnect_CountryCurrency(c, curr);
-		PGQuery.disconnect_CountryCurrency(c, curr2);
-		PGQuery.disconnect_CountryCurrency(c2, curr2);
+		PreparedQueries.disconnect_CountryCurrency(c, curr);
+		PreparedQueries.disconnect_CountryCurrency(c, curr2);
+		PreparedQueries.disconnect_CountryCurrency(c2, curr2);
 
 		// Then
 		CountryCurrency ccurr = ObjectOperations.getObject(CountryCurrency.class, new CountryCurrencyId(c, curr));
@@ -338,20 +328,20 @@ public class _DbTest {
 	public void shouldRemoveObjects() {
 
 		// Given
-		Currency curr = PGQSelect.selectCurrency_ByCode(examples.currency1.getCode());
-		Currency curr2 = PGQSelect.selectCurrency_ByCode(examples.currency2.getCode());
-		Country c = PGQSelect.selectCountry_ByName(examples.country1.getName());
-		Country c2 = PGQSelect.selectCountry_ByName(examples.country2.getName());
+		Currency curr = PreparedSelections.selectCurrency_ByCode(examples.currency1.getCode());
+		Currency curr2 = PreparedSelections.selectCurrency_ByCode(examples.currency2.getCode());
+		Country c = PreparedSelections.selectCountry_ByName(examples.country1.getName());
+		Country c2 = PreparedSelections.selectCountry_ByName(examples.country2.getName());
 		// When
 		ObjectOperations.deleteObject(curr);
 		ObjectOperations.deleteObject(curr2);
 		ObjectOperations.deleteObject(c);
 		ObjectOperations.deleteObject(c2);
 		// Then
-		curr = PGQSelect.selectCurrency_ByCode(examples.currency1.getCode());
-		curr2 = PGQSelect.selectCurrency_ByCode(examples.currency2.getCode());
-		c = PGQSelect.selectCountry_ByName(examples.country1.getName());
-		c2 = PGQSelect.selectCountry_ByName(examples.country2.getName());
+		curr = PreparedSelections.selectCurrency_ByCode(examples.currency1.getCode());
+		curr2 = PreparedSelections.selectCurrency_ByCode(examples.currency2.getCode());
+		c = PreparedSelections.selectCountry_ByName(examples.country1.getName());
+		c2 = PreparedSelections.selectCountry_ByName(examples.country2.getName());
 		assertThat(curr).isNull();
 		assertThat(curr2).isNull();
 		assertThat(c).isNull();

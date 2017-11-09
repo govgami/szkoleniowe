@@ -8,10 +8,10 @@ import org.hibernate.query.Query;
 
 import persistence.db.connection.DbAccess;
 
-public class BasicOperations {
+public class SessionAssist {
 
 	protected static Session openTransaction() {
-		Session session = DbAccess.openSession();
+		Session session = DbAccess.openCustomSession();
 		session.beginTransaction();
 		return session;
 	}
@@ -55,13 +55,6 @@ public class BasicOperations {
 	protected static void closeSession(Session s) {
 		s.getTransaction().commit();
 		s.close();
-	}
-
-	protected static <T> void applyOptionalLimitOnResultsNumber(Query<T> query, Integer limit) {
-		if (limit != null) {
-			if (limit > 0)
-				query.setMaxResults(limit);
-		}
 	}
 
 }

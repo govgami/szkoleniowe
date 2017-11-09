@@ -26,7 +26,7 @@ import org.hibernate.annotations.NamedQuery;
 	@NamedQuery(name = CurrencyRatios.GET_HIGHEST_DIFFERENCE_OF_ASK_AND_BID_PRICE, query = "select c, c.askPrice-c.bidPrice as difference from CurrencyRatios c inner join fetch c.currency where code = :code and c.askPrice is not null and c.bidPrice is not null order by difference desc"),
 	@NamedQuery(name = CurrencyRatios.GET_BY_CURRENCY_CODE_AND_PERIOD, query = "select e from CurrencyRatios e where e.currency.code = :code and e.effectiveDate > :from and e.effectiveDate< :to"),
 	@NamedQuery(name = CurrencyRatios.GET_ALL_RATIOS_CURRENCY_RELATED_WITH_COUNTRY_ON_DAY, query = "select r from Country c, CountryCurrency cc, CurrencyRatios r where c.name = :name and c.id=cc.country.id and r.currency.id=cc.currency.id and r.effectiveDate= :effectiveDate order by r.currency.id"),
-
+		// TODO eliminate not-necessary crypto-queries
 })
 @Entity
 @Table(name = "currency_ratios", uniqueConstraints = {

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-public class ObjectOperations extends BasicOperations {
+public class ObjectOperations extends SessionAssist {
 
 	public static final void insert(Object object) {
 		Session session = openTransaction();

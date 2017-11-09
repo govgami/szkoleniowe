@@ -12,7 +12,7 @@ import persistence.db.table.currency.Country;
 import persistence.db.table.currency.Currency;
 import persistence.db.table.currency.CurrencyRatios;
 
-public class PGQSelect extends PGQuery {
+public class PreparedSelections extends PreparedQueries {
 
 	public static final List<Currency> selectAllCurriencies() {
 		Session session = openTransaction();
@@ -71,7 +71,6 @@ public class PGQSelect extends PGQuery {
 	}
 
 	public static final List<CurrencyRatios> selectLowestBidCurrencyRatios(String code, Integer limit) {
-		validateQueryArgAgainstSimpleSQLInjection(code);
 
 		Session session = openTransaction();
 		Query<CurrencyRatios> query = session.getNamedQuery(CurrencyRatios.GET_LOWEST_BID_PRICE_OF_CHOSEN_CODE);
